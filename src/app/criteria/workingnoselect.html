@@ -1,0 +1,49 @@
+<!-- Modal -->
+<script type="text/ng-template" id="WorkingNoSelectModal">
+  <div>
+    <div class="modal-header">
+      <span class="pull-left"><h4 class="modal-title blue" translate="criteria.WORKING_NO_SELECT"></h4></span>
+      <img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" />
+    </div>
+    <div class="bg-operation-monitor modal-body form-border modal-height" style="padding: 0px !important;height: auto;border: none;" ng-type-enter>
+      <div class="page-title">
+        <form role="form" ng-init="translateCourse()" class="form-inline" name="formPlan" novalidate>
+          <div class="form-group" style="width: 100%;">
+            <button class="btn btn-secondary btn-single" ng-click="toggleFilterRow()" style="float: right;margin: 10px;">
+              <i class="fa-search"></i>&nbsp;&nbsp;<span translate="index.SEARCH"></span>
+            </button>
+            <button class="btn btn-secondary btn-single" ng-click="all()" style="float: right;margin: 10px;">
+              <span translate="factoryCriteria.ALL"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      					<!--<div class="news-edit-form ">
+							<button class="btn btn-postpone btn-icon btn-secondary" ng-click="toggleFilterRow()" style="float: right;">
+            <i class="fa fa-search"></i>
+            <span translate="index.SEARCH"></span>   
+           </button>	</div>-->
+      <div style="margin-top: 0px;" ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize></div>
+    </div>
+    <div class="modal-footer" style="margin: 0 auto;width: 380px">
+      <button class="btn btn-blue  btn-w150" ng-click="cancel()" style="float: left;">
+        <i class="icon-cancel"></i><span translate="index.CANCEL"></span>
+      </button>
+      <button class="btn btn-blue btn-w150" ng-click="save()" style="margin-left: 80px">
+        <i class="icon-save"></i><span translate="index.CONFIRM"></span>
+      </button>
+    </div>
+  </div>
+
+
+</script>
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<style>
+  .modal-height{
+    height: 500px;
+  }
+</style>
+
+

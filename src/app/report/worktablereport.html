@@ -1,0 +1,371 @@
+<div ng-controller="workTableReportCtrl">
+
+	<div class="row" ng-show="showDetailView!='showDetail'">
+
+    <div class="col-md-12">
+      <div class="page-title" style="height: 60px">
+        <scrollable-tabset show-tooltips="false" api="scrlTabsApi"  class="no-content-tab">
+          <uib-tabset>
+            <uib-tab  select="selectTab('1')" >
+              <uib-tab-heading  translate="reportTitle.MKT_FC_REPORT"></uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="selectTab('2')">
+              <uib-tab-heading translate="reportTitle.CUS_FC_REPORT"></uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="selectTab('3')">
+              <uib-tab-heading translate="reportTitle.TRANSFER_REPORT"></uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="selectTab('4')">
+              <uib-tab-heading translate="reportTitle.LC0190_REPORT"></uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="selectTab('5')">
+            	 <uib-tab-heading translate="reportTitle.FILL_RATE_REPORT"></uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="selectTab(6)">
+                <uib-tab-heading translate="reportTitle.DUTY_SAVE_REPORT"></uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="selectTab(7)">
+              <uib-tab-heading >Quantity Report</uib-tab-heading>
+            </uib-tab>
+          </uib-tabset>
+        </scrollable-tabset>
+      </div>
+    </div>
+    <ng-include src="'app/report/customerforecastreport.html'" ng-if="showView=='CustomerForecast'"></ng-include>
+		<ng-include src="'app/report/marketingforecastreport.html'" ng-if="showView=='MarketingForecast'"></ng-include>
+    <ng-include src="'app/report/transferreport.html'" ng-if="showView=='transfer'"></ng-include>
+		<ng-include src="'app/report/lc0190report.html'" ng-if="showView=='lc0190'"></ng-include>
+		<ng-include src="'app/report/fillRateReport.html'" ng-if="showView=='fillRateReport'"></ng-include>
+		<ng-include src="'app/report/dutySaveReport.html'" ng-if="showView=='dutySaveReport'"></ng-include>
+    <ng-include src="'app/report/quantityreport.html'" ng-if="showView=='quantityReport'"></ng-include>
+
+  </div>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<script id="blueGreenTemplate" type="text/template">
+	<div class="container-flex-center-center" style="width: 100%;height: 100%;" ng-class="{'background-blue':row.entity.documentStatus !='1','background-green':row.entity.documentStatus =='1'}">
+		<div ng-bind="row.entity.documentTypeName" class="icon-training-plan-online-offline"></div>
+	</div>
+</script>
+
+<script id="isNewTemplate" type="text/template">
+	<div class="container-flex-center-center" style="width: 100%;height: 100%;text-align: center;">
+		<div ng-class="{'background-news':row.entity.documentStatus =='1'}"></div>
+	</div>
+</script>
+
+<script id="linkLabelTemplate" type="text/template">
+	<div class="container-flex-center-center" style="width: 100%;height: 100%;text-align: center;">
+		<div ng-bind="row.entity.documentName" class="link-label"></div>
+	</div>
+</script>
+
+<script id="redLabelTemplate" type="text/template">
+	<div class="container-flex-center-center" style="width: 100%;height: 100%;" ng-class="{'background-red':row.entity.fillRate >= 90}">
+		<div ng-bind="row.entity.fillRate"></div>%
+	</div>
+</script>
+<script id="hoverTemplate" type="text/template">
+  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-click="grid.appScope.rowSelect(row)">
+    {{COL_FIELD CUSTOM_FILTERS}}
+  </div>
+</script>
+<script id="hoverBigNumberTemplate" type="text/template">
+  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-click="grid.appScope.rowSelect(row)">
+    {{COL_FIELD CUSTOM_FILTERS|quantityFilter}}
+  </div>
+</script>
+<script id="hoverPercentTemplate" type="text/template">
+  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-click="grid.appScope.rowSelect(row)">
+    {{COL_FIELD CUSTOM_FILTERS}}%
+  </div>
+</script>
+<script id="functionButtonTemplate" type="text/template">
+  <div class="container-flex-center-center" style="width: 100%;height: 100%;text-align: center;">
+    <div ng-if="row.entity.uploadType == '1'" class="work-table-button-width">
+			<!--<button  class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.toUpload(row.entity)"  ng-bind-html="row.entity.uploadHtml" ng-disabled="row.entity.Uploading"></button>
+			<button  class="btn-bowker-theme" style="height: 24px;line-height: 12px;background-color: #ed6044;border: #ed6044 1px solid;" ng-click="grid.appScope.deleteDom(row.entity)" ng-disabled="row.entity.Deleting"><i class="fa fa-trash-o"></i> Delete</button>-->
+      <button ng-if="row.entity.documentType == '6' ||row.entity.documentType == '9' " class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.refreshOrder(row.entity)"><i class="fa fa-refresh"></i> Refresh</button>
+    </div>
+    <div ng-if="row.entity.uploadType == '2'" ng-class="{'work-table-button-width':grid.appScope.existUploadType}">
+      <button class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.refreshOrder(row.entity)"><i
+        class="fa fa-refresh"></i> Refresh
+      </button>
+    </div>
+  </div>
+</script>
+<style>
+  .tab-content{
+    height: 0px !important;
+    padding: 0px !important;
+  }
+	.mod-popup-example {
+		padding: 2px;
+		border: 1px solid rgba(0, 0, 0, 9);
+		border-radius: 5px;
+		background: rgba(0, 0, 0, .7);
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		width: 50vw;
+		color: black;
+	}
+	.background-highlight {
+		color: black;
+		background-color: rgb(251,230,229);
+		border-bottom: rgba(255,255,255,0.5) 1px solid;
+	}
+	.mod-popup-example .ui-grid{
+		margin-top: 0px;
+	}
+
+	.background-blue {
+		background-color: #4579F0;
+		color: white;
+	}
+
+	.background-green {
+		background-color: #3baf7b;
+		color: white;
+	}
+
+	.background-red {
+		background-color: #a9293d;
+		color: white;
+	}
+
+	.background-news {
+		margin: 10px;
+		background-image: url(assets/images/forgiveGreenNewIcon.png);
+		width: 100%;
+		height: 100%;
+		background-position: center left;
+		background-repeat: no-repeat;
+		background-size: 20px;
+	}
+
+	.link-label {
+		color: royalblue;
+		text-decoration: underline;
+	}
+
+	.work-table-label,
+	.work-table-label+select {
+		padding: 8px;
+		margin-bottom: 0px;
+	}
+
+	.work-table-label>span {
+		float: right;
+	}
+
+	div[ng-controller="workTableCtrl"] .panel .panel-heading {
+		border-bottom: none;
+		padding: 0px;
+		font-size: inherit;
+	}
+
+	div[ng-controller="workTableCtrl"] .panel {
+		padding: 20px;
+		margin: 0px;
+		border-bottom: 1px solid #ccc;
+		box-shadow: 0 1px 0 rgba(0,1,1,.08), inset 0 1px 0 #ededed;
+	}
+
+	div[ng-controller="workTableCtrl"] .panel:last-child {
+		border-bottom: none;
+	}
+
+	div[ng-controller="workTableCtrl"] .col-md-12.container-flex-start+.col-md-12.container-flex-start {
+		margin: 15px 0px;
+	}
+</style>
+<style>
+	.bowker-dashboard-card {
+		padding: 10px 5px;
+		margin: 0px;
+		height: 200px;
+	}
+	/*.bowker-dashboard-card.bowker-dashboard-card-list-well {
+		display: inline-flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+
+	.bowker-dashboard-card.bowker-dashboard-card-list-well>div {
+		height: 100%;
+		width: 50%;
+	}*/
+
+	.bowker-dashboard-card .bowker-dashboard-card-header {
+		display: inline-flex;
+		justify-content: flex-start;
+		align-items: center;
+		height: 25%;
+		width: 100%;
+		padding: 5px 10px;
+		font-size: 15px;
+		color: white;
+	}
+
+	.bowker-dashboard-card .bowker-dashboard-card-header>li {
+		width: 100%;
+		text-align: center;
+	}
+
+	.bowker-dashboard-card .bowker-dashboard-card-body {
+		height: 75%;
+		width: 100%;
+		display: inline-flex;
+		justify-content: space-around;
+		align-items: center;
+		color: white;
+	}
+
+	.bowker-dashboard-card-board-value {
+		font-size: 40px;
+	}
+
+	.bowker-dashboard-card-board-icon {
+		font-size: 60px;
+	}
+
+	.bowker-dashboard-card-board-list {
+		height: 100%;
+		width: 50%;
+		float: right;
+	}
+
+	.bowker-dashboard-card-list-well .bowker-dashboard-card-board-list>ul {
+		height: 100%;
+		width: 100%;
+		padding: 0px;
+		margin: 0px;
+		background-color: rgb(5, 149, 232);
+	}
+
+	.gradual-cell {
+		width: 100%;
+		color: white;
+		display: block;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+	.bowker-dashboard-card.bowker-dashboard-card-forgive-green .bowker-dashboard-card-header {
+		background-color: #2fc3a0;
+	}
+
+	.bowker-dashboard-card.bowker-dashboard-card-forgive-green .bowker-dashboard-card-body {
+		background-color: #3fcaa9;
+	}
+
+	.bowker-dashboard-card.bowker-dashboard-card-violet .bowker-dashboard-card-header {
+		background-color: #6e68d9;
+	}
+
+	.bowker-dashboard-card.bowker-dashboard-card-violet .bowker-dashboard-card-body {
+		background-color: #7b76d9;
+	}
+
+	.bowker-dashboard-card.bowker-dashboard-card-blue .bowker-dashboard-card-header {
+		background-color: #1180c0;
+	}
+
+	.bowker-dashboard-card.bowker-dashboard-card-blue .bowker-dashboard-card-body {
+		background-color: #198acb;
+	}
+
+	.text-width {
+		width: 80px;
+		text-align: right;
+		margin-right: 5px;
+	}
+
+	.input-width {
+		width: 180px !important;
+	}
+
+	.btn-export {
+		margin-left: 20px;
+		margin-bottom: -10px !important;
+	}
+
+	.multi-select>first {
+		border-radius: 0px;
+		border: none;
+	}
+
+	button.dropdown-toggle.ng-binding.btn.btn-default {
+		border: 1px solid #c6c6c6;
+	}
+
+	.multiselect-parent.btn-group.dropdown-multiselect {
+		width: 100%;
+		border: 0px;
+		border-radius: 0;
+	}
+
+	.multiselect-parent.btn-group.dropdown-multiselect .btn-default.btn:hover {
+		border: 1px solid #c6c6c6;
+	}
+
+	.training-record-input-group>div {
+		display: flex!important;
+		align-items: center;
+	}
+   .work-table-panel-title{
+     height:33px;
+     background-color: #ffffff;
+     color: #233a66;
+     padding: 6px 12px;
+     font-weight: bold;
+     font-size: 18px;
+     min-width: 145px;
+   }
+  .work-table-button-width{
+    /*width: 214px;*/
+    text-align: left;
+  }
+</style>
+<style>
+	#accordionDailyDocument{
+		padding: 0px !important;
+	}
+</style>
+<style type="text/css">
+  ul{margin:0px; padding:0px; list-style:none;}
+  .wrap{width:960px; height:auto; line-height:30px; }
+  .step-case{height:40px;}
+  .step-case li{ float:left; margin:0px; padding:0px;position:relative; cursor:pointer;}
+  .step-case li span{display:block; background-color:#ccc;  height:40px; line-height:40px;  text-align:center; color:#fff; font-weight:bold;}
+  .step-case b{position:absolute; font-size:0px; line-height:0px; top:0px;}
+  .step-case .b-l{border-width:2px 2px 2px 0; border-style:dashed solid dashed dashed; border-color:transparent #ccc transparent transparent; height:36px; left:-2px;}
+  .step-case .b-r{border-width:2px 0 2px 2px; border-style:dashed dashed dashed solid; border-color:transparent transparent transparent #ccc; height:36px; right:-2px;}
+  .step-case .b-1{border-width:20px 0 20px 20px; border-style:solid dashed solid solid; border-color:#ccc transparent #ccc #ddd; left:-20px;}
+  .step-case .b-2{border-width:20px 0 20px 20px; border-style:dashed dashed dashed solid; border-color:transparent transparent transparent #ccc; left:-21px;}
+  /*当前状态*/
+  .step-case .s-cur span{background-color:orange;}
+  .step-case .s-cur .b-l{border-right-color:orange;}
+  .step-case .s-cur .b-r{border-left-color:orange;}
+  .step-case .s-cur .b-1{border-color:orange orange orange #FABF55;}
+  .step-case .s-cur .b-2{border-left-color:#FADBA5;}
+  /*当前状态后*/
+  .step-case .s-cur-next .b-2{border-color:transparent transparent transparent orange;}
+  /*完成的状态*/
+  .step-case .s-finish span{background-color:#FADBA5; color:white;}
+  .step-case .s-finish .b-l{border-right-color:#FADBA5;}
+  .step-case .s-finish .b-r{border-left-color:#FADBA5;}
+  .step-case .s-finish .b-1{border-color:#FADBA5 #FADBA5 #FADBA5 #FABF55;}
+  .step-case .s-finish .b-2{border-left-color:#FADBA5;}
+  .padding-20{padding: 20px}
+
+
+</style>
+<style>
+	.work-table-main{
+		overflow-y: auto;
+		height: calc(100vh - 212px);
+		width: 101.2%;
+	}
+</style>

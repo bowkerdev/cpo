@@ -1,0 +1,104 @@
+<!-- Modal -->
+<script type="text/ng-template" id="downLoadInvModal">
+  <div id="downLoadInvModalEntity">
+    <div class="modal-header">
+      <span class="pull-left"><h4 class="modal-title blue" translate="index.EXPORT"></h4></span>
+      <img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" ng-disabled="Uploading"/>
+    </div>
+    <div class="bg-operation-monitor modal-body" ng-type-enter >
+      <form class="form-horizontal form-modal" role="form" name="formCountrySiteEntry" novalidate >
+        <div class="line">
+          <div class="line-child">
+            <label translate="vendorKpi.ORIGIN" class="label-width" style="text-align: right;font-size: 16px;margin-right: 5px">origin</label>
+            <div id="downLoadInvMS" class="input-width" ng-dropdown-multiselect="" extra-settings="setting" options="originList" selected-model="origin" translation-texts="buttonTrans" style="font-size: 14px;width: 242px !important;"></div>
+          </div>
+        </div>
+        <div class="line">
+          <div class="line-child">
+            <label translate="vendorKpi.FACTORY_CODE" class="label-width" style="text-align: right;font-size: 16px;margin-right: 5px">origin</label>
+            <div  class="input-width" ng-dropdown-multiselect="" extra-settings="factorySetting" options="factoryCodes" selected-model="selectFacotoryCode" translation-texts="factoryButtonTrans" style="font-size: 14px;width: 242px !important;"></div>
+          </div>
+        </div>
+        <div class="line">
+          <div class="line-child">
+            <label translate="vendorKpi.INVOPTION" class="label-width" style="text-align: right;font-size: 16px;margin-right: 5px"></label>
+            <select ng-model="inv" class="form-control input-width" ng-options="inv.label for inv in invList" style="width: 242px !important">
+            </select>
+          </div>
+         </div>
+
+        <div class="line">
+          <div class="line-child">
+            <label translate="vendorKpi.START_DATE" class="label-width" style="text-align: right;font-size: 16px;margin-right: 5px"></label>
+            <div ng-model='inputStartTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputStartTime" >
+            <input ng-model='inputStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon" ng-click="inputStartTime=''"><i class="fa-close"></i></span>
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="line">
+        <div class="line-child">
+
+          <!--<div class="form-group col-md-6" style="display: flex">-->
+          <label translate="vendorKpi.END_DATE" class="label-width" style="text-align: right;font-size: 16px;margin-right: 5px">origin</label>
+
+          <!--<label class="control-label labelwidth end-date-label" translate="vendorKpi.END_DATE" style="line-height: 1.3em;align-self: center;"></label>-->
+            <div ng-model='inputEndTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputEndTime" >
+              <input ng-model='inputEndTime'  ng-change="controlTime('end',1)" class="form-control" size="16" type="text" value="" readonly>
+              <span class="input-group-addon" ng-click="inputEndTime=''"><i class="fa-close"></i></span>
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: 40px;margin-bottom: 20px;">
+          <button ng-click="exportDOC()" class="_btn">
+            <i class="fa fa-download"></i>
+            <span translate="index.EXPORT"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</script>
+<style>
+  #downLoadInvModalEntity .label-width{
+    float: left;
+    width:30%;
+  }
+  #downLoadInvModalEntity .input-width{
+    float: left;
+    width:50%;
+  }
+  #downLoadInvMS button{
+    margin-bottom: 0;
+    width:100%;
+  }
+  #downLoadInvMS {
+    width: 67%;
+    display: inline-block;
+  }
+  #downLoadInvMS>div{
+    width: 100%;
+  }
+  #downLoadInvMS .dropdown-multiselect.open .dropdown-menu{
+    width:100%;
+    max-height: 400px;
+  }
+  #downLoadInvModalEntity .line{
+    width: 100%;display: flex;align-items: center;justify-content: center;margin: 10px 0px;
+  }
+  #downLoadInvModalEntity .line-child{
+    width: 70%;display: flex;align-items: center
+  }
+  #downLoadInvModalEntity ._btn{
+    margin: 0 auto;font-size:14px;display: block;padding: 10px 30px 10px 30px;color: white;background-color: rgb(35,58,102);
+  }
+  #downLoadInvModalEntity .dropdown-menu.dropdown-menu-form{
+    width: inherit;
+  }
+</style>
+
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>

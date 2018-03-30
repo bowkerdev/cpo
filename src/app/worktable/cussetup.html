@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >Title</title >
+</head >
+<body >
+
+
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Set up</h3>
+</div>
+
+
+<form class="form-horizontal" style="padding:20px">
+  <div class="form-group">
+    <label for="input1" class="col-sm-2 control-label">China%</label>
+    <div class="col-sm-10">
+      <div class="input-group">
+        <input type="text" class="form-control" id="input1" placeholder="China%" ng-model="chinaRate">
+        <span class="input-group-addon" id="basic-addon2">%</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="form-group">
+    <label for="input2" class="col-sm-2 control-label">China Qty</label>
+    <div class="col-sm-10">
+      <input  type="text" class="form-control" id="input2" placeholder="China Qty" ng-model="chinaQuantity">
+    </div>
+
+  </div>
+  <div class="form-group">
+    <label for="input3" class="col-sm-2 control-label">EU%</label>
+
+    <div class="col-sm-10">
+      <div class="input-group">
+        <input type="text" class="form-control" id="input3" placeholder="EU%" ng-model="euRate">
+        <span class="input-group-addon" id="basic-addon2">%</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="form-group">
+    <label for="input4" class="col-sm-2 control-label">EU Qty</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input4" placeholder="EU Qty" ng-model="euQuantity">
+    </div>
+  </div>
+
+
+</form>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+</div>
+<!--<div id="heading"> </div>-->
+</body >
+</html >

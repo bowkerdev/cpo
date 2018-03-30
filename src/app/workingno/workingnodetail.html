@@ -1,0 +1,100 @@
+<!-- Modal -->
+<script type="text/ng-template" id="workingNoDetailModal">
+	<div class="modal-header working-no-detail-modal-header">
+		<span class="pull-left"><h4 class="modal-title blue" translate="workingNo.WORKING_NO_DETAIL"></h4></span>
+		<img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" />
+	</div>
+	<div class="bg-operation-monitor modal-body form-border" ng-type-enter>
+		<form class="form-horizontal form-modal" role="form" name="formCountrySiteEntry" novalidate style="padding-right: 50px">
+			<div class="form-group">
+				<label class="col-sm-6 control-label bold">
+                    <div><span translate="workingNo.WORKING_NO"></span></div>
+                </label>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.workingNo"></div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-6 control-label bold">
+                    <div><span translate="workingNo.PRODUCT_TYPE"></span></div>
+                </label>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.productTypes"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-6 control-label bold">
+                    <div><span translate="workingNo.WOVEN_KNIT"></span></div>
+                </label>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.wovenKnit"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-6 control-label bold">
+                	<div><span translate="workingNo.UNIT"></span></div>
+                </label>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.unit"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-6 control-label bold">
+                    <div><span translate="workingNo.SPECIAL_PROCESS"></span></div>
+                </label>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.specialProcess"></div>
+			</div>
+			<div class="form-group container-flex-align-items-center working-no-detail-input">
+				<label class="col-sm-6 control-label bold">
+                    <div><span class="red">*</span><span translate="workingNo.GARMENT_PRODUCTING_DAY"></span></div>
+                </label>
+				<input type="text" class="col-sm-5" style="padding-top: 5px;padding-bottom: 5px;" ng-model="workingNoDetail.garmentProductingDay" name="elem.capacity" ng-if="Mode=='EDIT'"></input>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.garmentProductingDay" ng-if="Mode=='VIEW'" style=" margin-top: 3px !important;margin-bottom: 0px"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-6 control-label bold">
+                    <div><span translate="workingNo.ADIDAS_A_SOURCE"></span></div>
+                </label>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.adidasASource" style="margin-top: 3px !important;margin-bottom: 0px"></div>
+			</div>
+			<div class="form-group container-flex-align-items-center working-no-detail-input">
+				<label class="col-sm-6 control-label bold">
+                    <div><span translate="workingNo.BOWKER_A_SOURCE"></span></div>
+                </label>
+				<input type="text" class="col-sm-5" style="padding-top: 5px;padding-bottom: 5px;" ng-model="workingNoDetail.bowkerASource" name="elem.capacity" ng-if="Mode=='EDIT'"></input>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.bowkerASource" ng-if="Mode=='VIEW'" style="margin-top: 3px !important;margin-bottom: 0px"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-6 control-label bold">
+                    <div><span translate="workingNo.LAST_PRODUCTION_FACTORY"></span></div>
+                </label>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.lastProductionFactory"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-6 control-label bold">
+                    <div><span translate="workingNo.PRODUCTION_FACTORY_HISTORY"></span></div>
+                </label>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.productionFactoryHistory"></div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+    <button class="btn btn-blue  btn-w150" ng-click="cancel()" style="margin:0 auto;background-color:lightgray" ng-if="Mode=='EDIT'">
+      <i class="icon-cancel"></i><span translate="index.CANCEL" ></span>
+    </button>
+		<button class="btn btn-blue  btn-w150" ng-click="save()" style="margin:0 auto">
+            <i class="icon-cancel"></i><span translate="index.CONFIRM"></span>
+        </button>
+	</div>
+
+</script>
+<style type="text/css">
+  .working-no-detail-modal-header{
+    border: 0;
+  }
+	.content-margin-top-zero {
+		margin-top: 0px !important;
+	}
+  .working-no-detail-input{
+    margin-top: -7.5px;
+  }
+  .working-no-detail-input input{
+    margin-left: 15px;
+  }
+</style>
+
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>

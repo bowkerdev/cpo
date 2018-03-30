@@ -1,0 +1,135 @@
+<div ng-controller="FactoryAdjustmentNewOrderCtrl" >
+
+
+
+  <div class="row" >
+    <div class="col-md-12" >
+      <div class="page-title" >
+        <ol class="breadcrumb" style="margin-bottom: 0px">
+          <li><a href="#" ng-click="closePage()" >Style Summary</a></li>
+          <li class="active">New Order</li>
+        </ol>
+        <!--<div class="col-md-offset-11 col-md-1" >-->
+          <!--<i class="fa fa-times-circle btn-margin" ng-click="closePage()" ></i >-->
+        <!--</div >-->
+        <div id="factoryAdjustmentCollapse" class="panel panel-default" style="padding: 0px 15px;">
+          <a class="col-md-12 panel-heading"  onclick="$(window).trigger('resize');" data-toggle="collapse" data-parent="#factoryAdjustmentCollapse" href="#factoryAdjustmentCollapseBody" style="background-color: lightgrey;padding: 10px;padding-left: 20px;background-image: none;border-radius: 0px;"> <div class="col-md-12"><strong>Current Adjustment Doc:&nbsp;&nbsp;</strong>{{documentName}}<i class="fa fa-angle-down pull-right" style="color: dodgerblue;font-size: 23px;"></i></div></a>
+          <div id="factoryAdjustmentCollapseBody" class="col-md-12 panel-collapse collapse in" style="padding-bottom: 10px " >
+
+          <div class="col-md-12" style="padding-bottom: 10px ">
+          <div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+            <div>From Factory:</div>
+            <select ng-model="searchRequestByOrder.site" ng-options="site.label for site in siteList" style="height: 32px;width:100%;padding-left: 10px;"></select>
+          </div>
+          <!--<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">-->
+            <!--<div>Product Type:</div>-->
+            <!--<select ng-model="searchRequestByOrder.productType" ng-options="productType.label for productType in productTypes" style="height: 32px;width:100%;padding-left: 10px;"></select>-->
+          <!--</div>-->
+          <!--<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">-->
+            <!--<div>Fabric Type:</div>-->
+            <!--<select ng-model="searchRequestByOrder.fabricType" ng-options="fabricType.label for fabricType in fabricTypes" style="height: 32px;width:100%;padding-left: 10px;"></select>-->
+          <!--</div>-->
+          <!--<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">-->
+            <!--<div>Working No.:</div>-->
+            <!--<select ng-model="searchRequestByOrder.workingNo" ng-options="workingno.label for workingno in workingNos" style="height: 32px;width:100%;padding-left: 10px;"></select>-->
+          <!--</div>-->
+
+
+
+          <div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+            <div>Total Garment Qty</div>
+
+            <form class="form-inline">
+              <div class="form-group">
+                <select ng-model="searchRequestByOrder.condition" ng-options="condition.label for condition in conditions" style="height: 32px;width: 20%;padding-left: 10px;padding-right: 0px !important;"></select>
+                <input ng-model="searchRequestByOrder.garmentQty" class="form-control" style="width: 77%;" id="garmentQty">
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6" style="padding-top: 5px;padding-bottom: 5px">
+            <div>Total PV Qty</div>
+
+            <form class="form-inline">
+              <div class="form-group">
+                <select ng-model="searchRequestByOrder.condition2" ng-options="condition.label for condition in conditions" style="height: 32px;width: 20%;padding-left: 10px;padding-right: 0px !important;"></select>
+                <input ng-model="searchRequestByOrder.totalPvQuantitys" class="form-control" style="width: 77%;" id="totalPvQuantitys">
+              </div>
+            </form>
+          </div>
+
+            <div class="col-md-3">
+              <div>From PV Month</div>
+              <div   ng-time class="input-group date form_date "   data-date-format="yyyymm" ng-model="searchRequestByOrder.fromDate"  style="height: 32px;width:100% !important;">
+                <input ng-model="searchRequestByOrder.fromDate" class="form-control" size="16" type="text" value="" readonly>
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div>To PV Month</div>
+              <div   ng-time class="input-group date form_date "  data-date-format="yyyymm" ng-model="searchRequestByOrder.toDate"  style="height: 32px;width:100% !important;">
+                <input ng-model="searchRequestByOrder.toDate" class="form-control" size="16" type="text" value="" readonly>
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+          <div class="col-md-6" style="padding-top: 5px;padding-bottom: 5px">
+            <button class="btn btn-secondary btn-single" style="float: right;padding-left:20px;padding-right:20px;margin-top: 17px;" ng-click="exportFile()">
+              <i class="fa fa-download"></i><span  class="ng-scope">Export</span>
+            </button>
+            <button class="btn btn-secondary btn-single" style="float: right;padding-left:20px;padding-right:20px;margin-top: 17px;margin-right: 10px" ng-click="search()">
+              <i class="fa fa-search"></i><span  class="ng-scope">Search</span>
+            </button>
+
+            <!--<button    style="" class="btn btn-secondary btn-single" ng-click="exportFile()" style="float: right;">-->
+              <!--<i class="fa fa-download"></i>-->
+              <!--<span translate="">Export</span>-->
+            <!--</button>-->
+          </div>
+
+        </div>
+            </div>
+        <br/>
+        <form role="form" class="form-inline" name="formPlan" novalidate style="margin-top: 15px;" >
+
+          <div class="form-group" >
+            <button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2(0,'BYS')">
+              <span translate="sltforecast.CONFIRM_BY_BYS"></span>
+            </button>
+          </div>
+          <div class="form-group" >
+            <button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2(0,'BVG')">
+              <span translate="sltforecast.CONFIRM_BY_BVG"></span>
+            </button>
+          </div>
+          <div class="form-group" >
+            <button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2(0,'BVN')">
+              <span translate="sltforecast.CONFIRM_BY_BVN"></span>
+            </button>
+          </div>
+          <div class="form-group" >
+            <button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2(0,'BCA')">
+              <span translate="sltforecast.CONFIRM_BY_BCA"></span>
+            </button>
+          </div>
+        </form>
+        <div id="sampleRoomCap" ui-grid="gridOptions1" ui-grid-pagination ui-grid-pinning ui-grid-selection
+             ui-grid-resize-columns ui-grid-auto-resize style="height: 400px;margin-top: 10px"   >
+          <loading show="gridOptions1.showLoading"></loading>
+        </div >
+
+
+
+      </div >
+    </div >
+
+  </div >
+
+
+
+  <style >
+    div[ng-controller="FactoryAdjustmentCtrl"] .ui-grid-cell-contents{
+      white-space: nowrap !important;
+    }
+  </style >
+</div >
+

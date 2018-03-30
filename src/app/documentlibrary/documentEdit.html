@@ -1,0 +1,63 @@
+<div ng-controller="DocumentEditController">
+  <div class="">
+    <div class="page-title">
+      <i class="fa fa-times-circle btn-margin" ng-click="closePage()"></i>
+      <form role="form" method="post" name="" >
+        <div class="news-edit-form">
+          <label><span >Version No.</span></label>
+          <div>{{selectDoc.documentName}}</div>
+        </div>
+        <div class="news-edit-form">
+          <label><span >Season</span></label>
+          <div>{{selectDoc.season}}</div>
+        </div>
+        <div class="news-edit-form">
+          <label><span >Upload Time</span></label>
+          <div >{{selectDoc.uploadTime}}</div>
+        </div>
+        <div class="news-edit-form">
+          <label><span >Resource</span></label>
+          <div >{{selectDoc.source}}</div>
+        </div>
+        <div class="news-edit-form">
+          <label class="control-label"><span >Batch Date</span></label>
+          <div  ng-model='selectDoc.orderDate' ng-time class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy/mm/dd" data-link-field="">
+            <input ng-model='selectDoc.orderDate' class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          </div>
+        </div>
+
+        <button class="btn-bowker-theme pull-left" ng-click="Save()" type="button" ng-disabled="submitLoading">
+          <i class="fa-save"></i> <span >Save</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<style>
+
+  .news-edit-form textarea {
+    width: 60%;
+    display: inline-block;
+  }
+  .factory-criteria-button-group {
+    width: 5% !important;
+  }
+
+  .factory-criteria-score {
+    width: 55% !important;
+  }
+
+  .factory-criteria-score-input {
+    width: 40% !important;
+  }
+
+  .factory-criteria-div {
+    width: 22% !important;
+  }
+  .span-padding-left{
+    padding-left: 12px !important;
+  }
+</style>

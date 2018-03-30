@@ -1,0 +1,129 @@
+.multi-select-dropdown-code{
+    display: inline-block !important;
+    position: relative !important;
+    font-size: 1.00em;
+    border: #C6C6C6 1px solid;
+}
+
+.multi-select-dropdown-code-dropdown-control{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 6px 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+.multi-select-dropdown-code button{
+    padding-left: 4px;
+    font-size: 1.00em;
+    text-align: left;
+    height: 100%;
+    background-color: #eee;
+    border-radius: 6px;
+    border: none;
+    line-height: 100%;
+    margin: 2px 5px 2px 1px;
+}
+
+.multi-select-dropdown-code select[type='text'] {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1.00em;
+}
+
+.multi-select-dropdown-code input{
+    width: calc(100% - 35px);
+    height: 31px;
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #555555;
+    background-color: #ffffff;
+    background-image: none;
+    border: #ccc;
+    border-radius: 0px 4px 4px 0px;
+}
+
+.multi-select-dropdown-code ul {
+    background: #fff;
+    box-sizing: border-box;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    z-index: 1000;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: 1.00em;
+}
+
+.multi-select-dropdown-code ul > li {
+    cursor: pointer;
+    color: #555;
+    font-size: 1.00em;
+    padding: 0px 12px;
+}
+
+.multi-select-dropdown-code ul > li > span {
+    word-break: break-all;
+}
+
+.multi-select-dropdown-code ul > li.active {
+    color: #fff;
+    background: #1e90ff;
+    border: royalblue 1px solid;
+    font-size: 1.00em;
+}
+
+.multi-selec-clear-content{
+    margin-right: 1px;
+    color: #000;
+}
+
+.sort-content{
+    position: absolute;
+    right: 2px;
+    top: 2.5px;
+    z-index: 12;
+    padding: 5px;
+    color: #c6c6c6;
+}
+.multi-select-dropdown-code-input-group{
+    width: 100%;
+    padding: 5px 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.multi-select-dropdown-code-input-group-search{
+    padding: 5px 9px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.multi-select-dropdown-code >.dropdown-menu{
+    margin: 0;
+    width: 100%;
+    padding: 0px;
+    border: 1px solid #c6c6c6;
+    min-width: initial;
+}
+
+.multi-select-dropdown-code >.input-group{
+    width: 100%;
+}
+
+.select-ul-group{
+    padding: 5px 0px;
+    min-height: 20px;
+}

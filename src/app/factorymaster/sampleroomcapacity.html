@@ -1,0 +1,37 @@
+<div ng-controller="SampleRoomCapacityCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			</div>
+			<div class="page-title">
+				<div class="btn-group">
+					<!--<button class="btn btn-white btn-icon" ng-click="">
+            <i class="fa fa-plus"></i>
+            <span translate="index.ADD"></span>
+          </button>-->
+					<button class="btn btn-white btn-icon" ng-click="view()">
+            <i class="fa fa-eye"></i>
+            <span translate="index.VIEW"></span>
+          </button>
+					<button class="btn btn-white btn-icon" ng-click="edit()">
+            <i class="fa fa-edit"></i>
+            <span translate="index.EDIT"></span>
+          </button>
+					<!--<button class="btn btn-delete btn-icon" ng-click="">
+            <i class="fa fa-trash-o"></i>
+            <span translate="index.DELETE"></span>
+          </button>-->
+					<button class="btn btn-publish btn-icon" ng-click="">
+            <i class="fa fa-upload"></i>
+            <span translate="index.IMPORT"></span>
+          </button>
+					<button class="btn btn-postpone btn-icon" ng-click="">
+            <i class="fa fa-download"></i>
+            <span translate="index.EXPORT"></span>
+          </button>
+				</div>
+				<div id="sampleRoomCap"  ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize></div>
+			</div>
+		</div>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<ng-include src="'app/factorymaster/sampleroomcapacitydetail.html'"></ng-include>

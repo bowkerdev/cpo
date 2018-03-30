@@ -1,0 +1,227 @@
+<div id="vendorKpi" ng-controller="reportSummaryCtrl">
+
+  <div class="row" >
+    <div class="page-title">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group factory">
+            <label translate="vendorKpi.FACTORY_CODE" class="labelwidth"></label>
+            <div  class="inputwidth" ng-dropdown-multiselect="" extra-settings="factorySetting" options="factoryCodeList" translation-texts="factoryButtonTrans"  selected-model="factoryCode"></div>
+            <!--<multi-select-dropdown-options options=""  class="form-control inputwidth" model="factoryCodeList" ></multi-select-dropdown-options>-->
+          </div>
+          <div class="form-group factory">
+            <label translate="vendorKpi.POL" class="labelwidth"></label>
+            <input type="text" class="form-control inputwidth" ng-model="loadPort" limit-to="50" maxlength="50" ng-maxlength="50">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group factory">
+            <label translate="vendorKpi.FORWARDER" class="labelwidth"></label>
+            <div class="inputwidth" ng-dropdown-multiselect="" extra-settings="factorySetting" options="forwarderList" translation-texts="forwarderButtonTrans"  selected-model="forwarder"></div>
+            <!--<multi-select-dropdown-options  class="form-control inputwidth" model="factoryCodeList" ></multi-select-dropdown-options>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group startTime">
+            <label class="control-label labelwidth" translate="vendorKpi.START_DATE" style="float: left;line-height: 1.3em;"></label>
+            <div ng-model='inputStartTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputStartTime" style="float: left;margin-left: 4px;">
+              <input ng-model='inputStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>
+              <span class="input-group-addon" ng-click="inputStartTime=''"><i class="fa-close"></i></span>
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+          <div class="form-group" style="width: 40%;float: left;">
+            <label class="control-label labelwidth end-date-label" translate="vendorKpi.END_DATE"></label>
+            <div ng-model='inputEndTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputEndTime" style="float: left;margin-left: 4px;">
+              <input ng-model='inputEndTime'  ng-change="controlTime('end',1)" class="form-control" size="16" type="text" value="" readonly>
+              <span class="input-group-addon" ng-click="inputEndTime=''"><i class="fa-close"></i></span>
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+        </div>
+
+    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group startTime ver-centerv">
+            <label class="control-label labelwidth" translate="vendorKpi.FROM_INTENDED_DELIVERY_DATE" style="float: left;line-height: 1.3em;"></label>
+            <div ng-model='intendedDeliveryStartDate' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputStartTime" style="float: left;margin-left: 4px;">
+              <input ng-model='intendedDeliveryStartDate' ng-change="controlTime('start',2)" class="form-control" size="16" type="text" value="" readonly>
+              <span class="input-group-addon" ng-click="intendedDeliveryStartDate=''"><i class="fa-close"></i></span>
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+          <div class="form-group ver-center" style="width: 40%;float: left;">
+            <label class="control-label labelwidth" translate="vendorKpi.TO_INTENDED_DELIVERY_DATE" style="float: left;line-height: 1.3em;"></label>
+            <div ng-model='intendedDeliveryEndDate' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputEndTime" style="float: left;margin-left: 4px;">
+              <input ng-model='intendedDeliveryEndDate'  ng-change="controlTime('end',2)" class="form-control" size="16" type="text" value="" readonly>
+              <span class="input-group-addon" ng-click="intendedDeliveryEndDate=''"><i class="fa-close"></i></span>
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+          <div style="width: 10%;float: left;height: 30px">
+            <button style="margin-top: 0px;" class="btn btn-white btn-icon searchBtn" ng-click="getReportList()" ng-disabled="searchLoading">
+              <span class="fa fa-search"></span>
+              <span translate="index.SEARCH"></span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <div class="page-title">
+          <div>
+            <div class="btn-group import">
+              <div class="btn-div">
+                <button class="btn btn-white btn-icon" ng-click="importFile('DOC')">
+                  <span  translate="vendorKpi.FILE_TYPE_DOC"></span><br/>
+                  <i class="fa  fa-upload"></i>
+                  <span translate="index.IMPORT"></span>
+                </button>
+                <button class="btn btn-white btn-icon" ng-click="importFile('HOL')">
+                  <span translate="vendorKpi.FILE_TYPE_HOL"></span><br/>
+                  <i class="fa fa-upload"></i>
+                  <span translate="index.IMPORT"></span>
+                </button>
+                <button class="btn btn-white btn-icon" ng-click="importFile('SHM-PA')">
+                  <span translate="vendorKpi.FILE_TYPE_SHM-PA"></span><br/>
+                  <i class="fa fa-upload"></i>
+                  <span translate="index.IMPORT"></span>
+                </button>
+                <button class="btn btn-white btn-icon" ng-click="importFile('SHM-KN')">
+                  <span translate="vendorKpi.FILE_TYPE_SHM-KN"></span><br/>
+                  <i class="fa fa-upload"></i>
+                  <span translate="index.IMPORT"></span>
+                </button>
+                <button class="btn btn-white btn-icon" ng-click="importFile('SHM-DC')">
+                  <span translate="vendorKpi.FILE_TYPE_SHM-DC"></span><br/>
+                  <i class="fa fa-upload"></i>
+                  <span translate="index.IMPORT"></span>
+                </button>
+              </div>
+            </div>
+            <div class="btn-group export">
+              <div class="btn-div">
+                <button class="btn btn-postpone btn-icon" ng-click="exportFile('SUMMARY')">
+                  <span translate="vendorKpi.SUMMARY"></span><br/>
+                  <i class="fa fa-download"></i>
+                  <span translate="index.EXPORT"></span>
+                </button>
+                <button class="btn btn-postpone btn-icon" ng-click="exportFile('DETAIL')">
+                  <span translate="vendorKpi.DETAIL"></span><br/>
+                  <i class="fa fa-download"></i>
+                  <span translate="index.EXPORT"></span>
+                </button>
+                <button class="btn btn-postpone btn-icon" ng-click="exportFile('ALL')">
+                  <span translate="vendorKpi.ALL"></span><br/>
+                  <i class="fa fa-download"></i>
+                  <span translate="index.EXPORT"></span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+        <div style="margin-top: 130px;font-size: 20px;">
+          <span translate="vendorKpi.SUMMARY_REPORT"></span>
+        </div>
+        <div style="margin-top: 10px" ui-grid="gridOptions_summary" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize>
+          <div class="well grid-loading" style="margin-top: 20px;height: 320px;" ng-show="gridOptions_summary.showLoading">
+            <i class="fa fa-spin fa-spinner"></i>
+            <strong translate="vendorKpi.LOADING"></strong>
+        </div>
+      </div>
+      <!--<div class="page-title" style="padding: 0px !important;margin-top: 60px">-->
+        <div style="font-size: 20px;margin-top: 20px">
+          <span translate="vendorKpi.DETAIL_REPORT"></span>
+        </div>
+        <div style="min-height: 380px;margin-top: 10px" ui-grid="gridOptions_detail" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize>
+          <div class="well grid-loading" ng-show="gridOptions_detail.showLoading" style="height: 310px">
+            <i class="fa fa-spin fa-spinner"></i>
+            <strong translate="vendorKpi.LOADING"></strong>
+        </div>
+      </div>
+    <!--</div>-->
+  </div>
+
+</div>
+  </div>
+</div>
+
+<ng-include src="'app/vendorkpi/vendorkpi_uploadfile.html'"></ng-include>
+<ng-include src="'app/vendorkpi/downloadinvmodal.html'"></ng-include>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<script id="columnHeaderTemplate" type="text/template">
+  <div role="rowgroup" class="ui-grid-header">
+    <div class="ui-grid-top-panel">
+      <div class="ui-grid-header-viewport">
+        <div class="ui-grid-header-canvas">
+          <div class="ui-grid-header-cell-wrapper">
+            <div role="row" class="ui-grid-header-cell-row">
+              <div class="ui-grid-header-cell ui-grid-clearfix ui-grid-category"  ng-repeat="cat in grid.options.category track by $index" ng-if="(colContainer.renderedColumns | filter:{ colDef:{category: cat.name} }).length > 0">
+                <div style="width:100%;text-align:center;">
+									<span ng-if="cat.showCatName === true" ng-style="{'visibility':cat.hide ? 'hidden':'visible'}">
+                    {{cat.displayName}}
+                  </span>
+                </div>
+                <div  class="ui-grid-header-cell ui-grid-clearfix" ng-repeat="col in colContainer.renderedColumns | filter:{ colDef:{category: cat.name} }" ui-grid-header-cell col="col" render-index="$index">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+<style>
+  #vendorKpi .labelwidth{
+    width: 30%;
+    float: left;
+    text-align: right;
+    padding-right: 5px;
+  }
+  #vendorKpi .inputwidth{
+    width:60%;
+    margin-left: 3px;
+  }
+  #vendorKpi .factory{
+    width: 40%;float: left;display: flex;align-items: center
+  }
+  #vendorKpi .startTime{
+    display: flex;align-items: center; width:40%;float: left
+  }
+  #vendorKpi .startTime{
+   width: 40%;float: left;
+  }
+  #vendorKpi .searchBtn{
+    background-color: #1664F4;color:white;height: 100%
+  }
+  #vendorKpi .end-date-label{
+    float: left;height: 30px;line-height: 30px;
+  }
+  #vendorKpi .export{
+    float: right;width: 40%;margin-left: 0px !important;text-align: right;
+  }
+  #vendorKpi .import{
+    float: left;width: 60%;margin-left: 0px !important;
+  }
+  #vendorKpi .btn-div>button{
+    margin-top: 10px;
+  }
+  #vendorKpi .ui-grid-pager-row-count-picker select{
+    padding: 0px 0px 0px 5px !important;
+  }
+  #vendorKpi .ver-center{
+    display: flex;align-items: center
+  }
+  #vendorKpi .dropdown-menu.dropdown-menu-form{
+    width: inherit;
+    overflow-x: hidden !important;
+  }
+
+</style>

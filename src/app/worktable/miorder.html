@@ -1,0 +1,429 @@
+<div ng-controller="MIOrderCtrl">
+  <div class="col-md-12" ng-hide="hideTopInfo">
+    <div class="page-title">
+      <div class="pannel">
+        <ul class="step-case" id="step">
+          <!--<li  class="s-finish"><span ng-class="{true:'s-step-start-1',false:'s-step-no-start'}[(stepNumber>0)]" translate="worktable.step1"><b ng-class="{}" ></b><b ng-class="{}"></b></span></li>-->
+          <li class="s-finish col-md-2" ng-repeat="step in steps">
+            <span ng-style="{'background-color':((stepNumber>$index)?step.on:step.off)}">
+              <div class="s-content">{{step.content}}</div>
+            </span>
+            <b class="b-1" ng-style="{'border-color':((stepNumber>$index)?(step.on+' ' +step.on+' '+step.on+' white'):(step.off+' ' +step.off+' '+step.off+' white')),'display':($index>0?'block':'none')}">
+            </b>
+            <b class="b-2" ng-style="{'border-left-color':((stepNumber+1>($index))?steps[$index-1].on:steps[$index-1].off),'display':($index>0?'block':'none')}">
+            </b>
+          </li>
+          <li class="s-cur">
+            <b class="b-1" style="border-color:white"></b>
+            <b class="b-2" ng-style="{'border-left-color':((stepNumber>=steps.length)?steps[steps.length-1].on:steps[steps.length-1].off)}"></b>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 work-table-main" id="MIOrderFlowGuild">
+    <div id="accordionDailyDocument" class="page-title" ng-hide="hideTopInfo">
+
+
+
+
+      <div class="panel">
+        <div class="panel-heading">
+          <form role="form" class="form-inline" name="formPlan" novalidate>
+            <!-- search -->
+            <div class="pull-left">
+              <div class="form-group">
+                <div class="work-table-panel-title container-flex-center-center">
+                  <span translate="worktable.ORDER"></span>
+                </div>
+              </div>
+            </div>
+            <div style="float: right;">
+              <div class="form-group" style="width: 400px;">
+                <label class="work-table-label col-md-4" translate="worktable.CRITERIA_VERSION"></label>
+                <select class="col-md-8" ng-model="version" class="form-control" ng-options="version.label for version in versionList">
+                </select>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-secondary btn-single" ng-click="assignFactory()" ng-bind-html="assignHtml" ng-disabled="assigning">
+
+                </button>
+                <button class="btn btn-secondary btn-single" ng-click="reAssign()">
+                  ReAssign
+                </button>
+              </div>
+              <div class="form-group">
+                <a data-toggle="collapse" data-parent="#accordionDailyDocument" href="#collapseMIOrder">
+                  <i class="fa  fa-angle-up pull-right"></i>
+                </a>
+              </div>
+            </div>
+            <div class="empty-view" data-toggle="collapse" data-parent="#accordionDailyDocument" href="#collapseMIOrder">
+
+            </div>
+          </form>
+        </div>
+        <div id="collapseMIOrder" class="panel-collapse collapse in">
+          <div id="grip5" ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="grid-header-cell-one-line-height"
+            style="height: 60px"></div>
+        </div>
+      </div>
+      <!--<div class="panel">
+        <div class="panel-heading">
+          <form role="form" class="form-inline" name="formPlan" novalidate>
+            <div class="pull-left">
+              <div class="form-group">
+                <div class="work-table-panel-title container-flex-center-center">
+                  <span translate="worktable.CAPACITY_FILL_RATE"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <i class="fa fa-exclamation-circle fill-rate-alert"></i>&nbsp;&nbsp;
+                <label translate="worktable.OVERLOADING"></label>
+              </div>
+            </div>
+            <div style="float: right;">
+              <div class="form-group">
+                <button class="btn btn-secondary btn-single" ng-click="editFactoryCapacity()">
+                  <span translate="index.EDIT"></span>
+                </button>
+              </div>
+              <div class="form-group">
+                <a data-toggle="collapse" data-parent="#accordionDailyDocument" href="#collapseMIOrder2">
+                  <i class="fa  fa-angle-up pull-right"></i>
+                </a>
+              </div>
+            </div>
+            <div class="empty-view" data-toggle="collapse" data-parent="#accordionDailyDocument"
+                 href="#collapseMIOrder2">
+
+            </div>
+          </form>
+        </div>
+        <div id="collapseMIOrder2" class="panel-collapse collapse collapsed">
+          <div ui-grid="gridOptions1" ui-grid-pagination ui-grid-selection ui-grid-resize-columns
+               ui-grid-auto-resize></div>
+
+        </div>
+      </div>-->
+    </div>
+    <div class="panel" ng-if="false">
+      <div class="panel-heading">
+        <form role="form" class="form-inline" name="formPlan" novalidate>
+          <div class="pull-left">
+            <div class="form-group">
+              <div class="work-table-panel-title container-flex-center-center">
+                <span translate="worktable.CAPACITY_FILL_RATE"></span>
+              </div>
+            </div>
+            <!--<div class="form-group">-->
+            <!--<i class="fa fa-exclamation-circle fill-rate-alert"></i>&nbsp;&nbsp;-->
+            <!--<label translate="worktable.OVERLOADING"></label>-->
+            <!--</div>-->
+          </div>
+          <div style="float: right;">
+
+            <div class="form-group">
+              <a data-toggle="collapse" data-parent="#accordionDailyDocument" href="#collapseLC01902">
+                <i class="fa  fa-angle-up pull-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="empty-view" data-toggle="collapse" data-parent="#accordionDailyDocument" href="#collapseLC01902">
+
+          </div>
+        </form>
+      </div>
+      <div id="collapseLC01902" class="panel-collapse collapse">
+        <div ui-grid="gridOptions1" ui-grid-pinning ui-grid-expandable ui-grid-pagination ui-grid-selection ui-grid-resize-columns
+          ui-grid-auto-resize></div>
+
+      </div>
+    </div>
+    <div class="page-title">
+
+      <div style="display:inline-flex">
+        <button class="" ng-click="hideTopInfo=!hideTopInfo" style="height:32px">
+          <span class="fa fa-arrows-alt"></span>
+        </button>
+        <!--<div class="input-group" style="padding-bottom: 5px" ng-show="tabIndex!='5'&&tabIndex!='6'">-->
+        <!--<span class="input-group-addon">Document:&nbsp</span>-->
+        <!--<select ng-model="selectDoc" ng-options="doc.label for doc in docs" style="height: 32px;padding-left: 10px;" ng-change="selectDocument()"></select>-->
+        <!--</div>-->
+        <div class="input-group" style="padding-bottom: 5px" ng-show="tabIndex!='6'">
+          <span class="input-group-addon">Document Type:&nbsp;</span>
+          <select ng-model="selectDocumentType" ng-options="doc.label for doc in documentTypes" style="height: 32px;padding-left: 10px;"
+            ng-change="selectDocumentTypeChanged()"></select>
+          <span class="input-group-addon">Document:&nbsp;</span>
+          <select ng-model="selectDoc" ng-options="doc.label for doc in documentTypes[selectDocumentType.index].documents" style="height: 32px;padding-left: 10px;min-width: 100px"
+            ng-change="selectDocumentChanged()"></select>
+        </div>
+
+
+      </div>
+
+      <!--<form role="form" class="form-inline col-md-12" name="formPlan" novalidate style="margin-bottom: 15px;">
+        <div class="col-md-12 container-flex-start">
+          <div class="form-group col-md-4 container-flex-start">
+            <label class="work-table-label col-md-4" translate="worktable.CRITERIA_VERSION"></label>
+            <select class="col-md-8" ng-model="version" class="form-control"
+                    ng-options="version.label for version in versionList">
+            </select>
+          </div>
+
+          <div class="form-group col-md-4 container-flex-start">
+            <label class="work-table-label col-md-4" translate="worktable.COMFIRMED_OR_NOT"></label>
+            <select class="col-md-8" ng-model="myStatus" class="form-control"
+                    ng-options="status.label for status in statusList">
+              <option value="" translate="index.ALL"></option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-4 container-flex-start">
+            <button class="btn btn-secondary btn-single col-md-4"
+                    ng-click="my_status=myStatus;my_onOffline=myOnOffline;my_planName=model_PlanName;my_courseName=model_CourseName;searchPlanList()">
+              <i class="fa-search"></i>&nbsp;&nbsp;<span translate="index.SEARCH"></span>
+            </button>
+          </div>
+        </div>
+
+      </form>-->
+      <div style="display: flex;">
+        <!--<button class="" ng-click="hideTopInfo=!hideTopInfo" style="font-size: 15px;margin: 10px;height: 26px">-->
+        <!--<span class="fa fa-arrows-alt"></span>-->
+        <!--</button>-->
+        <scrollable-tabset show-tooltips="false" api="scrlTabsApi" ng-init="setupScrollableTabSet()" class="no-content-tab marketing-scrollable-tabset two-line-ui-tabs">
+          <uib-tabset>
+            <uib-tab id="miorder{{$index}}" ng-model="tab" ng-repeat="tab in navList" select="selectTab($index)">
+              <!--<uib-tab-heading>{{tab}}</uib-tab-heading>-->
+              <uib-tab-heading>
+                <div>{{tab.name}}</div>
+                <div STYLE="font-size: 12px;text-align: center">
+                  <div ng-if="!tab.loading">{{tab.count}}</div>
+                  <i class="fa fa-spin fa-spinner" style="right: 0px;color: black" ng-if="tab.loading"></i>
+                </div>
+              </uib-tab-heading>
+            </uib-tab>
+          </uib-tabset>
+        </scrollable-tabset>
+        <div class="form-group" style="position: absolute;right: 40px;margin-bottom: 0px !important;">
+          <button style="float: right;margin-top: 10px;" class="btn btn-secondary btn-single" ng-click="exportFile()">
+            <i class="fa fa-download"></i>
+            <span translate="">Export</span>
+          </button>
+          <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="importFile()"
+            ng-if="tabIndex!='5'">
+            <i class="fa fa-upload"></i>
+            <span translate="">Import</span>
+          </button>
+          <!--<button style="float: right;margin-top: 10px;margin-right: 20px;" class="btn btn-secondary btn-single" ng-click="toggleFilterRow()" >-->
+          <!--<i class="fa fa-search"></i>-->
+          <!--<span translate="index.SEARCH"></span>-->
+          <!--</button>-->
+        </div>
+      </div>
+      <form role="form" class="form-inline" name="formPlan" novalidate>
+
+        <div class="form-group" ng-if="tabIndex=='0'">
+          <button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2('6','BYS')">
+            <span translate="sltforecast.CONFIRM_BY_BYS"></span>
+          </button>
+        </div>
+        <div class="form-group" ng-if="tabIndex=='0'">
+          <button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2('6','BVG')">
+            <span translate="sltforecast.CONFIRM_BY_BVG"></span>
+          </button>
+        </div>
+        <div class="form-group" ng-if="tabIndex=='0'">
+          <button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2('6','BVN')">
+            <span translate="sltforecast.CONFIRM_BY_BVN"></span>
+          </button>
+        </div>
+        <div class="form-group" ng-if="tabIndex=='0'">
+          <button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2('6','BCA')">
+            <span translate="sltforecast.CONFIRM_BY_BCA"></span>
+          </button>
+        </div>
+        <div ng-if="tabIndex=='0'">
+          <div class="col-md-2">
+            <div>Stripes</div>
+            <div class="input-group" style="width: 100%;">
+              <input type="text" class="form-control" aria-label="" ng-model="updateObj.stripes" style="width: 100%;">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div>Logo</div>
+            <div class="input-group" style="width: 100%;">
+              <input type="text" class="form-control" aria-label="" ng-model="updateObj.logo" style="width: 100%;">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div>Sblimiation</div>
+            <div class="input-group" style="width: 100%;">
+              <input type="text" class="form-control" aria-label="" ng-model="updateObj.sblimiation" style="width: 100%;">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div>N&N</div>
+            <div class="input-group" style="width: 100%;">
+              <input type="text" class="form-control" aria-label="" ng-model="updateObj.nn" style="width: 100%;">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div>MT2FB4 Hem Insert</div>
+            <div class="input-group" style="width: 100%;">
+              <input type="text" class="form-control" aria-label="" ng-model="updateObj.insert" style="width: 100%;">
+            </div>
+          </div>
+          <div class="col-md-2">
+
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="update()" ng-disabled="disableReleaseOrderButton">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
+              <span>Update</span>
+            </button>
+          </div>
+        </div>
+
+        <div ng-show="tabIndex=='0'"style="margin-top:60px;">
+          <div ng-if="tabIndex=='0'" id="mi_order_grid1" ui-grid="gridOptions2" ui-grid-expandable ui-grid-pagination ui-grid-selection
+            ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom></div>
+          <div class="form-group" style="margin-top: 15px;">
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseAllOrder()" ng-disabled="disableReleaseOrderButton">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
+              <span translate="worktable.RELEASE_ALL"></span>
+            </button>
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrder()" ng-disabled="disableReleaseOrderButton">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
+              <span translate="worktable.CONFIRM_TO_AX"></span>
+            </button>
+            <button ng-if="!miOrderEdit" class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="allUpdate()" ng-disabled="newOrderData.length===0">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
+              <span>Update</span>
+            </button>
+            <button ng-if="miOrderEdit" class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="allSave()" ng-disabled="newOrderData.length===0">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
+              <span>Save</span>
+            </button>
+          </div>
+        </div>
+        <div ng-show="tabIndex=='1'">
+          <div ng-if="tabIndex=='1'" id="mi_order_grid" ui-grid="gridOptions4" ui-grid-expandable ui-grid-pagination ui-grid-selection
+            ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom></div>
+          <div class="form-group" style="margin-top: 15px;">
+              <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseAllOrder()" ng-disabled="disableReleaseOrderButton">
+                  <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
+                  <span translate="worktable.RELEASE_ALL"></span>
+                </button>
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderPending()" ng-disabled="disableReleaseOrderButton">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
+              <span translate="worktable.CONFIRM_TO_FR"></span>
+            </button>
+          </div>
+        </div>
+
+        <div ng-show="tabIndex=='2'">
+          <div ng-if="tabIndex=='2'" id="mi_order_grid2" ui-grid="gridOptions3" ui-grid-expandable ui-grid-pagination ui-grid-selection
+            ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom></div>
+        </div>
+    </div>
+
+  </div>
+  <script id="stripesTemplate" type="text/template">
+    <div ng-if="!grid.appScope.miOrderEdit" class="templatestyle" style="text-align: left">
+      <span>{{row.entity.miStripes}}</span>
+    </div>
+    <div ng-if="grid.appScope.miOrderEdit" class="ui-grid-cell-contents" style="display: flex;align-items: center;">
+      <div>
+        <input type="text" ng-model="row.entity.miStripes" ng-change="grid.appScope.selectRow(row.entity)"/>
+      </div>
+    </div>
+  </script>
+  <script id="logoTemplate" type="text/template">
+    <div ng-if="!grid.appScope.miOrderEdit" class="templatestyle" style="text-align: left">
+      <span>{{row.entity.miLogo}}</span>
+    </div>
+    <div ng-if="grid.appScope.miOrderEdit" class="ui-grid-cell-contents" style="display: flex;align-items: center;">
+      <div>
+        <input type="text" ng-model="row.entity.miLogo" />
+      </div>
+    </div>
+  </script>
+  <script id="sublimationTemplate" type="text/template">
+    <div ng-if="!grid.appScope.miOrderEdit" class="templatestyle" style="text-align: left">
+      <span>{{row.entity.miPrint}}</span>
+    </div>
+    <div ng-if="grid.appScope.miOrderEdit" class="ui-grid-cell-contents" style="display: flex;align-items: center;">
+      <div>
+        <input type="text" ng-model="row.entity.miPrint"/>
+      </div>
+    </div>
+  </script>
+  <script id="nnTemplate" type="text/template">
+    <div ng-if="!grid.appScope.miOrderEdit" class="templatestyle" style="text-align: left">
+      <span>{{row.entity.miNN}}</span>
+    </div>
+    <div ng-if="grid.appScope.miOrderEdit" class="ui-grid-cell-contents" style="display: flex;align-items: center;">
+      <div>
+        <input type="text" ng-model="row.entity.miNN"/>
+      </div>
+    </div>
+  </script>
+  <script id="MT2FB4HemInsertTemplate" type="text/template">
+    <div ng-if="!grid.appScope.miOrderEdit" class="templatestyle" style="text-align: left">
+      <span>{{row.entity.miHemInsert}}</span>
+    </div>
+    <div ng-if="grid.appScope.miOrderEdit" class="ui-grid-cell-contents" style="display: flex;align-items: center;">
+      <div>
+        <input type="text" ng-model="row.entity.miHemInsert"/>
+      </div>
+    </div>
+  </script>
+
+
+  <style>
+    div[ng-controller="MIOrderCtrl"] .tabContent {
+      background-color: #FBFBFB;
+      height: 100%;
+      text-align: center;
+      padding-top: 50px
+    }
+
+    div[ng-controller="MIOrderCtrl"] .no-content-tab .tab-content {
+      height: 0px !important;
+      margin: 0px !important;
+      padding: 0px !important;
+      margin-bottom: 15px !important;
+    }
+
+    div[ng-controller="MIOrderCtrl"] .marketing-scrollable-tabset .ui-tabs-scrollable {
+      /*padding-top: 30px;*/
+    }
+
+    div[ng-controller="MIOrderCtrl"] .marketing-scrollable-tab .ui-tabs-scrollable {
+      padding-top: 30px;
+    }
+
+    div[ng-controller="MIOrderCtrl"] .marketing-scrollable-tabset .nav.nav-tabs>li.active>a {
+      background-color: #3baf7b !important;
+      border: #3BAF7B 1px solid !important;
+      color: white !important;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+
+    div[ng-controller="MIOrderCtrl"] .marketing-scrollable-tabset .nav.nav-tabs>li>a {
+      background-color: white;
+      border: #C6C6C6 1px solid;
+      color: #C6C6C6;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+
+    .bbbb {}
+  </style>
+
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<ng-include src="'app/worktable/factorycapacity.html'"></ng-include>
+<ng-include src="'app/worktable/uploadfile.html'"></ng-include>
+<ng-include src="'app/file/uploadfile.html'"></ng-include>

@@ -1,0 +1,93 @@
+<div ng-controller="marketingForecastReportCtrl">
+		<div class="col-md-12">
+			<div class="page-title">
+
+        <scrollable-tabset show-tooltips="false" api="scrlTabsApi"  class="no-content-tab marketing-scrollable-tabset" style="height: 60px">
+          <uib-tabset>
+            <uib-tab select="fetchInfo(1)">
+              <uib-tab-heading  >By Product Type</uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchInfo(2)">
+              <uib-tab-heading >By Product Type By Season</uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchInfo(3)">
+              <uib-tab-heading >By Range By Factory</uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchInfo(4)">
+              <uib-tab-heading >By Range By Season</uib-tab-heading>
+            </uib-tab>
+          </uib-tabset>
+        </scrollable-tabset>
+        <div class="form-group" style="width: 100%;margin-bottom: 0px !important;">
+          <button style="float: right;" class="btn btn-secondary btn-single" ng-click="exportFile()">
+            <i class="fa fa-download"></i>
+            <span translate="">Export</span>
+          </button>
+        </div>
+        <div class="input-group" style=""  >
+          <span class="input-group-addon">Batch Date:&nbsp</span>
+          <select  ng-model="searchRequest.mkfc" ng-options="doc.label for doc in mkfcs" style="height: 32px;min-width: 100px;padding-left: 10px"  ng-change="changeDoc()"></select>
+        </div>
+				<div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize common-directive-function hight-auto-fill-bottom >
+          <loading show="gridOptions.showLoading"></loading>
+        </div>
+			</div>
+		</div>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<style>
+  div[ng-controller="marketingForecastReportCtrl"] .tabContent {
+    background-color: #FBFBFB;
+    height: 100%;
+    text-align: center;
+    padding-top: 50px
+  }
+  div[ng-controller="marketingForecastReportCtrl"] .tabContent {
+    background-color: #FBFBFB;
+    height: 100%;
+    text-align: center;
+    padding-top: 50px
+  }
+
+  div[ng-controller="marketingForecastReportCtrl"] .marketing-scrollable-tabset .ui-tabs-scrollable {
+    /*padding-top: 30px;*/
+  }
+
+  div[ng-controller="marketingForecastReportCtrl"] .marketing-scrollable-tab .ui-tabs-scrollable {
+    padding-top: 30px;
+  }
+
+  div[ng-controller="marketingForecastReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs > li.active > a {
+    background-color: #3baf7b !important;
+    border: #3BAF7B 1px solid !important;
+    color: white !important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  div[ng-controller="marketingForecastReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs > li > a {
+    background-color: white;
+    border: #C6C6C6 1px solid;
+    color: #C6C6C6;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  div[ng-controller="marketingForecastReportCtrl"] .page-title.none-border{
+    padding: 5px 0px 5px 0px !important;
+  }
+  div[ng-controller="marketingForecastReportCtrl"] .ui-tabs-scrollable{
+    height: 55px;
+  }
+  div[ng-controller="marketingForecastReportCtrl"] .none-border{
+    border: none
+  }
+  div[ng-controller="marketingForecastReportCtrl"] .ui-tabs-scrollable{
+    height: 55px;
+  }
+  div[ng-controller="marketingForecastReportCtrl"] .ui-grid-header-viewport{
+    height: 55px;
+  }
+  div[ng-controller="marketingForecastReportCtrl"] .ui-grid-header-canvas{
+    height: 55px;
+  }
+</style>

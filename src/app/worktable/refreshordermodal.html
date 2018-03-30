@@ -1,0 +1,35 @@
+
+<div >
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Refresh</h3>
+  </div>
+
+
+  <form class="form-horizontal" style="padding:20px">
+
+    <div class="form-group">
+      <label for="input4" class="col-sm-3 control-label">File Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="input4"  ng-model="fileName">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="input5" class="col-sm-3 control-label">Batch Date</label>
+      <div class="col-sm-9">
+        <!--<input type="text" class="form-control" id="input5" ng-model="orderDate">-->
+        <div ng-model='orderTime' ng-time class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputStartTime" style="width: 100% !important;">
+          <input ng-model='orderTime'  class="form-control" size="16" type="text" value="" readonly style="">
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
+</div>
+
+

@@ -1,0 +1,25 @@
+<div  ng-controller="planGroupCtrl">
+  <div class="btn-group">
+    <button class="btn btn-white btn-icon" ng-click="add()" >
+      <i class="fa fa-plus"></i>
+      <span translate="index.ADD"></span>
+    </button>
+    <button class="btn btn-white btn-icon" ng-click="edit()" >
+      <i class="fa fa-edit"></i>
+      <span translate="index.EDIT"></span>
+    </button>
+    <button class="btn btn-delete btn-icon" ng-click="delete()" >
+      <i class="fa fa-trash-o"></i>
+      <span translate="index.DELETE"></span>
+    </button>
+    </div>
+  <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom >
+    <div class="well grid-loading" style="margin-top: 30px" ng-show="gridOptions.showLoading">
+      <i class="fa fa-spin fa-spinner"></i>
+      <strong translate="vendorKpi.LOADING"></strong>
+    </div>
+  </div>
+
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+

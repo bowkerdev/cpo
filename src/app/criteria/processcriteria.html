@@ -1,0 +1,70 @@
+<div ng-controller="ProcessCriteriaController">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-title">
+				<i class="fa fa-times-circle btn-margin" ng-click="closePage()"></i>
+				<form role="form" method="post" name="">
+					<div class="news-edit-form">
+						<label><span translate="index.STATUS"></span></label>
+						<span class="bowker-btn-no-radius" ng-bind="titleMode"></span>
+					</div>
+					<div class="news-edit-form">
+						<label><span class="red">*</span><span translate="criteria.CRITERIA_CATEGORY"></span></label>
+						<select ng-model="processCriteriaDetail.categorySelected" class="form-control" ng-options="category.label for category in categoryList" ng-change="categoryChange(processCriteriaDetail.categorySelected)">
+						</select>
+					</div>
+					<div class="news-edit-form ">
+						<label><span class="red">*</span><span translate="criteria.CRITERIA_NAME"></label>
+						<select ng-model="processCriteriaDetail.processSelected" class="form-control" ng-options="process.label for process in processList">
+						</select>
+					</div>
+					<!--<div class="news-edit-form ">
+						<label translate="criteria.APPLICATION_SITE"></label>
+						<select ng-model="processCriteriaDetail.factorySelected" class="form-control" ng-options="factory.label for factory in factoryList">
+						</select>
+					</div>-->
+					<div class="news-edit-form ">
+						<label translate="criteria.APPLICATION_SITE"></label>
+						<!--<select ng-model="condition.applicationSite" class="form-control" ng-options="applicationSite.label for applicationSite in siteList">
+								</select>-->
+						<div class="multi-select ng-scope ng-isolate-scope"  ng-dropdown-multiselect="" options="factoryList" selected-model="processCriteriaDetail.factorySelected" extra-settings="extraSettings"  translation-texts="translationTexts"></div>
+					</div>
+					<div class="news-edit-form ">
+						<label><span class="red">*</span><span translate="criteria.MANDATORY"></label>
+						<select ng-model="processCriteriaDetail.mandatorySelected" class="form-control" ng-options="mandatory.label for mandatory in mandatoryList">
+						</select>
+					</div>
+					<div class="news-edit-form">
+						<label><span class="red">*</span><span translate="criteria.SCORE"></span></label>
+						<input type="text" class="form-control" ng-model="processCriteriaDetail.processScore">
+					</div>
+					<div class="news-edit-form">
+						<label class="control-label"><span class="red">*</span><span translate="criteria.START_TIME"></span></label>
+						<div ng-if="Mode != MODETYPE.VIEW" ng-model='processCriteriaDetail.start' ng-time class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="voteStartTime">
+							<input ng-model='processCriteriaDetail.start' class="form-control" size="16" type="text" value="" readonly>
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
+						<input ng-model='vote.start' class="form-control input-group col-md-5" size="16" type="text" value="" readonly ng-if="Mode ==MODETYPE.VIEW">
+						<input type="hidden" id="voteStartTime" value="" />
+					</div>
+
+					<div class="news-edit-form">
+						<label for="voteEndTime" class="control-label"><span translate="criteria.END_TIME"></span></label>
+						<div ng-if="Mode != MODETYPE.VIEW" ng-model='processCriteriaDetail.end' ng-time class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="voteEndTime">
+							<input ng-model='processCriteriaDetail.end' class="form-control" size="16" type="text" value="" readonly>
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
+						<input ng-model='vote.end' class="form-control input-group col-md-5" size="16" type="text" value="" readonly ng-if="Mode ==MODETYPE.VIEW">
+						<input type="hidden" id="voteEndTime" value="" />
+					</div>
+
+					<button ng-if="Mode!==MODETYPE.VIEW" class="btn-bowker-theme pull-left" ng-click="Save()" ng-disabled="submitLoading">
+            <i class="fa-save"></i> <span translate="index.SAVE"></span>
+         </button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>

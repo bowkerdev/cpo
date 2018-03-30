@@ -1,0 +1,29 @@
+<!-- Modal -->
+<script type="text/ng-template" id="commonConfirmModal">
+  <div class="modal-header" id="modal" style="border: none;height: 30px">
+    <h4 class="modal-title blue"  ng-bind="outputTitle"></h4>
+  </div>
+  <div class="modal-body" ng-type-enter style="border: 1px #cccccc solid">
+    <form name="messageForm">
+      <div style="text-align: center;" ng-model="imgurl">
+        <div class="text-center" style="margin: 0 auto">
+          <img ng-src="{{imgurl}}"><br>
+          <label class="text-warning icon-warning font-size14 " ng-class="color" ng-bind="outputMsg" style="margin-top: 10px"></label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer" style="border: none;text-align: center">
+    <div class="btn-center">
+      <button class="btn btn-blue btn-w130" ng-show="cancelOutputFlag" ng-click="clickCancel()"
+              style="border-radius: 5px;padding-left: 40px;padding-right: 40px">
+        <i class="icon-cancel"></i><span ng-bind="cancelButton"></span>
+      </button>
+      <button class="btn btn-blue btn-w130" ng-class="!cancelOutputFlag ? 'pull-center' : ''" ng-click="clickOK()"
+              style="border-radius: 5px;padding-left: 40px;padding-right: 40px;">
+        <i class="icon-entry"></i><span ng-bind="successButton"></span>
+      </button>
+    </div>
+  </div>
+
+</script>

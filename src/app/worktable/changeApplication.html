@@ -1,0 +1,39 @@
+
+<div >
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Change Application</h3>
+  </div>
+
+
+  <form class="form-horizontal" style="padding:20px">
+  	
+    <div class="form-group">
+      <label for="input4" class="col-sm-3 control-label">To Factory</label>
+      <div class="col-sm-9">
+        <select class=" form-control" ng-model="site" ng-options="site.label for site in siteList">
+              </select>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="input4" class="col-sm-3 control-label">Transfer Remark</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="input4"  ng-model="remark">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="input5" class="col-sm-3 control-label">Transfer Reason</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="input5 " ng-model="reason">
+      </div>
+    </div>
+
+  </form>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
+</div>
+
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>

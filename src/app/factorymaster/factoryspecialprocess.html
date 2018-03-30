@@ -1,0 +1,67 @@
+<div ng-controller="factorySpecialProcessCtrl">
+	<div class="row">
+		<div class="col-md-12">
+
+			<!--<div class="page-title">
+				<form role="form" class="form-inline" name="formArticle" novalidate>
+					
+					<div class="form-group">
+						<label translate="factory.FACTORY_SIMP_NAME"></label><label>:</label>
+						<select ng-model="site" class="form-control" ng-options="site.label for site in siteList">
+							<option value="" translate="index.ALL"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label translate="processmaster.PROCESS_NO"></label><label>:</label>
+						<select ng-model="channel" class="form-control" ng-options="channel.label for channel in channelList">
+							<option value="" translate="index.ALL"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label translate="processmaster.PROCESS_NAME"></label><label>:</label>
+						<select ng-model="audience" class="form-control" ng-options="audience.label for audience in audienceList">
+							<option value="" translate="index.ALL"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-secondary btn-single" ng-click="mySite = site;myChannel = channel;myAudience =audience;myStatus = status;;searchArticleList()">
+              <i class="fa-search"></i>&nbsp;&nbsp;
+              <span translate="index.SEARCH"></span>
+            </button>
+					</div>
+				</form>
+			</div>-->
+			<div class="page-title">
+				<div class="btn-group">
+					<!--<button class="btn btn-white btn-icon" ng-click="">
+            <i class="fa fa-plus"></i>
+            <span translate="index.ADD"></span>
+          </button>-->
+					<button class="btn btn-white btn-icon" ng-click="view()">
+            <i class="fa fa-eye"></i>
+            <span translate="index.VIEW"></span>
+          </button>
+					<button class="btn btn-white btn-icon" ng-click="edit()">
+            <i class="fa fa-edit"></i>
+            <span translate="index.EDIT"></span>
+          </button>
+					<!--<button class="btn btn-delete btn-icon" ng-click="">
+            <i class="fa fa-trash-o"></i>
+            <span translate="index.DELETE"></span>
+          </button>-->
+					<button class="btn btn-publish btn-icon" ng-click="">
+            <i class="fa fa-upload"></i>
+            <span translate="index.IMPORT"></span>
+          </button>
+					<button class="btn btn-postpone btn-icon" ng-click="">
+            <i class="fa fa-download"></i>
+            <span translate="index.EXPORT"></span>
+          </button>
+				</div>
+				<div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize></div>
+			</div>
+		</div>
+	</div>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<ng-include src="'app/factorymaster/factoryspecialprocessdetail.html'"></ng-include>

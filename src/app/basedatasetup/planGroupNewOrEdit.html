@@ -1,0 +1,50 @@
+
+<div >
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">{{title}}</h3>
+  </div>
+
+
+  <form class="form-horizontal" style="padding:20px">
+    <div class="form-group">
+      <label for="input0" class="col-sm-3 control-label">Factory</label>
+      <div class="col-sm-9">
+
+        <select id="input0" ng-model="factory" ng-options="factory.label for factory in factories" style="height: 32px;width: 100%;padding-left: 10px"></select>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="input1" class="col-sm-3 control-label">Fabric Type</label>
+      <div class="col-sm-9">
+        <!--<input type="text" class="form-control" id="input1"  ng-model="remark">-->
+        <select ng-model="fabricType" ng-options="fabricType.label for fabricType in fabricTypes" style="height: 32px;width: 100%;padding-left: 10px"></select>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="input2" class="col-sm-3 control-label">Product Type-FR</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="input2"  ng-model="productType">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="input3" class="col-sm-3 control-label">Ap Group</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="input3"  ng-model="apGroup">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="input4" class="col-sm-3 control-label">Plan Group</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="input4"  ng-model="planGroup">
+      </div>
+    </div>
+
+
+  </form>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
+</div>

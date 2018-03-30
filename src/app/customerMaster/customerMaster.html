@@ -1,0 +1,52 @@
+<div ng-controller="customerMasterCtrl">
+
+
+  <div class="row" >
+    <div class="col-md-12">
+
+      <div class="page-title">
+        <div class="btn-group" style="width: 100%;">
+
+          <button class="btn btn-publish btn-icon" ng-click="importFile()">
+            <i class="fa fa-upload"></i>
+            <span translate="index.IMPORT"></span>
+          </button>
+          <button class="btn btn-postpone btn-icon" ng-click="exportFile()">
+            <i class="fa fa-download"></i>
+            <span translate="index.EXPORT"></span>
+          </button>
+        </div>
+
+        <div class="col-md-6" style="padding-top:4px;padding-left: 0px">
+        <div class="input-group">
+          <span class="input-group-addon">Customer No.</span>
+          <input type="text" class="form-control" aria-label="" ng-model="searchCustomerNo">
+          <span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="search()">Search</span>
+        </div>
+        </div>
+
+
+
+        <!--<div>-->
+          <!--<span translate="worktable.workingNo" style="margin-left: 30px;" >:</span>-->
+          <!--<input ng-model="workingNo" style="height: 30px;" type="text" />-->
+        <!--</div>-->
+        <div ui-grid="gridOptions" ui-grid-expandable ui-grid-pagination
+             ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;margin-top: 40px" hight-auto-fill-bottom >
+          <div class="well grid-loading" ng-show="gridOptions.showLoading">
+            <i class="fa fa-spin fa-spinner"></i>
+            <strong>Loading...</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-include src="'app/file/uploadfile.html'"></ng-include>
+<style>
+  /*Filter横向样式,想用可以开,但是要调整最小宽度*/
+  div[ng-controller="workingNoMasterCtrl"] div[role="columnheader"]{
+    /*display: flex;*/
+  }
+</style>

@@ -1,0 +1,165 @@
+<div ng-controller="tQuantityReportCtrl">
+  <div class="col-md-12" ng-show="isEdit === 'edit'">
+    <div class="page-title">
+      <div class="page-title none-border">
+        <div class="col-md-12" style="">
+          <!--<div class="col-md-2" style="" ng-show="">-->
+          <!--<div>-->
+          <!--<span translate="report.DOCUMENT_TYPE"></span>:-->
+          <!--</div>-->
+          <!--<select ng-model="model_documentType" ng-options="docType.label for docType in docTypes" style="height: 32px;width:100%;padding-left: 10px;"></select>-->
+          <!--</div>-->
+
+          <div class="col-md-3" style="">
+            <div>
+              <span></span>Field</div>
+            <div ng-dropdown-multiselect="" options="fields" selected-model="searchRequest.field" extra-settings="idPropertySettings"
+              style="width:100%;;" id="order-qty-type"></div>
+
+            <!-- <select  ng-options="workingno.label for workingno in workingList" style="height: 32px;width:100%;padding-left: 10px;"></select> -->
+          </div>
+          <div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+            <div>
+              <label style="width: 7px;height: 7px;background-color: red;border-radius: 50%;margin-bottom: 2px"></label>
+              <span>&nbsp;Order Type</span>:
+            </div>
+            <select ng-model="searchRequest.docType" ng-options="doc.label for doc in docTypes" style="height: 32px;width:100%;padding-left: 10px;"
+              ng-change="orderDateSelect()">
+            </select>
+          </div>
+          <div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+            <div>
+              <label style="width: 7px;height: 7px;background-color: red;border-radius: 50%;margin-bottom: 2px"></label>
+              <span>File Name</span>:
+            </div>
+            <select ng-model="searchRequest.orderTime" ng-options="orderTime.label for orderTime in orderTimes" style="height: 32px;width:100%;padding-left: 10px;">
+            </select>
+          </div>
+
+          <div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+            <div>
+              <!--<label style="width: 7px;height: 7px;background-color: red;border-radius: 50%;margin-bottom: 2px"></label>-->
+              <span>&nbsp;</span>
+            </div>
+            <div style="height: 32px;width:100%;padding-left: 10px;">
+              <label style="margin-left: 15px;margin-right: 15px">
+                <input type="checkbox" style="font-size: 15px;" ng-model="searchRequest.isCompareCustomerFc">Compare Customer FC
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+
+            <div>From month:</div>
+            <div ng-time class="input-group date form_datemonth " data-date-format="yyyymm" ng-model="searchRequest.fromMonth" style="height: 32px;width:100% !important;">
+              <input ng-model="searchRequest.fromMonth" class="form-control" size="16" type="text" value="" readonly>
+              <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+            <div>To month:</div>
+            <div ng-time class="input-group date form_datemonth " data-date-format="yyyymm" ng-model="searchRequest.toMonth" style="height: 32px;width:100% !important;">
+              <input ng-model="searchRequest.toMonth" class="form-control" size="16" type="text" value="" readonly>
+              <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px" >
+            <div>Total:</div>
+            <div class="input-group" style="height: 32px;width:100% !important;">
+              <input ng-model="searchRequest.total" class="form-control" size="16" type="number" >
+            </div>
+          </div>
+
+          <div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px" ng-show="searchRequest.isCompareCustomerFc">
+            <div>FC Total:</div>
+            <div class="input-group" style="height: 32px;width:100% !important;">
+              <input ng-model="searchRequest.total_fc" class="form-control" size="16" type="number" >
+            </div>
+          </div>
+
+          <div class="col-md-1" style="">
+            <button class="btn btn-secondary btn-single" style="padding-left:20px;padding-right:20px;margin-top: 23px;" ng-click="search()">
+              <i class="fa-search"></i>
+              <span class="ng-scope">Search</span>
+            </button>
+
+          </div>
+          <div class="col-md-1" style="margin-left:20px">
+            <button class="btn btn-secondary btn-single" style="padding-left:20px;padding-right:20px;margin-top: 23px;" ng-click="exportFile()">
+              <i class="fa fa-download"></i>
+              <span class="ng-scope">Export</span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <div id="customerForecastReportOne" ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize
+        hight-auto-fill-bottom style="margin-top: 0px">
+        <div class="well grid-loading" ng-show="gridOptions.showLoading">
+          <i class="fa fa-spin fa-spinner"></i>
+          <strong>Loading...</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <ng-include class="col-md-12" src="'app/report/styleTransferEdit.html'" ng-if="isEdit === 'styleTransferEdit'"></ng-include>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+
+<style>
+  div[ng-controller="tQuantityReportCtrl"] .tabContent {
+    background-color: #FBFBFB;
+    height: 100%;
+    text-align: center;
+    padding-top: 50px
+  }
+
+  div[ng-controller="tQuantityReportCtrl"] .marketing-scrollable-tabset .ui-tabs-scrollable {
+    /*padding-top: 30px;*/
+  }
+
+  div[ng-controller="tQuantityReportCtrl"] .marketing-scrollable-tab .ui-tabs-scrollable {
+    padding-top: 30px;
+  }
+
+  div[ng-controller="tQuantityReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs>li.active>a {
+    background-color: #3baf7b !important;
+    border: #3BAF7B 1px solid !important;
+    color: white !important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  div[ng-controller="tQuantityReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs>li>a {
+    background-color: white;
+    border: #C6C6C6 1px solid;
+    color: #C6C6C6;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  div[ng-controller="tQuantityReportCtrl"] .page-title.none-border {
+    padding: 5px 0px 5px 0px !important;
+  }
+
+  div[ng-controller="tQuantityReportCtrl"] .ui-tabs-scrollable {
+    height: 55px;
+  }
+
+  div [ng-controller="tQuantityReportCtrl"] .ui-grid-header-viewport {
+    height: 55px;
+  }
+
+  .none-border {
+    border: none
+  }
+</style>

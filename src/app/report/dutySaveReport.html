@@ -1,0 +1,119 @@
+<div ng-controller="dutySaveReportCtrl">
+  <div class="col-md-12">
+    <div class="page-title">
+      <div class="form-group">
+        <button style="float: right;margin-top: 10px;" class="btn btn-secondary btn-single" ng-click="fetchInfo(null,1)">
+          <i class="fa fa-calendar-times-o"></i>
+          <span translate="">By Season</span>
+        </button>
+        <button style="float: right;margin-top: 10px;margin-right: 10px;" class="btn btn-secondary btn-single" ng-click="fetchInfo(null,2)">
+          <i class="fa fa-calendar-times-o"></i>
+          <span translate="">By Year</span>
+        </button>
+      </div>
+      <scrollable-tabset show-tooltips="false" api="scrlTabsApi" class="no-content-tab marketing-scrollable-tabset" style="height: 60px">
+        <uib-tabset>
+          <uib-tab select="fetchInfo('EU')">
+            <uib-tab-heading translate="worktable.EURate"></uib-tab-heading>
+          </uib-tab>
+          <uib-tab select="fetchInfo('CHINA')">
+            <uib-tab-heading translate="worktable.ChinaRate"></uib-tab-heading>
+          </uib-tab>
+        </uib-tabset>
+
+      </scrollable-tabset>
+      <!--<div style="display: flex">-->
+
+      <!--</div>-->
+      <div id="dutysave" ui-grid="gridOptionsduty"  ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize
+        hight-auto-fill-bottom>
+        <loading show="gridOptionsduty.showLoading"></loading>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<style>
+  div[ng-controller="dutySaveReportCtrl"] .form-group{
+    position: absolute;
+    right: 38px;
+    top: 10px;
+    z-index: 999;
+    width: 50%;
+    margin-bottom: 0px !important;
+  }
+  div[ng-controller="dutySaveReportCtrl"] .ui-grid-header-cell-primary-focus {
+    /*text-align: center;*/
+    white-space: normal;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  div[ng-controller="dutySaveReportCtrl"] .nav.nav-tabs+.tab-content {
+    margin-bottom: 0px;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"] .sampleRoomCap {
+    margin-top: 10px;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"] .cell-text-bolder {
+    font-weight: bolder;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"]  .cell-divider2 {
+
+    border-bottom: 1px solid #e9e9e9;
+    border-top: 1px solid #e9e9e9;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"] .text-color-red {
+    color: red;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"] .text-color-normal {
+    color: black;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"]  .height-20 {
+    height: 20px;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"]  .height-120 {
+    height: 120px;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"] .ui-grid-cell-contents {
+    white-space: normal;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"] .marketing-scrollable-tabset .ui-tabs-scrollable {
+    /*padding-top: 30px;*/
+  }
+
+  div[ng-controller="dutySaveReportCtrl"] .marketing-scrollable-tab .ui-tabs-scrollable {
+    padding-top: 30px;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs>li.active>a {
+    background-color: #3baf7b !important;
+    border: #3BAF7B 1px solid !important;
+    color: white !important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  div[ng-controller="dutySaveReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs>li>a {
+    background-color: white;
+    border: #C6C6C6 1px solid;
+    color: #C6C6C6;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  div[ng-controller="dutySaveReportCtrl"] .ui-grid-header-canvas{
+    min-height: 44px ;
+  }
+</style>

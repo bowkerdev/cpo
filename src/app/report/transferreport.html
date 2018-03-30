@@ -1,0 +1,143 @@
+<div ng-controller="transferReportCtrl">
+		<div class="col-md-12"  ng-show="isEdit === 'edit'">
+			<div class="page-title">
+
+        <scrollable-tabset show-tooltips="false" api="scrlTabsApi"  class="no-content-tab marketing-scrollable-tabset" style="height: 60px">
+          <uib-tabset>
+            <uib-tab select="fetchInfo(1)">
+              <uib-tab-heading  translate="reportTitle.PO_TRANSFER"></uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchInfo(2)">
+              <uib-tab-heading translate="reportTitle.PO_TRANSFER_INTERNAL"></uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchInfo(3)">
+              <uib-tab-heading translate="reportTitle.STYLE_TRANSFER"></uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchInfo(4)">
+              <uib-tab-heading translate="reportTitle.STYLE_TRANSFER_INTERNAL"></uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchInfo(5)">
+              <uib-tab-heading translate="reportTitle.TRANSFERED_ORDER_LIST"></uib-tab-heading>
+            </uib-tab>
+          </uib-tabset>
+        </scrollable-tabset>
+
+
+
+
+			<div class="page-title none-border"  >
+        <div class="col-md-12" style="" >
+
+          <div class="col-md-2" style="" ng-show="tabindex==1||tabindex==2">
+            <div>
+              <span ></span>LCO190 Date:
+            </div>
+            <select ng-model="model_orderDate" ng-options="docType.label for docType in orderDates" style="height: 32px;width:100%;padding-left: 10px;"></select>
+          </div>
+
+
+          <div class="col-md-2" style="" ng-show="tabindex==5">
+            <div>
+              <span translate="report.DOCUMENT_TYPE"></span>:
+            </div>
+            <select ng-model="model_documentType" ng-options="docType.label for docType in docTypes" style="height: 32px;width:100%;padding-left: 10px;"></select>
+          </div>
+
+          <div class="col-md-2" style="" ng-show="tabindex==5">
+            <div><span translate="workingNo.WORKING_NO"></span>:</div>
+            <input type="text" ng-model="model_workingNo" class="form-control" size="16">
+
+            <!-- <select  ng-options="workingno.label for workingno in workingList" style="height: 32px;width:100%;padding-left: 10px;"></select> -->
+          </div>
+          <div class="col-md-3">
+            <div ng-show="tabindex==1||tabindex==2">Release Date (From):</div>
+            <div ng-show="tabindex==3||tabindex==4">Create Date (From):</div>
+            <div ng-show="tabindex==5">Order Remark Date (From):</div>
+            <div ng-time class="input-group date form_date " data-date-format="yyyy-mm-dd" ng-model="fromDate" style="height: 32px;width:100% !important;">
+              <input ng-model="fromDate" class="form-control" size="16" type="text" value="" readonly>
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div ng-show="tabindex==1||tabindex==2">Release Date (To):</div>
+            <div ng-show="tabindex==3||tabindex==4">Create Date (To):</div>
+            <div ng-show="tabindex==5">Order Remark Date (To):</div>
+            <div ng-time class="input-group date form_date " data-date-format="yyyy-mm-dd" ng-model="toDate" style="height: 32px;width:100% !important;">
+              <input ng-model="toDate" class="form-control" size="16" type="text" value="" readonly>
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+
+          <div class="col-md-2" style="">
+            <button class="btn btn-secondary btn-single" style="padding-left:20px;padding-right:20px;margin-top: 17px;"
+            ng-click="documentType = model_documentType;
+            workingNo = model_workingNo;
+
+            fillterList()">
+              <i class="fa-search"></i><span  class="ng-scope">Search</span>
+            </button>
+          </div>
+        </div>
+      </div>
+        <div class="btn-group" >
+          <button class="btn btn-postpone btn-icon" ng-click="exportFile()">
+            <i class="fa fa-download"></i>
+            <span translate="index.EXPORT"></span>
+          </button>
+          <button class="btn btn-white btn-icon" ng-if="tabindex===2 || tabindex === 4" ng-click="editStyleTransfer()" ng-disabled="btndisable">
+            <i class="fa fa-edit"></i>
+            <span translate="index.EDIT"></span>
+          </button>
+        </div>
+
+
+				<div id="customerForecastReportOne" ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom style="margin-top: 0px"></div>
+      </div>
+    </div>
+    <ng-include class="col-md-12" src="'app/report/styleTransferEdit.html'" ng-if="isEdit === 'styleTransferEdit'"></ng-include>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<ng-include src="'app/report/transferPoEdit.html'"></ng-include>
+<style>
+
+  div[ng-controller="transferReportCtrl"] .tabContent {
+    background-color: #FBFBFB;
+    height: 100%;
+    text-align: center;
+    padding-top: 50px
+  }
+
+  div[ng-controller="transferReportCtrl"] .marketing-scrollable-tabset .ui-tabs-scrollable {
+    /*padding-top: 30px;*/
+  }
+
+  div[ng-controller="transferReportCtrl"] .marketing-scrollable-tab .ui-tabs-scrollable {
+    padding-top: 30px;
+  }
+
+  div[ng-controller="transferReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs > li.active > a {
+    background-color: #3baf7b !important;
+    border: #3BAF7B 1px solid !important;
+    color: white !important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  div[ng-controller="transferReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs > li > a {
+    background-color: white;
+    border: #C6C6C6 1px solid;
+    color: #C6C6C6;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  div[ng-controller="transferReportCtrl"] .page-title.none-border{
+    padding: 5px 0px 5px 0px !important;
+  }
+  div.ui-tabs-scrollable{
+    height: 55px;
+  }
+  .none-border{
+    border: none
+  }
+</style>

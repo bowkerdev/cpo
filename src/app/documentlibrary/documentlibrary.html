@@ -1,0 +1,70 @@
+<div ng-controller="documentLibraryCtrl">
+	<div class="row" ng-show="!showEditPage">
+		<div class="col-md-12">
+			<div class="page-title">
+				<scrollable-tabset show-tooltips="false" api="scrlTabsApi"  class="no-content-tab">
+					<uib-tabset>
+						<uib-tab ng-repeat="document in documentTypeList"  select="selectDocumentTab($index)">
+							<uib-tab-heading >{{document.label}}</uib-tab-heading>
+						</uib-tab>
+					</uib-tabset>
+				</scrollable-tabset>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="page-title">
+				<div class="btn-group">
+					<button class="btn btn-delete btn-icon" ng-click="deleteDocument()">
+            <i class="fa fa-trash-o"></i>
+            <span translate="index.DELETE"></span>
+         </button>
+					<button class="btn btn-postpone btn-icon" ng-click="downloadDocument()">
+            <i class="fa fa-download"></i>
+            <span translate="index.DOWNLOAD"></span>
+          </button>
+          <button class="btn btn-publish btn-icon" ng-click="upload()" ng-if="tabIndex==0||tabIndex==1||tabIndex==3||tabIndex==5||tabIndex==10||tabIndex==12">
+            <i class="fa fa-upload"></i>
+            <span translate="index.UPLOAD"></span>
+          </button>
+          </button>
+          <button class="btn btn-default btn-icon" ng-click="edit()" >
+            <i class="fa fa-upload"></i>
+            <span >Update Batch Date</span>
+          </button>
+          <button class="btn btn-default btn-icon" ng-click="mergeDocuments()" ng-if="tabIndex==5">
+            <i class="fa fa-upload"></i>
+            <span >Merge</span>
+          </button>
+				</div>
+				<div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom ></div>
+			</div>
+		</div>
+	</div>
+  <ng-include class="col-md-12" src="'app/documentlibrary/documentEdit.html'" ng-show='showEditPage'></ng-include>
+</div>
+<!--<ng-include src="'app/documentlibrary/documentEdit.html'"></ng-include>-->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<style>
+  div[ng-controller="documentLibraryCtrl"] .tabContent {
+		background-color: #FBFBFB;
+		height: 100%;
+		text-align: center;
+		padding-top: 50px
+	}
+
+  div[ng-controller="documentLibraryCtrl"] .menuHeader {
+		padding: 5px 0 10px 15px;
+	}
+
+  div[ng-controller="documentLibraryCtrl"] .menuHeader a {
+		padding-right: 5px;
+		font-size: 10px;
+	}
+
+  div[ng-controller="documentLibraryCtrl"] .no-content-tab .tab-content{
+		height: 0px !important;
+		margin: 0px !important;
+		padding: 0px !important;
+		margin-bottom: -15px !important;
+	}
+</style>

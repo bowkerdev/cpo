@@ -1,0 +1,95 @@
+<div ng-controller="lc0190reportCtrl">
+	<div class="col-md-12">
+		<div class="page-title">
+			<scrollable-tabset show-tooltips="false" api="scrlTabsApi" class="no-content-tab marketing-scrollable-tabset" style="height: 60px">
+				<uib-tabset>
+					<uib-tab select="fetchInfo(1)">
+						<uib-tab-heading>Bulk order by SMV</uib-tab-heading>
+					</uib-tab>
+					<uib-tab select="fetchInfo(2)">
+						<uib-tab-heading>Bulk order by Qty</uib-tab-heading>
+					</uib-tab>
+					<uib-tab select="fetchInfo(3)">
+						<uib-tab-heading>product by Qty</uib-tab-heading>
+					</uib-tab>
+					<uib-tab select="fetchInfo(4)">
+						<uib-tab-heading>Bonding.TPU.Laser Order</uib-tab-heading>
+					</uib-tab>
+				</uib-tabset>
+			</scrollable-tabset>
+			<div class="page-title none-border">
+				<div class="col-md-12">
+					<div class="col-md-3">
+						<div>Month (From):</div>
+						<div ng-time class="input-group date form_datemonth" data-date-format="yyyy-mm" ng-model="fromMonth" style="height: 32px;width:100% !important;">
+							<input ng-model="fromMonth" class="form-control" size="16" type="text" value="" readonly>
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div>Month (To):</div>
+						<div ng-time class="input-group date form_datemonth" data-date-format="yyyy-mm" ng-model="toMonth" style="height: 32px;width:100% !important;">
+							<input ng-model="toMonth" class="form-control" size="16" type="text" value="" readonly>
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
+					</div>
+
+					<div class="col-md-2">
+						<button class="btn btn-secondary btn-single" style="padding-left:20px;padding-right:20px;margin-top: 17px;" ng-click="searchlist()">
+							<i class="fa-search"></i><span  class="ng-scope">Search</span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button class="btn btn-postpone btn-icon" ng-click="exportFile()">
+					<i class="fa fa-download"></i><span translate="index.EXPORT"></span>
+				</button>
+			</div>
+			<div id="customerForecastReportOne" ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize>
+				<div class="well grid-loading" ng-show="gridOptions.showLoading">
+					<i class="fa fa-spin fa-spinner"></i>
+					<strong>Loading...</strong>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<style>
+	div[ng-controller="lc0190reportCtrl"] .tabContent {
+		background-color: #FBFBFB;
+		height: 100%;
+		text-align: center;
+		padding-top: 50px
+	}
+	
+	div[ng-controller="lc0190reportCtrl"] .marketing-scrollable-tabset .ui-tabs-scrollable {
+		/*padding-top: 30px;*/
+	}
+	
+	div[ng-controller="lc0190reportCtrl"] .marketing-scrollable-tab .ui-tabs-scrollable {
+		padding-top: 30px;
+	}
+	
+	div[ng-controller="lc0190reportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs>li.active>a {
+		background-color: #3baf7b !important;
+		border: #3BAF7B 1px solid !important;
+		color: white !important;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+	
+	div[ng-controller="lc0190reportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs>li>a {
+		background-color: white;
+		border: #C6C6C6 1px solid;
+		color: #C6C6C6;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+	
+	div.ui-tabs-scrollable {
+		height: 55px;
+	}
+</style>

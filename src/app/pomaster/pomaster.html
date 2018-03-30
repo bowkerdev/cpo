@@ -1,0 +1,30 @@
+<div ng-controller="PoMasterCtrl">
+
+
+  <div class="row" >
+    <div class="col-md-12">
+
+      <div class="page-title">
+
+        <div class="col-md-6" style="padding-top:4px;padding-left: 0px">
+          <div class="input-group">
+            <span class="input-group-addon">PO No.</span>
+            <input type="text" class="form-control" aria-label="" ng-model="searchCustomerNo">
+            <span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="search()">Search</span>
+          </div>
+        </div>
+
+
+
+        <div ui-grid="gridOptions" ui-grid-expandable ui-grid-pagination
+             ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;margin-top: 40px" hight-auto-fill-bottom >
+          <div class="well grid-loading" ng-show="gridOptions.showLoading">
+            <i class="fa fa-spin fa-spinner"></i>
+            <strong>Loading...</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

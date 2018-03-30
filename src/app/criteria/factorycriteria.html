@@ -1,0 +1,134 @@
+<div ng-controller="FactoryCriteriaController">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-title">
+				<i class="fa fa-times-circle btn-margin" ng-click="closePage()"></i>
+				<form role="form" method="post" name="">
+					<div class="news-edit-form">
+						<label><span translate="index.STATUS"></span></label>
+						<span class="bowker-btn-no-radius span-padding-left" ng-bind="titleMode"></span>
+					</div>
+					<div class="news-edit-form">
+						<label><span class="red">*</span><span translate="factoryCriteria.APPLICATION_ORDER_TYPE"></span></label>
+						<select ng-model="factoryCriteriaDetail.factoryOrderType" class="form-control" ng-options="orderType.label for orderType in orderTypeList">
+						</select>
+					</div>
+					<!--<div class="news-edit-form cg_edit_margin">
+						<label><span class="red">*</span><span translate="criteria.CRITERIA_VALUE"></span></label>
+					    <input type="text" class="form-control" ng-model="factoryCriteriaDetail.criteriaObject" name="name" ng-maxlength="255" maxlength="255">
+					</div>-->
+					<div class="news-edit-form ">
+						<label><span class="red">*</span><span translate="criteria.CRITERIA_CATEGORY"></span></label>
+						<select ng-model="factoryCriteriaDetail.criteriaCategory" class="form-control" ng-options="category.label for category in categoryList"  ng-change="onCategoryChange(category)">
+						</select>
+					</div>
+					<div class="news-edit-form ">
+						<label><span class="red">*</span><span translate="criteria.MANDATORY"></span></label>
+						<select ng-model="factoryCriteriaDetail.mandatorySelected" class="form-control" ng-options="mandatory.label for mandatory in mandatoryList">
+						</select>
+					</div>
+					
+					<div class="news-edit-form ">
+								<label translate="criteria.APPLICATION_SITE"></label>
+								<div class="multi-select ng-scope ng-isolate-scope"  ng-dropdown-multiselect="" options="siteList" selected-model="factoryCriteriaDetail.applicationSite" extra-settings="extraSettings" translation-texts="translationTexts"></div>
+					</div>
+					<div class="news-edit-form">
+								<label ><span class="red">*</span><span translate="criteria.SCORE" ng-show="showScore"></span><span  ng-show="!showScore" translate="factoryCriteria.COEFFICIENT_LABEL"></span><span>:</span></label>
+								<input type="text" class="form-control " ng-model="factoryCriteriaDetail.criteriaValue" name="name" ng-maxlength="10" maxlength="10">
+					</div>
+					 <div class="news-edit-form">
+						    <label><span translate="criteria.APPLICATION_WORKING_NO"></span></label>
+						    <span class="bowker-btn-no-radius span-padding-left" ng-bind="factoryCriteriaDetail.applicationWorkingNo" ng-click="selectWorkingNo(factoryCriteriaDetail)" ></span>
+					 </div>
+					 
+					<div ng-repeat="condition in factoryCriteriaDetail.criteriaCondition">
+						
+					   <div class="news-edit-form">
+						<label><span class="red">*</span><span translate="criteria.CRITERIA_NAME"></span></label>
+						<select ng-model="condition.factoryCriteriaType" ng-change="onCriteriaTypeChange()" class="form-control" ng-options="factoryCriteriaType.label for factoryCriteriaType in factoryCriteriaTypeList">
+						</select>
+					    </div>
+					    
+						<div class="inline-form inline-form-3">
+							<div>
+								<label><span class="red">*</span><span translate="criteria.CONDITION"></span>&nbsp;&nbsp;<span>{{$index+1}}</span></label>
+								<select ng-model="condition.condition" class="form-control" ng-options="condition.label for condition in conditionList">
+								</select>
+							</div>
+							<div class="factory-criteria-div">
+								<label><span class="red">*</span><span class="factory-criteria-score">A:</span></label>
+								<input type="text" class="form-control factory-criteria-score-input" ng-model="condition.conditionValue1" name="name" ng-maxlength="45" maxlength="45">
+							</div>
+							<div class="factory-criteria-div" ng-if="condition.condition.value>4">
+								<label><span class="red">*</span><span class="factory-criteria-score">B:</span></label>
+								<input type="text" class="form-control factory-criteria-score-input" ng-model="condition.conditionValue2" name="name" ng-maxlength="45" maxlength="45">
+							</div>
+							<!--<div class="factory-criteria-div">
+								<label class="factory-criteria-score"><span class="red">*</span><span translate="criteria.SCORE" ng-show="showScore"></span><span  ng-show="!showScore" translate="factoryCriteria.COEFFICIENT_LABEL"></span><span>:</span></label>
+								<input type="text" class="form-control factory-criteria-score-input" ng-model="condition.criteriaValue" name="name" ng-maxlength="255" maxlength="255">
+							</div>-->
+							<div class="section-widget-right-float-button-group factory-criteria-button-group" ng-if="Mode!==MODETYPE.VIEW">
+								<a ng-if="factoryCriteriaDetail.criteriaCondition.length>1" class="fa fa-minus" ng-click="delete($index,factoryCriteriaDetail.criteriaCondition)"></a>
+								<a ng-if="$index==factoryCriteriaDetail.criteriaCondition.length-1" class="fa fa-plus" ng-click="add()"></a>
+							</div>
+						</div>
+						<!--<div class="news-edit-form ">
+								<label translate="criteria.APPLICATION_SITE"></label>
+								<div class="multi-select ng-scope ng-isolate-scope"  ng-dropdown-multiselect="" options="siteList" selected-model="condition.applicationSite" extra-settings="extraSettings" translation-texts="translationTexts"></div>
+						</div>-->
+					    <!--<div class="news-edit-form">
+						    <label><span translate="criteria.APPLICATION_WORKING_NO"></span></label>
+						    <span class="bowker-btn-no-radius span-padding-left" ng-bind="condition.applicationWorkingNo" ng-click="selectWorkingNo(condition)" ></span>
+					    </div>-->
+					</div>
+					<div class="news-edit-form">
+							<label class="control-label"><span class="red">*</span><span translate="criteria.START_TIME"></span></label>
+							<div ng-if="Mode != MODETYPE.VIEW" ng-model='factoryCriteriaDetail.start' ng-time class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="voteStartTime">
+								<input ng-model='factoryCriteriaDetail.start' class="form-control" size="16" type="text" value="" readonly>
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+							<input ng-model='factoryCriteriaDetail.start' class="form-control input-group col-md-5" size="16" type="text" value="" readonly ng-if="Mode ==MODETYPE.VIEW">
+							<input type="hidden" id="voteStartTime" value="" />
+					</div>
+
+					<div class="news-edit-form">
+							<label for="voteEndTime" class="control-label"><span translate="criteria.END_TIME"></span></label>
+							<div ng-if="Mode != MODETYPE.VIEW" ng-model='factoryCriteriaDetail.end' ng-time class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="voteEndTime">
+								<input ng-model='factoryCriteriaDetail.end' class="form-control" size="16" type="text" value="" readonly>
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+							<input ng-model='factoryCriteriaDetail.end' class="form-control input-group col-md-5" size="16" type="text" value="" readonly ng-if="Mode ==MODETYPE.VIEW">
+							<input type="hidden" id="voteEndTime" value="" />
+					</div>
+
+					<button ng-if="Mode!==MODETYPE.VIEW" class="btn-bowker-theme pull-left" ng-click="Save()" ng-disabled="submitLoading">
+            <i class="fa-save"></i> <span translate="index.SAVE"></span>
+         </button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<ng-include src="'app/criteria/workingnoselect.html'"></ng-include>
+<style>
+	.factory-criteria-button-group {
+		width: 5% !important;
+	}
+
+	.factory-criteria-score {
+		width: 55% !important;
+	}
+
+	.factory-criteria-score-input {
+		width: 40% !important;
+	}
+
+	.factory-criteria-div {
+		width: 22% !important;
+	}
+	.span-padding-left{
+		padding-left: 12px !important;
+	}
+</style>

@@ -1,0 +1,64 @@
+<!-- Modal -->
+<script type="text/ng-template" id="factoryProcessDetailModal">
+    <div class="modal-header">
+        <span class="pull-left"><h4 class="modal-title blue" translate="factoryProcess.FACTORY_PROCESS_DETAIL"></h4></span>
+        <img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" />
+    </div>
+    <div class="bg-operation-monitor modal-body form-border" ng-type-enter>
+        <form class="form-horizontal form-modal" role="form" name="formCountrySiteEntry" novalidate style="padding-right: 50px">
+            <div class="form-group">
+                <label  class="col-sm-6 control-label bold">
+                    <div><span translate="factory.FACTORY_SIMP_NAME"></span></div>
+                </label>
+                <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryProcessDetail.factSimpName"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label bold">
+                    <div><span translate="factory.FACTORY_NAME"></span></div>
+                </label>
+                <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryProcessDetail.factoryName"></div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-6 control-label bold">
+                    <div><span translate="factory.FACTORY_CODE"></span></div>
+                </label>
+                <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryProcessDetail.factoryCode"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label bold"><div><span translate="processmaster.PROCESS_NO"></span></div>
+                </label>
+                <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryProcessDetail.processCode"></div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-6 control-label bold">
+                    <div><span translate="factory.FACTORY_PROCESS"></span></div>
+                </label>
+                <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryProcessDetail.processName"></div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-blue  btn-w150" ng-click="cancel()" style="margin:0 auto">
+            <i class="icon-cancel"></i><span translate="index.CONFIRM"></span>
+        </button>
+    </div>
+
+</script>
+<style type="text/css">
+	.modal-dialog{
+		top: 80px;
+	}
+</style>
+
+<style type="text/css">
+	.content-margin-top-zero{
+		margin-top: 0px !important;
+	}
+</style>
+
+
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+

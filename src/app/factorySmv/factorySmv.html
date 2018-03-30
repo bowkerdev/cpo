@@ -1,0 +1,43 @@
+<div ng-controller="factorySmvCtrl">
+  <div class="row" >
+    <div class="col-md-12">
+
+      <div class="page-title">
+        <!-- <scrollable-tabset show-tooltips="false" api="scrlTabsApi" class="no-content-tab marketing-scrollable-tabset" style="width: 95%;">
+          <uib-tabset>
+            <uib-tab id="" ng-model="tab" ng-repeat="tab in navList"
+                     select="selectTab($index)">
+              <uib-tab-heading>{{tab}}</uib-tab-heading>
+            </uib-tab>
+          </uib-tabset>
+        </scrollable-tabset>
+        <div  style="margin-top: -10px;width:300px" ng-if="tabIndex==1">
+          <div class="input-group">
+            <span class="input-group-addon">Working No.</span>
+            <input type="text" class="form-control" aria-label=""  id="searchWorkingNo">
+            <span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="search()">Search</span>
+          </div>
+        </div>
+        <div ng-if="tabIndex==1"  ui-grid="gridOptions1" ui-grid-expandable ui-grid-pagination ui-grid-selection
+             ui-grid-resize-columns
+             ui-grid-auto-resize style="height:385px ;" hight-auto-fill-bottom>
+          <loading show="gridOptions1.showLoading"></loading>
+        </div> -->
+
+        <ng-include src="'app/seasondaterangesetting/seasondaterangesetting.html'" ng-if="tabIndex==2"></ng-include>
+        <ng-include src="'app/basedatasetup/planGroup.html'" ng-if="tabIndex==3"></ng-include>
+        <ul class="list-group" ng-style="getLeftSpaceHeight()" hight-auto-fill-bottom ng-show="tabIndex==0">
+
+          <li class="list-group-item" ng-click="importFile(20000)">Import Factory SMV</li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<ng-include src="'app/worktable/uploadfile.html'"></ng-include>
+<ng-include src="'app/file/uploadfile.html'"></ng-include>
+<style>
+
+</style>

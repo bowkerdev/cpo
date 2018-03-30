@@ -1,0 +1,41 @@
+<!-- Modal -->
+<script type="text/ng-template" id="factoryCapacityModal">
+	<div id="factoryCapacityModalEntity">
+		<div class="modal-header">
+			<span class="pull-left"><h4 class="modal-title blue" translate="worktable.FACTORY_FILL_RATE"></h4></span>
+			<img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" />
+		</div>
+		<div class="bg-operation-monitor modal-body form-border" ng-type-enter style="padding: 0 !important;border: none;">
+			<form class="form-horizontal form-modal" role="form" name="formCountrySiteEntry" novalidate>
+				<div ui-grid="gridOptions1" ui-grid-edit ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="margin-top: 0px;"></div>
+			</form>
+		</div>
+
+		<div class="modal-footer">
+			<button class="btn btn-blue  btn-w150" ng-click="save()" style="margin:0 auto">
+        <i class="icon-cancel"></i><span translate="index.CONFIRM"></span>
+      </button>
+		</div>
+	</div>
+
+</script>
+
+<style type="text/css">
+	.content-margin-top-zero {
+		margin-top: 0px !important;
+	}
+
+	#factoryCapacityModalEntity .ui-grid-cell {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	#factoryCapacityModalEntity .ui-grid-cell .ui-grid-cell-contents {
+		line-height: 1;
+		height: auto;
+	}
+</style>
+
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>

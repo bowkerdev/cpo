@@ -1,0 +1,206 @@
+<div ng-controller="FactoryAdjustmentCtrl">
+
+	<ng-include src="'app/factorymaster/factoryneworderadjustment.html'" ng-if="showNewOrder=='showNewOrder'"></ng-include>
+	<div class="row" ng-if="showNewOrder!='showNewOrder'">
+
+		<div class="col-md-12">
+			<div class="page-title">
+				<ol class="breadcrumb" style="margin-bottom: 0px" ng-if="fromCapacity">
+					<li>
+						<a href="#" ng-click="closePage()">Factory Capacity</a>
+					</li>
+					<li class="active">Style Summary</li>
+				</ol>
+				<div id="factoryAdjustmentCollapse"
+					class="panel panel-default"
+					style="padding: 0px 15px;">
+					<a class="col-md-12 panel-heading"
+						onclick="$(window).trigger('resize');"
+						data-toggle="collapse"
+						data-parent="#factoryAdjustmentCollapse"
+						href="#factoryAdjustmentCollapseBody"
+						style="background-color: lightgrey;padding: 10px;padding-left: 20px;background-image: none;border-radius: 0px;">
+
+						<div class="col-md-12"><strong>Current Adjustment Doc:&nbsp;&nbsp;</strong>{{documentName}}<i class="fa fa-angle-down pull-right" style="color: dodgerblue;font-size: 23px;"></i></div>
+					</a>
+					<div id="factoryAdjustmentCollapseBody" class="col-md-12 panel-collapse collapse in" style="padding-bottom: 10px ">
+
+						<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+							<div>Product Type:</div>
+							<select ng-model="searchRequest.productType" ng-options="productType.label for productType in productTypes" style="height: 32px;width:100%;padding-left: 10px;"></select>
+						</div>
+						<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+							<div>Fabric Type:</div>
+							<select ng-model="searchRequest.fabricType" ng-options="fabricType.label for fabricType in fabricTypes" style="height: 32px;width:100%;padding-left: 10px;"></select>
+						</div>
+						<!--<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">-->
+							<!--<div>Working No.:</div>-->
+							<!--<select ng-model="searchRequest.workingNo" ng-options="workingno.label for workingno in workingNos" style="height: 32px;width:100%;padding-left: 10px;"></select>-->
+						<!--</div>-->
+						<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px;">
+							<div>Order Qty Type:</div>
+							<div ng-dropdown-multiselect="" options="idPropertyData" selected-model="idPropertyModel" extra-settings="idPropertySettings" style="width:100%;;" id="order-qty-type"></div>
+						</div>
+
+
+						<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+							<div>
+								<span translate="workTableTitle.FROM_FACTORY"></span>:
+							</div>
+							<select ng-model="searchRequest.site"
+									ng-options="site.label for site in siteList"
+									style="height: 32px;width:100%;padding-left: 10px;">
+							</select>
+						</div>
+						<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+							<div>
+                <label style="width: 7px;height: 7px;background-color: red;border-radius: 50%;margin-bottom: 2px"></label>
+								<span >&nbsp;Order Type</span>:
+							</div>
+							<select ng-model="searchRequest.docType"
+									ng-options="doc.label for doc in docTypes"
+									style="height: 32px;width:100%;padding-left: 10px;" ng-change="orderDateSelect()" >
+							</select>
+						</div>
+						<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+							<div>
+                <label style="width: 7px;height: 7px;background-color: red;border-radius: 50%;margin-bottom: 2px"></label>
+								<span >&nbsp;Order Date</span>:
+							</div>
+							<select ng-model="searchRequest.orderTime"
+									ng-options="orderTime.label for orderTime in orderTimes"
+									style="height: 32px;width:100%;padding-left: 10px;" >
+							</select>
+						</div>
+						<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+							<div><span translate="processmaster.PROCESS_NAME"></span>:</div>
+							<select ng-model="searchRequest.processName" ng-options="processName.label for processName in processNameList" style="height: 32px;width:100%;padding-left: 10px;">
+							</select>
+            </div>
+            <!-- <div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+							<div>Product Type:</div>
+							<select ng-model="searchRequest.processName" ng-options="processName.label for processName in processNameList" style="height: 32px;width:100%;padding-left: 10px;">
+							</select>
+            </div> -->
+						<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+							<div>Total Open FC Qty</div>
+
+							<form class="form-inline">
+								<div class="form-group">
+									<select ng-model="searchRequest.condition" ng-options="condition.label for condition in conditions" style="height: 32px;width: 20%;padding-left: 10px;padding-right: 0px !important;"></select>
+									<input ng-model="searchRequest.garmentQty" class="form-control" style="width: 77%;">
+								</div>
+							</form>
+            </div>
+						<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+							<div>Total PV Qty</div>
+
+							<form class="form-inline">
+								<div class="form-group">
+									<select ng-model="searchRequest.condition2" ng-options="condition.label for condition in conditions" style="height: 32px;width: 20%;padding-left: 10px;padding-right: 0px !important;"></select>
+									<input ng-model="searchRequest.totalPvQuantitys" class="form-control" style="width: 77%;">
+								</div>
+							</form>
+            </div>
+            <!-- <div class="col-md-3">
+							<div>Fabric Type:</div>
+							<select ng-model="searchRequest.processName" ng-options="processName.label for processName in processNameList" style="height: 32px;width:100%;padding-left: 10px;">
+							</select>
+						</div> -->
+            <div class="col-md-3">
+              <div>From PV Month</div>
+              <div ng-time class="input-group date form_date " data-date-format="yyyy-mm" ng-model="searchRequest.fromDate" style="height: 32px;width:100% !important;">
+                <input ng-model="searchRequest.fromDate" class="form-control" size="16" type="text" value="" readOnly>
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div>To PV Month</div>
+              <div ng-time class="input-group date form_date " data-date-format="yyyy-mm" ng-model="searchRequest.toDate" style="height: 32px;width:100% !important;">
+                <input ng-model="searchRequest.toDate" class="form-control" size="16" type="text" value="" readOnly>
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+						<div class="col-md-3" style="padding-top: 5px;padding-bottom: 5px">
+							<button class="btn btn-secondary btn-single" style="float: right;padding-left:20px;padding-right:20px;margin-top: 17px;margin-left: 10px" ng-click="exportFile()">
+                      <i class="fa fa-download"></i>
+                      <span translate="">Export</span>
+                    </button>
+							<button class="btn btn-secondary btn-single" style="float: right;padding-left:20px;padding-right:20px;margin-top: 17px;" ng-click="search()" >
+                      <i class="fa-search"></i><span  class="ng-scope">Search</span>
+                    </button>
+
+						</div>
+					</div>
+				</div>
+
+				<br/>
+				<form role="form" class="form-inline" name="formPlan" novalidate style="margin-top: 15px;">
+
+					<div class="form-group">
+						<button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2(0,'BYS')">
+              <span translate="sltforecast.CONFIRM_BY_BYS"></span>
+            </button>
+					</div>
+					<div class="form-group">
+						<button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2(0,'BVG')">
+              <span translate="sltforecast.CONFIRM_BY_BVG"></span>
+            </button>
+					</div>
+					<div class="form-group">
+						<button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2(0,'BVN')">
+              <span translate="sltforecast.CONFIRM_BY_BVN"></span>
+            </button>
+					</div>
+					<div class="form-group">
+						<button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2(0,'BCA')">
+              <span translate="sltforecast.CONFIRM_BY_BCA"></span>
+            </button>
+					</div>
+				</form>
+				<div id="sampleRoomCap" ui-grid="gridOptions1" ui-grid-pagination ui-grid-pinning ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height: 400px;margin-top: 10px" ng-show="!showBottom" hight-auto-fill-bottom ng-style="autoFillButtom()">
+          <loading show="gridOptions1.showLoading"></loading>
+					</div>
+
+				<div id="singleRowGrid" ui-grid="gridOptionsSingleLine" ui-grid-pagination ui-grid-pinning ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style=";margin-top: 15px;" ng-show="showBottom">
+				</div>
+
+				<div ui-grid="gridOptions2" ui-grid-pagination ui-grid-pinning ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="margin-top: 10px;" ng-show="showBottom" ng-style="autoFillButtom()">
+					<div class="well grid-loading" ng-show="showBottomGridLoading">
+						<i class="fa fa-spin fa-spinner"></i>
+						<strong>Loading...</strong>
+					</div>
+				</div>
+        <div class="form-group" style="margin-top: 15px;" ng-if="couldReleaseOrder">
+          <button class="btn btn-secondary btn-single col-md-3" style="background-color: #33b17a !important;"
+                  ng-click="releaseOrder()" ng-disabled="disableReleaseOrderButton">
+            <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+            translate="">Release</span>
+
+          </button>
+        </div>
+			</div>
+		</div>
+
+	</div>
+
+	<ng-include src="'app/file/uploadfile.html'"></ng-include>
+	<style>
+		div[ng-controller="FactoryAdjustmentCtrl"] .ui-grid-cell-contents {
+			white-space: nowrap !important;
+		}
+
+		#order-qty-type>div>button {
+			height: 32px;
+		}
+
+		div[ng-controller="FactoryAdjustmentCtrl"] .ui-grid-header-cell-primary-focus {
+			/*text-align: center;*/
+			white-space: normal !important;
+			min-height: 44px;
+			display: flex;
+			align-items: center;
+		}
+	</style>
+</div>

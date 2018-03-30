@@ -1,0 +1,227 @@
+<div ng-controller="fillRateReportCtrl">
+
+  <!-- <ng-include src="'app/factorymaster/factoryadjustment.html'" ng-if="showAdjustment=='adjustment'" ng></ng-include> -->
+  <div class="col-md-12" >
+    <div class="page-title" >
+      <!-- <scrollable-tabset show-tooltips="false" api="scrlTabsApi"  class="no-content-tab">
+          <uib-tabset>
+            <uib-tab  select="fetchLoadingInfo('0')" >
+              <uib-tab-heading >PT Fty</uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchLoadingInfo('1')">
+              <uib-tab-heading >PT Total</uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchLoadingInfo('2')">
+              <uib-tab-heading >PT Deatil</uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchLoadingInfo('3')" >
+              <uib-tab-heading >Pro Fty</uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchLoadingInfo('4')">
+              <uib-tab-heading >Pro Total</uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchLoadingInfo('5')">
+              <uib-tab-heading >Pro Detail</uib-tab-heading>
+            </uib-tab>
+            <uib-tab  select="fetchLoadingInfo('6')" >
+              <uib-tab-heading >Duty Save Report</uib-tab-heading>
+            </uib-tab>
+          </uib-tabset>
+        </scrollable-tabset> -->
+      <scrollable-tabset show-tooltips="false" api="scrlTabsApi"  class="no-content-tab marketing-scrollable-tabset" style="height: 60px">
+        <uib-tabset>
+          <uib-tab  select="fetchLoadingInfo('PT','1')" >
+            <uib-tab-heading >PT Fty</uib-tab-heading>
+          </uib-tab>
+          <uib-tab  select="fetchLoadingInfo('PT','2')">
+            <uib-tab-heading >PT Total</uib-tab-heading>
+          </uib-tab>
+          <uib-tab  select="fetchLoadingInfo('PT','3')">
+            <uib-tab-heading >PT Detail</uib-tab-heading>
+          </uib-tab>
+          <uib-tab  select="fetchLoadingInfo('PRO','1')" >
+            <uib-tab-heading >Pro Fty</uib-tab-heading>
+          </uib-tab>
+          <uib-tab  select="fetchLoadingInfo('PRO','2')">
+            <uib-tab-heading >Pro Total</uib-tab-heading>
+          </uib-tab>
+          <uib-tab  select="fetchLoadingInfo('PRO','3')">
+            <uib-tab-heading >Pro Detail</uib-tab-heading>
+          </uib-tab>
+          <!-- <uib-tab  select="fetchLoadingInfo('PT','1')" >
+            <uib-tab-heading >Duty Save Report</uib-tab-heading>
+          </uib-tab> -->
+        </uib-tabset>
+
+      </scrollable-tabset>
+      <div style="display: flex">
+
+        <!-- <div class="btn-group">
+					<button class="btn btn-white btn-icon" ng-click="view()">
+            <i class="fa fa-eye"></i>
+            <span translate="index.VIEW"></span>
+          </button>
+          <button class="btn btn-publish btn-icon" ng-click="refresh()" style="height: 42px">
+            <i class="fa fa-refresh"></i>
+            <span translate="worktable.REFRESH"></span>
+          </button>
+
+				</div> -->
+        <div class="btn-group" style="width: 100%;display:flex;padding-right: 20px" ng-show="false">
+          <button class="btn btn-white btn-icon" ng-click="view()">
+            <i class="fa fa-eye"></i>
+            <span translate="index.VIEW"></span>
+          </button>
+          <button ng-show="type=='1'" class="btn btn-publish btn-icon"  ng-click="upload()" style="height: 42px">
+            <i class="fa fa-upload" ></i>
+            <span translate="index.IMPORT"></span>
+          </button>
+          <!-- <button class="btn btn-publish btn-icon" ng-click="refresh()" style="height: 42px">
+            <i class="fa fa-refresh"></i>
+            <span translate="worktable.REFRESH"></span>
+          </button> -->
+
+        </div>
+      </div>
+      <div class="page-title">
+
+        <form class="form-inline" style="margin-bottom: 10px">
+
+          <div class="input-group" style=""  >
+            <span class="input-group-addon">By:&nbsp</span>
+            <select ng-model="searchRequest.monthType" ng-options="monthType.label for monthType in monthTypes" style="width:120px;height: 32px;padding-left: 10px !important;" ng-change="search()"></select>
+
+          </div>
+          <div class="input-group" style=""  >
+            <span class="input-group-addon">By:&nbsp</span>
+            <select  ng-model="searchRequest.queryType"  ng-options="queryType.label for queryType in queryTypes" style="height: 32px;min-width: 100px;padding-left: 10px"  ></select>
+          </div>
+          <div class="input-group" style=""  ng-if=" searchRequest.queryType.id=='CUS_LC0190'||searchRequest.queryType.id=='CUS'||searchRequest.queryType.id=='MKT_CUS_LC0190'">
+            <span class="input-group-addon">Customer Forecast:&nbsp</span>
+            <select  ng-model="searchRequest.cus" ng-options="doc.label for doc in cuss" style="height: 32px;min-width: 100px;padding-left: 10px"  ></select>
+          </div>
+          <div class="input-group" style=""  ng-if=" searchRequest.queryType.id=='MKT'||searchRequest.queryType.id=='MKT_CUS_LC0190'">
+            <span class="input-group-addon">Marketing Forecast:&nbsp</span>
+            <select  ng-model="searchRequest.mkfc" ng-options="doc.label for doc in mkfcs" style="height: 32px;min-width: 100px;padding-left: 10px"  ></select>
+          </div>
+          <div class="input-group" ng-if=" searchRequest.queryType.id=='CUS_LC0190'||searchRequest.queryType.id=='LC0190'||searchRequest.queryType.id=='MKT_CUS_LC0190'">
+            <span class="input-group-addon">LC0190:</span>
+            <select  ng-model="searchRequest.lco190" ng-options="doc.label for doc in lco190s" style="height: 32px;min-width: 100px;padding-left: 10px"   ></select>
+            <label style="margin-left: 15px;margin-right: 15px" ng-if=" searchRequest.queryType.id=='CUS_LC0190'||searchRequest.queryType.id=='MKT_CUS_LC0190'">
+              <input type="checkbox" style="font-size: 15px;" ng-model="searchRequest.deduction">Deduction
+            </label>
+            <!--<span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="search()">Search</span>-->
+
+          </div>
+          <div class="input-group" >
+            <span class="">Month (From):</span>
+            <span ng-time class="input-group date form_datemonth" data-date-format="yyyy-mm" ng-model="searchRequest.fromMonth" style="height: 32px;width:150px !important;">
+            <input ng-model="searchRequest.fromMonth" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          </span>
+            <span class="">&nbsp;&nbsp;Month (To):</span>
+            <span ng-time class="input-group date form_datemonth" data-date-format="yyyy-mm" ng-model="searchRequest.toMonth" style="height: 32px;width:150px !important;">
+            <input ng-model="searchRequest.toMonth" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+          </span>
+          <div class="input-group" >
+            <span>&nbsp;&nbsp;</span>
+            <span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="search()">Search</span>
+            <span>&nbsp;&nbsp;</span>
+            <span class="input-group-addon" style="margin-left:10px;background-color: #1664F4;color:white" ng-click="export()">Export</span>
+            <span>&nbsp;&nbsp;</span>
+            <span class="input-group-addon" style="margin-left:10px;background-color: #1664F4;color:white" ng-click="exportOrderList()">Export Order List</span>
+
+          </div>
+
+
+          </div>
+        </form>
+
+        <div id="sampleRoomCap"  ui-grid="gridOptions1" ui-grid-pagination  ui-grid-pinning ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height: 400px" hight-auto-fill-bottom>
+          <div class="well grid-loading" ng-show="gridOptions1.showLoading">
+            <i class="fa fa-spin fa-spinner"></i>
+            <strong>Loading...</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script id="divTemplate" type="text/template">
+
+      <div>Existing Loading&nbsp;</div>
+      <div>New Loading&nbsp;</div>
+      <div>Capacity&nbsp;</div>
+      <div>Fill Rate&nbsp;</div>
+    </script>
+    <ng-include src="'app/file/uploadfile.html'"></ng-include>
+    <style>
+      .nav.nav-tabs + .tab-content{
+        margin-bottom: 0px;
+      }
+      .sampleRoomCap{
+        margin-top: 10px;
+      }
+
+      .cell-text-bolder{
+        font-weight: bolder;
+      }
+      .cell-divider2{
+
+        border-bottom: 1px solid #e9e9e9;
+        border-top: 1px solid #e9e9e9;
+      }
+      .text-color-red{
+        color:red;
+      }
+      .text-color-normal{
+        color: black;
+      }
+      .height-20{
+        height: 20px;
+      }
+      .height-60{
+        height: 60px;
+      }
+      .height-120{
+        height: 120px;
+      }
+      div[ng-controller="fillRateReportCtrl"] .ui-grid-cell-contents{
+        white-space: normal;
+      }
+
+      div[ng-controller="fillRateReportCtrl"] .marketing-scrollable-tabset .ui-tabs-scrollable {
+        /*padding-top: 30px;*/
+      }
+
+      div[ng-controller="fillRateReportCtrl"] .marketing-scrollable-tab .ui-tabs-scrollable {
+        padding-top: 30px;
+      }
+
+      div[ng-controller="fillRateReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs > li.active > a {
+        background-color: #3baf7b !important;
+        border: #3BAF7B 1px solid !important;
+        color: white !important;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+      }
+
+      div[ng-controller="fillRateReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs > li > a {
+        background-color: white;
+        border: #C6C6C6 1px solid;
+        color: #C6C6C6;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+      }
+      div[ng-controller="fillRateReportCtrl"] .zebra:nth-of-type(odd) {
+        background-color: white;
+
+      }
+      div[ng-controller="fillRateReportCtrl"] .zebra:nth-of-type(even) {
+        background-color: rgb(240,240,240);
+
+      }
+    </style>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<!-- Modal -->
+<script type="text/ng-template" id="uploadFileModal">
+	<div id="factoryCapacityModalEntity">
+		<div class="modal-header">
+			<span class="pull-left"><h4 class="modal-title blue" translate="index.UPLOAD_FILE"></h4></span>
+			<img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" ng-disabled="Uploading"/>
+		</div>
+    <div class="bg-operation-monitor modal-body" ng-type-enter style="margin-top: 40px;">
+        <form class="form-horizontal form-modal" role="form" name="formCountrySiteEntry" novalidate >
+
+            <div class="form-group" ng-if="showSeasonSelect!=1">
+                <label class="col-sm-5 control-label bold"><div class="col-sm-10 label-span-blue"><span  translate="worktable.SELECT_A_SEASON"></span></div>
+                </label>
+				<!--<select ng-model="season" class="col-sm-6 " style="padding-top: 12px;padding-bottom: 12px;font-size: 14px;" ng-options="season.label for season in seasonList">-->
+              <div class="col-sm-6" style="font-size: 14px;margin-top: 0px;;padding-bottom: 12px;padding-left: 0px;padding-right: 0px" ng-dropdown-multiselect="" options='seasonList' selected-model="season" extra-settings="extraSettings" translation-texts="translationTexts"></div>
+
+              </select>
+            </div>
+          <div class="form-group" ng-if="showLco190Type">
+            <label class="col-sm-5 control-label bold"><div class="col-sm-10 label-span-blue"><span  >Type</span></div>
+            </label>
+            <!--<select ng-model="season" class="col-sm-6 " style="padding-top: 12px;padding-bottom: 12px;font-size: 14px;" ng-options="season.label for season in seasonList">-->
+            <!--<div class="col-sm-6" style="font-size: 14px;margin-top: 0px;;padding-bottom: 12px;padding-left: 0px;padding-right: 0px" ng-dropdown-multiselect="" options='lco190types' selected-model="lco190type" extra-settings="extraSettings" translation-texts="translationTexts"></div>-->
+            <select  class="col-sm-6" style="font-size: 14px;margin-top: 0px;;padding-right:25px;padding-left: 12px;height:44px;" id="loc190Type" >
+              <option value="6" >TC Customer PO</option>
+              <option value="2002" >LO Customer PO</option>
+              <option value="2005" >Pre Order</option>
+            </select>
+
+
+          </div>
+          <!--<div class="news-edit-form ">-->
+            <!--<label translate="criteria.APPLICATION_SITE"></label>-->
+            <!--<div class="multi-select ng-scope ng-isolate-scope"  ng-dropdown-multiselect="" options="siteList" selected-model="factoryCriteriaDetail.applicationSite" extra-settings="extraSettings" translation-texts="translationTexts"></div>-->
+          <!--</div>-->
+          <div class="form-group" style="margin-top: 20px;" ng-if="showOrderDate">
+            <label  class="col-sm-5 control-label bold">
+              <div class="col-sm-10 label-span-blue"><span  >Batch Date</span></div>
+            </label>
+            <!--<div ng-model='inputStartTime' ng-time class="col-sm-6 input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputStartTime" style="float: left;margin-left: 4px;">-->
+              <!--<input ng-model='inputStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>-->
+
+              <!--<span class="input-group-addon"><i class="fa fa-calendar"></i></span>-->
+            <!--</div>-->
+            <div   class="col-sm-6 upload-file-div"  style="padding: 0px;border: none">
+              <div ng-model='searchRequest.orderTime' ng-time class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputStartTime" style="width: 100% !important;height: 44px">
+              <input ng-model='searchRequest.orderTime'  class="form-control" size="16" type="text" value="" readonly style="height: 44px">
+
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+            <div class="form-group" style="margin-top: 20px;">
+                <label  class="col-sm-5 control-label bold">
+                    <div class="col-sm-10 label-span-blue"><span translate="worktable.SELECT_A_FILE" ></span></div>
+                </label>
+                <div ngf-select="UploadFile($file)"  class="col-sm-6 upload-file-div"  ng-bind="fileName"></div>
+			 </div>
+			 <div class="form-group" style="margin-top: 40px;margin-bottom: 20px;">
+			 	<button ng-click="Upload()"  ng-bind-html="uploadHtml" ng-disabled="Uploading"
+			 		translate="index.UPLOAD" style="margin: 0 auto;font-size:14px;display: block;padding: 10px 30px 10px 30px;color: white;background-color: rgb(35,58,102);"></button>
+			 </div>
+        </form>
+    </div>
+	</div>
+
+</script>
+
+<style type="text/css">
+	.content-margin-top-zero {
+		margin-top: 0px !important;
+	}
+
+	#factoryCapacityModalEntity .ui-grid-cell {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	#factoryCapacityModalEntity .ui-grid-cell .ui-grid-cell-contents {
+		line-height: 1;
+		height: auto;
+	}
+	.label-span-blue{
+		background-color: rgb(35,58,102);
+		float: right;
+		text-align: center;
+		padding: 12px 20px 12px 20px !important;
+		color: white;
+		font-size: 14px;
+		padding: 5px;
+	}
+	.upload-file-div{
+		padding-top: 12px;
+		padding-bottom: 12px;
+		font-size: 14px;
+		border: #C6C6C6 1px solid;
+		margin-top: 0px !important;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+  .dropdown-toggle{
+    margin-bottom: 0px;
+    height: 42px;
+  }
+</style>
+
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>

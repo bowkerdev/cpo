@@ -1,0 +1,60 @@
+<!-- Modal -->
+<script type="text/ng-template" id="NewCriteriaModal">
+	<div>
+		<div class="modal-header">
+			<span class="pull-left"><h4 class="modal-title blue" translate="criteria.SAVE_NEW_CRITERIA_CONDITION"></h4></span>
+			<img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" />
+		</div>
+		<div class="bg-operation-monitor modal-body form-border" ng-type-enter>
+			<form class="form-horizontal" role="form" name="formCountrySiteEntry" novalidate style="padding-right: 50px">
+
+
+				<div class="form-group">
+					<label class="control-label col-sm-4 control-label-center"><span translate="criteria.CRITERIA_VERSION_NAME"></span></label>
+					<div class="col-sm-8">
+						<input ng-model='versionName' class="form-control" size="255" type="text" >
+					</div>
+				</div>
+
+			</form>
+		</div>
+		<div class="modal-footer" style="margin: 0 auto;width: 380px">
+			<button class="btn btn-blue  btn-w150" ng-click="cancel()">
+        <i class="icon-cancel"></i><span translate="index.CANCEL"></span>
+      </button>
+			<button class="btn btn-blue btn-w150" ng-click="save()" style="margin-left: 80px">
+        <i class="icon-save"></i><span translate="index.SAVE"></span>
+      </button>
+		</div>
+	</div>
+
+</script>
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<style>
+	.modal-height {
+		height: 500px;
+	}
+	#planEndTimePicker{
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+  .model-form-group{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% + 30px);
+  }
+  .model-form-date{
+    width: 66.6666667% !important;
+  }
+  .control-label-center{
+    padding-top: 0px !important;
+  }
+	.royalblue{
+		background-color: royalblue;
+	}
+	.color-white{
+		color:white;
+	}
+</style>

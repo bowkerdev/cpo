@@ -1,0 +1,31 @@
+
+<div >
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Merge Docments</h3>
+  </div>
+
+
+  <form class="form-horizontal" style="padding:20px">
+
+    <div class="form-group">
+      <label for="input4" class="col-sm-1 control-label">To:</label>
+      <div class="col-sm-11">
+        <select id="input4" ng-model="targeDocument" ng-options="doc.documentOldName for doc in items" style="height: 32px;width:100%;padding-left: 10px;"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="input5" class="col-sm-1 control-label">Name:</label>
+      <div class="col-sm-11">
+        <input type="text" class="form-control" id="input5"  ng-model="newFileName">
+      </div>
+    </div>
+
+
+  </form>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button id="submitButton" type="submit" class="btn btn-secondary btn-single" >Submit</button>
+  </div>
+</div>
+
+

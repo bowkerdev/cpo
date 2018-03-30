@@ -1,0 +1,67 @@
+{
+  "name": "cpo",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular-animate": "~1.4.8",
+    "angular-touch": "~1.4.8",
+    "angular-sanitize": "~1.4.8",
+    "angular-messages": "~1.4.8",
+    "angular-aria": "~1.4.8",
+    "jquery": "~2.1.4",
+    "angular-resource": "~1.4.8",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5",
+    "angular-bootstrap": "~0.14.3",
+    "moment": "~2.10.6",
+    "animate.css": "~3.4.0",
+    "govicons": "1.1.0",
+    "font-awesome": "4.5.0",
+    "angularytics": "~0.4.0",
+    "angular-translate": "^2.15.1",
+    "angular-translate-loader-static-files": "^2.15.1",
+    "angular": "~1.4.8",
+    "angular-ui-grid": "^4.0.6",
+    "angularjs-dropdown-multiselect":"*",
+    "ng-file-upload":"*",
+    "angular-ui-tab-scroll":"*"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.8"
+  },
+  "overrides": {
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.css",
+        "fonts/fontawesome-webfont.eot",
+        "fonts/fontawesome-webfont.svg",
+        "fonts/fontawesome-webfont.ttf",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.woff2"
+      ]
+    },
+    "govicons": {
+      "main": [
+        "css/govicons.css",
+        "fonts/govicons-webfont.eot",
+        "fonts/govicons-webfont.svg",
+        "fonts/govicons-webfont.ttf",
+        "fonts/govicons-webfont.woff",
+        "fonts/govicons-webfont.woff2"
+      ]
+    },
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/fonts/glyphicons-halflings-regular.eot",
+        "dist/fonts/glyphicons-halflings-regular.svg",
+        "dist/fonts/glyphicons-halflings-regular.ttf",
+        "dist/fonts/glyphicons-halflings-regular.woff",
+        "dist/fonts/glyphicons-halflings-regular.woff2"
+      ]
+    }
+  },
+  "resolutions": {
+    "jquery": "~2.1.4",
+    "angular": "~1.4.8"
+  }
+}

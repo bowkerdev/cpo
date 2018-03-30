@@ -1,0 +1,124 @@
+<div ng-controller="FactoryCapacityCtrl">
+
+  <ng-include src="'app/factorymaster/factoryadjustment.html'" ng-if="showAdjustment=='adjustment'" ng></ng-include>
+  <div class="row">
+
+
+    <div class="row" ng-if="showAdjustment!='adjustment'">
+      <div class="col-md-12" >
+        <div class="page-title" >
+          <div style="display: flex">
+            <scrollable-tabset show-tooltips="false" api="scrlTabsApi"  class="no-content-tab">
+              <uib-tabset>
+                <uib-tab  select="fetchLoadingInfo('0')" >
+                  <uib-tab-heading  >Factory Capacity</uib-tab-heading>
+
+                </uib-tab>
+
+                <uib-tab  select="fetchLoadingInfo('2')">
+                  <uib-tab-heading >Process Capacity</uib-tab-heading>
+                </uib-tab>
+                <uib-tab  select="fetchLoadingInfo('1')">
+                  <uib-tab-heading >Sample Room Capacity</uib-tab-heading>
+                </uib-tab>
+
+              </uib-tabset>
+            </scrollable-tabset>
+            <div class="btn-group" style="width: 100%;display:flex;justify-content: flex-end;padding-right: 20px">
+              <button ng-show="type=='1'" class="btn btn-publish btn-icon"  ng-click="upload()" style="height: 42px">
+                <i class="fa fa-upload" ></i>
+                <span translate="index.IMPORT"></span>
+              </button>
+              <button class="btn btn-publish btn-icon" ng-click="refresh()" style="height: 42px">
+                <i class="fa fa-refresh"></i>
+                <span translate="worktable.REFRESH"></span>
+              </button>
+
+            </div>
+          </div>
+          <div class="page-title">
+
+
+            <div  style="display: inline-flex;align-items: center">
+              <span >By</span>
+              <span  >
+                <select ng-model="searchFilter.monthType" ng-options="monthType.label for monthType in monthTypes" style="width:120px;height: 32px;padding-left: 10px !important;" ng-change="refresh()"></select>
+              </span>
+              <span ng-show="type==0">By</span>
+              <span  ng-show="type==0">
+                <select ng-model="searchFilter.showType" ng-options="showType.label for showType in showTypes" style="width:80px;height: 32px;padding-left: 10px !important;" ng-change="refreshSMVOrPCS()"></select>
+              </span>
+              <span>&nbsp;&nbsp;&nbsp;By</span>
+              <span>
+              	<select ng-model="searchFilter.queryType" ng-options="queryType.label for queryType in queryTypes" style="width:160px;height: 32px;padding-left: 10px !important;" ng-change="refresh()">
+              	</select>
+              </span>
+              <label style="margin-left: 15px;margin-right: 15px" ng-if=" searchFilter.queryType.id=='CUS_LC0190'||searchFilter.queryType.id=='ALL'">
+              	<input type="checkbox" style="font-size: 15px;" ng-model="searchFilter.deduction">Deduction
+              </label>
+              <span>Month (From):</span>
+              <span ng-time class="input-group date form_datemonth" data-date-format="yyyy-mm" ng-model="searchFilter.fromMonth" style="height: 32px;width:150px !important;">
+            <input ng-model="searchFilter.fromMonth" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          </span>
+              <span>&nbsp;&nbsp;Month (To):</span>
+              <span ng-time class="input-group date form_datemonth" data-date-format="yyyy-mm" ng-model="searchFilter.toMonth" style="height: 32px;width:150px !important;">
+            <input ng-model="searchFilter.toMonth" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          </span>
+            </div>
+            <div id="sampleRoomCap"  ui-grid="gridOptions1" ui-grid-pagination  ui-grid-pinning ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height: 520px">
+              <div class="well grid-loading" ng-show="gridOptions1.showLoading">
+                <i class="fa fa-spin fa-spinner"></i>
+                <strong>Loading...</strong>
+              </div>
+            </div>
+            <div   ui-grid="gridOptions2" ng-show="showFactioryDetail"ui-grid-pagination ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize style="margin-top: 10px;height: 520px">
+              <div class="well grid-loading" ng-show="gridOptions1.showLoading">
+                <i class="fa fa-spin fa-spinner"></i>
+                <strong>Loading...</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script id="divTemplate" type="text/template">
+
+      <div>Existing Loading&nbsp;</div>
+      <div>New Loading&nbsp;</div>
+      <div>Capacity&nbsp;</div>
+      <div>Fill Rate&nbsp;</div>
+    </script>
+    <ng-include src="'app/file/uploadfile.html'"></ng-include>
+    <style>
+      .nav.nav-tabs + .tab-content{
+        margin-bottom: 0px;
+      }
+      .sampleRoomCap{
+        margin-top: 10px;
+      }
+
+      .cell-text-bolder{
+        font-weight: bolder;
+      }
+      .cell-divider2{
+
+        border-bottom: 1px solid #e9e9e9;
+        border-top: 1px solid #e9e9e9;
+      }
+      .text-color-red{
+        color:red;
+      }
+      .text-color-normal{
+        color: black;
+      }
+      .height-20{
+        height: 20px;
+      }
+      div[ng-controller="FactoryCapacityCtrl"] .ui-grid-cell-contents{
+        white-space: normal;
+      }
+    </style>
+  </div>
+</div>

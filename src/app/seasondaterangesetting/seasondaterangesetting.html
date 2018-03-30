@@ -1,0 +1,97 @@
+<div id="seasonSetting" ng-controller="seasonSettingCtrl">
+  <!--<div class="row" >-->
+    <!--<div class="col-md-12">-->
+      <!--<div class="page-title">-->
+        <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom >
+          <div class="well grid-loading" style="margin-top: 30px" ng-show="gridOptions.showLoading">
+            <i class="fa fa-spin fa-spinner"></i>
+            <strong translate="vendorKpi.LOADING"></strong>
+          </div>
+        </div>
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<script id="documentTypeTemplate" type="text/template">
+  <select ng-if="row.entity.Edit" ng-model="row.entity.documentType" class="form-control" style="padding:5px!important;border:none!important;" ng-options="documentType.label for documentType in grid.appScope.documentTypeList" >
+    <option ng-bind="row.entity.documentTypeName"></option>
+  </select>
+  <div ng-if="!row.entity.Edit" ng-bind="row.entity.documentTypeName" class="table-text"></div>
+</script>
+<script id="seasonTemplate" type="text/template">
+  <select ng-if="row.entity.Edit" ng-model="row.entity._season" class="form-control" style="padding:5px!important;border:none!important;" ng-options="_season.label for _season in grid.appScope.seasonList" >
+    <option ng-bind="row.entity.season"></option>
+  </select>
+  <div ng-if="!row.entity.Edit" ng-bind="row.entity.season" class="table-text"></div>
+</script>
+<script id="fromDateTemplate" type="text/template">
+  <div ng-if="row.entity.Edit" ng-model='row.entity.fromDate' ng-time="" class="input-group date form_date col-md-5 input" data-date-format="yyyy-mm-dd" >
+    <input ng-model='row.entity.fromDate' class="form-control date-input" size="16" type="text" value="" readonly>
+    <span class="input-group-addon" ng-click="row.entity.fromDate=''"><i class="fa-close"></i></span>
+    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+  </div>
+  <div ng-if="!row.entity.Edit" class="table-text">{{row.entity.fromDate|timeConvert:'yyyy-MM-dd'}}</div>
+</script>
+<script id="toDateInputTemplate" type="text/template">
+  <div ng-if="row.entity.Edit" ng-model='row.entity.toDate'  ng-time="" class="input-group date form_date input"  data-date-format="yyyy-mm-dd">
+    <input ng-model='row.entity.toDate' class="form-control date-input" size="16" type="text" value="" readonly>
+    <span class="input-group-addon" ng-click="row.entity.toDate=''"><i class="fa-close"></i></span>
+    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+  </div>
+  <div ng-if="!row.entity.Edit" class="table-text">{{row.entity.toDate |timeConvert:'yyyy-MM-dd'}}</div>
+</script>
+<script id="validationFromInputTemplate" type="text/template">
+  <div ng-if="row.entity.Edit" ng-model='row.entity.validationFrom' ng-time="" class="input-group date form_date col-md-5 input"  data-date-format="yyyy-mm-dd" >
+    <input ng-model='row.entity.validationDate' class="form-control date-input" size="16" type="text" value="" readonly>
+    <span class="input-group-addon" ng-click="row.entity.validationDate=''"><i class="fa-close"></i></span>
+    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+  </div>
+  <div ng-if="!row.entity.Edit" class="table-text">{{row.entity.validationDate|timeConvert:'yyyy-MM-dd'}}</div>
+</script>
+<script id="validationToInputTemplate" type="text/template">
+  <div ng-if="row.entity.Edit" ng-model='row.entity.invalidationDate' ng-time="" class="input-group date form_date col-md-5 input"  data-date-format="yyyy-mm-dd" >
+    <input  ng-model='row.entity.invalidationDate' class="form-control date-input" size="16" type="text" value="" readonly>
+    <span class="input-group-addon" ng-click="row.entity.invalidationDate=''"><i class="fa-close"></i></span>
+    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+  </div>
+  <div ng-if="!row.entity.Edit" ng-init="row.entity.Edit=false" class="table-text">{{row.entity.invalidationDate|timeConvert:'yyyy-MM-dd'}}</div>
+</script>
+<script id="operationTemplate" type="text/template">
+  <div class="operation">
+    <button ng-if="!row.entity.Edit" type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.edit(row)">
+      <span translate="index.EDIT"></span>
+    </button>
+    <button ng-if="row.entity.Edit" type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.cancel(row)">
+      <span translate="index.CANCEL"></span>
+    </button>
+    <button ng-if="!row.entity.Edit" type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.delete(row)">
+      <span translate="index.DELETE"></span>
+    </button>
+    <button ng-if="row.entity.Edit" type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.confirm(row)">
+      <span translate="index.CONFIRM"></span>
+    </button>
+  </div>
+</script>
+<style>
+  #seasonSetting .date-input{
+    min-width: 120px;padding:7px 5px;border:none!important;
+  }
+  #seasonSetting .op-btn{
+    background-color: #f3562c;color: white;margin-bottom: 0;
+  }
+  #seasonSetting .table-text{
+    height: 100%;
+    padding: 0px 5px;
+    line-height: 2.3em;
+  }
+  #seasonSetting .operation{
+    height: 100%;display: flex;align-items: center;padding: 5px
+  }
+  #seasonSetting .templatestyle{
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

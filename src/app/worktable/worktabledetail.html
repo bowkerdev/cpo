@@ -1,0 +1,297 @@
+<div ng-controller="workTableDetailCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-title">
+        <div class="col-md-6" style="display: flex;align-items: center;padding-top: 0px;padding-bottom: 5px;padding-left: 0px;">
+          <div class="input-group">
+            <span class="input-group-addon" translate="worktable.FINAL_CONFIRMATION"></span>
+            <select class=" form-control" ng-model="site" ng-options="site.label for site in siteList">-->
+              </select>
+
+              <span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="confirmAssign()" translate="index.CONFIRM"></span>
+            </div>
+          </div>
+          <div class="col-md-offset-5 col-md-1">
+            <i class="fa fa-times-circle btn-margin" ng-click="closePage()"></i>
+          </div>
+          <div class="row"> <div class="col-md-12">
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.ORDER_TYPE"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.orderActualType" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktabledetail.SEASON"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.season" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktabledetail.CPO_NO"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.cpoNo" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.ADIDAS_PO"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.po" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktabledetail.WORKING_NO"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.workingNo" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktabledetail.A_SOURCE"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.aSource" style="padding-left: 15px;" class="red"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.PRODUCT_TYPE"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.productTypeAx" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.FABRIC_TYPE"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.fabricType" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.SUPPLY_CHAIN_TRACK"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.supplyChainTrack" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktableMKTFC.workingNoRange"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.workingNoRange" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.Customer_Code"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.customerNo" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.EURate"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.euRate" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.EUQty"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.euQuantity" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.ChinaRate"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.chinaRate" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.ChinaQty"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.chinaQuantity" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.LEFT_OVER"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.leftOver" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.LEFT_OVER_FACTORY"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.leftoverFactory" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="workingNo.B_NO"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="ResultDetail.bNo" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.B_BATCH"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.bBatch" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%" ></label>
+              <label class="bold"><span translate="worktabledetail.LAST_PRODUCTION_FACTORY"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.assignedFactory" style="padding-left: 15px;" class="red"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.System_Assign_Factory"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.suggFactory" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-3 padding-top-bottom-5">
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.criteria_Details"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.criteria_Details" style="padding-left: 15px;"></span>
+            </div>
+            <div class="col-md-6 padding-top-bottom-5" >
+              <label style="width: 7px;height: 7px;background-color: #0a5aed;border-radius: 50%"></label>
+              <label class="bold"><span translate="worktable.REMARK"></span><span>:</span></label>
+              <br/>
+              <span ng-bind="assignDetail.note" style="padding-left: 15px;" class="red"></span>
+            </div>
+
+
+
+            <div class="col-md-2 padding-top-bottom-5">
+              <div class="blue-dot-col-12 container-flex-start">
+
+              </div>
+            </div>
+          </div></div>
+
+
+				<div id="workingTableDetailGrid"  ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="grid-header-cell-one-line-height hight-auto-fill-bottom"></div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<script id="workTableN" type="text/template">
+  <div ng-bind="MODEL_COL_FIELD?MODEL_COL_FIELD:'0.00'|number:2" class="work-table-detail-category" ng-style="{color:(row.entity.CategoryName === 'Special Process' || row.entity.CategoryName === 'Coefficient')? 'red':'black'}"></div>
+</script>
+
+<script id="workTableDetailCategory" type="text/template">
+  <div ng-bind="MODEL_COL_FIELD" class="work-table-detail-category" ng-style="{color:(row.entity.CategoryName === 'Special Process' || row.entity.CategoryName === 'Coefficient')? 'red':'black'}"></div>
+</script>
+
+<style>
+	.work-table-label,
+	.work-table-label+select {
+		padding: 8px;
+		margin-bottom: 10px;
+	}
+
+	.work-table-label>span {
+		float: right;
+	}
+
+	.blue-dot-col-1,
+	.blue-dot-col-2,
+	.blue-dot-col-3,
+	.blue-dot-col-4,
+	.blue-dot-col-5,
+	.blue-dot-col-6,
+	.blue-dot-col-7,
+	.blue-dot-col-8,
+	.blue-dot-col-9,
+	.blue-dot-col-10,
+	.blue-dot-col-11,
+	.blue-dot-col-12 {
+		margin: 5px 0px;
+		float: left;
+	}
+
+	.blue-dot-col-12 {
+		width: 100% !important;
+	}
+
+	.blue-dot-col-11 {
+		width: calc(100% / 12 * 11) !important;
+	}
+
+	.blue-dot-col-10 {
+		width: calc(100% / 12 * 10) !important;
+	}
+
+	.blue-dot-col-9 {
+		width: 75% !important;
+	}
+
+	.blue-dot-col-8 {
+		width: calc(100% / 12 * 8) !important;
+	}
+
+	.blue-dot-col-7 {
+		width: calc(100% / 12 * 7) !important;
+	}
+
+	.blue-dot-col-6 {
+		width: 50% !important;
+	}
+
+	.blue-dot-col-5 {
+		width: calc(100% / 12 * 5) !important;
+	}
+
+	.blue-dot-col-4 {
+		width: calc(100% / 3) !important;
+	}
+
+	.blue-dot-col-3 {
+		width: 25% !important;
+	}
+
+	.blue-dot-col-2 {
+		width: calc(100% / 6) !important;
+	}
+
+	.blue-dot-col-1 {
+		width: calc(100% / 12) !important;
+	}
+
+	.form-group>div>.blue-dot-col-1,
+	.form-group>div>.blue-dot-col-2,
+	.form-group>div>.blue-dot-col-3,
+	.form-group>div>.blue-dot-col-4,
+	.form-group>div>.blue-dot-col-5,
+	.form-group>div>.blue-dot-col-6,
+	.form-group>div>.blue-dot-col-7,
+	.form-group>div>.blue-dot-col-8,
+	.form-group>div>.blue-dot-col-9,
+	.form-group>div>.blue-dot-col-10,
+	.form-group>div>.blue-dot-col-11,
+	.form-group>div>.blue-dot-col-12 {
+		min-height: 32px;
+	}
+  .padding-top-bottom-5{
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+	.blue-dot:before{
+		content: '' ;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		margin-right: 5px;
+		background-color: cornflowerblue;
+	}
+  .work-table-detail-category{
+    padding: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .ui-grid-cell-contents{
+  	height: auto;
+  }
+</style>

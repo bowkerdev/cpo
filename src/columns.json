@@ -1,0 +1,4164 @@
+{
+  "mkfcOrder": [
+    {
+      "displayName": "Earliest Buy Ready Model",
+      "field": "byReadyDate"
+    },
+    {
+      "displayName": "Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Range",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "Style Status",
+      "field": "styleStatus"
+    },
+    {
+      "displayName": "Working No",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "A Source",
+      "field": "aSource"
+    },
+    {
+      "displayName": "System Assign Result",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+    {
+      "displayName": "Remark",
+      "field": "note"
+    },
+    {
+      "displayName": "Transfer Reason",
+      "field": "transferReason"
+    },
+    {
+      "displayName": "Transfer Remark",
+      "field": "transferRemark"
+    },
+    {
+      "displayName": "Fabric Type",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "Product Type",
+      "field": "productTypeAx"
+    },
+    {
+      "displayName": "Product Type-FR",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "Special Process",
+      "field": "process"
+    },
+    {
+      "displayName": "Special Remark",
+      "field": "specialProcessRemark"
+    },
+    {
+      "displayName": "Product Name",
+      "field": "productName"
+    },
+    {
+      "displayName": "Leftover(Piece)",
+      "field": "leftover"
+    },
+    {
+      "displayName": "Leftover Factory",
+      "field": "leftoverFactory"
+    },
+    {
+      "displayName": "Greige Preparation Fty",
+      "field": "greigePreparationFty"
+    },
+    {
+      "displayName": "WC Remark",
+      "field": "wcCutRemark"
+    },
+    {
+      "displayName": "Customer FC Qty",
+      "field": "cusFcQty"
+    },
+    {
+      "displayName": "Last Season EU%",
+      "field": "euRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "Garment SMV",
+      "field": "smv"
+    },
+    {
+      "displayName": "Basic Style",
+      "field": "motherStyle"
+    },
+    {
+      "displayName": "First Assigned Factory",
+      "field": "firstAssignment"
+    },
+    {
+      "displayName": "Second Assigned Factory",
+      "field": "secondAssignment"
+    },
+    {
+      "displayName": "Third Assigned Factory",
+      "field": "thirdAssignment"
+    },
+    {
+      "displayName": "Presell Fty",
+      "field": "presellFty"
+    },
+    {
+      "displayName": "SMS Fty Name",
+      "field": "smsFtyName"
+    },
+    {
+      "displayName": "Last Assignment Factory",
+      "field": "mktAssignedResult"
+    },
+    {
+      "displayName": "T2 Name ",
+      "field": "t2Name"
+    },
+    {
+      "displayName": "Main Body Fabric",
+      "field": "mainFabric"
+    },
+    {
+      "displayName": "Main Body Desc",
+      "field": "mainfabricDesc"
+    },
+    {
+      "displayName": "Pad Print Style",
+      "field": "padPrintStyle"
+    },
+    {
+      "displayName": "Pad Print Item",
+      "field": "padPrintItem"
+    },
+    {
+      "displayName": "Bonding Qty",
+      "field": "bonding"
+    },
+    {
+      "displayName": "Laser Cut Qty",
+      "field": "laserCut"
+    },
+    {
+      "displayName": "Sublimation Print Qty",
+      "field": "sublimationPrint"
+    },
+    {
+      "displayName": "Print Qty",
+      "field": "print"
+    },
+    {
+      "displayName": "Embroidery Qty",
+      "field": "embroidery"
+    },
+    {
+      "displayName": "Heat Transfer Qty",
+      "field": "heatTransfer"
+    },
+    {
+      "displayName": "Embossing Qty",
+      "field": "emboss"
+    },
+    {
+      "displayName": "4F Qty",
+      "field": "threadStitch"
+    },
+    {
+      "displayName": "Blind Stitching Qty",
+      "field": "blindStitching"
+    },
+    {
+      "displayName": "Seam Seal Qty",
+      "field": "seamSeal"
+    },
+    {
+      "displayName": "Zigzag Qty",
+      "field": "zigzag"
+    },
+    {
+      "displayName": "Previous Quantity",
+      "field": "preDocQty"
+    },
+    {
+      "displayName": "Corrected Source",
+      "field": "correctedSource"
+    },
+    {
+      "displayName": "Production LT",
+      "field": "productionLeadTime"
+    },
+    {
+      "displayName": "Garment LT",
+      "field": "garmentProductingDay"
+    },
+    {
+      "displayName": "FR Status",
+      "field": "flagFr"
+    },
+    {
+      "displayName": "AX Status",
+      "field": "flagAx"
+    },
+    {
+      "displayName": "FR Remark",
+      "field": "transitFrRemark"
+    },
+    {
+      "displayName": "AX Remark",
+      "field": "transitAxRemark"
+    },
+    {
+      "displayName": "Total Qty",
+      "field": "totalQty"
+    }
+  ],
+  "assignMkfcOrder": [
+    {
+      "displayName": "Earliest Buy Ready Model",
+      "field": "byReadyDate"
+    },
+    {
+      "displayName": "Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Range",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "Style Status",
+      "field": "styleStatus"
+    },
+    {
+      "displayName": "Order Status",
+      "field": "cpoOrderStatus"
+    },
+    {
+      "displayName": "Working No",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "A Source",
+      "field": "aSource"
+    },
+    {
+      "displayName": "System Assign Result",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+    {
+      "displayName": "Remark",
+      "field": "note"
+    },
+    {
+      "displayName": "Transfer Reason",
+      "field": "transferReason"
+    },
+    {
+      "displayName": "Transfer Remark",
+      "field": "transferRemark"
+    },
+    {
+      "displayName": "Fabric Type",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "Product Type",
+      "field": "productTypeAx"
+    },
+    {
+      "displayName": "Product Type-FR",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "Special Process",
+      "field": "process"
+    },
+    {
+      "displayName": "Special Remark",
+      "field": "specialProcessRemark"
+    },
+    {
+      "displayName": "Product Name",
+      "field": "productName"
+    },
+    {
+      "displayName": "Leftover(Piece)",
+      "field": "leftover"
+    },
+    {
+      "displayName": "Leftover Factory",
+      "field": "leftoverFactory"
+    },
+    {
+      "displayName": "Greige Preparation Fty",
+      "field": "greigePreparationFty"
+    },
+    {
+      "displayName": "WC Remark",
+      "field": "wcCutRemark"
+    },
+    {
+      "displayName": "Customer FC Qty",
+      "field": "cusFcQty"
+    },
+    {
+      "displayName": "Last Season EU%",
+      "field": "euRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "Garment SMV",
+      "field": "smv"
+    },
+    {
+      "displayName": "Basic Style",
+      "field": "motherStyle"
+    },
+    {
+      "displayName": "First Assigned Factory",
+      "field": "firstAssignment"
+    },
+    {
+      "displayName": "Second Assigned Factory",
+      "field": "secondAssignment"
+    },
+    {
+      "displayName": "Third Assigned Factory",
+      "field": "thirdAssignment"
+    },
+    {
+      "displayName": "Presell Fty",
+      "field": "presellFty"
+    },
+    {
+      "displayName": "SMS Fty Name",
+      "field": "smsFtyName"
+    },
+    {
+      "displayName": "Last Assignment Factory",
+      "field": "mktAssignedResult"
+    },
+    {
+      "displayName": "T2 Name ",
+      "field": "t2Name"
+    },
+    {
+      "displayName": "Main Body Fabric",
+      "field": "mainFabric"
+    },
+    {
+      "displayName": "Main Body Desc",
+      "field": "mainfabricDesc"
+    },
+    {
+      "displayName": "Pad Print Style",
+      "field": "padPrintStyle"
+    },
+    {
+      "displayName": "Pad Print Item",
+      "field": "padPrintItem"
+    },
+    {
+      "displayName": "Bonding Qty",
+      "field": "bonding"
+    },
+    {
+      "displayName": "Laser Cut Qty",
+      "field": "laserCut"
+    },
+    {
+      "displayName": "Sublimation Print Qty",
+      "field": "sublimationPrint"
+    },
+    {
+      "displayName": "Print Qty",
+      "field": "print"
+    },
+    {
+      "displayName": "Embroidery Qty",
+      "field": "embroidery"
+    },
+    {
+      "displayName": "Heat Transfer Qty",
+      "field": "heatTransfer"
+    },
+    {
+      "displayName": "Embossing Qty",
+      "field": "emboss"
+    },
+    {
+      "displayName": "4F Qty",
+      "field": "threadStitch"
+    },
+    {
+      "displayName": "Blind Stitching Qty",
+      "field": "blindStitching"
+    },
+    {
+      "displayName": "Seam Seal Qty",
+      "field": "seamSeal"
+    },
+    {
+      "displayName": "Zigzag Qty",
+      "field": "zigzag"
+    },
+    {
+      "displayName": "Previous Quantity",
+      "field": "preDocQty"
+    },
+    {
+      "displayName": "Corrected Source",
+      "field": "correctedSource"
+    },
+    {
+      "displayName": "Production LT",
+      "field": "productionLeadTime"
+    },
+    {
+      "displayName": "Garment LT",
+      "field": "garmentProductingDay"
+    },
+    {
+      "displayName": "FR Status",
+      "field": "flagFr"
+    },
+    {
+      "displayName": "AX Status",
+      "field": "flagAx"
+    },
+    {
+      "displayName": "FR Remark",
+      "field": "transitFrRemark"
+    },
+    {
+      "displayName": "AX Remark",
+      "field": "transitAxRemark"
+    },
+    {
+      "displayName": "Total Qty",
+      "field": "totalQty"
+    }
+  ],
+  "slt_summary_report": [
+    {
+      "displayName": "Factory Name",
+      "field": "factory"
+    },
+    {
+      "displayName": "Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Total Season PV FC*10%",
+      "field": "totalQuantity"
+    },
+    {
+      "displayName": "SLT EU%",
+      "field": "sltEuRate"
+    },
+    {
+      "displayName": "Total EU%",
+      "field": "euRate"
+    },
+    {
+      "displayName": "China%",
+      "field": "chinaRate"
+    },
+    {
+      "displayName": "SLT Working No. Count",
+      "field": "workingNoCount"
+    }
+  ],
+  "slt_working_no_by_summary_report": [
+    {
+      "displayName": "SLT Factory Name",
+      "field": "sltFactory"
+    },
+    {
+      "displayName": "CUS FC Factory Name",
+      "field": "cusFactory"
+    },
+    {
+      "displayName": "Working No.",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "A Source",
+      "field": "aSource"
+    },
+    {
+      "displayName": "Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Total Season PV FC*10%",
+      "field": "totalQuantity"
+    },
+    {
+      "displayName": "SLT EU%",
+      "field": "sltEuRate"
+    },
+    {
+      "displayName": "Total EU%",
+      "field": "euRate"
+    },
+    {
+      "displayName": "China%",
+      "field": "chinaRate"
+    }
+  ],
+  "slt_working_no": [
+    {
+      "displayName": "Working No.",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Range",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "Article Number",
+      "field": "articleNo"
+    },
+    {
+      "displayName": "Customer No.",
+      "field": "customerNo"
+    },
+    {
+      "displayName": "Planning Volume Quantity",
+      "field": "pvQuantity"
+    },
+    {
+      "displayName": "EU/Non-EU",
+      "field": "orderCountry"
+    },
+    {
+      "displayName": "Forecast Quantity",
+      "field": "totalQty"
+    },
+    {
+      "displayName": "Order Quantity",
+      "field": "forecastQty"
+    },
+    {
+      "displayName": "Open Forecast Quantity",
+      "field": "openForecastQty"
+    },
+    {
+      "displayName": "EU Rate",
+      "field": "euRate"
+    },
+    {
+      "displayName": "EU Quantity",
+      "field": "euQuantity"
+    },
+    {
+      "displayName": "China Rate",
+      "field": "chinaRate"
+    },
+    {
+      "displayName": "China Quantity",
+      "field": "chinaQuantity"
+    },
+    {
+      "field": "articleSeasonHistory",
+      "displayName": "Article Season History"
+    },
+    {
+      "displayName": "Order Article Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Total Forecast",
+      "field": "sumQuantity"
+    },
+    {
+      "displayName": "Supply Chain Track",
+      "field": "supplyChainTrack"
+    },
+    {
+      "displayName": "Planned Month",
+      "field": "planMonth"
+    },
+    {
+      "displayName": "Process",
+      "field": "process"
+    },
+    {
+      "displayName": "MKT FC Factory Assignment",
+      "field": "mktAssignedResult"
+    },
+    {
+      "displayName": "Marketing Forecast Quantity",
+      "field": "preDocQty"
+    },
+    {
+      "displayName": "Leftover(Piece)",
+      "field": "leftover"
+    },
+    {
+      "displayName": "Leftover Factory",
+      "field": "leftoverFactory"
+    },
+    {
+      "displayName": "Assign Result",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "Last Assignment Factory",
+      "field": "assignedFactory"
+    },
+    {
+      "displayName": "A Source",
+      "field": "aSource"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+    {
+      "displayName": "Remark",
+      "field": "euRemark"
+    },
+    {
+      "displayName": "KNIT/WOVEN",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "product type-FR",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "Order Type",
+      "field": "orderActualType"
+    }
+  ],
+  "customerforecast": [
+    {
+      "displayName": "FR Status",
+      "field": "flagFr"
+    },
+    {
+      "displayName": "AX Status",
+      "field": "flagAx"
+    },
+    {
+      "displayName": "FR Remark",
+      "field": "transitFrRemark"
+    },
+    {
+      "displayName": "AX Remark",
+      "field": "transitAxRemark"
+    },
+    {
+      "displayName": "LO",
+      "field": "lo"
+    },
+    {
+      "displayName": "Factory Group",
+      "field": "factoryGroup"
+    },
+    {
+      "displayName": "Brand",
+      "field": "brand"
+    },
+    {
+      "displayName": "Factory ID",
+      "field": "factoryNumber"
+    },
+    {
+      "displayName": "Factory Factory Name",
+      "field": "factoryName"
+    },
+    {
+      "displayName": "COO",
+      "field": "coo"
+    },
+    {
+      "displayName": "Working No",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Model ID",
+      "field": "modelId"
+    },
+    {
+      "displayName": "Model DESC",
+      "field": "modelDesc"
+    },
+    {
+      "displayName": "Article",
+      "field": "articleNo"
+    },
+    {
+      "displayName": "Business Segment",
+      "field": "businessSegment"
+    },
+    {
+      "displayName": "Sports Code",
+      "field": "sportsCode"
+    },
+    {
+      "displayName": "Product Type",
+      "field": "productTypeAx"
+    },
+    {
+      "displayName": "Sales Line",
+      "field": "salesLine"
+    },
+    {
+      "displayName": "Category Marketing Line",
+      "field": "categoryMarketingLine"
+    },
+    {
+      "displayName": "Corporate Marketing Line",
+      "field": "corporateMarketingLine"
+    },
+    {
+      "displayName": "Article Lead time",
+      "field": "articleLeadTime"
+    },
+    {
+      "displayName": "System Assign Factory",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+    {
+      "displayName": "New Fty",
+      "field": "newFactory"
+    },
+    {
+      "displayName": "Old Fty",
+      "field": "oldFactory"
+    },
+    {
+      "displayName": "Final Fty Name",
+      "field": "ftyName"
+    },
+    {
+      "displayName": "Remark",
+      "field": "euRemark"
+    },
+    {
+      "displayName": "Transfer Remark",
+      "field": "transferRemark"
+    },
+    {
+      "displayName": "Fabric Type",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "Product Type-FR",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "Special_Process Remarks",
+      "field": "specialProcessRemark"
+    },
+    {
+      "displayName": "Pad Pint Item",
+      "field": "padPrintItem"
+    },
+    {
+      "displayName": "WC Style",
+      "field": "wcCutRemark"
+    },
+    {
+      "displayName": "SLT Final Fty",
+      "field": "sltFactoryName"
+    },
+    {
+      "displayName": "SMV",
+      "field": "smv"
+    },
+    {
+      "displayName": "Main Fabric Item",
+      "field": "mainFabric"
+    },
+    {
+      "displayName": "Main Fabric Item T2 Name",
+      "field": "t2Name"
+    },
+    {
+      "displayName": "By Ready Date",
+      "field": "byReadyDate"
+    },
+    {
+      "displayName": "Style Status",
+      "field": "styleStatus"
+    },
+    {
+      "displayName": "A Source",
+      "field": "aSource"
+    },
+    {
+      "displayName": "Mother Style",
+      "field": "motherStyle"
+    },
+    {
+      "displayName": "MKT Assignment Factory",
+      "field": "mktAssignedResult"
+    },
+    {
+      "displayName": "Article Season History",
+      "field": "articleSeasonHistory"
+    },
+    {
+      "displayName": "Order Article Season",
+      "field": "season"
+    },
+    {
+      "displayName": "GPS Customer Customer",
+      "field": "customerNo"
+    },
+    {
+      "displayName": "EU/Non-EU",
+      "field": "orderCountry"
+    },
+    {
+      "displayName": "GPS Customer DESC",
+      "field": "gpsCustomerDesc"
+    },
+    {
+      "displayName": "EU Rate",
+      "field": "euRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "EU Quantity",
+      "field": "euQuantity",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "China Rate",
+      "field": "chinaRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "China Quantity",
+      "field": "chinaQuantity",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Leftover(Piece)",
+      "field": "leftover"
+    },
+    {
+      "displayName": "Leftover Factory",
+      "field": "leftoverFty"
+    },
+    {
+      "displayName": "Pull Forward Qty",
+      "field": "pullForward",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Supply Chain Track",
+      "field": "supplyChainTrack"
+    },
+    {
+      "displayName": "Period",
+      "field": "planMonth"
+    },
+    {
+      "displayName": "Half Month Period",
+      "field": "halfMonthPeriod"
+    },
+    {
+      "displayName": "Planning Volume Quantity",
+      "field": "pvQuantity",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Forecast Quantity",
+      "field": "forecastQty",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Netted Open Forecast (PV - ORD)",
+      "field": "openForecastQty",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Order Quantity by CRD",
+      "field": "orderQuantityByCrd",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Order Quantity by Plan Date",
+      "field": "orderQuantityByPlanDate",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Bonding Qty",
+      "field": "bonding"
+    },
+    {
+      "displayName": "Laser Cut Qty",
+      "field": "laserCut"
+    },
+    {
+      "displayName": "Sublimation Print Qty",
+      "field": "sublimationPrint"
+    },
+    {
+      "displayName": "Print Qty",
+      "field": "print"
+    },
+    {
+      "displayName": "Embroidery Qty",
+      "field": "embroidery"
+    },
+    {
+      "displayName": "Heart Transfer Qty",
+      "field": "heatTransfer"
+    },
+    {
+      "displayName": "Embossing Qty",
+      "field": "emboss"
+    },
+    {
+      "displayName": "4F Qty",
+      "field": "threadStitch"
+    },
+    {
+      "displayName": "Blind Stitching Qty",
+      "field": "blindStitching"
+    },
+    {
+      "displayName": "Zigzag Qty",
+      "field": "zigzag"
+    }
+  ],
+  "assignCustomerforecast": [
+    {
+      "displayName": "FR Status",
+      "field": "flagFr"
+    },
+    {
+      "displayName": "AX Status",
+      "field": "flagAx"
+    },
+    {
+      "displayName": "FR Remark",
+      "field": "transitFrRemark"
+    },
+    {
+      "displayName": "AX Remark",
+      "field": "transitAxRemark"
+    },
+    {
+      "displayName": "Order Status",
+      "field": "cpoOrderStatus"
+    },
+    {
+      "displayName": "LO",
+      "field": "lo"
+    },
+    {
+      "displayName": "Factory Group",
+      "field": "factoryGroup"
+    },
+    {
+      "displayName": "Brand",
+      "field": "brand"
+    },
+    {
+      "displayName": "Factory ID",
+      "field": "factoryNumber"
+    },
+    {
+      "displayName": "Factory Factory Name",
+      "field": "factoryName"
+    },
+    {
+      "displayName": "COO",
+      "field": "coo"
+    },
+    {
+      "displayName": "Working No",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Model ID",
+      "field": "modelId"
+    },
+    {
+      "displayName": "Model DESC",
+      "field": "modelDesc"
+    },
+    {
+      "displayName": "Article",
+      "field": "articleNo"
+    },
+    {
+      "displayName": "Business Segment",
+      "field": "businessSegment"
+    },
+    {
+      "displayName": "Sports Code",
+      "field": "sportsCode"
+    },
+    {
+      "displayName": "Product Type",
+      "field": "productTypeAx"
+    },
+    {
+      "displayName": "Sales Line",
+      "field": "salesLine"
+    },
+    {
+      "displayName": "Category Marketing Line",
+      "field": "categoryMarketingLine"
+    },
+    {
+      "displayName": "Corporate Marketing Line",
+      "field": "corporateMarketingLine"
+    },
+    {
+      "displayName": "Article Lead time",
+      "field": "articleLeadTime"
+    },
+    {
+      "displayName": "System Assign Factory",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+    {
+      "displayName": "New Fty",
+      "field": "newFactory"
+    },
+    {
+      "displayName": "Old Fty",
+      "field": "oldFactory"
+    },
+    {
+      "displayName": "Final Fty Name",
+      "field": "ftyName"
+    },
+    {
+      "displayName": "Remark",
+      "field": "euRemark"
+    },
+    {
+      "displayName": "Transfer Remark",
+      "field": "transferRemark"
+    },
+    {
+      "displayName": "Fabric Type",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "Product Type-FR",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "Special_Process Remarks",
+      "field": "specialProcessRemark"
+    },
+    {
+      "displayName": "Pad Pint Item",
+      "field": "padPrintItem"
+    },
+    {
+      "displayName": "WC Style",
+      "field": "wcCutRemark"
+    },
+    {
+      "displayName": "SLT Final Fty",
+      "field": "sltFactoryName"
+    },
+    {
+      "displayName": "SMV",
+      "field": "smv"
+    },
+    {
+      "displayName": "Main Fabric Item",
+      "field": "mainFabric"
+    },
+    {
+      "displayName": "Main Fabric Item T2 Name",
+      "field": "t2Name"
+    },
+    {
+      "displayName": "By Ready Date",
+      "field": "byReadyDate"
+    },
+    {
+      "displayName": "Style Status",
+      "field": "styleStatus"
+    },
+    {
+      "displayName": "A Source",
+      "field": "aSource"
+    },
+    {
+      "displayName": "Mother Style",
+      "field": "motherStyle"
+    },
+    {
+      "displayName": "MKT Assignment Factory",
+      "field": "mktAssignedResult"
+    },
+    {
+      "displayName": "Article Season History",
+      "field": "articleSeasonHistory"
+    },
+    {
+      "displayName": "Order Article Season",
+      "field": "season"
+    },
+    {
+      "displayName": "GPS Customer Customer",
+      "field": "customerNo"
+    },
+    {
+      "displayName": "EU/Non-EU",
+      "field": "orderCountry"
+    },
+    {
+      "displayName": "GPS Customer DESC",
+      "field": "gpsCustomerDesc"
+    },
+    {
+      "displayName": "EU Rate",
+      "field": "euRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "EU Quantity",
+      "field": "euQuantity",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "China Rate",
+      "field": "chinaRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "China Quantity",
+      "field": "chinaQuantity",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Leftover(Piece)",
+      "field": "leftover"
+    },
+    {
+      "displayName": "Leftover Factory",
+      "field": "leftoverFty"
+    },
+    {
+      "displayName": "Pull Forward Qty",
+      "field": "pullForward",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Supply Chain Track",
+      "field": "supplyChainTrack"
+    },
+    {
+      "displayName": "Period",
+      "field": "planMonth"
+    },
+    {
+      "displayName": "Half Month Period",
+      "field": "halfMonthPeriod"
+    },
+    {
+      "displayName": "Planning Volume Quantity",
+      "field": "pvQuantity",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Forecast Quantity",
+      "field": "forecastQty",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Netted Open Forecast (PV - ORD)",
+      "field": "openForecastQty",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Order Quantity by CRD",
+      "field": "orderQuantityByCrd",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Order Quantity by Plan Date",
+      "field": "orderQuantityByPlanDate",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Bonding Qty",
+      "field": "bonding"
+    },
+    {
+      "displayName": "Laser Cut Qty",
+      "field": "laserCut"
+    },
+    {
+      "displayName": "Sublimation Print Qty",
+      "field": "sublimationPrint"
+    },
+    {
+      "displayName": "Print Qty",
+      "field": "print"
+    },
+    {
+      "displayName": "Embroidery Qty",
+      "field": "embroidery"
+    },
+    {
+      "displayName": "Heart Transfer Qty",
+      "field": "heatTransfer"
+    },
+    {
+      "displayName": "Embossing Qty",
+      "field": "emboss"
+    },
+    {
+      "displayName": "4F Qty",
+      "field": "threadStitch"
+    },
+    {
+      "displayName": "Blind Stitching Qty",
+      "field": "blindStitching"
+    },
+    {
+      "displayName": "Zigzag Qty",
+      "field": "zigzag"
+    }
+  ],
+  "sampleorderforecast": [
+    {
+      "field": "po",
+      "displayName": "Adidas PO"
+    },
+    {
+      "field": "cpoNo",
+      "displayName": "CPO No"
+    },
+    {
+      "field": "workingNoRange",
+      "displayName": "Range"
+    },
+    {
+      "field": "workingNo",
+      "displayName": "Working No"
+    },
+    {
+      "field": "aSource",
+      "displayName": "A Source"
+    },
+    {
+      "field": "bNo",
+      "displayName": "BNO"
+    },
+    {
+      "field": "mo",
+      "displayName": "B+Batch"
+    },
+    {
+      "displayName": "Process in Sample Room",
+      "field": "factoryType"
+    },
+    {
+      "field": "sizeGroup",
+      "displayName": "Size Group"
+    },
+    {
+      "field": "unit",
+      "displayName": "Unit Style"
+    },
+    {
+      "field": "articleNumber",
+      "displayName": "Article Number"
+    },
+    {
+      "field": "articleSeasonHistory",
+      "displayName": "Article Season History"
+    },
+    {
+      "field": "season",
+      "displayName": "Order Article Season"
+    },
+    {
+      "field": "customerNo",
+      "displayName": "Customer No."
+    },
+    {
+      "field": "totalQty",
+      "displayName": "Quantity",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "field": "orderCountry",
+      "displayName": "EU/Non-EU"
+    },
+    {
+      "field": "orderActualType",
+      "displayName": "Order Type"
+    },
+    {
+      "field": "process",
+      "displayName": "Process"
+    },
+    {
+      "field": "assignedFactory",
+      "displayName": "Last Assignment Factory"
+    },
+    {
+      "displayName": "System Assign Result",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+    {
+      "displayName": "Remark",
+      "field": "note"
+    },
+    {
+      "field": "fabricType",
+      "displayName": "Fabric Type"
+    },
+    {
+      "field": "productTypeAx",
+      "displayName": "Product Type"
+    },
+    {
+      "field": "productTypeFr",
+      "displayName": "Product Type Fr"
+    },
+    {
+      "field": "planPiDate",
+      "displayName": "Plan PI Date"
+    },
+    {
+      "field": "t2DeliveryDate",
+      "displayName": "Actual PI Date"
+    },
+    {
+      "field": "requestDate",
+      "displayName": "CRD"
+    },
+    {
+      "field": "planDate",
+      "displayName": "Plan Date"
+    },
+    {
+      "field": "psdd",
+      "displayName": "PSDD"
+    },
+    {
+      "field": "firstProdDate",
+      "displayName": "First Production Date"
+    },
+    {
+      "field": "podd",
+      "displayName": "PODD"
+    },
+    {
+      "field": "lastProdDate",
+      "displayName": "Last Production Date"
+    },
+    {
+      "field": "classCode",
+      "displayName": "Class Code"
+    },
+    {
+      "displayName": "FR Status",
+      "field": "flagFr"
+    },
+    {
+      "displayName": "AX Status",
+      "field": "flagAx"
+    },
+    {
+      "displayName": "FR Remark",
+      "field": "transitFrRemark"
+    },
+    {
+      "displayName": "AX Remark",
+      "field": "transitAxRemark"
+    }
+  ],
+  "assignSampleorderforecast": [
+    {
+      "field": "po",
+      "displayName": "Adidas PO"
+    },
+    {
+      "field": "cpoNo",
+      "displayName": "CPO No"
+    },
+    {
+      "field": "workingNoRange",
+      "displayName": "Range"
+    },
+    {
+      "field": "workingNo",
+      "displayName": "Working No"
+    },
+    {
+      "displayName": "Order Status",
+      "field": "cpoOrderStatus"
+    },
+    {
+      "field": "aSource",
+      "displayName": "A Source"
+    },
+    {
+      "field": "bNo",
+      "displayName": "BNO"
+    },
+    {
+      "field": "mo",
+      "displayName": "B+Batch"
+    },
+    {
+      "displayName": "Process in Sample Room",
+      "field": "factoryType"
+    },
+    {
+      "field": "sizeGroup",
+      "displayName": "Size Group"
+    },
+    {
+      "field": "unit",
+      "displayName": "Unit Style"
+    },
+    {
+      "field": "articleNumber",
+      "displayName": "Article Number"
+    },
+    {
+      "field": "articleSeasonHistory",
+      "displayName": "Article Season History"
+    },
+    {
+      "field": "season",
+      "displayName": "Order Article Season"
+    },
+    {
+      "field": "customerNo",
+      "displayName": "Customer No."
+    },
+    {
+      "field": "totalQty",
+      "displayName": "Quantity",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "field": "orderCountry",
+      "displayName": "EU/Non-EU"
+    },
+    {
+      "field": "orderActualType",
+      "displayName": "Order Type"
+    },
+    {
+      "field": "process",
+      "displayName": "Process"
+    },
+    {
+      "field": "assignedFactory",
+      "displayName": "Last Assignment Factory"
+    },
+    {
+      "displayName": "System Assign Result",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+    {
+      "displayName": "Remark",
+      "field": "note"
+    },
+    {
+      "field": "fabricType",
+      "displayName": "Fabric Type"
+    },
+    {
+      "field": "productTypeAx",
+      "displayName": "Product Type"
+    },
+    {
+      "field": "productTypeFr",
+      "displayName": "Product Type Fr"
+    },
+    {
+      "field": "planPiDate",
+      "displayName": "Plan PI Date"
+    },
+    {
+      "field": "t2DeliveryDate",
+      "displayName": "Actual PI Date"
+    },
+    {
+      "field": "requestDate",
+      "displayName": "CRD"
+    },
+    {
+      "field": "planDate",
+      "displayName": "Plan Date"
+    },
+    {
+      "field": "psdd",
+      "displayName": "PSDD"
+    },
+    {
+      "field": "firstProdDate",
+      "displayName": "First Production Date"
+    },
+    {
+      "field": "podd",
+      "displayName": "PODD"
+    },
+    {
+      "field": "lastProdDate",
+      "displayName": "Last Production Date"
+    },
+    {
+      "field": "classCode",
+      "displayName": "Class Code"
+    },
+    {
+      "displayName": "FR Status",
+      "field": "flagFr"
+    },
+    {
+      "displayName": "AX Status",
+      "field": "flagAx"
+    },
+    {
+      "displayName": "FR Remark",
+      "field": "transitFrRemark"
+    },
+    {
+      "displayName": "AX Remark",
+      "field": "transitAxRemark"
+    }
+  ],
+  "bulkorder_new": [
+    {
+      "displayName": "Release to AX Status",
+      "field": "flagAx"
+    },
+    {
+      "displayName": "Release to FR Status",
+      "field": "flagFr"
+    },
+    {
+      "displayName": "Release to AX Remark",
+      "field": "transitAxRemark"
+    },
+    {
+      "displayName": "Release to FR Remark",
+      "field": "transitFrRemark"
+    },
+    {
+      "displayName": "TC PO",
+      "field": "po"
+    },
+    {
+      "displayName": "IPMT_NO",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "BNO",
+      "field": "bNo"
+    },
+    {
+      "displayName": "BatchNO",
+      "field": "batchNo"
+    },
+    {
+      "displayName": "Athlete",
+      "field": "athlete"
+    },
+    {
+      "displayName": "B+Batch",
+      "field": "mo"
+    },
+    {
+      "displayName": "Article",
+      "field": "articleNo"
+    },
+    {
+      "displayName": "Article Name",
+      "field": "articleName"
+    },
+    {
+      "field": "articleSeasonHistory",
+      "displayName": "Article Season History"
+    },
+    {
+      "displayName": "Order Article Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Style Status",
+      "field": "styleStatus"
+    },
+    {
+      "displayName": "Earier by ready date",
+      "field": "byReadyDate"
+    },
+    {
+      "field": "seasonRemark",
+      "displayName": "Article Season Remark"
+    },
+    {
+      "displayName": "Factory",
+      "field": "factoryNumber"
+    },
+    {
+      "displayName": "A Source",
+      "field": "aSource"
+    },
+    {
+      "displayName": "System Assign Result ",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+		{
+			"displayName": "New Fty",
+			"field": "newFactory"
+		},
+		{
+			"displayName": "Old Fty",
+			"field": "oldFactory"
+		},
+    {
+      "displayName": "Fty Name",
+      "field": "ftyName"
+    },
+    {
+      "displayName": "Remark",
+      "field": "assignmentRemark"
+    },
+    {
+      "displayName": "Transfer Reason",
+      "field": "transferReason"
+    },
+    {
+      "displayName": "Transfer Remark",
+      "field": "transferRemark"
+    },
+    {
+      "displayName": "CPO No",
+      "field": "cpoNo"
+    },
+    {
+      "displayName": "168#",
+      "field": "no168"
+    },
+    {
+      "displayName": "CLASSI",
+      "field": "classCode"
+    },
+    {
+      "displayName": "CST Order No.",
+      "field": "cstOrderNo"
+    },
+    {
+      "displayName": "Order Qty",
+      "field": "totalQty"
+    },
+    {
+      "displayName": "Balance",
+      "field": "balance"
+    },
+    {
+      "displayName": "Model",
+      "field": "modelNumber"
+    },
+    {
+      "displayName": "CTRY TO",
+      "field": "ctryNo"
+    },
+    {
+      "displayName": "Customer",
+      "field": "customerNo"
+    },
+    {
+      "displayName": "EU/Non-EU",
+      "field": "orderCountry"
+    },
+    {
+      "displayName": "CRD",
+      "field": "customerRequestDate"
+    },
+    {
+      "displayName": "Planned Date",
+      "field": "planDate"
+    },
+    {
+      "displayName": "LC0190 Issue Date",
+      "field": "orderDate"
+    },
+    {
+      "displayName": "PO Batch Date",
+      "field": "poBatchDate"
+    },
+    {
+      "displayName": "LC0190 Date Remark",
+      "field": "dateRemark"
+    },
+    {
+      "displayName": "CRD Confirm Satus",
+      "field": "crdConfirmStatus"
+    },
+    {
+      "displayName": "PD Confirm Status",
+      "field": "pdConfirmStatus"
+    },
+    {
+      "displayName": "PSDD",
+      "field": "psdd"
+    },
+    {
+      "displayName": "FPD",
+      "field": "fpd"
+    },
+    {
+      "displayName": "PODD",
+      "field": "podd"
+    },
+    {
+      "displayName": "LPD",
+      "field": "lastProdDate"
+    },
+    {
+      "displayName": "PSDD(Factory)",
+      "field": "psddFactory"
+    },
+    {
+      "displayName": "FPD(Factory)",
+      "field": "fpdFactory"
+    },
+    {
+      "displayName": "PSDD Mid or End",
+      "field": "psddMidEnd"
+    },
+    {
+      "displayName": "FPD Mid or End",
+      "field": "fpdMidEnd"
+    },
+    {
+      "displayName": "MDPfailreason",
+      "field": "mdpFailReason"
+    },
+    {
+      "displayName": "PDPfailreason",
+      "field": "pdpFailReason"
+    },
+    {
+      "displayName": "New Style",
+      "field": "newStyle"
+    },
+    {
+      "displayName": "Range",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "DD Style",
+      "field": "ddStyle"
+    },
+    {
+      "displayName": "Unit",
+      "field": "unit"
+    },
+    {
+      "displayName": "Print Qty",
+      "field": "printQty"
+    },
+    {
+      "displayName": "Production LT",
+      "field": "productionLeadTime"
+    },
+    {
+      "displayName": "Garment LT",
+      "field": "garmentProductingDay"
+    },
+    {
+      "displayName": "Special Order",
+      "field": "specialOrder"
+    },
+    {
+      "displayName": "Order Remark",
+      "field": "orderRemark"
+    },
+    {
+      "displayName": "Updated Information",
+      "field": "updatedInformation"
+    },
+    {
+      "displayName": "MTF Order/PPC Order",
+      "field": "mtfcNumber"
+    },
+    {
+      "displayName": "Original LC0190 date",
+      "field": "originalLc0190Date"
+    },
+    {
+      "displayName": "Internal Pull Forward Factory",
+      "field": "lasterCusFcFactory"
+    },
+    {
+      "displayName": "CUS FC Assigned Factory",
+      "field": "assignedFactory"
+    },
+    {
+      "displayName": "GSP",
+      "field": "gsp"
+    },
+    {
+      "displayName": "Serviceidentify",
+      "field": "serviceIdentify"
+    },
+    {
+      "displayName": "Customization Status",
+      "field": "customizationStatus"
+    },
+    {
+      "displayName": "Test",
+      "field": "test"
+    },
+    {
+      "displayName": "Ship Mode",
+      "field": "shipMode"
+    },
+    {
+      "displayName": "Customer Over FC Qty",
+      "field": "customerOverFc"
+    },
+    {
+      "displayName": "Latest Fabric PI ETA",
+      "field": "latestFabricPiEta"
+    },
+    {
+      "displayName": "Latest Trim PI ETA",
+      "field": "latestTrimPiEta"
+    },
+    {
+      "displayName": "Main MPO#",
+      "field": "mainMpo"
+    },
+    {
+      "displayName": "1st T2 Name",
+      "field": "t2Name1st"
+    },
+    {
+      "displayName": "1st Fabric RMS#",
+      "field": "fabricRms1st"
+    },
+    {
+      "displayName": "1st Fabric PO#",
+      "field": "fabricPo1st"
+    },
+    {
+      "displayName": "1st Fabric PI Date",
+      "field": "fabricPiDate"
+    },
+    {
+      "displayName": "Brand",
+      "field": "brand"
+    },
+    {
+      "displayName": "Unit Price",
+      "field": "unitPrice"
+    },
+    {
+      "displayName": "Client",
+      "field": "client"
+    },
+    {
+      "displayName": "Sports Code",
+      "field": "sportsCode"
+    },
+    {
+      "displayName": "Size Group",
+      "field": "sizeGroup"
+    },
+    {
+      "displayName": "Quantity",
+      "field": "quantity"
+    },
+    {
+      "displayName": "LC0190 Order Type",
+      "field": "orderType"
+    },
+    {
+      "displayName": "Leftover(Piece)",
+      "field": "leftover"
+    },
+    {
+      "displayName": "Leftover Factory",
+      "field": "leftoverFactory"
+    },
+    {
+      "displayName": "Fabric Type",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "Product Type",
+      "field": "productTypeAx"
+    },
+    {
+      "displayName": "Product Type-FR",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "Plan Group",
+      "field": "planGroup"
+    },
+    {
+      "displayName": "T&A",
+      "field": "timetable"
+    },
+    {
+      "displayName": "Special Process",
+      "field": "process"
+    },
+    {
+      "displayName": "Special process remark",
+      "field": "specialProcessRemark"
+    },
+    {
+      "displayName": "Order Type",
+      "field": "orderActualType"
+    },
+    {
+      "displayName": "SMV",
+      "field": "smv"
+    },
+    {
+      "displayName": "TTL SMV",
+      "field": "ttlSmv"
+    },
+    {
+      "displayName": "FOB",
+      "field": "fob"
+    },
+    {
+      "displayName": "TC Order Status",
+      "field": "orderStatus"
+    },
+    {
+      "displayName": "Change Remark",
+      "field": "transferOrderInfo"
+    },
+    {
+      "displayName": "SIZE_RUN",
+      "field": "customerSizeRun"
+    },
+    {
+      "displayName": "Technical Notation",
+      "field": "technicalNotation"
+    },
+    {
+      "displayName": "TS COUNT",
+      "field": "tsCount"
+    },
+    {
+      "displayName": "PPC Order Status",
+      "field": "ppcOrderStatus"
+    },
+    {
+      "displayName": "Trade Card Order Status",
+      "field": "tradeCardOrderStatus"
+    }
+  ],
+  "assignBulkorder_new": [
+    {
+      "displayName": "Release to AX Status",
+      "field": "flagAx"
+    },
+    {
+      "displayName": "Release to FR Status",
+      "field": "flagFr"
+    },
+    {
+      "displayName": "Release to AX Remark",
+      "field": "transitAxRemark"
+    },
+    {
+      "displayName": "Release to FR Remark",
+      "field": "transitFrRemark"
+    },
+    {
+      "displayName": "Order Status",
+      "field": "cpoOrderStatus"
+    },
+    {
+      "displayName": "TC PO",
+      "field": "po"
+    },
+    {
+      "displayName": "IPMT_NO",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "BNO",
+      "field": "bNo"
+    },
+    {
+      "displayName": "BatchNO",
+      "field": "batchNo"
+    },
+    {
+      "displayName": "Athlete",
+      "field": "athlete"
+    },
+    {
+      "displayName": "B+Batch",
+      "field": "mo"
+    },
+    {
+      "displayName": "Article",
+      "field": "articleNo"
+    },
+    {
+      "displayName": "Article Name",
+      "field": "articleName"
+    },
+    {
+      "field": "articleSeasonHistory",
+      "displayName": "Article Season History"
+    },
+    {
+      "displayName": "Order Article Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Style Status",
+      "field": "styleStatus"
+    },
+    {
+      "displayName": "Earier by ready date",
+      "field": "byReadyDate"
+    },
+    {
+      "field": "seasonRemark",
+      "displayName": "Article Season Remark"
+    },
+    {
+      "displayName": "Factory",
+      "field": "factoryNumber"
+    },
+    {
+      "displayName": "A Source",
+      "field": "aSource"
+    },
+    {
+      "displayName": "System Assign Result ",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+    {
+      "displayName": "Old Fty",
+      "field": "oldFty"
+    },
+    {
+      "displayName": "New Fty",
+      "field": "newFtyName"
+    },
+    {
+      "displayName": "Fty Name",
+      "field": "ftyName"
+    },
+    {
+      "displayName": "Remark",
+      "field": "assignmentRemark"
+    },
+    {
+      "displayName": "Transfer Reason",
+      "field": "transferReason"
+    },
+    {
+      "displayName": "Transfer Remark",
+      "field": "transferRemark"
+    },
+    {
+      "displayName": "CPO No",
+      "field": "cpoNo"
+    },
+    {
+      "displayName": "168#",
+      "field": "no168"
+    },
+    {
+      "displayName": "CLASSI",
+      "field": "classCode"
+    },
+    {
+      "displayName": "CST Order No.",
+      "field": "cstOrderNo"
+    },
+    {
+      "displayName": "Order Qty",
+      "field": "totalQty"
+    },
+    {
+      "displayName": "Balance",
+      "field": "balance"
+    },
+    {
+      "displayName": "Model",
+      "field": "modelNumber"
+    },
+    {
+      "displayName": "CTRY TO",
+      "field": "ctryNo"
+    },
+    {
+      "displayName": "Customer",
+      "field": "customerNo"
+    },
+    {
+      "displayName": "EU/Non-EU",
+      "field": "orderCountry"
+    },
+    {
+      "displayName": "CRD",
+      "field": "customerRequestDate"
+    },
+    {
+      "displayName": "Planned Date",
+      "field": "planDate"
+    },
+    {
+      "displayName": "LC0190 Issue Date",
+      "field": "orderDate"
+    },
+    {
+      "displayName": "PO Batch Date",
+      "field": "poBatchDate"
+    },
+    {
+      "displayName": "LC0190 Date Remark",
+      "field": "dateRemark"
+    },
+    {
+      "displayName": "CRD Confirm Satus",
+      "field": "crdConfirmStatus"
+    },
+    {
+      "displayName": "PD Confirm Status",
+      "field": "pdConfirmStatus"
+    },
+    {
+      "displayName": "PSDD",
+      "field": "psdd"
+    },
+    {
+      "displayName": "FPD",
+      "field": "fpd"
+    },
+    {
+      "displayName": "PODD",
+      "field": "podd"
+    },
+    {
+      "displayName": "LPD",
+      "field": "lastProdDate"
+    },
+    {
+      "displayName": "PSDD(Factory)",
+      "field": "psddFactory"
+    },
+    {
+      "displayName": "FPD(Factory)",
+      "field": "fpdFactory"
+    },
+    {
+      "displayName": "PSDD Mid or End",
+      "field": "psddMidEnd"
+    },
+    {
+      "displayName": "FPD Mid or End",
+      "field": "fpdMidEnd"
+    },
+    {
+      "displayName": "MDPfailreason",
+      "field": "mdpFailReason"
+    },
+    {
+      "displayName": "PDPfailreason",
+      "field": "pdpFailReason"
+    },
+    {
+      "displayName": "New Style",
+      "field": "newStyle"
+    },
+    {
+      "displayName": "Range",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "DD Style",
+      "field": "ddStyle"
+    },
+    {
+      "displayName": "Unit",
+      "field": "unit"
+    },
+    {
+      "displayName": "Print Qty",
+      "field": "printQty"
+    },
+    {
+      "displayName": "Production LT",
+      "field": "productionLeadTime"
+    },
+    {
+      "displayName": "Garment LT",
+      "field": "garmentProductingDay"
+    },
+    {
+      "displayName": "Special Order",
+      "field": "specialOrder"
+    },
+    {
+      "displayName": "Order Remark",
+      "field": "orderRemark"
+    },
+    {
+      "displayName": "Updated Information",
+      "field": "updatedInformation"
+    },
+    {
+      "displayName": "MTF Order/PPC Order",
+      "field": "mtfcNumber"
+    },
+    {
+      "displayName": "Original LC0190 date",
+      "field": "originalLc0190Date"
+    },
+    {
+      "displayName": "Internal Pull Forward Factory",
+      "field": "lasterCusFcFactory"
+    },
+    {
+      "displayName": "CUS FC Assigned Factory",
+      "field": "assignedFactory"
+    },
+    {
+      "displayName": "GSP",
+      "field": "gsp"
+    },
+    {
+      "displayName": "Serviceidentify",
+      "field": "serviceIdentify"
+    },
+    {
+      "displayName": "Customization Status",
+      "field": "customizationStatus"
+    },
+    {
+      "displayName": "Test",
+      "field": "test"
+    },
+    {
+      "displayName": "Ship Mode",
+      "field": "shipMode"
+    },
+    {
+      "displayName": "Customer Over FC Qty",
+      "field": "customerOverFc"
+    },
+    {
+      "displayName": "Latest Fabric PI ETA",
+      "field": "latestFabricPiEta"
+    },
+    {
+      "displayName": "Latest Trim PI ETA",
+      "field": "latestTrimPiEta"
+    },
+    {
+      "displayName": "Main MPO#",
+      "field": "mainMpo"
+    },
+    {
+      "displayName": "1st T2 Name",
+      "field": "t2Name1st"
+    },
+    {
+      "displayName": "1st Fabric RMS#",
+      "field": "fabricRms1st"
+    },
+    {
+      "displayName": "1st Fabric PO#",
+      "field": "fabricPo1st"
+    },
+    {
+      "displayName": "1st Fabric PI Date",
+      "field": "fabricPiDate"
+    },
+    {
+      "displayName": "Brand",
+      "field": "brand"
+    },
+    {
+      "displayName": "Unit Price",
+      "field": "unitPrice"
+    },
+    {
+      "displayName": "Client",
+      "field": "client"
+    },
+    {
+      "displayName": "Sports Code",
+      "field": "sportsCode"
+    },
+    {
+      "displayName": "Size Group",
+      "field": "sizeGroup"
+    },
+    {
+      "displayName": "Quantity",
+      "field": "quantity"
+    },
+    {
+      "displayName": "LC0190 Order Type",
+      "field": "orderType"
+    },
+    {
+      "displayName": "Leftover(Piece)",
+      "field": "leftover"
+    },
+    {
+      "displayName": "Leftover Factory",
+      "field": "leftoverFactory"
+    },
+    {
+      "displayName": "Fabric Type",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "Product Type",
+      "field": "productTypeAx"
+    },
+    {
+      "displayName": "Product Type-FR",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "Plan Group",
+      "field": "planGroup"
+    },
+    {
+      "displayName": "T&A",
+      "field": "timetable"
+    },
+    {
+      "displayName": "Special Process",
+      "field": "process"
+    },
+    {
+      "displayName": "Special process remark",
+      "field": "specialProcessRemark"
+    },
+    {
+      "displayName": "Order Type",
+      "field": "orderActualType"
+    },
+    {
+      "displayName": "SMV",
+      "field": "smv"
+    },
+    {
+      "displayName": "TTL SMV",
+      "field": "ttlSmv"
+    },
+    {
+      "displayName": "FOB",
+      "field": "fob"
+    },
+    {
+      "displayName": "TC Order Status",
+      "field": "orderStatus"
+    },
+    {
+      "displayName": "Change Remark",
+      "field": "transferOrderInfo"
+    },
+    {
+      "displayName": "SIZE_RUN",
+      "field": "customerSizeRun"
+    },
+    {
+      "displayName": "Technical Notation",
+      "field": "technicalNotation"
+    },
+    {
+      "displayName": "TS COUNT",
+      "field": "tsCount"
+    },
+    {
+      "displayName": "PPC Order Status",
+      "field": "ppcOrderStatus"
+    },
+    {
+      "displayName": "Trade Card Order Status",
+      "field": "tradeCardOrderStatus"
+    }
+  ],
+  "bulkorder_new_order_change": [
+    {
+      "displayName": "Change Type",
+      "field": "changeType"
+    },
+    {
+      "displayName": "Change Status",
+      "field": "changeStatus"
+    },
+    {
+      "displayName": "TC PO",
+      "field": "po"
+    },
+    {
+      "displayName": "Change Remark",
+      "field": "transferOrderInfo"
+    },
+    {
+      "displayName": "Release to AX Status",
+      "field": "flagAx"
+    },
+    {
+      "displayName": "Release to FR Status",
+      "field": "flagFr"
+    },
+    {
+      "displayName": "Release to AX Remark",
+      "field": "transitAxRemark"
+    },
+    {
+      "displayName": "Release to FR Remark",
+      "field": "transitFrRemark"
+    },
+    {
+      "displayName": "IPMT_NO",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "BNO",
+      "field": "bNo"
+    },
+    {
+      "displayName": "BatchNO",
+      "field": "batchNo"
+    },
+    {
+      "displayName": "Athlete",
+      "field": "athlete"
+    },
+    {
+      "displayName": "B+Batch",
+      "field": "mo"
+    },
+    {
+      "displayName": "Article",
+      "field": "articleNo"
+    },
+    {
+      "displayName": "Article Name",
+      "field": "articleName"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+    {
+      "displayName": "Fty Name",
+      "field": "ftyName"
+    },
+    {
+      "displayName": "Remark",
+      "field": "assignmentRemark"
+    },
+    {
+      "displayName": "CPO No",
+      "field": "cpoNo"
+    },
+    {
+      "displayName": "168#",
+      "field": "no168"
+    },
+    {
+      "displayName": "CLASSI",
+      "field": "classCode"
+    },
+    {
+      "displayName": "CST Order No.",
+      "field": "cstOrderNo"
+    },
+    {
+      "displayName": "Order Qty",
+      "field": "totalQty"
+    },
+    {
+      "displayName": "Model",
+      "field": "modelNumber"
+    },
+    {
+      "displayName": "CTRY TO",
+      "field": "ctryNo",
+      "isHave": false
+    },
+    {
+      "displayName": "Customer",
+      "field": "customerNo"
+    },
+    {
+      "displayName": "CRD",
+      "field": "customerRequestDate"
+    },
+    {
+      "displayName": "Planned Date",
+      "field": "planDate"
+    },
+    {
+      "displayName": "LC0190 Issue Date",
+      "field": "orderDate"
+    },
+    {
+      "displayName": "PO Batch Date",
+      "field": "poBatchDate"
+    },
+    {
+      "displayName": "LC0190 Date Remark",
+      "field": "dateRemark"
+    },
+    {
+      "displayName": "PSDD",
+      "field": "psdd"
+    },
+    {
+      "displayName": "FPD",
+      "field": "fpd"
+    },
+    {
+      "displayName": "PODD",
+      "field": "podd"
+    },
+    {
+      "displayName": "LPD",
+      "field": "lastProdDate"
+    },
+    {
+      "displayName": "PSDD(Factory)",
+      "field": "psddFactory"
+    },
+    {
+      "displayName": "FPD(Factory)",
+      "field": "fpdFactory"
+    },
+    {
+      "displayName": "Range",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "Production LT",
+      "field": "productionLeadTime"
+    },
+    {
+      "displayName": "Garment LT",
+      "field": "garmentProductingDay"
+    },
+    {
+      "displayName": "Special Order",
+      "field": "specialOrder"
+    },
+    {
+      "displayName": "Order Remark",
+      "field": "orderRemark"
+    },
+    {
+      "displayName": "Updated Information",
+      "field": "updatedInformation"
+    },
+    {
+      "displayName": "Serviceidentify",
+      "field": "serviceIdentify"
+    },
+    {
+      "displayName": "Customization Status",
+      "field": "customizationStatus"
+    },
+    {
+      "displayName": "Ship Mode",
+      "field": "shipMode"
+    },
+    {
+      "displayName": "Unit Price",
+      "field": "unitPrice"
+    },
+    {
+      "displayName": "Client",
+      "field": "client"
+    },
+    {
+      "displayName": "Quantity",
+      "field": "totalQty"
+    },
+    {
+      "displayName": "Product Type-FR",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "T&A",
+      "field": "timetable"
+    },
+    {
+      "displayName": "Special Process",
+      "field": "process"
+    },
+    {
+      "displayName": "Special process remark",
+      "field": "specialProcessRemark"
+    },
+    {
+      "displayName": "SIZE_RUN",
+      "field": "customerSizeRun"
+    },
+    {
+      "displayName": "Technical Notation",
+      "field": "technicalNotation"
+    },
+    {
+      "displayName": "TS COUNT",
+      "field": "tsCount"
+    }
+  ],
+  "miorderforecast": [
+    {
+      "field": "miStripes",
+      "displayName": "stripes"
+    },
+    {
+      "field": "miLogo",
+      "displayName": "Logo"
+    },
+    {
+      "field": "miPrint",
+      "displayName": "Sublimation printing"
+    },
+    {
+      "field": "miNN",
+      "displayName": "N&N"
+    },
+    {
+      "field": "miHemInsert",
+      "displayName": "MT2FB4 Hem Insert"
+    },
+    {
+      "field": "orderRemark",
+      "displayName": "remark"
+    },
+    {
+      "field": "confirmFactory",
+      "displayName": "CPO Confirmation FTY"
+    },
+    {
+      "field": "no168",
+      "displayName": "168#"
+    },
+    {
+      "field": "po",
+      "displayName": "PO#"
+    },
+    {
+      "field": "bNo",
+      "displayName": "BNO"
+    },
+    {
+      "field": "cstOrderNo",
+      "displayName": "Customer Order Number"
+    },
+    {
+      "field": "batchNo",
+      "displayName": "BatchNO"
+    },
+    {
+      "field": "workingNo",
+      "displayName": "Working Number"
+    },
+    {
+      "field": "totalQty",
+      "displayName": "total qty",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "field": "customerNo",
+      "displayName": "Customer Number"
+    },
+    {
+      "field": "modelNumber",
+      "displayName": "Model Number"
+    },
+    {
+      "field": "articleNo",
+      "displayName": "Article Number"
+    },
+    {
+      "field": "articleName",
+      "displayName": "Article Description"
+    },
+    {
+      "field": "customerRequestDate",
+      "displayName": "Customer Request Date"
+    },
+    {
+      "field": "poBatchDate",
+      "displayName": "PO Batch Date"
+    },
+    {
+      "field": "planDate",
+      "displayName": "PLNDAT"
+    },
+    {
+      "field": "shipMode",
+      "displayName": "Ship Mode"
+    },
+    {
+      "field": "technicalNotation",
+      "displayName": "GB18TEHSIZ"
+    },
+    {
+      "field": "customerSizeRun",
+      "displayName": "GB18CUSSIZ"
+    }
+  ],
+  "customerMaster": [
+    {
+      "displayName": "Cust.No.",
+      "field": "customerNo"
+    },
+    {
+      "displayName": "Cust.No type",
+      "field": "custNoType"
+    },
+    {
+      "displayName": "Country Code",
+      "field": "countryCode"
+    },
+    {
+      "displayName": "COUNTRY",
+      "field": "country"
+    },
+    {
+      "displayName": "EU/Non-EU",
+      "field": "organiseType"
+    },
+    {
+      "displayName": "Region Code",
+      "field": "region"
+    }
+  ],
+  "customerforcast_report_1": [
+    {
+      "field": "brand",
+      "displayName": "Brand",
+      "width": "150"
+    },
+    {
+      "field": "factoryId",
+      "displayName": "Factory ID",
+      "width": "150"
+    },
+    {
+      "field": "factoryName",
+      "displayName": "Factory Factory Name",
+      "width": "150"
+    },
+    {
+      "field": "sportsCode",
+      "displayName": "Sports Code",
+      "width": "150"
+    },
+    {
+      "field": "workingNo",
+      "displayName": "WorkingNo",
+      "width": "150"
+    },
+    {
+      "field": "modelDesc",
+      "displayName": "Model DESC",
+      "width": "150"
+    },
+    {
+      "field": "modelId",
+      "displayName": "Model ID",
+      "width": "150"
+    },
+    {
+      "field": "gpsCustomerCustomer",
+      "displayName": "GPS Customer Customer",
+      "width": "150"
+    },
+    {
+      "field": "gpsCustomerDesc",
+      "displayName": "GPS Customer DESC",
+      "width": "150"
+    },
+    {
+      "field": "articleLeadTime",
+      "displayName": "Article Lead time",
+      "width": "150"
+    },
+    {
+      "field": "supplyChainTrack",
+      "displayName": "Supply Chain Track",
+      "width": "150"
+    },
+    {
+      "field": "smv",
+      "displayName": "SMV",
+      "width": "150"
+    },
+    {
+      "field": "countFty",
+      "displayName": "CPO Confirmation Factory",
+      "width": "150"
+    },
+    {
+      "field": "range",
+      "displayName": "Range",
+      "width": "150"
+    },
+    {
+      "field": "mainFabric",
+      "displayName": "Main Fabric",
+      "width": "150"
+    },
+    {
+      "field": "t2Name",
+      "displayName": "T2 name",
+      "width": "150"
+    },
+    {
+      "field": "fabricType",
+      "displayName": "Fabric Type",
+      "width": "150"
+    },
+    {
+      "field": "productTypeFr",
+      "displayName": "Product Type-FR",
+      "width": "150"
+    },
+    {
+      "field": "specialProcess",
+      "displayName": "Special_Process",
+      "width": "150"
+    },
+    {
+      "field": "printQty",
+      "displayName": "Print Qty",
+      "width": "150"
+    },
+    {
+      "field": "embroideryQty",
+      "displayName": "Embroidery Qty",
+      "width": "150"
+    },
+    {
+      "field": "orderCountry",
+      "displayName": "EU/NOEU",
+      "width": "150"
+    },
+    {
+      "field": "productTypeAx",
+      "displayName": "Product Type",
+      "width": "150"
+    }
+  ],
+  "customerforcast_report_2": [
+    {
+      "displayName": "WorkingNo",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Pad Print",
+      "field": "padPrintItem"
+    },
+    {
+      "displayName": "Speed Style",
+      "field": "speedOrder"
+    },
+    {
+      "displayName": "Bulk Order Assignment FTY",
+      "field": "bulkOrderFactory"
+    },
+    {
+      "displayName": "China By Plan FTY",
+      "field": "chinaBuyPlanFactory"
+    },
+    {
+      "displayName": "SLT FTY",
+      "field": "sltFty"
+    },
+    {
+      "displayName": "IPF:Internal Pull Forward",
+      "field": "prFactoryName"
+    },
+    {
+      "displayName": "MTF Fty Name",
+      "field": "mtfFactory"
+    },
+    {
+      "displayName": "EI Set Up",
+      "field": "eiSetUp"
+    },
+    {
+      "displayName": "Special Process",
+      "field": "specialProcessSchedule"
+    },
+    {
+      "displayName": "Fabric Lef Fty",
+      "field": "leftoverFactory"
+    },
+    {
+      "displayName": "Fabric Lef Qty",
+      "field": "leftover"
+    },
+    {
+      "displayName": "SMV",
+      "field": "smv"
+    },
+    {
+      "displayName": "WC Style",
+      "field": "wcStyle"
+    },
+    {
+      "displayName": "Model DESC",
+      "field": "modelDesc"
+    },
+    {
+      "displayName": "A Source",
+      "field": "aSource"
+    },
+    {
+      "displayName": "Style Status",
+      "field": "styleStatus"
+    },
+    {
+      "displayName": "Factory ID",
+      "field": "factoryId"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "countFty"
+    },
+    {
+      "displayName": "New Fty",
+      "field": "newFactoryName"
+    },
+    {
+      "displayName": "Transfer Reason",
+      "field": "transferReason"
+    },
+    {
+      "displayName": "Transfer Remark",
+      "field": "transferRemark"
+    },
+    {
+      "displayName": "Supply Chain Track",
+      "field": "supplyChainTrack"
+    },
+    {
+      "displayName": "EU/NOEU",
+      "field": "orderCountry"
+    },
+    {
+      "displayName": "EU%",
+      "field": "euRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "China%",
+      "field": "chinaRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "Range ",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "Fabric_Type",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "Product Type-FR ",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "System Assign Result ",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "Total Qty ",
+      "field": "totalQty"
+    }
+  ],
+  "customerforcast_report_3": [
+    {
+      "displayName": "WorkingNo.",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Model DESC",
+      "field": "modelDesc"
+    },
+    {
+      "displayName": "Pad Pint Item",
+      "field": "padPrintItem"
+    },
+    {
+      "displayName": "WC Style",
+      "field": "wcStyle"
+    },
+    {
+      "displayName": "SLT",
+      "field": "sltFty"
+    },
+    {
+      "displayName": "EU %",
+      "field": "euRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "CHINA%",
+      "field": "chinaRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "NOEU %",
+      "field": "otherRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "CPO Confirmation Fty",
+      "field": "countFty"
+    },
+    {
+      "displayName": "SMV",
+      "field": "smv"
+    },
+    {
+      "displayName": "Main Fabric",
+      "field": "mainFabric"
+    },
+    {
+      "displayName": "Range",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "T2 Name",
+      "field": "t2Name"
+    },
+    {
+      "displayName": "Fabric Type",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "Product Type",
+      "field": "productTypeAx"
+    },
+    {
+      "displayName": "Product Type-FR",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "Special_Process",
+      "field": "specialProcessSchedule"
+    },
+    {
+      "displayName": "Print Quantity",
+      "field": "printQty"
+    },
+    {
+      "displayName": "Embroidery Quantity",
+      "field": "embrorideryQty"
+    },
+    {
+      "displayName": "New Fty",
+      "field": "newFty"
+    },
+    {
+      "displayName": "Transfer Reason",
+      "field": "transferReason"
+    },
+    {
+      "displayName": "Transfer Remark",
+      "field": "transferRemark"
+    },
+    {
+      "displayName": "Total Qty",
+      "field": "totalQty"
+    }
+  ],
+  "po_lo_report": [
+    {
+      "displayName": "LC0190 Date",
+      "field": "lc0190Date"
+    },
+    {
+      "displayName": "Brand",
+      "field": "brand"
+    },
+    {
+      "displayName": "Working No",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Planned Date",
+      "field": "planDate"
+    },
+    {
+      "displayName": "PO Number",
+      "field": "po"
+    },
+    {
+      "displayName": "Classic",
+      "field": "classCode"
+    },
+    {
+      "displayName": "PO Qty.",
+      "field": "poQty"
+    },
+    {
+      "displayName": "From factory (A Source)",
+      "field": "fromFactory"
+    },
+    {
+      "displayName": "To factory (Bowker A Source)",
+      "field": "toFactory"
+    },
+    {
+      "displayName": "Quota Approved",
+      "field": "quotaApproved"
+    },
+    {
+      "displayName": "Reason",
+      "field": "reason"
+    },
+    {
+      "displayName": "Order Release Date",
+      "field": "orderReleaseDate"
+    },
+    {
+      "displayName": "B Source Needed",
+      "field": "bsourceNeeded"
+    },
+    {
+      "displayName": "LO Contact",
+      "field": "loContract"
+    },
+    {
+      "displayName": "GPS Contact",
+      "field": "gpsContract"
+    },
+    {
+      "displayName": "Transfer Approved",
+      "field": "transferContract"
+    },
+    {
+      "displayName": "Status",
+      "field": "status"
+    },
+    {
+      "displayName": "Completed Date",
+      "field": "completedDate"
+    }
+  ],
+  "po_internal_report": [
+    {
+      "displayName": "LC0190 Date",
+      "field": "lc0190Date"
+    },
+    {
+      "displayName": "Release Date",
+      "field": "releaseDate"
+    },
+    {
+      "displayName": "Remarks",
+      "field": "note"
+    },
+    {
+      "displayName": "Range",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "Brand",
+      "field": "brand"
+    },
+    {
+      "displayName": "Working No",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "PLM Fty code",
+      "field": "factoryCode"
+    },
+    {
+      "displayName": "Planned Date",
+      "field": "planDate"
+    },
+    {
+      "displayName": "Customer Request Date",
+      "field": "customerRequestDate"
+    },
+    {
+      "displayName": "PSDD",
+      "field": "psdd"
+    },
+    {
+      "displayName": "FPD",
+      "field": "fpd"
+    },
+    {
+      "displayName": "PO No.",
+      "field": "po"
+    },
+    {
+      "displayName": "T/C PO",
+      "field": "tcPo"
+    },
+    {
+      "displayName": "Updated PO No.",
+      "field": "updatedPoNumber"
+    },
+    {
+      "displayName": "Classic",
+      "field": "classCode"
+    },
+    {
+      "displayName": "CPO No.",
+      "field": "cpoNo"
+    },
+    {
+      "displayName": "Customer Code",
+      "field": "customerNo"
+    },
+    {
+      "displayName": "EU/Non-EU",
+      "field": "orderCountry"
+    },
+    {
+      "displayName": "Assigned Factory",
+      "field": "assignedFactory"
+    },
+    {
+      "displayName": "PO Qty.",
+      "field": "poQty"
+    },
+    {
+      "displayName": "From Factory (Old)",
+      "field": "fromFactory"
+    },
+    {
+      "displayName": "To Factory (New)",
+      "field": "toFactory"
+    },
+    {
+      "displayName": "Quota Approved(Y)",
+      "field": "quotaApproved"
+    },
+    {
+      "displayName": "Reason",
+      "field": "reason"
+    },
+    {
+      "displayName": "Order Release Date",
+      "field": "orderReleaseDate"
+    },
+    {
+      "displayName": "B source needed",
+      "field": "bsourceNeeded"
+    },
+    {
+      "displayName": "LO Contact ",
+      "field": "loContract"
+    },
+    {
+      "displayName": "GPS Contact",
+      "field": "gpsContract"
+    },
+    {
+      "displayName": "Transfer Approved",
+      "field": "transferContract        "
+    },
+    {
+      "displayName": "Status",
+      "field": "status"
+    },
+    {
+      "displayName": "Completed Date",
+      "field": "completedDate"
+    }
+  ],
+  "style_lo_report": [
+    {
+      "displayName": "Field name",
+      "field": "fieldName"
+    },
+    {
+      "displayName": "Division",
+      "field": "division"
+    },
+    {
+      "displayName": "Allocation type",
+      "field": "allocationType"
+    },
+    {
+      "displayName": "Sourcing Type",
+      "field": "sourcingType"
+    },
+    {
+      "displayName": "Transfer Reason",
+      "field": "transferReason"
+    },
+    {
+      "displayName": "Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Working Number",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Giving Factory",
+      "field": "givingFactory"
+    },
+    {
+      "displayName": "Receiving Factory",
+      "field": "receivingFactory"
+    },
+    {
+      "displayName": "Receiving Factory - Leadtime",
+      "field": "receivingFactoryLeadTime"
+    },
+    {
+      "displayName": "Transfer Volume",
+      "field": "transferVolume"
+    },
+    {
+      "displayName": "Request Transfer Month From (Receiving Factory)",
+      "field": "requestTransferMonthFrom"
+    },
+    {
+      "displayName": "Request Transfer Month To (Receiving Factory)",
+      "field": "requestTransferMonthTo"
+    },
+    {
+      "displayName": "Change A Source",
+      "field": "changeASource"
+    },
+    {
+      "displayName": "Giving Factory FOB ($)",
+      "field": "givingFactoryFob"
+    },
+    {
+      "displayName": "Giving Factory Price Landed ($)",
+      "field": "givingFactoryPriceLanded"
+    },
+    {
+      "displayName": "Receiving Factory FOB ($)",
+      "field": "receivingFactoryFob"
+    },
+    {
+      "displayName": "Receiving Factory price Landed ($)",
+      "field": "receivingFactoryPriceLanded"
+    },
+    {
+      "displayName": "Reason For Price Variance",
+      "field": "reasonForPriceVariance"
+    },
+    {
+      "displayName": "EI Set Up Needed",
+      "field": "eiSetUpNeeded"
+    },
+    {
+      "displayName": "Selling Region Percentage - EU",
+      "field": "sellingRegionPercentageEu"
+    },
+    {
+      "displayName": "Selling Region Percentage - Asia",
+      "field": "sellingRegionPercentageAsia"
+    },
+    {
+      "displayName": "Selling Region Percentage - NAM",
+      "field": "sellingRegionPercentageNam"
+    },
+    {
+      "displayName": "Selling Region Percentage - LAM",
+      "field": "sellingRegionPercentageLam"
+    },
+    {
+      "displayName": "Selling Region Percentage - CIS",
+      "field": "sellingRegionPercentageCis"
+    },
+    {
+      "displayName": "Selling Region Percentage - China",
+      "field": "sellingRegionPercentageChina"
+    },
+    {
+      "displayName": "Landed Price Per Selling Region - Giving Factory - EU",
+      "field": "landedPricePerSellingRegionGivingFactoryEu"
+    },
+    {
+      "displayName": "Landed Price Per Selling Region - Giving Factory - Asia",
+      "field": "landedPricePerSellingRegionGivingFactoryAsia"
+    },
+    {
+      "displayName": "Landed Price Per Selling Region - Giving Factory - NAM",
+      "field": "landedPricePerSellingRegionGivingFactoryNam"
+    },
+    {
+      "displayName": "Landed Price Per Selling Region - Giving Factory - LAM",
+      "field": "landedPricePerSellingRegionGivingFactoryLam"
+    },
+    {
+      "displayName": "Landed Price Per Selling Region - Giving Factory - CIS",
+      "field": "landedPricePerSellingRegionGivingFactoryCis"
+    },
+    {
+      "displayName": "Landed Price Per Selling Region - Giving Factory - China",
+      "field": "landedPricePerSellingRegionGivingFactoryChina"
+    },
+    {
+      "displayName": "Skip Techpack",
+      "field": "skipTechpack"
+    },
+    {
+      "displayName": "Remarks",
+      "field": "remarks"
+    },
+    {
+      "displayName": "Create Day",
+      "field": "utcCreate"
+    }
+  ],
+  "style_internal_report": [
+    {
+      "displayName": "Working Number",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Create Day",
+      "field": "utcCreate"
+    },
+    {
+      "displayName": "Remarks",
+      "field": "remarks"
+    },
+    {
+      "displayName": "If Got LCO190",
+      "field": "ifGotLc0"
+    },
+    {
+      "displayName": "Division",
+      "field": "division"
+    },
+    {
+      "displayName": "Allocation Type",
+      "field": "allocationType"
+    },
+    {
+      "displayName": "Sourcing Type",
+      "field": "sourcingType"
+    },
+    {
+      "displayName": "Transfer Reason",
+      "field": "transferReason"
+    },
+    {
+      "displayName": "Season",
+      "field": "season"
+    },
+    {
+      "displayName": "PLM A Source",
+      "field": "asource"
+    },
+    {
+      "displayName": "B Source",
+      "field": "bsource"
+    },
+    {
+      "displayName": "C Source",
+      "field": "csource"
+    },
+    {
+      "displayName": "D Source",
+      "field": "dsource"
+    },
+    {
+      "displayName": "Giving Factory",
+      "field": "givingFactory"
+    },
+    {
+      "displayName": "Receiving Factory",
+      "field": "receivingFactory"
+    },
+    {
+      "displayName": "Receiving Factory - Leadtime",
+      "field": "receivingFactoryLeadTime"
+    },
+    {
+      "displayName": "Transfer Volume",
+      "field": "transferVolume"
+    },
+    {
+      "displayName": "Request Transfer Month From (Receiving Factory)",
+      "field": "requestTransferMonthFrom"
+    },
+    {
+      "displayName": "Request Transfer Month To (Receiving Factory)",
+      "field": "requestTransferMonthTo"
+    },
+    {
+      "displayName": "Change A Source",
+      "field": "changeASource"
+    },
+    {
+      "displayName": "Giving Factory FOB ($)",
+      "field": "givingFactoryFob"
+    },
+    {
+      "displayName": "Receiving Factory FOB ($)",
+      "field": "receivingFactoryFob"
+    },
+    {
+      "displayName": "Diff of FOB($)",
+      "field": "diffOfFobData"
+    },
+    {
+      "displayName": "Diff of FOB($) %",
+      "field": "diffOfFobPercent"
+    },
+    {
+      "displayName": "Reason for Price Variance",
+      "field": "reasonForPriceVariance"
+    },
+    {
+      "displayName": "Transfer Remarks",
+      "field": "note"
+    },
+    {
+      "displayName": "Range",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "LO Merch.",
+      "field": "loMerch"
+    },
+    {
+      "displayName": "Tier 1 Merch.",
+      "field": "tierMerch"
+    },
+    {
+      "displayName": "Fty Code",
+      "field": "ftyCode"
+    },
+    {
+      "displayName": "Remark",
+      "field": "sourceRemark"
+    }
+  ],
+  "seam_sealing_report": [
+    {
+      "displayName": "Month",
+      "field": ""
+    },
+    {
+      "displayName": "Factory",
+      "field": ""
+    },
+    {
+      "displayName": "Fty Capacity",
+      "field": ""
+    },
+    {
+      "displayName": "Half of Month-01",
+      "field": ""
+    },
+    {
+      "displayName": "Half of Month-02",
+      "field": ""
+    },
+    {
+      "displayName": "Hold shipment qty",
+      "field": ""
+    },
+    {
+      "displayName": "Open FC",
+      "field": ""
+    },
+    {
+      "displayName": "LCO190　",
+      "field": ""
+    },
+    {
+      "displayName": "TOTAL",
+      "field": ""
+    },
+    {
+      "displayName": "Left Capacity",
+      "field": ""
+    },
+    {
+      "displayName": "Remark",
+      "field": ""
+    }
+  ],
+  "padding_order_report": [
+    {
+      "displayName": "Factory",
+      "field": ""
+    },
+    {
+      "displayName": "Fty Capacity",
+      "field": ""
+    },
+    {
+      "displayName": "Half of Month-01",
+      "field": ""
+    },
+    {
+      "displayName": "Half of Month-02",
+      "field": ""
+    },
+    {
+      "displayName": "Hold shipment qty",
+      "field": ""
+    },
+    {
+      "displayName": " PV-ORD",
+      "field": ""
+    },
+    {
+      "displayName": "LC0190-01",
+      "field": ""
+    },
+    {
+      "displayName": "LO0190-02",
+      "field": ""
+    },
+    {
+      "displayName": "TOTAL",
+      "field": ""
+    },
+    {
+      "displayName": "Left Capacity",
+      "field": ""
+    },
+    {
+      "displayName": "Remark",
+      "field": ""
+    }
+  ],
+  "bonding_tpu_laser_order_report": [
+    {
+      "displayName": "Factory",
+      "field": ""
+    },
+    {
+      "displayName": "Process",
+      "field": ""
+    },
+    {
+      "displayName": "Fty Capacity",
+      "field": ""
+    },
+    {
+      "displayName": "Half of Month-01",
+      "field": ""
+    },
+    {
+      "displayName": "Half of Month-02",
+      "field": ""
+    },
+    {
+      "displayName": "Hold shipment qty",
+      "field": ""
+    },
+    {
+      "displayName": "OPEN FC",
+      "field": ""
+    },
+    {
+      "displayName": "LCO190-01",
+      "field": ""
+    },
+    {
+      "displayName": "LCO190-02",
+      "field": ""
+    },
+    {
+      "displayName": "TOTAL",
+      "field": ""
+    },
+    {
+      "displayName": "Left capacity",
+      "field": ""
+    },
+    {
+      "displayName": "Remark",
+      "field": ""
+    }
+  ],
+  "bulk_order_by_smv": [
+    {
+      "displayName": "Factory Name",
+      "field": ""
+    },
+    {
+      "displayName": "Fty Capacity-01",
+      "field": ""
+    },
+    {
+      "displayName": "Fty Loading-01",
+      "field": ""
+    },
+    {
+      "displayName": "Left-01",
+      "field": ""
+    },
+    {
+      "displayName": "Fty Capacity-02",
+      "field": ""
+    },
+    {
+      "displayName": "Fty Loading-02",
+      "field": ""
+    },
+    {
+      "displayName": "Left-02",
+      "field": ""
+    },
+    {
+      "displayName": "FPD total",
+      "field": ""
+    },
+    {
+      "displayName": "Hold Shipment qty",
+      "field": ""
+    },
+    {
+      "displayName": "Planned Order from Last Month ",
+      "field": ""
+    },
+    {
+      "displayName": "Mid Month Order",
+      "field": ""
+    },
+    {
+      "displayName": "PF Order",
+      "field": ""
+    },
+    {
+      "displayName": "total open FC",
+      "field": ""
+    },
+    {
+      "displayName": "45D ",
+      "field": ""
+    },
+    {
+      "displayName": "30D",
+      "field": ""
+    },
+    {
+      "displayName": "SLT",
+      "field": ""
+    },
+    {
+      "displayName": "60D",
+      "field": ""
+    },
+    {
+      "displayName": "MTF",
+      "field": ""
+    },
+    {
+      "displayName": "Planed Capacity",
+      "field": ""
+    },
+    {
+      "displayName": "Open Forecast",
+      "field": ""
+    },
+    {
+      "displayName": "Total Qty(FPD by PD)",
+      "field": ""
+    },
+    {
+      "displayName": "Order Qty(Actual Order+New Order)",
+      "field": ""
+    },
+    {
+      "displayName": "lef by CRD",
+      "field": ""
+    },
+    {
+      "displayName": "LC0190 New Order-01",
+      "field": ""
+    },
+    {
+      "displayName": "LC0190 New Order-02",
+      "field": ""
+    },
+    {
+      "displayName": "2nd LC0190 New Order -01)",
+      "field": ""
+    },
+    {
+      "displayName": "2nd LC0190 New Order -02",
+      "field": ""
+    },
+    {
+      "displayName": "Actual Order-01",
+      "field": ""
+    },
+    {
+      "displayName": "Actual Order-02",
+      "field": ""
+    }
+  ],
+  "transfered_order_list": [
+    {
+      "displayName": "Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Document Type",
+      "field": "documentType"
+    },
+    {
+      "displayName": "Remark Date",
+      "field": "utcCreate"
+    },
+    {
+      "displayName": "Reason",
+      "field": "transferReason"
+    },
+    {
+      "displayName": "Working No",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Pad Print",
+      "field": "padPrint"
+    },
+    {
+      "displayName": "Speed Style",
+      "field": "speedStyle"
+    },
+    {
+      "displayName": "LC0190 Assigend Fty",
+      "field": "bulkOrderAssignedFactory"
+    },
+    {
+      "displayName": "A China by Plan Fty",
+      "field": "chinaBuyPlanFty"
+    },
+    {
+      "displayName": "SLT Fty",
+      "field": "sltFty"
+    },
+    {
+      "displayName": "IPF Fty",
+      "field": "ipfFtyName"
+    },
+    {
+      "displayName": "MTF Fty",
+      "field": "mtfFtyName"
+    },
+    {
+      "displayName": "EU Fty",
+      "field": "euFactory"
+    },
+    {
+      "displayName": "CHINA Fty",
+      "field": "chinaFactory"
+    },
+    {
+      "displayName": "Non EU Fty",
+      "field": "nonEuFactory"
+    },
+    {
+      "displayName": "EI Set up",
+      "field": "eiSetUp"
+    },
+    {
+      "displayName": "Special Process",
+      "field": "specialProcess"
+    },
+    {
+      "displayName": "Old Fty",
+      "field": "oldFty"
+    },
+    {
+      "displayName": "New Fty",
+      "field": "newFtyName"
+    },
+    {
+      "displayName": "Transfer Remark",
+      "field": "transferRemark"
+    },
+    {
+      "displayName": "A Source",
+      "field": "asource"
+    },
+    {
+      "displayName": "B Source",
+      "field": "bsource"
+    },
+    {
+      "displayName": "C Source",
+      "field": "csource"
+    },
+    {
+      "displayName": "D Source",
+      "field": "dsource"
+    },
+    {
+      "displayName": "To do Styles Transfer",
+      "field": "toDoStyleTransfer"
+    },
+    {
+      "displayName": "To Source",
+      "field": "toSource"
+    }
+  ],
+  "bno": [
+    {
+      "displayName": "Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Working No.",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "B No.",
+      "field": "bno"
+    },
+    {
+      "displayName": "Size Group",
+      "field": "sizeGroup"
+    },
+    {
+      "displayName": "Athlete",
+      "field": "athletic"
+    },
+    {
+      "displayName": "Size",
+      "field": "size"
+    }
+  ],
+  "planGroup": [
+    {
+      "displayName": "Factory",
+      "field": "factSimpName"
+    },
+    {
+      "displayName": "Fabric Type",
+      "field": "knitWoven"
+    },
+    {
+      "displayName": "Product Type-FR",
+      "field": "productType"
+    },
+    {
+      "displayName": "Ap Group",
+      "field": "apGroup"
+    },
+    {
+      "displayName": "Plan Group",
+      "field": "planGroup"
+    }
+  ],
+  "productUpdate": [
+    {
+      "displayName": "Product Name",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Description",
+      "field": "description"
+    },
+    {
+      "displayName": "Created Date",
+      "field": "createdDate"
+    },
+    {
+      "displayName": "SMV",
+      "field": "smv"
+    },
+    {
+      "displayName": "Pad Print",
+      "field": "padPrint"
+    },
+    {
+      "displayName": "Pad Print Item",
+      "field": "padPrintItem"
+    },
+    {
+      "displayName": "Fabric Type",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "Product Type",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "Special Process Remark",
+      "field": "specialProcessRemark"
+    },
+    {
+      "displayName": "Bonding Qty",
+      "field": "bondingQty"
+    },
+    {
+      "displayName": "Laser Cut Qty",
+      "field": "laserCutQty"
+    },
+    {
+      "displayName": "Sublimation Print",
+      "field": "sublimationPrint"
+    },
+    {
+      "displayName": "Print Qty",
+      "field": "printQty"
+    },
+    {
+      "displayName": "Embroidery Qty",
+      "field": "embroideryQty"
+    },
+    {
+      "displayName": "Heat Transfer",
+      "field": "heatTransfer"
+    },
+    {
+      "displayName": "Embossing Qty",
+      "field": "embossingQty"
+    }
+  ],
+  "actual_open_fc_sumary_report": [
+    {
+      "displayName": "Working No.",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "Month",
+      "field": "planMonth"
+    },
+    {
+      "displayName": "Original OP FC",
+      "field": "originalOpenForecastQuantity"
+    },
+    {
+      "displayName": "Actual OP FC",
+      "field": "actualOpenForecastQuantity"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+<div ng-controller="StyleTransferController">
+	<div class="">
+			<div class="page-title">
+				<i class="fa fa-times-circle btn-margin" ng-click="closePage()"></i>
+				<form role="form" method="post" name="" ng-if="reportType==='style'">
+					<div class="news-edit-form">
+						<label><span translate="workingNo.WORKING_NO"></span></label>
+						<input ng-model='model.workingNo' class="form-control" size="16" type="text" readonly>
+					</div>
+					<div class="news-edit-form">
+						<label><span translate="styletransfer.SOURCING_TYPE"></span></label>
+						<select ng-model="model.sourcingType" class="form-control" ng-options="sType.label for sType in SourcingTypeList">
+						</select>
+					</div>
+					<!--<div class="news-edit-form cg_edit_margin">
+						<label><span class="red">*</span><span translate="criteria.CRITERIA_VALUE"></span></label>
+					    <input type="text" class="form-control" ng-model="StyleTransferDetail.criteriaObject" name="name" ng-maxlength="255" maxlength="255">
+					</div>-->
+					<div class="news-edit-form ">
+						<label><span translate="styletransfer.TRANSFER_REASON"></span></label>
+						<select ng-model="model.transferReason" class="form-control" ng-options="transfeReason.label for transfeReason in TransfeReasonList" >
+						</select>
+					</div>
+					<div class="news-edit-form ">
+						<label><span translate="styletransfer.CHANGE_A_SOURCE"></span></label>
+						<select ng-model="model.changeASource" class="form-control" >
+							<option value="YES">YES</option>
+							<option value="NO">NO</option>
+						</select>
+					</div>
+					<div class="news-edit-form">
+						<label><span translate="styletransfer.GIVING_FACTORY_FOB"></span></label>
+						<input ng-model='model.givingFactoryFob' class="form-control" size="16" maxlength="8" type="number" >
+					</div>
+
+					<div class="news-edit-form">
+						<label><span translate="styletransfer.RECEIVING_FACTORY_FOB"></span></label>
+						<input ng-model='model.receivingFactoryFob' class="form-control" size="16" maxlength="8" type="number" >
+					</div>
+					<div class="news-edit-form">
+						<label><span translate="marketingforecast.LO"></span></label>
+						<input ng-model='model.loMerch' class="form-control" maxlength="128" size="16" type="text" >
+					</div>
+					<div class="news-edit-form">
+						<label><span translate="report.TIER_1_MERCH"></span></label>
+						<input ng-model='model.tierMerch' class="form-control" maxlenght = "128" size="16" type="text" >
+					</div>
+					<div class="news-edit-form">
+						<label class="control-label"><span translate="report.CREATE_DATE"></span></label>
+						<div  ng-model='model.utcCreate' ng-time class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="voteStartTime">
+							<input ng-model='model.utcCreate' class="form-control" size="16" type="text" value="" readonly>
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
+					</div>
+					<div class="news-edit-form">
+						<label><span translate="worktable.REMARK"></span></label>
+						<textarea ng-model='model.remarks' class="form-control " maxlength="500" rows="3"></textarea>
+					</div>
+					<div class="news-edit-form">
+						<label><span translate="report.TRANSFER_REASON_REMARKS"></span></label>
+						<textarea ng-model='model.note' class="form-control " maxlength="500" rows="3"></textarea>
+					</div>
+					<button class="btn-bowker-theme pull-left" ng-click="SaveStyle()" ng-disabled="submitLoading" type="button">
+						<i class="fa-save"></i> <span translate="index.SAVE"></span>
+					</button>
+				</form>
+				<form role="form" method="post" name="" ng-if="reportType==='Po'">
+					<div class="news-edit-form">
+						<label><span translate="workingNo.WORKING_NO"></span></label>
+						<input ng-model='model.workingNo' class="form-control" size="16" type="text" readonly>
+					</div>
+					<div class="news-edit-form">
+						<label><span translate="marketingforecast.LO"></span></label>
+						<input ng-model='model.loContract' class="form-control" size="16" maxlength="50" type="text" >
+					</div>
+					<div class="news-edit-form">
+						<label class="control-label"><span translate="worktable.RELEASE_Date"></span></label>
+						<div  ng-model='model.releaseDate' ng-time class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="voteStartTime">
+							<input ng-model='model.releaseDate' class="form-control" size="16" type="text" value="" readonly>
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
+					</div>
+					<div class="news-edit-form ">
+						<label><span translate="report.REASON"></span></label>
+						<textarea ng-model='model.reason' class="form-control" maxlength="500" rows="3"></textarea>
+					</div>
+					<div class="news-edit-form">
+						<label><span translate="worktable.REMARK"></span></label>
+						<textarea ng-model='model.note' class="form-control " maxlength="500" rows="3"></textarea>
+					</div>
+					<button class="btn-bowker-theme pull-left" ng-click="SavePO()" type="button" ng-disabled="submitLoading">
+						<i class="fa-save"></i> <span translate="index.SAVE"></span>
+					</button>
+				</form>
+			</div>
+	</div>
+</div>
+<!-- Modal Window Source HTML -->
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<ng-include src="'app/criteria/workingnoselect.html'"></ng-include>
+<style>
+
+	.news-edit-form textarea {
+		width: 60%;
+		display: inline-block;
+	}
+	.factory-criteria-button-group {
+		width: 5% !important;
+	}
+
+	.factory-criteria-score {
+		width: 55% !important;
+	}
+
+	.factory-criteria-score-input {
+		width: 40% !important;
+	}
+
+	.factory-criteria-div {
+		width: 22% !important;
+	}
+	.span-padding-left{
+		padding-left: 12px !important;
+	}
+</style>
