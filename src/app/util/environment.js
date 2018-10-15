@@ -7,12 +7,12 @@
 
 //var urlDEV = "http://112.74.191.64:8080/service/";
 //LOCAL
-var urlLOCAL = "http://localhost:8080/";
+var urlLOCAL = "http://localhost:12345/";
 //var urlLOCAL = "http://bowkerwecareapp.azurewebsites.net/service/";
 //SIT
-var urlSIT = "http://112.74.191.64:8080/cpo/";
+var urlSIT = "http://52.229.205.22:8080/cpo/";
 //UAT
-var urlUAT = "http://bowkercpodev.azurewebsites.net/cpo/";
+var urlUAT = "https://bowkercpodev.azurewebsites.net/cpo/";
 //PROD
 var urlPROD = "http://bowkercpov2.azurewebsites.net/cpo/";
 //PUBLIC
@@ -23,11 +23,14 @@ var urlBasePortalAli="http://47.52.22.37:8080/baseportal/";
 //Base Portal
 var urlBasePortalDEV = "http://112.74.191.64:8080/baseportal/";
 //LOCAL
-var urlBasePortalLOCAL = "http://112.74.191.64:8080/baseportal/";
-//SIT
-var urlBasePortalSIT = "http://112.74.191.64:8080/baseportal/";
+//var urlBasePortalLOCAL = "http://52.229.205.22:8080/baseportal/";
 //UAT
-var urlBasePortalUAT = "http://bowkerbaseportalapp.azurewebsites.net/baseportal/";
+//var urlBasePortalLOCAL = "https://bowkerbaseportalapp.azurewebsites.net/baseportal/";
+var urlBasePortalLOCAL = "http://bowkerbaseportalprod.azurewebsites.net/baseportal/";
+//SIT
+var urlBasePortalSIT = "http://52.229.205.22:8080/baseportal/";
+//UAT
+var urlBasePortalUAT = "https://bowkerbaseportalapp.azurewebsites.net/baseportal/";
 //PROD
 var urlBasePortalPROD = "http://bowkerbaseportalprod.azurewebsites.net/baseportal/";
 //PUBLIC
@@ -50,7 +53,7 @@ if(typeof environment == "undefined") {
 	environment.ALI=7;
 }
 
-var CURRENT_ENVIRONMENT = environment.LOCAL;
+var CURRENT_ENVIRONMENT =  environment.LOCAL;
 
 function getBaseURL() {
 	switch(CURRENT_ENVIRONMENT) {

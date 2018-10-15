@@ -53,7 +53,7 @@
                 url="http://bowkercpodev.azurewebsites.net/upload/example/";
                 break
               case "PROD":
-                url="bowkercpov2.azurewebsites.net/upload/example/";
+                url="http://bowkercpov2.azurewebsites.net/upload/example/";
                 break
               case "SIT":
                 url="http://112.74.191.64:8080/upload/example/";
@@ -85,7 +85,7 @@
             case 1007:
               url+="SEA MODE - 3PL - Damco document submission timeline.xlsx";
               break;
-            case 1003:
+            case 1003:{
               var param={};
               param.documentType=1003;
               var modalInstance = $uibModal.open({
@@ -106,7 +106,9 @@
               }, function() {});
 
               return;
+            }
           }
+          debugger;
           window.open(url, "_blank");
         }
 

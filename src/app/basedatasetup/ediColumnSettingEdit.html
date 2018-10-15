@@ -1,0 +1,30 @@
+
+<div >
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">{{title}}</h3>
+  </div>
+
+
+  <form class="form-horizontal" style="padding:20px">
+    <div class="form-group" ng-show="mode=='DELETE'">
+      <label for="input0" class="col-sm-3 control-label">Type</label>
+      <div class="col-sm-9">
+
+        <select  ng-model="ediColumnType" ng-options="ediColumnType.label for ediColumnType in ediColumnTypes" style="height: 32px;width: 100%;padding-left: 10px"></select>
+
+      </div>
+    </div>
+    <div class="form-group" ng-show="mode=='ADD'">
+      <label for="input2" class="col-sm-3 control-label">Type Name : </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control"  ng-model="ediColumnTypeLabel">
+      </div>
+    </div>
+
+
+  </form>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
+</div>

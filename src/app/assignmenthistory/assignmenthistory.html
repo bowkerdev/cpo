@@ -1,242 +1,228 @@
 <div ng-controller="assignmentHistoryCtrl">
-  <div class="row" ng-show="showDetailView!='showDetail'">
-    <div class="col-md-12">
-      <div class="page-title" style="padding-bottom: 0 !important;padding-top: 28px !important;">
-        <ul class="nav nav-tabs">
-          <li ng-class="{'active':activeTab==5}">
-            <a data-toggle="tab" style="padding: 14px;" ng-click="selectTab(5)">
-              <span translate="worktable.MKT_FC"></span>
-            </a>
-          </li>
-          <li ng-class="{'active':activeTab==6}">
-            <a data-toggle="tab" style="padding: 14px;" ng-click="selectTab(6)">
-              <span translate="worktable.CUS_FC"></span>
-            </a>
-          </li>
-          <li ng-class="{'active':activeTab==1}">
-            <a data-toggle="tab" style="padding: 14px;margin-left: 5px;" ng-click="selectTab(1)">
-              <span translate="worktable.BULK_ORDER"></span>
-            </a>
-          </li>
-          <li ng-class="{'active':activeTab==2}">
-            <a data-toggle="tab" style="padding: 14px;" ng-click="selectTab(2)">
-              <span translate="worktable.SAMPLE_ORDER"></span>
-            </a>
-          </li>
-          <li ng-class="{'active':activeTab==3}">
-            <a data-toggle="tab" style="padding: 14px;" ng-click="selectTab(3)">
-              <span translate="worktable.MI_ORDER"></span>
-            </a>
-          </li>
-          <li ng-class="{'active':activeTab==4}">
-            <a data-toggle="tab" style="padding: 14px;" ng-click="selectTab(4)">
-              <span translate="worktable.NON_TRADE_CARD"></span>
-            </a>
-          </li>
+	<div class="row" ng-show="showDetailView!='showDetail'">
+		<div class="col-md-12">
+			<div class="page-title" style="padding-bottom: 0 !important;padding-top: 28px !important;">
+				<ul class="nav nav-tabs">
+					<li ng-class="{'active':activeTab==5}">
+						<a data-toggle="tab" style="padding: 14px;" ng-click="selectTab(5)">
+							<span translate="worktable.MKT_FC"></span>
+						</a>
+					</li>
+					<li ng-class="{'active':activeTab==6}">
+						<a data-toggle="tab" style="padding: 14px;" ng-click="selectTab(6)">
+							<span translate="worktable.CUS_FC"></span>
+						</a>
+					</li>
+					<li ng-class="{'active':activeTab==1}">
+						<a data-toggle="tab" style="padding: 14px;margin-left: 5px;" ng-click="selectTab(1)">
+							<span translate="worktable.BULK_ORDER"></span>
+						</a>
+					</li>
+					<li ng-class="{'active':activeTab==2}">
+						<a data-toggle="tab" style="padding: 14px;" ng-click="selectTab(2)">
+							<span translate="worktable.SAMPLE_ORDER"></span>
+						</a>
+					</li>
+					<li ng-class="{'active':activeTab==3}">
+						<a data-toggle="tab" style="padding: 14px;" ng-click="selectTab(3)">
+							<span translate="worktable.MI_ORDER"></span>
+						</a>
+					</li>
+					<li ng-class="{'active':activeTab==4}">
+						<a data-toggle="tab" style="padding: 14px;" ng-click="selectTab(4)">
+							<span translate="worktable.NON_TRADE_CARD"></span>
+						</a>
+					</li>
 
-        </ul>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="page-title">
-        <form role="form" class="form-inline" name="formPlan" novalidate>
-          <div class="container-flex-start">
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="page-title">
+				<form role="form" class="form-inline" name="formPlan" novalidate>
+					<div class="container-flex-start">
 
-          </div>
-          <div class="pull-left">
-            <!--<span translate="worktable.SEASON">:</span>-->
-            <!--<select style="font-size: 14px;width: 80px;height: 30px;" ng-model="season" class="form-control"-->
-                    <!--ng-options="season.label for season in seasonList">-->
-            <!--</select>-->
-            <span translate="worktable.workingNo" style="margin-left: 30px;">:</span>
-            <input ng-model="workingNo" style="height: 30px;" type="text"/>
+					</div>
+					<div class="pull-left">
+						<!--<span translate="worktable.SEASON">:</span>-->
+						<!--<select style="font-size: 14px;width: 80px;height: 30px;" ng-model="season" class="form-control"-->
+						<!--ng-options="season.label for season in seasonList">-->
+						<!--</select>-->
+						<span translate="worktable.workingNo" style="margin-left: 30px;">:</span>
+						<input ng-model="workingNo" style="height: 30px;" type="text" />
 
-            <!--<span translate="worktable.round" style="margin-left: 30px;">:</span>-->
-            <!--<select style="font-size: 14px;width: 100px;height: 30px;" ng-model="round" class="form-control"-->
-                    <!--ng-options="round.label for round in roundList">-->
-            <!--</select>-->
+						<!--<div ng-show="activeTab!=5&&activeTab!=6">-->
+						<span ng-show="activeTab!=5&&activeTab!=6" translate="worktable.ADIDAS_PO" style="margin-left: 30px;">:</span>
+						<input ng-show="activeTab!=5&&activeTab!=6" ng-model="po" style="height: 30px;" type="text" />
+						<!--</div>-->
+						<!--<span translate="worktable.round" style="margin-left: 30px;">:</span>-->
+						<!--<select style="font-size: 14px;width: 100px;height: 30px;" ng-model="round" class="form-control"-->
+						<!--ng-options="round.label for round in roundList">-->
+						<!--</select>-->
 
+						<span ng-show="activeTab!=5&&activeTab!=4" translate="worktable.ORDER_TYPE" style="margin-left: 30px;">:</span>
 
-            <span  ng-show="activeTab!=5&&activeTab!=4" translate="worktable.ORDER_TYPE" style="margin-left: 30px;">:</span>
+						<select id="orderTypeSelect" style="font-size: 14px;width: 200px;height: 30px;" ng-model="orderType" class="form-control" ng-options="orderType.label for orderType in orderTypeList">
+						</select>
 
-            <select id="orderTypeSelect"  style="font-size: 14px;width: 200px;height: 30px;" ng-model="orderType"
-                    class="form-control"
-                    ng-options="orderType.label for orderType in orderTypeList">
-            </select>
+						<span style="margin-left: 30px;" class="batch-date-item">Batch Date:</span>
+						<select style="font-size: 14px;width: 150px;height: 30px;" ng-model="batchDate" class="form-control batch-date-item" ng-options="item.label for item in batchDates">
+						</select>
+					</div>
+					<div class="pull-right">
 
-            <span translate="worktableMKTTitle.Order_DATE" style="margin-left: 30px;" class="order-time-item">:</span>
-            <select style="font-size: 14px;width: 100px;height: 30px;" ng-model="orderTime" class="form-control order-time-item"
-                    ng-options="item.label for item in orderTimes"   >
-            </select>
+						<form role="form" class="form-inline" name="formPlan" novalidate>
 
-            <span  style="margin-left: 30px;"   class="batch-date-item" >Batch Date:</span>
-            <select style="font-size: 14px;width: 150px;height: 30px;" ng-model="batchDate" class="form-control batch-date-item"
-                    ng-options="item.label for item in batchDates" >
-            </select>
-          </div>
-          <div class="pull-right">
+						</form>
+					</div>
+				</form>
+				<form role="form" class="form-inline" name="formPlan" novalidate style="padding-bottom: 0px;padding-top: 20px">
+					<div class="container-flex-start">
 
+					</div>
 
-            <form role="form" class="form-inline" name="formPlan" novalidate>
+					<div class="pull-left">
 
-            </form>
-          </div>
-        </form>
-        <form role="form" class="form-inline" name="formPlan" novalidate style="padding-bottom: 0px;padding-top: 20px">
-          <div class="container-flex-start">
-
-          </div>
-
-          <div class="pull-left">
-
-            <div class="form-group container-flex-start">
-              <button class="btn btn-secondary btn-single" ng-click="searchlist()">
+						<div class="form-group container-flex-start">
+							<button class="btn btn-secondary btn-single" ng-click="searchlist()">
                 <i class="fa-search"></i>&nbsp;&nbsp;
                 <span translate="index.SEARCH"></span>
               </button>
-              <button  style="float: right;" class="btn btn-secondary btn-single" ng-click="exportFile()">
+							<button style="float: right;" class="btn btn-secondary btn-single" ng-click="exportFile()">
                 <i class="fa fa-download"></i>
                 <span translate="">Export</span>
               </button>
-            </div>
+						</div>
 
-          </div>
-        </form>
-        <div ng-if="activeTab==1">
-          <div id="assignmentHistoryGrid1" ui-grid="gridOptions1" ui-grid-pagination ui-grid-selection
-               ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;" hight-auto-fill-bottom >
-            <div class="well grid-loading" ng-show="showLoading">
-              <i class="fa fa-spin fa-spinner"></i>
-              <strong>Loading...</strong>
-            </div>
-          </div>
-        </div>
-        <div ng-if="activeTab==2">
-          <div id="assignmentHistoryGrid2" ui-grid="gridOptions2" ui-grid-pagination ui-grid-selection
-               ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;"  hight-auto-fill-bottom >
-            <div class="well grid-loading" ng-show="showLoading">
-              <i class="fa fa-spin fa-spinner"></i>
-              <strong>Loading...</strong>
-            </div>
-          </div>
-        </div>
-        <div ng-if="activeTab==3">
-          <div id="assignmentHistoryGrid3" ui-grid="gridOptions3" ui-grid-pagination ui-grid-selection
-               ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;"  hight-auto-fill-bottom >
-            <div class="well grid-loading" ng-show="showLoading">
-              <i class="fa fa-spin fa-spinner"></i>
-              <strong>Loading...</strong>
-            </div>
-          </div>
-        </div>
-        <div ng-if="activeTab==4">
-          <div id="assignmentHistoryGrid4" ui-grid="gridOptions4" ui-grid-pagination ui-grid-selection
-               ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;"  hight-auto-fill-bottom >
-            <div class="well grid-loading" ng-show="showLoading">
-              <i class="fa fa-spin fa-spinner"></i>
-              <strong>Loading...</strong>
-            </div>
-          </div>
-        </div>
-        <div ng-if="activeTab==5">
-          <div id="assignmentHistoryGrid5" ui-grid="gridOptions5" ui-grid-pagination ui-grid-selection
-               ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;"  hight-auto-fill-bottom >
-            <div class="well grid-loading" ng-show="showLoading">
-              <i class="fa fa-spin fa-spinner"></i>
-              <strong>Loading...</strong>
-            </div>
-          </div>
-        </div>
-        <div ng-if="activeTab==6">
-          <div id="assignmentHistoryGrid6" ui-grid="gridOptions6" ui-grid-pagination ui-grid-selection
-               ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;"  hight-auto-fill-bottom >
-            <div class="well grid-loading" ng-show="showLoading">
-              <i class="fa fa-spin fa-spinner"></i>
-              <strong>Loading...</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+					</div>
+				</form>
+				<div ng-if="activeTab==1">
+					<div id="assignmentHistoryGrid1" ui-grid="gridOptions1" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;" hight-auto-fill-bottom>
+						<div class="well grid-loading" ng-show="showLoading">
+							<i class="fa fa-spin fa-spinner"></i>
+							<strong>Loading...</strong>
+						</div>
+					</div>
+				</div>
+				<div ng-if="activeTab==2">
+					<div id="assignmentHistoryGrid2" ui-grid="gridOptions2" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;" hight-auto-fill-bottom>
+						<div class="well grid-loading" ng-show="showLoading">
+							<i class="fa fa-spin fa-spinner"></i>
+							<strong>Loading...</strong>
+						</div>
+					</div>
+				</div>
+				<div ng-if="activeTab==3">
+					<div id="assignmentHistoryGrid3" ui-grid="gridOptions3" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;" hight-auto-fill-bottom>
+						<div class="well grid-loading" ng-show="showLoading">
+							<i class="fa fa-spin fa-spinner"></i>
+							<strong>Loading...</strong>
+						</div>
+					</div>
+				</div>
+				<div ng-if="activeTab==4">
+					<div id="assignmentHistoryGrid4" ui-grid="gridOptions4" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;" hight-auto-fill-bottom>
+						<div class="well grid-loading" ng-show="showLoading">
+							<i class="fa fa-spin fa-spinner"></i>
+							<strong>Loading...</strong>
+						</div>
+					</div>
+				</div>
+				<div ng-if="activeTab==5">
+					<div id="assignmentHistoryGrid5" ui-grid="gridOptions5" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;" hight-auto-fill-bottom>
+						<div class="well grid-loading" ng-show="showLoading">
+							<i class="fa fa-spin fa-spinner"></i>
+							<strong>Loading...</strong>
+						</div>
+					</div>
+				</div>
+				<div ng-if="activeTab==6">
+					<div id="assignmentHistoryGrid6" ui-grid="gridOptions6" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:auto ;" hight-auto-fill-bottom>
+						<div class="well grid-loading" ng-show="showLoading">
+							<i class="fa fa-spin fa-spinner"></i>
+							<strong>Loading...</strong>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-
-  </div>
+	</div>
 </div>
 <ng-include src="'app/common/commonconfirm.html'"></ng-include>
 
 <script id="assignmentHistoryHoverTemplate" type="text/template">
-  <div class="ui-grid-cell-contents" title="TOOLTIP">
-    {{COL_FIELD CUSTOM_FILTERS}}
-  </div>
+	<div class="ui-grid-cell-contents" title="TOOLTIP">
+		{{COL_FIELD CUSTOM_FILTERS}}
+	</div>
 </script>
 
 <script id="redLabelTemplate" type="text/template">
-  <div class="container-flex-center-center" style="width: 100%;height: 100%;"
-       ng-class="{'background-red':row.entity.fillRate >= 90}">
-    <div ng-bind="row.entity.fillRate"></div>
-    %
-  </div>
+	<div class="container-flex-center-center" style="width: 100%;height: 100%;" ng-class="{'background-red':row.entity.fillRate >= 90}">
+		<div ng-bind="row.entity.fillRate"></div>
+		%
+	</div>
 </script>
 
 <style>
-  .background-blue {
-    background-color: #4579F0;
-    color: white;
-  }
-
-  .background-green {
-    background-color: #5AD295;
-    color: white;
-  }
-
-  .background-red {
-    background-color: #a9293d;
-    color: white;
-  }
-
-  .background-news {
-    margin: 10px;
-    background-image: url(assets/images/forgiveGreenNewIcon.png);
-    width: 100%;
-    height: 100%;
-    background-position: center left;
-    background-repeat: no-repeat;
-    background-size: 20px;
-  }
-
-  .link-label {
-    color: royalblue;
-    text-decoration: underline;
-  }
-
-  .work-table-label,
-  .work-table-label + select {
-    padding: 8px;
-    margin-bottom: 0px;
-  }
-
-  .work-table-label > span {
-    float: right;
-  }
-
-  div[ng-controller="assignmentHistoryCtrl"] .panel .panel-heading {
-    border-bottom: none;
-    padding: 0px;
-    font-size: inherit;
-  }
-
-  div[ng-controller="assignmentHistoryCtrl"] .panel {
-    padding: 0px;
-    margin: 0px;
-    border-bottom: gray 1px solid;
-    box-shadow: none;
-  }
-
-  div[ng-controller="assignmentHistoryCtrl"] .panel:last-child {
-    border-bottom: none;
-  }
-
-  div[ng-controller="assignmentHistoryCtrl"] .col-md-12.container-flex-start + .col-md-12.container-flex-start {
-    margin: 15px 0px;
-  }
+	.background-blue {
+		background-color: #4579F0;
+		color: white;
+	}
+	
+	.background-green {
+		background-color: #5AD295;
+		color: white;
+	}
+	
+	.background-red {
+		background-color: #a9293d;
+		color: white;
+	}
+	
+	.background-news {
+		margin: 10px;
+		background-image: url(assets/images/forgiveGreenNewIcon.png);
+		width: 100%;
+		height: 100%;
+		background-position: center left;
+		background-repeat: no-repeat;
+		background-size: 20px;
+	}
+	
+	.link-label {
+		color: royalblue;
+		text-decoration: underline;
+	}
+	
+	.work-table-label,
+	.work-table-label+select {
+		padding: 8px;
+		margin-bottom: 0px;
+	}
+	
+	.work-table-label>span {
+		float: right;
+	}
+	
+	div[ng-controller="assignmentHistoryCtrl"] .panel .panel-heading {
+		border-bottom: none;
+		padding: 0px;
+		font-size: inherit;
+	}
+	
+	div[ng-controller="assignmentHistoryCtrl"] .panel {
+		padding: 0px;
+		margin: 0px;
+		border-bottom: gray 1px solid;
+		box-shadow: none;
+	}
+	
+	div[ng-controller="assignmentHistoryCtrl"] .panel:last-child {
+		border-bottom: none;
+	}
+	
+	div[ng-controller="assignmentHistoryCtrl"] .col-md-12.container-flex-start+.col-md-12.container-flex-start {
+		margin: 15px 0px;
+	}
 </style>

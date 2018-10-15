@@ -1,0 +1,31 @@
+
+<div >
+  <div class="modal-header" id="orderInfoCheckingDialog">
+    <h3 class="modal-title" id="modal-title">Order Info Checking</h3>
+  </div>
+
+
+  <form class="form-horizontal" style="padding:20px">
+  	<div id="orderInfoCheckingGrid" ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom>
+  		<div class="well grid-loading" ng-show="gridOptions.showLoading">
+						<i class="fa fa-spin fa-spinner"></i>
+						<strong>Loading...</strong>
+					</div>
+  	</div>
+  </form>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+  </div>
+</div>
+
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<style>
+	
+  #orderInfoCheckingGrid .ui-grid-header-viewport{
+    height: 75px !important;
+  }
+  #orderInfoCheckingGrid .ui-grid-header-canvas{
+    height: 75px !important;
+  }
+  
+</style>

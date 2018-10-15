@@ -1,0 +1,55 @@
+
+<div >
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Export Filter</h3>
+  </div>
+
+
+  <form class="form-horizontal" style="padding:20px">
+  	
+    <div class="form-group">
+      <label for="input4" class="col-sm-3 control-label">Export Data:</label>
+			<div ng-dropdown-multiselect="" options="documentTypes" selected-model="documentTypeList" 
+							extra-settings="idPropertySettings" style="width:auto;display: inline-block;" id="order-list"
+							events="changeEventSettings"></div>			
+    </div>
+		
+    <div class="form-group" ng-show="checkDocumentType('FC')>-1">
+      <label class="col-sm-3 control-label">Period (From):</label>
+            <span ng-time class="input-group date form_datemonth" data-date-format="yyyy-mm" ng-model="fromPeriod" style="height: 32px;width:150px !important;">
+            <input ng-model="fromPeriod" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+	    </span>
+    </div>
+    <div class="form-group" ng-show="checkDocumentType('FC')>-1">
+     <label class="col-sm-3 control-label">&nbsp;&nbsp;Period (To):</label>
+            <span ng-time class="input-group date form_datemonth" data-date-format="yyyy-mm" ng-model="toPeriod" style="height: 32px;width:150px !important;">
+            <input ng-model="toPeriod" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          </span>
+    </div>
+
+    <div class="form-group" ng-show="checkDocumentType('Order')>-1">
+       <label class="col-sm-3 control-label">FPD (From):</label>
+            <span ng-time class="input-group date form_date" data-date-format="yyyy-mm-dd" ng-model="fromFpd" style="height: 32px;width:150px !important;">
+            <input ng-model="fromFpd" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+    </span>
+    </div>
+    <div class="form-group" ng-show="checkDocumentType('Order')>-1">
+     
+     <label class="col-sm-3 control-label">&nbsp;&nbsp;FPD (To):</label>
+            <span ng-time class="input-group date form_date" data-date-format="yyyy-mm-dd" ng-model="toFpd" style="height: 32px;width:150px !important;">
+            <input ng-model="toFpd" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          </span>
+    </div>
+
+  </form>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
+</div>
+
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>

@@ -1,0 +1,101 @@
+<div  ng-controller="ediColumnSettingCtrl">
+  <div class="btn-group">
+    <button class="btn btn-white btn-icon" ng-click="edit()" ng-disabled="mode=='EDIT'" >
+      <i class="fa fa-edit"></i>
+      <span translate="Edit Setting"></span>
+    </button>
+    <button class="btn btn-white btn-icon" ng-click="save()" ng-disabled="mode=='VIEW'">
+      <i class="fa fa-save"></i>
+      <span translate="Save Setting"></span>
+    </button>
+    <button class="btn btn-white btn-icon" ng-click="showModal('ADD','Add Type')" >
+      <i class="fa fa-plus"></i>
+      <span translate="Add Type"></span>
+    </button>
+    <button class="btn btn-delete btn-icon" ng-click="showModal('DELETE','Delete Type')" >
+      <i class="fa fa-trash-o"></i>
+      <span translate="Delete Type"></span>
+    </button>
+    </div>
+    
+  <div class="btn-group" style=" margin-left: 0px;background: #2598EA; color: #FFFFFF;padding: 10px; width: fit-content; float: right;" > 
+  	<label >MODE :&nbsp; </label><label>{{mode}}</label>
+    </div>
+    
+  <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom >
+    <div class="well grid-loading" style="margin-top: 30px" ng-show="gridOptions.showLoading">
+      <i class="fa fa-spin fa-spinner"></i>
+      <strong translate="vendorKpi.LOADING"></strong>
+    </div>
+  </div>
+
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+
+<script type="text/ng-template" id="css3SwitchTemplate">
+	  <div class="text-template" style="height: 100%;text-align: center;">
+	  	<label class="iSwitch">
+		    <input type="checkbox" ng-checked="XXXCHECKXXX" ng-true-value="'YES'||true" ng-false-value="'NO'||false" ng-model="XXREPLACEXX" style="margin: 0;" ng-disabled="XXREPLACE2XX" ng-change="XXXCHANGEXXX" />
+		    <i></i>
+		</label> 
+	  </div>
+</script>
+
+<style>
+		.iSwitch{
+	  position: relative !important;
+	  display: inline-block !important;
+	  width: 40px !important;
+	  height: 20px !important;
+	  border-radius: 15px !important;
+	  background: #dcdcdc !important;
+	  border:1px solid #dcdcdc !important;
+	  box-shadow: 0 0 5px #dcdcdc !important;
+	  overflow: hidden !important;
+	  vertical-align: middle !important;
+	  margin-top: 5px !important;
+	
+	}
+	.iSwitch input{
+	  visibility: hidden;
+	}
+	.iSwitch i{
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  display: inline-block;
+	  width: 50%;
+	  height: 100%;
+	  border-radius: 100%;
+	  background: #fff;
+	}
+	.iSwitch i::before{
+	  content: " ";
+	  display: none;
+	  width: 200%;
+	  height: 100%;
+	  border-radius: 25%;
+	  background: #7ED542;
+	}
+	.iSwitch i::after{
+	  content: " ";
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  z-index: 2;
+	  display: inline-block;
+	  width: 100%;
+	  height: 100%;
+	  border-radius: 100%;
+	  background: #fff;
+	}
+	.iSwitch input:checked + i{
+	  transform:translateX(100%);
+	  -webkit-transform:translateX(100%);
+	}
+	.iSwitch input:checked + i:before{
+	  display: inline-block;
+	  transform:translateX(-50%);
+	  -webkit-transform:translateX(-50%);
+	}
+</style>

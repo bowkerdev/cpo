@@ -13,23 +13,28 @@
 				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.workingNo"></div>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group container-flex-align-items-center working-no-detail-input">
 				<label class="col-sm-6 control-label bold">
-                    <div><span translate="workingNo.PRODUCT_TYPE"></span></div>
+                    <div><span class="red">*</span><span translate="workingNo.PRODUCT_TYPE"></span></div>
                 </label>
-				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.productTypes"></div>
+				<input type="text" class="col-sm-5" style="padding-top: 5px;padding-bottom: 5px;" ng-model="workingNoDetail.productTypeFr" name="elem.capacity" ng-if="Mode=='EDIT'"></input>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.productTypeFr" ng-if="Mode=='VIEW'" style=" margin-top: 3px !important;margin-bottom: 0px"></div>
 			</div>
-			<div class="form-group">
+			
+			<div class="form-group container-flex-align-items-center working-no-detail-input">
 				<label class="col-sm-6 control-label bold">
-                    <div><span translate="workingNo.WOVEN_KNIT"></span></div>
+                    <div><span class="red">*</span><span translate="workingNo.WOVEN_KNIT"></span></div>
                 </label>
-				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.wovenKnit"></div>
+				<input type="text" class="col-sm-5" style="padding-top: 5px;padding-bottom: 5px;" ng-model="workingNoDetail.fabricType" name="elem.capacity" ng-if="Mode=='EDIT'"></input>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.fabricType" ng-if="Mode=='VIEW'" style=" margin-top: 3px !important;margin-bottom: 0px"></div>
 			</div>
-			<div class="form-group">
+			
+			<div class="form-group container-flex-align-items-center working-no-detail-input">
 				<label class="col-sm-6 control-label bold">
-                	<div><span translate="workingNo.UNIT"></span></div>
+                    <div><span class="red">*</span><span translate="workingNo.RANGE"></span></div>
                 </label>
-				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.unit"></div>
+				<input type="text" class="col-sm-5" style="padding-top: 5px;padding-bottom: 5px;" ng-model="workingNoDetail.workingNoRange" name="elem.capacity" ng-if="Mode=='EDIT'"></input>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.workingNoRange" ng-if="Mode=='VIEW'" style=" margin-top: 3px !important;margin-bottom: 0px"></div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-6 control-label bold">
@@ -37,37 +42,13 @@
                 </label>
 				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.specialProcess"></div>
 			</div>
+			
 			<div class="form-group container-flex-align-items-center working-no-detail-input">
 				<label class="col-sm-6 control-label bold">
-                    <div><span class="red">*</span><span translate="workingNo.GARMENT_PRODUCTING_DAY"></span></div>
+                    <div><span class="red">*</span><span translate="workingNo.SPECIAL_PROCESS_REMARK"></span></div>
                 </label>
-				<input type="text" class="col-sm-5" style="padding-top: 5px;padding-bottom: 5px;" ng-model="workingNoDetail.garmentProductingDay" name="elem.capacity" ng-if="Mode=='EDIT'"></input>
-				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.garmentProductingDay" ng-if="Mode=='VIEW'" style=" margin-top: 3px !important;margin-bottom: 0px"></div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-6 control-label bold">
-                    <div><span translate="workingNo.ADIDAS_A_SOURCE"></span></div>
-                </label>
-				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.adidasASource" style="margin-top: 3px !important;margin-bottom: 0px"></div>
-			</div>
-			<div class="form-group container-flex-align-items-center working-no-detail-input">
-				<label class="col-sm-6 control-label bold">
-                    <div><span translate="workingNo.BOWKER_A_SOURCE"></span></div>
-                </label>
-				<input type="text" class="col-sm-5" style="padding-top: 5px;padding-bottom: 5px;" ng-model="workingNoDetail.bowkerASource" name="elem.capacity" ng-if="Mode=='EDIT'"></input>
-				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.bowkerASource" ng-if="Mode=='VIEW'" style="margin-top: 3px !important;margin-bottom: 0px"></div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-6 control-label bold">
-                    <div><span translate="workingNo.LAST_PRODUCTION_FACTORY"></span></div>
-                </label>
-				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.lastProductionFactory"></div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-6 control-label bold">
-                    <div><span translate="workingNo.PRODUCTION_FACTORY_HISTORY"></span></div>
-                </label>
-				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.productionFactoryHistory"></div>
+				<input type="text" class="col-sm-5" style="padding-top: 5px;padding-bottom: 5px;" ng-model="workingNoDetail.specialProcessRemark" name="elem.capacity" ng-if="Mode=='EDIT'"></input>
+				<div class="col-sm-6 control-content content-margin-top-zero" ng-bind="workingNoDetail.specialProcessRemark" ng-if="Mode=='VIEW'" style=" margin-top: 3px !important;margin-bottom: 0px"></div>
 			</div>
 		</form>
 	</div>
@@ -75,7 +56,7 @@
     <button class="btn btn-blue  btn-w150" ng-click="cancel()" style="margin:0 auto;background-color:lightgray" ng-if="Mode=='EDIT'">
       <i class="icon-cancel"></i><span translate="index.CANCEL" ></span>
     </button>
-		<button class="btn btn-blue  btn-w150" ng-click="save()" style="margin:0 auto">
+		<button class="btn btn-blue  btn-w150" ng-click="save()" style="margin:0 auto" ng-disabled="confirmDisable==true">
             <i class="icon-cancel"></i><span translate="index.CONFIRM"></span>
         </button>
 	</div>

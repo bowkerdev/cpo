@@ -10,35 +10,39 @@
 						scope.showView = 'MarketingForecast';
 					} else if(Tab == 2) {
 						scope.showView = 'CustomerForecast';
-					}else if(Tab==3){
+					} else if(Tab == 3) {
 						scope.showView = 'LC0190';
 						scope.$broadcast('LC0190.scrollGuild', null);
-					}else if(Tab==4){
+					} else if(Tab == 4) {
 						scope.showView = 'SampleOrder';
-					}else if(Tab==5){
+					} else if(Tab == 5) {
 						scope.showView = 'MIOrder';
-					}else if(Tab==6){
+					} else if(Tab == 6) {
 						scope.showView = 'NonTradeCard';
 					}
 				}
-				this.rowSelect = function(scope, row) {
+				this.rowSelect = function(scope, row,subScope) {
 
-					if(!row.entity.assignResultId){
+					if(scope.activeTab == 3 && subScope.tabIndex>3){
+						return ;
+					}
+
+					if(!row.entity.assignResultId) {
 						return;
 					}
-          scope.selectRowGridAppScore =  row.grid.appScope;
-					scope.factoryAssingmentResultDetail={};
-					scope.factoryAssingmentResultDetail.id=row.entity.assignResultId;
-					if(row.entity.sltWorkingNoId){
-						scope.factoryAssingmentResultDetail.sltWorkingNoId=row.entity.sltWorkingNoId;
+					scope.selectRowGridAppScore = row.grid.appScope;
+					scope.factoryAssingmentResultDetail = {};
+					scope.factoryAssingmentResultDetail.id = row.entity.assignResultId;
+					if(row.entity.sltWorkingNoId) {
+						scope.factoryAssingmentResultDetail.sltWorkingNoId = row.entity.sltWorkingNoId;
 
 					}
-          if(row.entity.bNo){
-            scope.factoryAssingmentResultDetail.bNo =row.entity.bNo;
-          }else{
-            scope.factoryAssingmentResultDetail.bNo ="N/A";
-          }
-					scope.factoryAssingmentResultDetail.assignmentRemark=row.entity.assignmentRemark;
+					if(row.entity.bNo) {
+						scope.factoryAssingmentResultDetail.bNo = row.entity.bNo;
+					} else {
+						scope.factoryAssingmentResultDetail.bNo = "N/A";
+					}
+					scope.factoryAssingmentResultDetail.assignmentRemark = row.entity.assignmentRemark;
 					scope.showDetailView = 'showDetail';
 				}
 
@@ -47,16 +51,16 @@
 				 */
 				this.init = function(scope) {
 					// 初期化
-          scope.selectRowGridAppScore = null;
+					scope.selectRowGridAppScore = null;
 					var _this = this;
 					scope.activeTab = 1;
-					scope.$on('detailPage.close',function(data){
-						scope.showDetailView='';
+					scope.$on('detailPage.close', function(data) {
+						scope.showDetailView = '';
 					});
-          scope.$on('detailPage.refreshGrid',function(data){
+					scope.$on('detailPage.refreshGrid', function(data) {
 
-            scope.selectRowGridAppScore.refreshAll();
-          });
+						scope.selectRowGridAppScore.refreshAll();
+					});
 
 					scope.showView = 'MarketingForecast';
 					scope.$on('workTableDetail.init', function(event, data) {
@@ -65,28 +69,28 @@
 				};
 			}
 		])
-    .filter('quantityFilter',function(){
-        return function (input) {
+		.filter('quantityFilter', function() {
+			return function(input) {
 
-          if(!isNaN(input)){
+				if(!isNaN(input)) {
 
-            var parts = input.toString().split(".");
-            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            return parts.join(".");
+					var parts = input.toString().split(".");
+					parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					return parts.join(".");
 
-          }else{
-            return input;
-          }
+				} else {
+					return input;
+				}
 
-        }
-    })
+			}
+		})
 		.controller('workTableCtrl', ['$scope', 'workTableService',
 			function($scope, workTableService) {
 				$scope.selectTab = function(Tab) {
 					workTableService.selectTab($scope, Tab);
 				}
-				$scope.rowSelect = function(row) {
-					workTableService.rowSelect($scope, row);
+				$scope.rowSelect = function(row,subScope) {
+					workTableService.rowSelect($scope, row,subScope);
 				}
 				workTableService.init($scope);
 			}

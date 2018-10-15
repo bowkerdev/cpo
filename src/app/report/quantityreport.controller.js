@@ -32,6 +32,9 @@
           if(scope.searchRequest.total_fc !== null){
             params.total_fc = scope.searchRequest.total_fc
           }
+          if(scope.searchRequest.site && scope.searchRequest.site.length>0){
+            params['in_confirm_factory']=listToString(scope.searchRequest.site,'id');
+          }
           scope.gridOptions.showLoading = true;
           GLOBAL_Http($http, "cpo/api/quantity_report/query_quantity_report?", 'GET', params, function(data) {
             scope.gridOptions.showLoading = false;
@@ -140,6 +143,30 @@
           //cpo/cpo/api/document/query_document?documentType=2
         };
 
+			        this.getFactoryList = function (scope) {
+			          var _this = this;
+			          var param = {
+			            pageNo: 1,
+			            pageSize: 1000,
+			            eq_factory_type: 0
+			          }
+			          GLOBAL_Http($http, "portal/factory/find?", 'GET', param, function (data) {
+			            if (data.rows) {
+				              var items = translateData(data.rows);
+				              scope.siteList = new Array();
+				              for (var i = 0; i < items.length; i++) {
+				                var siteData = {
+				                  id: items[i].factSimpName,
+				                  label: items[i].factSimpName
+				                }
+				                scope.siteList.push(siteData);
+				              }
+			            }
+			          }, function (data) {
+			
+			
+			          });
+			        }
         this.getDocs =function ( scope ) {
           var _this = this;
           var param = {
@@ -223,15 +250,18 @@
             orderTime:null,
             isCompareCustomerFc:false,
             field:[],
+            site:[],
             total:null,
             total_fc:null
           }
           scope.headerList = [];
+          scope.siteList=[];
           //					_this.getSeasonList(scope);
           scope.customerReportOne = [];
           _this.initFirstGrid(scope);
           this.getDocType(scope)
           this.getField(scope);
+          this.getFactoryList(scope);
 
         };
       }

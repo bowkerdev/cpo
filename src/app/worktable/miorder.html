@@ -277,7 +277,7 @@
           </div>
           <div class="col-md-2">
 
-            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="update()" ng-disabled="disableReleaseOrderButton">
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="update()" ng-disabled="disableReleaseOrderButton||disableUpdateMiAttrButton">
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span>Update</span>
             </button>
@@ -286,7 +286,9 @@
 
         <div ng-show="tabIndex=='0'"style="margin-top:60px;">
           <div ng-if="tabIndex=='0'" id="mi_order_grid1" ui-grid="gridOptions2" ui-grid-expandable ui-grid-pagination ui-grid-selection
-            ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom></div>
+            ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom>
+          <loading show="gridOptions2.showLoading"></loading>
+          </div>
           <div class="form-group" style="margin-top: 15px;">
             <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseAllOrder()" ng-disabled="disableReleaseOrderButton">
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
@@ -296,6 +298,10 @@
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span translate="worktable.CONFIRM_TO_AX"></span>
             </button>
+		        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
+		          <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+		          translate="">Refresh 168 No.</span>
+		        </button>
             <button ng-if="!miOrderEdit" class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="allUpdate()" ng-disabled="newOrderData.length===0">
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span>Update</span>
@@ -304,11 +310,17 @@
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span>Save</span>
             </button>
+		        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refreshBno()" ng-disabled="disableRefreshBNoButton">
+		          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+		          translate="worktable.REFRESH_B_NO"></span>
+		        </button>
           </div>
         </div>
         <div ng-show="tabIndex=='1'">
           <div ng-if="tabIndex=='1'" id="mi_order_grid" ui-grid="gridOptions4" ui-grid-expandable ui-grid-pagination ui-grid-selection
-            ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom></div>
+            ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom>
+          <loading show="gridOptions4.showLoading"></loading>
+          </div>
           <div class="form-group" style="margin-top: 15px;">
               <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseAllOrder()" ng-disabled="disableReleaseOrderButton">
                   <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
@@ -318,12 +330,18 @@
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span translate="worktable.CONFIRM_TO_FR"></span>
             </button>
+		        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
+		          <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+		          translate="">Refresh 168 No.</span>
+		        </button>
           </div>
         </div>
 
         <div ng-show="tabIndex=='2'">
           <div ng-if="tabIndex=='2'" id="mi_order_grid2" ui-grid="gridOptions3" ui-grid-expandable ui-grid-pagination ui-grid-selection
-            ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom></div>
+            ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom>
+          <loading show="gridOptions3.showLoading"></loading>
+          </div>
         </div>
     </div>
 

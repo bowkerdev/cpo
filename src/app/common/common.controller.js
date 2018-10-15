@@ -313,6 +313,7 @@
 
         this.showLoadingView = function(text,callBack){
           $('#httploading').modal('show');
+          $('#httploading').css('display','flex')
           $("#loadingText").text(text?text:"");
           // setTimeout(function(){
           //   // $('#httploading').modal('show');
@@ -327,6 +328,7 @@
         this.hideLoadingView = function(){
           $("#loadingText").text("");
           $('#httploading').modal('hide');
+          $('#httploading').css('display','none')
 
         }
       this.constructeColumnItem = function (displayname,name,field,hasFilter,cellTemplate,minwidth) {

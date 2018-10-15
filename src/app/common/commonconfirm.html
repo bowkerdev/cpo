@@ -8,7 +8,7 @@
       <div style="text-align: center;" ng-model="imgurl">
         <div class="text-center" style="margin: 0 auto">
           <img ng-src="{{imgurl}}"><br>
-          <label class="text-warning icon-warning font-size14 " ng-class="color" ng-bind="outputMsg" style="margin-top: 10px"></label>
+          <label class="text-warning icon-warning font-size14 " ng-class="color" ng-bind-html="outputMsg" style="margin-top: 10px"></label>
         </div>
       </div>
     </form>

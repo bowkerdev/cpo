@@ -1,0 +1,122 @@
+<div ng-controller="dataLogCtrl">
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="page-title">
+				<scrollable-tabset show-tooltips="false" api="scrlTabsApi" class="no-content-tab marketing-scrollable-tabset" style="width: 95%;">
+					<uib-tabset>
+						<uib-tab id="" ng-model="tab" ng-repeat="tab in navList" select="selectTab($index)">
+							<uib-tab-heading>{{tab}}</uib-tab-heading>
+						</uib-tab>
+					</uib-tabset>
+				</scrollable-tabset>
+				<div ng-show="tabIndex==1">
+					<div style="margin-top: -10px;width:500px">
+						<div class="input-group" style="width: 700px;">
+							<span class="input-group-addon">Document Name:</span>
+							<select ng-model="lineSheetDocument" ng-options="lineSheet.label for lineSheet in lineSheetDocuments" ng-change="refreshData()" style="height: 32px;width:100%;padding-left: 10px;"></select>
+							<span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="search('1')">Search</span>
+							<button class="btn btn-postpone btn-icon" ng-click="export('1')">
+				            <i class="fa fa-download"></i>
+				            <span translate="index.EXPORT"></span>
+				          	</button>
+						</div>
+					</div>
+					<div>
+						<div ui-grid="gridOptions1" ui-grid-expandable ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:365px ;" hight-auto-fill-bottom>
+							<loading show="gridOptions1.showLoading"></loading>
+						</div>
+					</div>
+				</div>
+				<div ng-show="tabIndex==2">
+					<div style="margin-top: -10px;width:500px">
+						<div class="input-group" style="width: 700px;">
+							<span class="input-group-addon">Document Name:</span>
+							<select ng-model="BNumberDocument" ng-options="BNumber.label for BNumber in BNumberDocuments" ng-change="refreshData()" style="height: 32px;width:100%;padding-left: 10px;"></select>
+							<span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="search('2')">Search</span>
+							<button class="btn btn-postpone btn-icon" ng-click="export('2')">
+				            <i class="fa fa-download"></i>
+				            <span translate="index.EXPORT"></span>
+				          	</button>
+						</div>
+					</div>
+					<div ui-grid="gridOptions2" ui-grid-expandable ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:365px ;" hight-auto-fill-bottom>
+						<loading show="gridOptions2.showLoading"></loading>
+					</div>
+				</div>
+				<div ng-show="tabIndex==3">
+					<div style="margin-top: -10px;width:auto;display: inline-flex;">
+						<div class="input-group" style="display: inline-flex;">
+							<span class="input-group-addon" style="padding: 12px; width: auto;">Working No.</span>
+							<input type="text" class="form-control" aria-label="" ng-model="searchRequest.workingNo" style="height: 40px; vertical-align: middle;width: 150px;">
+							<div style="display: inline-flex;margin-left: 10px;">
+								<span class="" style="display: inline-block;line-height: 40px;">From:&nbsp;&nbsp;</span>
+								<span ng-time class="input-group date form_date" data-date-format="yyyy-mm-dd" ng-model="searchRequest.fromDate" style="height: 40px;width:150px !important;">
+			            <input ng-model="searchRequest.fromDate" class="form-control" size="16" type="text" value="" readonly style="height: 40px;">
+			            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</span>
+								<span class="" style="display: inline-block;line-height: 40px;">&nbsp;&nbsp;To:&nbsp;&nbsp;</span>
+								<span ng-time class="input-group date form_date" data-date-format="yyyy-mm-dd" ng-model="searchRequest.toDate" style="height: 40px;width:150px !important;">
+				            <input ng-model="searchRequest.toDate" class="form-control" size="16" type="text" value="" readonly style="height: 40px;">
+				            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</span>
+								<button class="btn btn-postpone btn-icon" ng-click="search('3')" style="background-color: #1664F4;color:white;margin-left: 10px;">
+				            <i class="fa fa-search"></i>
+				            <span >Search</span>
+				          	</button>
+
+								<button class="btn btn-postpone btn-icon" ng-click="export('3')" style="margin-left: 10px;">
+				            <i class="fa fa-download"></i>
+				            <span translate="index.EXPORT"></span>
+				          	</button>
+							</div>
+
+						</div>
+					</div>
+					<div ui-grid="gridOptions3" ui-grid-expandable ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:365px ;" hight-auto-fill-bottom>
+						<loading show="gridOptions3.showLoading"></loading>
+					</div>
+				</div>
+				<div ng-show="tabIndex==4">
+					<div style="margin-top: -10px;width:auto;display: inline-flex;">
+						<div class="input-group" style="display: inline-flex;">
+							<span class="input-group-addon" style="padding: 12px; width: auto;">Plan Group.</span>
+							<input type="text" class="form-control" aria-label="" ng-model="searchRequest.planGroup" style="height: 40px; vertical-align: middle;width: 150px;">
+							<div style="display: inline-flex;margin-left: 10px;">
+								<span class="" style="display: inline-block;line-height: 40px;">From:&nbsp;&nbsp;</span>
+								<span ng-time class="input-group date form_date" data-date-format="yyyy-mm-dd" ng-model="searchRequest.fromDate2" style="height: 40px;width:150px !important;">
+			            <input ng-model="searchRequest.fromDate2" class="form-control" size="16" type="text" value="" readonly style="height: 40px;">
+			            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</span>
+								<span class="" style="display: inline-block;line-height: 40px;">&nbsp;&nbsp;To:&nbsp;&nbsp;</span>
+								<span ng-time class="input-group date form_date" data-date-format="yyyy-mm-dd" ng-model="searchRequest.toDate2" style="height: 40px;width:150px !important;">
+				            <input ng-model="searchRequest.toDate2" class="form-control" size="16" type="text" value="" readonly style="height: 40px;">
+				            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</span>
+								<button class="btn btn-postpone btn-icon" ng-click="search('4')" style="background-color: #1664F4;color:white;margin-left: 10px;">
+				            <i class="fa fa-search"></i>
+				            <span >Search</span>
+				          	</button>
+
+								<button class="btn btn-postpone btn-icon" ng-click="export('4')" style="margin-left: 10px;">
+				            <i class="fa fa-download"></i>
+				            <span translate="index.EXPORT"></span>
+				          	</button>
+							</div>
+
+						</div>
+					</div>
+					<div ui-grid="gridOptions4" ui-grid-expandable ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize style="height:365px ;" hight-auto-fill-bottom>
+						<loading show="gridOptions4.showLoading"></loading>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<style>
+div[ng-controller="dataLogCtrl"] .ui-grid-header-canvas{
+	height:55px !important;
+}
+</style>

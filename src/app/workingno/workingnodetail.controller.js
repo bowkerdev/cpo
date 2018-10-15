@@ -22,23 +22,27 @@
                 this.save = function (scope) {
 
 
-                  if(!scope.workingNoDetail.garmentProductingDay||
-                    isNaN(scope.workingNoDetail.garmentProductingDay)||
-                      parseFloat(scope.workingNoDetail.garmentProductingDay)!=parseInt(scope.workingNoDetail.garmentProductingDay)) {
-                    modalAlert(CommonService, 2, $translate.instant('factoryCriteria.GARMENT_PRODUCTION_DAY_SHOULD_BE_A_NUMBER'), null);
-                    return false;
-                  }
+//                if(!scope.workingNoDetail.garmentProductingDay||
+//                  isNaN(scope.workingNoDetail.garmentProductingDay)||
+//                    parseFloat(scope.workingNoDetail.garmentProductingDay)!=parseInt(scope.workingNoDetail.garmentProductingDay)) {
+//                  modalAlert(CommonService, 2, $translate.instant('factoryCriteria.GARMENT_PRODUCTION_DAY_SHOULD_BE_A_NUMBER'), null);
+//                  return false;
+//                }
                 	if(scope.Mode=='VIEW'){
                 		 gModalInstance.close();
                 		 return;
                 	}
                 	var param={
                 		'workingNoId':scope.workingNoDetail.workingNoId,
-                		"bowkerASource":scope.workingNoDetail.bowkerASource,
-                		"garmentProductingDay":scope.workingNoDetail.garmentProductingDay
+                		workingNo:scope.workingNoDetail.workingNo,
+                		fabricType:scope.workingNoDetail.fabricType,
+                		productTypeFr:scope.workingNoDetail.productTypeFr,
+                		specialProcessRemark:scope.workingNoDetail.specialProcessRemark,
+                		workingNoRange:scope.workingNoDetail.workingNoRange
                 	};
+                	scope.confirmDisable=true;
                 	GLOBAL_Http($http, "cpo/api/workingNo/update_working_no?", 'PUT', param, function(data) {
-
+	                	scope.confirmDisable=false;
 						if(data.status == 0) {
                              modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
                              gModalInstance.close('YES');
@@ -49,6 +53,7 @@
 							}
 						}
 					}, function(data) {
+	                	scope.confirmDisable=false;
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 

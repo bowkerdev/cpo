@@ -65,22 +65,22 @@
 </script>
 
 <script id="hoverRateTemplate" type="text/template">
-  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-dblclick="grid.appScope.rowSelect(row)">
+  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-dblclick="grid.appScope.rowSelect(row,grid.appScope)">
     {{COL_FIELD CUSTOM_FILTERS}}%
   </div>
 </script>
 <script id="hoverTemplate" type="text/template">
-  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-dblclick="grid.appScope.rowSelect(row)">
+  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-dblclick="grid.appScope.rowSelect(row,grid.appScope)">
     {{COL_FIELD CUSTOM_FILTERS}}
   </div>
 </script>
 <script id="hoverBigNumberTemplate" type="text/template">
-  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-dblclick="grid.appScope.rowSelect(row)">
+  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-dblclick="grid.appScope.rowSelect(row,grid.appScope)">
     {{COL_FIELD CUSTOM_FILTERS|quantityFilter}}
   </div>
 </script>
 <script id="hoverPercentTemplate" type="text/template">
-  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-dblclick="grid.appScope.rowSelect(row)">
+  <div class="ui-grid-cell-contents"  ng-class="{'background-highlight':row.entity.assignResultStatus == 3}" title="TOOLTIP" ng-dblclick="grid.appScope.rowSelect(row,grid.appScope)">
     {{COL_FIELD CUSTOM_FILTERS}}%
   </div>
 </script>
@@ -89,12 +89,23 @@
     <div ng-if="row.entity.uploadType == '1'" class="work-table-button-width">
 			<button  class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.toUpload(row.entity)"  ng-bind-html="row.entity.uploadHtml" ng-disabled="row.entity.Uploading"></button>
 			<button  class="btn-bowker-theme" style="height: 24px;line-height: 12px;background-color: #ed6044;border: #ed6044 1px solid;" ng-click="grid.appScope.deleteDom(row.entity)" ng-disabled="row.entity.Deleting"><i class="fa fa-trash-o"></i> Delete</button>
-      <button ng-if="row.entity.documentType == '3'||row.entity.documentType == '4'||row.entity.documentType == '6' ||row.entity.documentType == '9'||row.entity.documentType == '7'||row.entity.documentType == '8' " class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.refreshOrder(row.entity)"><i class="fa fa-refresh"></i> Refresh</button>
+      <button ng-if="row.entity.documentType == '3'||row.entity.documentType == '4'||row.entity.documentType == '6' ||row.entity.documentType == '9'||row.entity.documentType == '7'||row.entity.documentType == '8' " class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.refreshOrder(row.entity)" ng-disabled="row.entity.disableRefreshButton"><i class="fa fa-refresh"></i> Refresh</button>
     </div>
     <div ng-if="row.entity.uploadType == '2'" ng-class="{'work-table-button-width':grid.appScope.existUploadType}">
       <button class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.refreshOrder(row.entity)" ng-disabled="row.entity.disableRefreshButton"><i
         class="fa fa-refresh"></i> Refresh
       </button>
+    </div>
+  </div>
+</script>
+
+
+<script id="exportButtonTemplate" type="text/template">
+  <div class="container-flex-center-center" style="width: 100%;height: 100%;text-align: center;">
+    <div class="work-table-button-width">
+    	<span style="line-height: 30px;margin-left: 5px">{{row.entity.orderQuantity}}</span>
+			<button  class="btn-bowker-theme" style="height: 24px;line-height: 12px;margin-top: 3px;margin-left: 5px;" ng-click="grid.appScope.downloadNewOrderInTradeCard(row.entity)">  <i class="fa fa-download"></i> <span translate="">Export</span></button>
+			<button  class="btn-bowker-theme" style="height: 24px;line-height: 12px;margin-top: 3px;float: right;" ng-click="grid.appScope.downloadEmailChecking(row.entity)">  <i class="fa fa-download"></i> <span translate="">Export Email Checking</span></button>
     </div>
   </div>
 </script>

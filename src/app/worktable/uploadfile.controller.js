@@ -8,7 +8,7 @@
 
 				var modalScope;
 				var gModalInstance;
-        var _this = this;
+				var _this = this;
 				this.setModalScope = function(inScope, inModalInstance) {
 					modalScope = inScope;
 					gModalInstance = inModalInstance;
@@ -54,10 +54,10 @@
 				}
 
 				this.Upload = function(scope) {
-          if(scope.showOrderDate&&!scope.searchRequest.orderTime){
-            modalAlert(CommonService, 2, "Please enter Batch Date", null);
-            return;
-          }
+					if(scope.showOrderDate && !scope.searchRequest.orderTime) {
+						modalAlert(CommonService, 2, "Please enter Batch Date", null);
+						return;
+					}
 					if(scope.fileType == 1 || scope.fileType == 201) {
 						if(!scope.season.id) {
 							modalAlert(CommonService, 2, $translate.instant('worktable.SELECT_AT_LEAST_A_SEASON'), null);
@@ -87,42 +87,40 @@
 					var fd = new FormData();
 					fd.append('file', scope.file);
 
-          if(scope.showOrderDate){
-            fd.append('orderDate',  scope.searchRequest.orderTime);
-          }
-          if(scope.custom){
-            for (var key in scope.custom){
-              if(scope.custom[key]){
-                fd.append(key, scope.custom[key]);
-              }
-            }
-          }
+					if(scope.showOrderDate) {
+						fd.append('orderDate', scope.searchRequest.orderTime);
+					}
+					if(scope.custom) {
+						for(var key in scope.custom) {
+							if(scope.custom[key]) {
+								fd.append(key, scope.custom[key]);
+							}
+						}
+					}
 
 					if(scope.season) {
 						if(scope.fileType == 1 || scope.fileType == 201) {
 							fd.append("season", scope.season.id);
 						} else {
 
-              var seasons = scope.seasonList.filter(function(item){
-                var has = false;
-                angular.forEach(scope.season,function(selecItem){
-                  has = has|| (selecItem.id==item.id)
+							var seasons = scope.seasonList.filter(function(item) {
+								var has = false;
+								angular.forEach(scope.season, function(selecItem) {
+									has = has || (selecItem.id == item.id)
 
-                })
-                return has;
-              });
+								})
+								return has;
+							});
 
 							fd.append("season", listToString(seasons, 'id'));
 						}
 					}
 
-
-
-					if(scope.showLco190Type){
-            fd.append("documentType",$("#loc190Type").val());
-          }else{
-            fd.append("documentType", scope.fileType);
-          }
+					if(scope.showLco190Type) {
+						fd.append("documentType", $("#loc190Type").val());
+					} else {
+						fd.append("documentType", scope.fileType);
+					}
 
 					scope.uploadHtml = 'Uploading... ';
 					scope.Uploading = true;
@@ -131,24 +129,23 @@
 
 						if(data.status == 0) {
 
-              if(scope.fileType==2){
-                _this.waitCustomerForecastDataImporting(function(){
-                  gModalInstance.close("YES");
-                  if(data.message){
-                    modalAlert(CommonService, 2, data.message, null);
-                  }
+							if(scope.fileType == 2) {
+								_this.waitCustomerForecastDataImporting(function() {
+									gModalInstance.close("YES",data);
+									if(data.message) {
+										modalAlert(CommonService, 2, data.message, null);
+									}
 
-                })
+								})
 
+							} else {
 
-              }else{
+								gModalInstance.close("YES");
+								if(data.message) {
+									modalAlert(CommonService, 2, data.message, null);
+								}
 
-                gModalInstance.close("YES");
-                if(data.message){
-                  modalAlert(CommonService, 2, data.message, null);
-                }
-
-              }
+							}
 
 						} else {
 							scope.uploadHtml = '<i class="fa fa-upload"></i> Upload ';
@@ -161,29 +158,29 @@
 						modalAlert(CommonService, 3, $translate.instant('notifyMsg.UPLOAD_FAIL'), null);
 					});
 				}
-        this.waitCustomerForecastDataImporting = function(finishCallBack,time){
-          var _this = this;
-          var param = {
-            in_code : 'ASYNCHRONOUSCUS'
-          }
-          GLOBAL_Http($http , "cpo/api/sys/admindict/translate_code?" , 'GET' , param , function ( data ) {
-            time++;
-            if ( data.ASYNCHRONOUSCUS[0].label=="YES" ) {
-              setTimeout(function () {
-                _this.waitCustomerForecastDataImporting(finishCallBack,time);
-              }, 2000);
-            }else{
-              if(finishCallBack){
-                finishCallBack();
-              }
-            }
-          } , function ( data ) {
-            if(finishCallBack){
-              finishCallBack();
-            }
-          });
+				this.waitCustomerForecastDataImporting = function(finishCallBack, time) {
+					var _this = this;
+					var param = {
+						in_code: 'ASYNCHRONOUSCUS'
+					}
+					GLOBAL_Http($http, "cpo/api/sys/admindict/translate_code?", 'GET', param, function(data) {
+						time++;
+						if(data.ASYNCHRONOUSCUS[0].label == "YES") {
+							setTimeout(function() {
+								_this.waitCustomerForecastDataImporting(finishCallBack, time);
+							}, 2000);
+						} else {
+							if(finishCallBack) {
+								finishCallBack();
+							}
+						}
+					}, function(data) {
+						if(finishCallBack) {
+							finishCallBack();
+						}
+					});
 
-        }
+				}
 				this.init = function(scope, planGroups) {
 					var _this = this;
 
@@ -191,21 +188,21 @@
 					scope.Uploading = false;
 					scope.fileName = 'Please Select File...';
 					scope.fileType = planGroups.fileType;
-          scope.custom  = planGroups.custom;
-          scope.lco190types = [];
-          scope.lco190type  = null;
-          scope.searchRequest ={
-            orderTime:null
-          };
+					scope.custom = planGroups.custom;
+					scope.lco190types = [];
+					scope.lco190type = null;
+					scope.searchRequest = {
+						orderTime: null
+					};
 					scope.showSeasonSelect = planGroups.showSeasonSelect;
-          if(planGroups.fileType==6){
-            scope.showLco190Type = true;
-          }
+					if(planGroups.fileType == 6) {
+						scope.showLco190Type = true;
+					}
 
-          if(planGroups.special&&planGroups.special.showOrderDate){
-            scope.showOrderDate = true;
-            scope.searchRequest.orderTime = "";//(new Date()).Format("yyyy-MM-dd");
-          }
+					if(planGroups.special && planGroups.special.showOrderDate) {
+						scope.showOrderDate = true;
+						scope.searchRequest.orderTime = ""; //(new Date()).Format("yyyy-MM-dd");
+					}
 
 					//  console.log("111111111111111"+scope.fileType);
 					if(scope.fileType != 1 && scope.fileType != 201) {
@@ -244,17 +241,20 @@
 					uncheckAll: $translate.instant('index.NOT_SELECT_ALL'),
 					buttonDefaultText: $translate.instant('index.SELECT')
 				}
+				
 				/**
 				 * モーダル設定
 				 */
 				$scope.seasonList = [];
 
-			  $scope.cancel = function() {
+				$scope.cancel = function() {
 					UploadFileService.cancel();
 				}
+				
 				$scope.save = function() {
 					UploadFileService.save($scope);
 				}
+				
 				$scope.UploadFile = function(file) {
 					if(file) {
 						UploadFileService.UploadFile($scope, file);

@@ -1,92 +1,126 @@
 <div ng-controller="customerForecastReportCtrl">
-		<div class="col-md-12">
+	<div class="col-md-12">
 
-			<div class="page-title">
-          <div style="display: flex">
-        <scrollable-tabset show-tooltips="false" api="scrlTabsApi"  class="no-content-tab marketing-scrollable-tabset" style="height: 60px">
-          <uib-tabset>
-            <uib-tab select="fetchInfo(1)">
-              <uib-tab-heading  translate="reportTitle.CUS_FC_REPORT_LO_CUS_FC"></uib-tab-heading>
-            </uib-tab>
-            <uib-tab  select="fetchInfo(2)">
-              <uib-tab-heading translate="reportTitle.CUS_FC_REPORT_Open_FC_SUMMARY"></uib-tab-heading>
-            </uib-tab>
-            <uib-tab  select="fetchInfo(3)">
-              <uib-tab-heading translate="reportTitle.CUS_FC_REPORT_FORECAST_SUMMARY"></uib-tab-heading>
-            </uib-tab>
-            <uib-tab  select="fetchInfo(4)">
-              <uib-tab-heading >Actual Open FC Summary</uib-tab-heading>
-            </uib-tab>
-          </uib-tabset>
-        </scrollable-tabset>
-        <div class="form-group" style="width: 100%;margin-bottom: 0px !important;">
-          <button style="float: right;margin-top: 10px;" class="btn btn-secondary btn-single" ng-click="exportFile()">
+		<div class="page-title">
+			<div style="display: flex">
+				<scrollable-tabset show-tooltips="false" api="scrlTabsApi" class="no-content-tab marketing-scrollable-tabset" style="height: 60px">
+					<uib-tabset>
+						<uib-tab select="fetchInfo(1)">
+							<uib-tab-heading translate="reportTitle.CUS_FC_REPORT_LO_CUS_FC"></uib-tab-heading>
+						</uib-tab>
+						<uib-tab select="fetchInfo(2)">
+							<uib-tab-heading translate="reportTitle.CUS_FC_REPORT_Open_FC_SUMMARY"></uib-tab-heading>
+						</uib-tab>
+						<uib-tab select="fetchInfo(3)">
+							<uib-tab-heading translate="reportTitle.CUS_FC_REPORT_FORECAST_SUMMARY"></uib-tab-heading>
+						</uib-tab>
+						<uib-tab select="fetchInfo(4)">
+							<uib-tab-heading>Actual Open FC Summary</uib-tab-heading>
+						</uib-tab>
+						<uib-tab select="fetchInfo(5)">
+							<uib-tab-heading>FC Comparison</uib-tab-heading>
+						</uib-tab>
+					</uib-tabset>
+				</scrollable-tabset>
+				<div class="form-group" style="width: 100%;margin-bottom: 0px !important;">
+					<button style="float: right;margin-top: 10px;" class="btn btn-secondary btn-single" ng-click="exportFile()">
             <i class="fa fa-download"></i>
             <span translate="">Export</span>
           </button>
 
-        </div>
-          </div>
-        <div style="" ng-if="tabIndex!==4">
-          <div class="input-group" style=""  >
-            <span class="input-group-addon">Batch Date:&nbsp</span>
-            <select  ng-model="searchRequest.cus" ng-options="doc.label for doc in cuss" style="height: 32px;min-width: 100px;padding-left: 10px"  ng-change="selectBatchDate(tabIndex)"></select>
-          </div>
-        </div>
-       <div style="" ng-if="tabIndex==4">
-         <form class="form-inline">
-         <div class="input-group" style=""  >
-           <span class="input-group-addon">Document:&nbsp</span>
-           <select  ng-model="searchRequest.selectDoc" ng-options="doc.label for doc in docs" style="height: 32px;min-width: 200px"  ng-change="selectDocumentChanged()" id="xxxx"></select>
-         </div>
-         <div class="input-group" style="width: 40%">
-           <span class="input-group-addon">Working No.</span>
-           <input type="text" class="form-control" aria-label="" ng-model="searchRequest.searchWorkingNo">
-           <span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="searchActualOpenForecast()">Search</span>
-         </div>
-           </form>
-       </div>
+				</div>
+			</div>
+			<div style="" ng-if="tabIndex<4">
+				<div class="input-group" style="">
+					<span class="input-group-addon">Batch Date:&nbsp</span>
+					<select ng-model="searchRequest.cus" ng-options="doc.label for doc in cuss" style="height: 32px;min-width: 100px;padding-left: 10px" ng-change="selectBatchDate(tabIndex)"></select>
+				</div>
+			</div>
+			<div style="" ng-if="tabIndex==4">
+				<form class="form-inline">
+					<div class="input-group" style="">
+						<span class="input-group-addon">Document:&nbsp</span>
+						<select ng-model="searchRequest.selectDoc" ng-options="doc.label for doc in docs" style="height: 32px;min-width: 200px" ng-change="selectDocumentChanged()" id="xxxx"></select>
+					</div>
+					<div class="input-group" style="width: 40%">
+						<span class="input-group-addon">Working No.</span>
+						<input type="text" class="form-control" aria-label="" ng-model="searchRequest.searchWorkingNo">
+						<span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="searchActualOpenForecast()">Search</span>
+					</div>
+				</form>
+			</div>
 
-
-
+			<div style="" ng-if="tabIndex==5">
+				<form class="form-inline">
+					<div class="input-group" style="">
+						<span class="input-group-addon">Document:&nbsp</span>
+						<div ng-dropdown-multiselect="" options="docs" selected-model="searchRequest.fcComparisonDocs" extra-settings="idPropertySettings" style="width:100%;;" id="fc-comparison-docs"></div>
+					</div>
+					<div class="input-group" style="">
+						<span class="input-group-addon">Field:&nbsp</span>
+						<div ng-dropdown-multiselect="" options="fields" selected-model="searchRequest.fcComparisonFields" extra-settings="idPropertySettings" style="width:100%;;" id="fc-comparison-fields"></div>
+					</div>
+					<div class="input-group" style="">
+						<span class="input-group-addon">Compare Quantity Type:&nbsp</span>
+						<select ng-model="searchRequest.fcComparisonQuantityType" ng-options="fcComparisonQuantityType.label for fcComparisonQuantityType in fcComparisonQuantityTypes" style="height: 32px;min-width: 200px" id="xxxx"></select>
+					</div>
+					<div class="input-group" style="">
+						<span>&nbsp;&nbsp;</span>
+						<span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="search()">Search</span>
+						<span>&nbsp;&nbsp;</span>
+						<span class="input-group-addon" style="margin-left:10px;background-color: #1664F4;color:white" ng-click="exportFile()">Export</span>
+					</div>
+				</form>
+			</div>
+			<div ng-show="tabIndex<5">
 				<div id="customerForecastReportOne" ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom></div>
 			</div>
+			<div ng-show="tabIndex>4">
+				<div id="customerForecastReportTwo" ui-grid="gridOptions2" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom>
+					<div class="well grid-loading" ng-show="gridOptions2.showLoading">
+						<i class="fa fa-spin fa-spinner"></i>
+						<strong>Loading...</strong>
+					</div>
+				</div>
+
+			</div>
 		</div>
+	</div>
 </div>
 <ng-include src="'app/common/commonconfirm.html'"></ng-include>
 <style>
-
-  div[ng-controller="customerForecastReportCtrl"] .tabContent {
-    background-color: #FBFBFB;
-    height: 100%;
-    text-align: center;
-    padding-top: 50px
-  }
-
-  div[ng-controller="customerForecastReportCtrl"] .marketing-scrollable-tabset .ui-tabs-scrollable {
-    /*padding-top: 30px;*/
-  }
-
-  div[ng-controller="customerForecastReportCtrl"] .marketing-scrollable-tab .ui-tabs-scrollable {
-    padding-top: 30px;
-  }
-
-  div[ng-controller="customerForecastReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs > li.active > a {
-    background-color: #3baf7b !important;
-    border: #3BAF7B 1px solid !important;
-    color: white !important;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-  }
-
-  div[ng-controller="customerForecastReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs > li > a {
-    background-color: white;
-    border: #C6C6C6 1px solid;
-    color: #C6C6C6;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-  }
-  div.ui-tabs-scrollable{
-    height: 55px;
-  }
+	div[ng-controller="customerForecastReportCtrl"] .tabContent {
+		background-color: #FBFBFB;
+		height: 100%;
+		text-align: center;
+		padding-top: 50px
+	}
+	
+	div[ng-controller="customerForecastReportCtrl"] .marketing-scrollable-tabset .ui-tabs-scrollable {
+		/*padding-top: 30px;*/
+	}
+	
+	div[ng-controller="customerForecastReportCtrl"] .marketing-scrollable-tab .ui-tabs-scrollable {
+		padding-top: 30px;
+	}
+	
+	div[ng-controller="customerForecastReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs>li.active>a {
+		background-color: #3baf7b !important;
+		border: #3BAF7B 1px solid !important;
+		color: white !important;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+	
+	div[ng-controller="customerForecastReportCtrl"] .marketing-scrollable-tabset .nav.nav-tabs>li>a {
+		background-color: white;
+		border: #C6C6C6 1px solid;
+		color: #C6C6C6;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+	
+	div.ui-tabs-scrollable {
+		height: 55px;
+	}
 </style>

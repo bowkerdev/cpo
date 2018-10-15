@@ -69,7 +69,7 @@
 					}
 					var _this = this;
 					var fileType = getFileType(scope.file.name);
-					if(fileType !== 'xlsx' && fileType !== 'xls' && fileType !== 'xlsm' && fileType !== 'xltx' && fileType !== 'xltm' && fileType !== 'xlsb' && fileType !== 'xlam') {
+					if(fileType !== 'xlsx'&&fileType !== 'XLSX' && fileType !== 'xls' && fileType !== 'XLS'&& fileType !== 'xlsm' && fileType !== 'xltx' && fileType !== 'xltm' && fileType !== 'xlsb' && fileType !== 'xlam') {
 						modalAlert(CommonService, 3, $translate.instant('errorMsg.ERROR_FILE_FORMAT'), null);
 						return;
 					}
@@ -88,6 +88,9 @@
 					GLOBAL_Http_UploadFile($http, "cpo/api/worktable/upload_factory_assignment_document?", fd, function(data) {
 
 						if(data.status == 0) {
+							if(scope.doResolve){
+								gModalInstance.resolve(data);
+							}
 							gModalInstance.close("YES");
 						} else {
               scope.uploadHtml = '<i class="fa fa-upload"></i> Upload ';
@@ -108,6 +111,7 @@
 					scope.fileType=planGroups.fileType;
 					scope.criteriaVersionId=planGroups.criteriaVersionId;
 					scope.season={};
+					scope.doResolve=planGroups.doResolve;
 					_this.getSeasonList(scope);
 				};
 			}

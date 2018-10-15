@@ -147,8 +147,8 @@
 
         var timeStamp = dateTimeFormat(new Date());
         //				var userName = "WeCAREC001";
-        var userName = "BVN001";
-        var pwd = "123456";
+        var userName = "zhimi";
+        var pwd = "zm@123";
         var newPassword = SHA256(pwd);
         var signStr = SHA256(userName + newPassword + timeStamp + userName);
         var requestData = {
@@ -276,6 +276,16 @@
             "name" : "Vendor KPI Report" ,
             "url" : "app/vendorkpi/reportrequirement.html" ,
             "icon" : "fa fa-area-chart"
+          },
+          {
+            "name" : "Data Log" ,
+            "url" : "app/datalog/datalog.html" ,
+            "icon" : "fa fa-file-o"
+          },
+          {
+            "name" : "Factory SMV" ,
+            "url" : "app/factorySmv/factorySmv.html" ,
+            "icon" : "fa fa-file-o"
           },
           // {
           //   "name" : "Season Date Range Setting" ,

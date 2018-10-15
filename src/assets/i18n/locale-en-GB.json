@@ -304,7 +304,7 @@
   "notifyMsg": {
     "NO_DATA_REASSIGN":"No data to Reassign",
     "RELEASE_SUCCESS":"Release Success",
-    "REFRESH_DATA_SUCCESS":" data refresh",
+    "REFRESH_DATA_SUCCESS":" Data refresh successfully",
     "PLEASE_CONFIRM_SEPCIAL_FACTORY":"Please confirm the specific factory since there are multiple factories for APU002.",
     "UPLOAD_FAIL":"Upload Failed",
     "CONFIRM_MSG_DELETE": "Confirm to delete ?",

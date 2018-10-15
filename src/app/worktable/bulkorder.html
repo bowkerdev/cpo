@@ -38,7 +38,7 @@
 						<button class="btn btn-secondary btn-single" ng-click="assignFactory()" ng-bind-html="assignHtml" ng-disabled="assigning">
 
             </button>
-            <button class="btn btn-secondary btn-single" ng-click="reAssign()">
+            <button class="btn btn-secondary btn-single" ng-click="reAssign()"  ng-disabled="assigning">
                 ReAssign
               </button>
 					</div>
@@ -99,7 +99,7 @@
         <!--<span class="input-group-addon">Document:&nbsp</span>-->
         <!--<select ng-model="selectDoc" ng-options="doc.label for doc in docs" style="height: 32px;padding-left: 10px;" ng-change="selectDocument()"></select>-->
       <!--</div>-->
-      <div class="input-group" style="padding-bottom: 5px" ng-show="tabIndex!='6' || tabIndex!=='7'">
+      <div class="input-group" style="padding-bottom: 5px" ng-show="tabIndex!='6' && tabIndex!='7'&& tabIndex!='8'&& tabIndex!='9'">
         <span class="input-group-addon">Document Type:&nbsp;</span>
         <select ng-model="selectDocumentType" ng-options="doc.label for doc in documentTypes" style="height: 32px;padding-left: 10px;" ng-change="selectDocumentTypeChanged()"></select>
         <span class="input-group-addon">Document:&nbsp;</span>
@@ -141,9 +141,17 @@
           <i class="fa fa-share"></i>
           <span translate="">Change Application</span>
         </button>
-        <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="importFile()" ng-if="tabIndex!='5'">
+        <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="importFile(501)" ng-if="tabIndex!='5'">
           <i class="fa fa-upload"></i>
           <span translate="">Import</span>
+        </button>
+        <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="importFile(40000)" ng-if="tabIndex=='6'||tabIndex=='7'">
+          <i class="fa fa-upload"></i>
+          <span translate="">Import PO Change</span>
+        </button>
+        <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="exportMTFContractTotalList()" ng-if="selectDocumentType.id==7">
+          <i class="fa fa-download"></i>
+          <span translate="">Export MTF Contract Total List</span>
         </button>
 				<!--<button style="float: right;margin-top: 10px;" class="btn btn-secondary btn-single" ng-click="toggleFilterRow()" >-->
 					<!--<i class="fa fa-search"></i>-->
@@ -202,6 +210,11 @@
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="">Set Season</span>
         </button>
+
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
+          <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+          translate="">Refresh 168 No.</span>
+        </button>
         <!--<button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="generateBatchNo()" ng-disabled="generateBatchNoButtonDisabled">-->
           <!--<i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span-->
           <!--translate="">Generate Batch No.</span>-->
@@ -236,6 +249,18 @@
           translate="">Generate Batch No.</span>
         </button>
 
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
+          <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+          translate="">Refresh 168 No.</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refreshBno()" ng-disabled="disableRefreshBNoButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+          translate="worktable.REFRESH_B_NO"></span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="checkOrderInfo()" >
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+          translate="">Check Order Info</span>
+        </button>
 
       </div>
     </div>
@@ -270,6 +295,11 @@
           <!--<i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span-->
           <!--translate="">Confirm All</span>-->
         <!--</button>-->
+
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
+          <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+          translate="">Refresh 168 No.</span>
+        </button>
       </div>
     </div>
     <div ng-show="tabIndex=='4'">
@@ -296,6 +326,11 @@
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="">Confirm All</span>
         </button>
+
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
+          <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+          translate="">Refresh 168 No.</span>
+        </button>
       </div>
     </div>
 
@@ -309,6 +344,11 @@
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseTransitPendingOrder()" ng-disabled="disableReleaseOrderButton">
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="worktable.RELEASE"></span>
+        </button>
+
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
+          <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+          translate="">Refresh 168 No.</span>
         </button>
       </div>
     </div>
@@ -325,13 +365,8 @@
           translate="index.CONFIRM"></span>
         </button>
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder('PENDING')" ng-disabled="disableReleaseOrderButton">
-          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
-          translate="worktable.RELEASE"></span>
-        </button>
-
-        <button  class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="exportCSV('PENDING')" >
-          <i class="fa fa-download"></i>
-          <span translate="">Export AS400 CSV</span>
+          <i class="fa fa-check-circle-o" style="font-size: 20px;">	</i>&nbsp;&nbsp;<span
+          >Confirm and Release</span>
         </button>
 
       </div>
@@ -341,22 +376,6 @@
            ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom>
 
         <loading show="gridOptions9.showLoading"></loading>
-      </div>
-      <div class="form-group" style="margin-top: 15px;">
-        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="confirmChange()">
-          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
-          translate="index.CONFIRM"></span>
-        </button>
-        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder()" ng-disabled="disableReleaseOrderButton">
-          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
-          translate="worktable.RELEASE"></span>
-        </button>
-
-        <button  class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="exportCSV('CONFIRMED')" >
-          <i class="fa fa-download"></i>
-          <span translate="">Export AS400 CSV</span>
-        </button>
-
       </div>
     </div>
     <div ng-show="tabIndex=='8'">
@@ -488,5 +507,12 @@
     color: #C6C6C6;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+  }
+  .dynamic-template-modal-window  .modal {
+    margin: auto;
+  }
+  
+   .dynamic-template-modal-window  .modal >div:last-child{
+    width: 1500px;
   }
 </style>

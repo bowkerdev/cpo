@@ -126,12 +126,38 @@
         }
         
         this.exportOrderList=function(scope){
-        	var param = {
-            pageSize : 1000000 ,
-            pageNo : 1
-          };
-          param.documentType=7001;
-        	exportExcel(param , "cpo/portal/document/export_file?" , "_blank");
+        	
+					var modalInstance =
+						$uibModal.open({
+							animation: true,
+							ariaLabelledBy: "modal-header",
+							templateUrl: 'app/report/orderListFilter.html',
+							controller: 'orderListFilterCtrl'
+						});
+					modalInstance.result = function(result) {
+	        	var param = {
+	            pageSize : 1000000 ,
+	            pageNo : 1
+	          };
+	          if(result.fromPeriod){
+	          	param.fromPeriod=result.fromPeriod;
+	          }
+	          if(result.toPeriod){
+	          	param.toPeriod=result.toPeriod;
+	          }
+	          if(result.fromFpd){
+	          	param.fromFpd=result.fromFpd;
+	          }
+	          if(result.toFpd){
+	          	param.toFpd=result.toFpd;
+	          }
+	          if(result.documentType){
+	          	param.orderRange=result.documentType;
+	          }
+	          param.documentType=7001;
+						debugger;
+	        	exportExcel(param , "cpo/portal/document/export_file?" , "_blank");
+					}
         }
         
         

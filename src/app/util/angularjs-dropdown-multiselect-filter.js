@@ -81,7 +81,7 @@ var directiveModule = angular.module('angularjs-dropdown-multiselect-filter', []
         var repeatContainer = angular.isDefined($attrs.vsRepeatContainer) ? angular.element($element[0].querySelector($attrs.vsRepeatContainer)) : $element,
           ngRepeatChild = repeatContainer.children().eq(0),
           ngRepeatExpression,
-          childCloneHtml = ngRepeatChild[0].outerHTML,
+          childCloneHtml = ngRepeatChild[0]?ngRepeatChild[0].outerHTML:undefined,
           expressionMatches,
           lhs,
           rhs,

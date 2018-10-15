@@ -1,6 +1,6 @@
 var DebugLog = true;
-var transferDateKey = ["createDate", "publishTime", "editTime", "validityFrom", "validityTo", "approveTime", "voteTime", "utcUpdate","utcCreate", "createdate","planDate","orderReleaseDate","requestTransferMonthFrom","requestTransferMonthTo","releaseDate","remarkDate",'byReadyDate','createdDate'];
-var transferSimpleDateKey = ["startTime", "endTime","firstProdDate","lastProdDate","planDate","poBatchDate","requestDate","psdd","podd",'customerRequestDate','psddFactory','fpd','fpdFactory','customerRequestDateCs',"orderReleaseDate","pvMonth","toPvMonth",'byReadyDate','byReady','latestFabricPiEta','latestTrimPiEta','fabricPiDate','etd','byReady','orderDate','poBatchDate','byReadyDate','createdDate'];
+var transferDateKey = ["createDate", "publishTime", "editTime", "validityFrom", "validityTo", "approveTime", "voteTime", "utcUpdate","utcCreate", "createdate","planDate","orderReleaseDate","requestTransferMonthFrom","requestTransferMonthTo","releaseDate","remarkDate",'byReadyDate','createdDate','fpdMidEnd','psddMidEnd','originalLc0190Date','crdMidOrEnd','pdMidOrEnd','crdPdMidOrEnd','lc0190Date'];
+var transferSimpleDateKey = ["startTime", "endTime","firstProdDate","lastProdDate","planDate","poBatchDate","requestDate","psdd","podd",'customerRequestDate','psddFactory','fpd','fpdFactory','customerRequestDateCs',"orderReleaseDate","pvMonth","toPvMonth",'byReadyDate','byReady','latestFabricPiEta','latestTrimPiEta','fabricPiDate','etd','byReady','orderDate','poBatchDate','byReadyDate','createdDate','originalLc0190Date'];
 var transferFixTo2NumberKey  = ["ttlSmv"];
 var splitThrousandCount=["totalQty"];
 var pageStatus = {
@@ -111,9 +111,12 @@ function GLOBAL_Http($http, url, method, data, successCallBack, errorCallBack) {
 	return $http({
 			method: method,
 			url:myUrl,
+			cache:false,
 			data: data,
-    timeout: 1000*60*10,
+    		timeout: 1000*60*10,
 			headers: {
+				"pragma":"no-cache",
+				'Cache-Control': 'no-cache',
 				'Content-Type': 'application/json;charset=UTF-8',
 				'Accept-Language': 'en-US',
 				'Authorization': 'Bearer ' + token
@@ -157,7 +160,6 @@ function export_path(data, url) {
 	}
 	var string = array.join("&");
 	var myUrl = getBaseURL() + url + string;
-	//console.log(myUrl);
 	return myUrl;
 }
 
@@ -193,6 +195,15 @@ function dateTimeFormat(timestamp) {
 	var date = new Date();
 	date.setTime(timestamp);
 	return date.Format("yyyy/MM/dd");
+}
+
+function dateTimeDetailFormat(timestamp) {
+	if(!timestamp) {
+		return "";
+	}
+	var date = new Date();
+	date.setTime(timestamp);
+	return date.Format("yyyy/MM/dd HH:mm:ss");
 }
 
 function dateFormat(timestamp) {

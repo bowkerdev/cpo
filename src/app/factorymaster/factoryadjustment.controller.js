@@ -860,7 +860,7 @@
             }
           };
         };
-        this.getSearchParam = function (scope, workingno) {
+        this.getSearchParam = function (scope, workingno,isExpand) {
 
           var params = {
             queryType: 1
@@ -895,7 +895,6 @@
           } else {
             params.queryType = 1;
           }
-
           if (scope.searchRequest.productType.id && scope.searchRequest.productType.id.length > 0) {
             params.eq_product_type_fr = encodeURIComponent(scope.searchRequest.productType.id);
           }
@@ -913,11 +912,11 @@
           if (scope.searchRequest.toDate && scope.searchRequest.toDate.length > 0) {
             params.to_pv_month = scope.searchRequest.toDate + "-03";
           }
-          if (scope.searchRequest.garmentQty && scope.searchRequest.garmentQty.length > 0) {
+          if (scope.searchRequest.garmentQty && scope.searchRequest.garmentQty.length > 0 &&params.queryType == 1&&!isExpand) {
             var key = scope.searchRequest.condition.id + "_total_qty";
             params[key] = scope.searchRequest.garmentQty;
           }
-          if (scope.searchRequest.totalPvQuantitys && scope.searchRequest.totalPvQuantitys.length > 0) {
+          if (scope.searchRequest.totalPvQuantitys && scope.searchRequest.totalPvQuantitys.length > 0 &&params.queryType == 1&&!isExpand) {
             var key2 = scope.searchRequest.condition2.id + "_totalPvQuantitys";
             params[key2] = scope.searchRequest.totalPvQuantitys;
           }
@@ -925,7 +924,7 @@
             params["eq_process_id"] = scope.searchRequest.processName.id;
           }
           if (scope.searchRequest.site.label != "All") {
-            params["eq_confirmFactory"] = scope.searchRequest.site.label;
+            params["eq_confirm_factory"] = scope.searchRequest.site.label;
           }
           if (scope.searchRequest.orderTime.id) {
             params["eq_document_id"] = scope.searchRequest.orderTime.id;
@@ -1116,7 +1115,7 @@
           scope.singleLineData = [row.entity];
 
           scope.showFactioryDetail = true;
-          var params = __this.getSearchParam(scope, row.entity.workingNo);
+          var params = __this.getSearchParam(scope, row.entity.workingNo,'YES');
 
 
           scope.bottomParams = {
@@ -1141,10 +1140,7 @@
           var url = "cpo/api/factory_adjustment/query_adjustment_data_filter?";
 
           scope.gridOptions2.zsColumnFilterRequestUrl = url;
-          scope.gridOptions2.zsColumnFilterRequestParam = {
-            eq_working_no: row.entity.workingNo,
-            queryType: 2
-          };
+          scope.gridOptions2.zsColumnFilterRequestParam = angular.copy(scope.bottomParams);
           FilterInGridService.gridClearAllFilter(scope.gridApi2.grid);
           __this.fetchBottomGridInfo(scope);
 
@@ -1281,7 +1277,7 @@
             eq_working_no: scope.singleLineData[0].workingNo,
             queryType: 1
           };
-          GLOBAL_Http($http, "cpo/api/factory_adjustment/query_adjustment_data?", 'GET', params, function (data) {
+          GLOBAL_Http($http, "cpo/api/factory_adjustment/?", 'GET', params, function (data) {
             data.output = translateData(data.output);
             scope.singleLineData[0] = data.output[0];
 

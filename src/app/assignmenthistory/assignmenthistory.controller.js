@@ -8,11 +8,11 @@
           var _this = this;
           scope.activeTab = Tab;
           scope.orderType = '';
-
-          if ( Tab != '5' && Tab != '4' ) {
+          if ( Tab != '5' && Tab != '6' ) {
             _this.getOrderTypeList(scope);
           } else {
-            _this.getOrderTime(scope);
+            _this.getBatchDate(scope);
+            _this.searchlist(scope);
           }
           // if(Tab=='6'||Tab=='1'){
           //   _this.getBatchDate(scope);
@@ -69,8 +69,7 @@
             }
 
             var params = {
-              orderType : orderType,
-              documentStatus:4
+              orderType : orderType
             }
             if ( scope.orderType && scope.orderType.value && scope.orderType.value.length > 0 ) {
               params[ 'orderActualType' ] = scope.orderType.value;
@@ -87,7 +86,11 @@
 
                 })
                 scope.batchDates = [{documentId:null,label:"All"}].concat(result);
-                scope.batchDate = scope.batchDates[ 0 ];
+                if(scope.batchDates.length>1){
+ 	               scope.batchDate = scope.batchDates[ 1 ];
+                }else{
+	                scope.batchDate = scope.batchDates[ 0 ];
+                }
                 _this.searchlist(scope);
 
               } else {
@@ -100,61 +103,6 @@
               scope.batchDate = scope.batchDates[ 0 ];
             });
 
-        }
-        this.getOrderTime = function ( scope ) {
-          var orderType = null;
-          switch ( scope.activeTab ) {
-            case 5:
-              orderType = "1";
-              break;
-            case 6:
-              orderType = "2";
-              break;
-            case 1:
-              orderType = "3";
-              break;
-            case 2:
-              orderType = "4";
-              break;
-            case 3:
-              orderType = "5";
-              break;
-            case 4:
-              orderType = "6";
-              break;
-              defaults:orderType = Tab;
-              break;
-          }
-
-          var params = {
-            orderType : orderType,
-            documentStatus:4
-          }
-          if ( scope.orderType && scope.orderType.value && scope.orderType.value.length > 0 ) {
-            params[ 'orderActualType' ] = scope.orderType.value;
-          }
-
-          GLOBAL_Http($http , "cpo/api/document/query_order_date?" , 'GET' , params , function ( data ) {
-
-            if ( data.status && data.output && data.output.length > 0 ) {
-              var result = data.output.map(function ( item ) {
-                return {
-                  documentId : item.documentId ,
-                  label : new Date(item.utcCreate).toLocaleDateString()
-                }
-
-              })
-              scope.orderTimes = [ { documentId : '' , label : "All" } ].concat(result);
-              scope.orderTime = scope.orderTimes[ 0 ];
-            } else {
-              scope.orderTimes = [ { documentId : '' , label : "All" } ]
-              scope.orderTime = scope.orderTimes[ 0 ];
-            }
-
-          } , function ( data ) {
-            scope.orderTimes = [ { documentId : '' , label : "All" } ];
-            scope.orderTime = scope.orderTimes[ 0 ];
-          });
         }
         this.initMarketingforecastGrid = function ( scope , i , gridData ) {
           var _this = this;
@@ -448,7 +396,8 @@
               };
               data[ "ASSIGNMENTHISTORYORDERTYPE-" + scope.activeTab ].unshift(orderType);
               scope.orderTypeList = data[ "ASSIGNMENTHISTORYORDERTYPE-" + scope.activeTab ];
-              scope.orderType = scope.orderTypeList[ 0 ];
+              scope.orderType = scope.orderTypeList[ 1 ];
+              _this.getBatchDate(scope);
             }
           } , function ( data ) {
             modalAlert(CommonService , 3 , $translate.instant('index.FAIL_GET_DATA') , null);
@@ -484,7 +433,7 @@
             zsColumnFilterRequestParam : param ,
             useExternalPagination : true ,
             enablePaginationControls : true ,
-            columnDefs : workTableCommonService.constructeAssignmentStaticColumns(scope , "assignSampleorderforecast" , true , 200) ,
+            columnDefs : workTableCommonService.constructeAssignmentStaticColumns(scope , "bulkorder_new" , true , 200) ,
             onRegisterApi : function ( gridApi ) {
               scope[ 'gridApi' + i ] = gridApi;
               gridApi.core.on.sortChanged(scope , function ( grid , sortColumns ) {
@@ -555,7 +504,6 @@
               break;
           }
           _this.getAssignFactoryResult(scope , tabValue , '4' , page);
-
           if ( tabValue == "1" ) {
             var monthly = [];
             var seasonStr =scope.season? scope.season.value.substring(0 , 2):"";
@@ -712,19 +660,18 @@
               param[ 'order_actual_type' ] = scope.orderType.label;
             }
           }
-          if(scope.activeTab==6||scope.activeTab==1){
+          
+          if(scope.activeTab!=5&&scope.activeTab!=6){
+          	if(scope.po){
+          		param[ 'like_po' ] = scope.po;
+          	}
+          }
+          
             if ( scope.batchDate ) {
               if ( scope.batchDate.documentId && scope.batchDate.documentId != '' ) {
                 param[ 'eq_document_id' ] = scope.batchDate.documentId;
               }
             }
-          }else{
-            if ( scope.orderTime ) {
-              if ( scope.orderTime.documentId && scope.orderTime.documentId != '' ) {
-                param[ 'eq_document_id' ] = scope.orderTime.documentId;
-              }
-            }
-          }
 
 
           for (var key in param){
@@ -777,7 +724,6 @@
 
 
           GLOBAL_Http($http , "cpo/api/worktable/query_assignment_result?" , 'POST' , param , function ( data ) {
-            scope.showLoading = false;
 
             if ( data.output ) {
 
@@ -829,6 +775,7 @@
                   scope.bulkOrder = translateData(data.output);
                   scope.gridOptions1.data = scope.bulkOrder;
                   scope.page1.totalNum = data.total;
+                  scope.gridOptions1.columnDefs =  workTableCommonService.constructeAssignmentStaticColumns(scope , "bulkorder_new" , true , 200);
                   workTableCommonService.bulkorderDynamicColumns(data.sizeListCount , scope.gridOptions1);
 
                   for ( var index in scope.bulkOrder ) {
@@ -890,16 +837,13 @@
             } else {
               modalAlert(CommonService , 2 , data.message , null);
             }
+            scope.showLoading = false;
           } , function ( data ) {
             scope.showLoading = false;
             modalAlert(CommonService , 3 , $translate.instant('index.FAIL_GET_DATA') , null);
           });
         }
         this.init = function ( scope ) {
-
-          $(".order-time-item").show();
-          $(".batch-date-item").hide();
-
           var _this = this;
 
           for ( var i = 1 ; i < 7 ; i++ ) {
@@ -912,8 +856,6 @@
             };
           }
           scope.bulkOrder = [];
-          scope.orderTimes = [];
-          scope.orderTime = null;
           scope.sampleOrder = [];
           scope.miOrder = [];
           scope.nonTradeCardOrder = [];
@@ -936,13 +878,8 @@
             if(scope.orderType==""){
               return;
             }
-            if(scope.activeTab==1||scope.activeTab==6){
-              _this.getBatchDate(scope);
-            }else{
-              _this.getOrderTime(scope);
-              _this.searchlist(scope);
-            }
-
+            _this.getBatchDate(scope);
+            _this.searchlist(scope);
           });
 
         };
@@ -956,15 +893,6 @@
           } else {
             $("#orderTypeSelect").show();
           }
-
-          if(Tab==1||Tab==6){
-            $(".order-time-item").hide();
-            $(".batch-date-item").show();
-          }else{
-            $(".order-time-item").show();
-            $(".batch-date-item").hide();
-          }
-
           assignmentHistoryService.selectTab($scope , Tab);
         }
         $scope.changeOrderActualType = function () {

@@ -845,29 +845,57 @@
       "field": "gpsCustomerDesc"
     },
     {
-      "displayName": "EU Rate",
+      "displayName": "PV EU Rate",
       "field": "euRate",
       "special": {
         "rate": true
       }
     },
     {
-      "displayName": "EU Quantity",
+      "displayName": "PV EU Quantity",
       "field": "euQuantity",
       "special": {
         "thousands": true
       }
     },
     {
-      "displayName": "China Rate",
+      "displayName": "PV China Rate",
       "field": "chinaRate",
       "special": {
         "rate": true
       }
     },
     {
-      "displayName": "China Quantity",
+      "displayName": "PV China Quantity",
       "field": "chinaQuantity",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Open FC EU Rate",
+      "field": "openFcEuRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "Open FC EU Quantity",
+      "field": "openFcEuQuantity",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Open FC China Rate",
+      "field": "openFcChinaRate",
+      "special": {
+        "rate": true
+      }
+    },
+    {
+      "displayName": "Open FC China Quantity",
+      "field": "openFcChinaQuantity",
       "special": {
         "thousands": true
       }
@@ -930,6 +958,13 @@
     {
       "displayName": "Order Quantity by Plan Date",
       "field": "orderQuantityByPlanDate",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Blanket Qty",
+      "field": "blanketQty",
       "special": {
         "thousands": true
       }
@@ -1372,6 +1407,10 @@
       "displayName": "Order Type"
     },
     {
+      "displayName": "Adidas Order Type",
+      "field": "adidasOrderType"
+    },
+    {
       "field": "process",
       "displayName": "Process"
     },
@@ -1533,6 +1572,10 @@
       "displayName": "Order Type"
     },
     {
+      "displayName": "Adidas Order Type",
+      "field": "adidasOrderType"
+    },
+    {
       "field": "process",
       "displayName": "Process"
     },
@@ -1637,6 +1680,10 @@
     {
       "displayName": "TC PO",
       "field": "po"
+    },
+    {
+      "displayName": "Original PO",
+      "field": "originalPo"
     },
     {
       "displayName": "IPMT_NO",
@@ -1775,6 +1822,18 @@
       "field": "planDate"
     },
     {
+      "displayName": "CRD Mid Or End",
+      "field": "crdMidOrEnd"
+    },
+    {
+      "displayName": "PD Mid Or End",
+      "field": "pdMidOrEnd"
+    },
+    {
+      "displayName": "CRD&PD Mid or End",
+      "field": "crdPdMidOrEnd"
+    },
+    {
       "displayName": "LC0190 Issue Date",
       "field": "orderDate"
     },
@@ -1825,6 +1884,18 @@
     {
       "displayName": "FPD Mid or End",
       "field": "fpdMidEnd"
+    },
+    {
+      "displayName": "Packing Type",
+      "field": "packingType"
+    },
+    {
+      "displayName": "Packaging Requirement",
+      "field": "packagingRequirement"
+    },
+    {
+      "displayName": "Retailer Order Number",
+      "field": "retailerOrderNumber"
     },
     {
       "displayName": "MDPfailreason",
@@ -1879,7 +1950,7 @@
       "field": "mtfcNumber"
     },
     {
-      "displayName": "Original LC0190 date",
+      "displayName": "BU LC0190 Date",
       "field": "originalLc0190Date"
     },
     {
@@ -1909,6 +1980,10 @@
     {
       "displayName": "Ship Mode",
       "field": "shipMode"
+    },
+    {
+      "displayName": "UD ShipMode",
+      "field": "udShipMode"
     },
     {
       "displayName": "Customer Over FC Qty",
@@ -2009,6 +2084,10 @@
     {
       "displayName": "Order Type",
       "field": "orderActualType"
+    },
+    {
+      "displayName": "Adidas Order Type",
+      "field": "adidasOrderType"
     },
     {
       "displayName": "SMV",
@@ -2317,7 +2396,7 @@
       "field": "mtfcNumber"
     },
     {
-      "displayName": "Original LC0190 date",
+      "displayName": "BU LC0190 Date",
       "field": "originalLc0190Date"
     },
     {
@@ -2447,6 +2526,10 @@
     {
       "displayName": "Order Type",
       "field": "orderActualType"
+    },
+    {
+      "displayName": "Adidas Order Type",
+      "field": "adidasOrderType"
     },
     {
       "displayName": "SMV",
@@ -4159,6 +4242,40 @@
     {
       "displayName": "Actual OP FC",
       "field": "actualOpenForecastQuantity"
+    }
+  ],
+  "order_change_confirm_tab_first_header": [
+    {
+      "displayName": "Comfirm By",
+      "field": "orderChangeUpdateByName"
+    },
+    {
+      "displayName": "Confirm Time",
+      "field": "orderChangeUpdateTime"
+    }
+  ],
+  "approval_pending": [
+    {
+      "displayName": "Change From To",
+      "field": "orderApprovalTransfer"
+    },
+    {
+      "displayName": "Applied By",
+      "field": "orderApprovalCreate"
+    },
+    {
+      "displayName": "Applied Time",
+      "field": "orderApprovalCreateTime"
+    }
+  ],
+  "approval_transit": [
+    {
+      "displayName": "Approved By",
+      "field": "orderApprovalUpdate"
+    },
+    {
+      "displayName": "Approved Time",
+      "field": "orderApprovalUpdateTime"
     }
   ]
 }
