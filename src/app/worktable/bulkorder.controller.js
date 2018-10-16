@@ -2939,7 +2939,13 @@
 								GLOBAL_Http($http, "cpo/api/worktable/split_order", 'POST', param, function(data) {
 									if(data.status == 0) {
 										modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
-										_this.refreshAll(scope);
+										if(scope.tabIndex == 0) {
+											_this.getAssignFactoryResult(scope, '3', '0,3', scope.page2, true);
+										} else if(scope.tabIndex == 1) {
+											_this.getAssignFactoryResult(scope, '3', '2', scope.page3, true);
+										} else if(scope.tabIndex == 3) {
+											_this.getTransitOrder(scope, scope.page4, '4', true);
+										};
 									} else {
 										modalAlert(CommonService, 2, data.message, null);
 									}
