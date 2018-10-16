@@ -349,6 +349,8 @@
     "PLEASE_CONFIREM_DELETE":"Please confirm to delete data",
     "PLEASE_CONFIREM_UPLOAD":"There are still some FC/orders didn't release. Do you confirm to upload this new FC/Order.",
     "ONE_RECORD_SELECT_WARNING": "Please select a data",
+    "THE_STAR_FLAG_IS_REQUIRED": "The star flag is required",
+    "ONLY_CAN_SELECT_ONE_DATA": "Only can select one data",
     "ERROR_MSG_NO_SET_TITLE": "Please input the title",
     "NO_INPUT_WARNING": "Please input the data",
     "REQUSET_DATA_ERROR": "Request data error, pleae try later",

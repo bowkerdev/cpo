@@ -2840,6 +2840,126 @@
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
+
+				this.splitOrder = function(scope) {
+					var _this = this;
+					var selectedRows = null; //scope.gridApi5.selection.getSelectedRows();
+					var ids = new Array();
+					if(scope.tabIndex == 0) {
+						selectedRows = scope.gridApi2.selection.getSelectedRows();
+					} else if(scope.tabIndex == 1) {
+						selectedRows = scope.gridApi3.selection.getSelectedRows();
+					} else if(scope.tabIndex == 3) {
+						selectedRows = scope.gridApi5.selection.getSelectedRows();
+					};
+					if(selectedRows.length < 1) {
+						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
+						return;
+					}
+					if(selectedRows.length > 1) {
+						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONLY_CAN_SELECT_ONE_DATA'), null);
+						return;
+					}
+					var row = selectedRows[0];
+					GLOBAL_Http($http, "cpo/api/worktable/ediordersize/find?", 'GET', {eq_order_master_id: row.orderMasterId}, function(data) {
+						if(data.rows && data.rows.length > 0) {
+							scope.sizeObjArr = data.rows.map(function(item) {
+								return {
+									id: item.ediOrderSizeId,
+									label: item.manufacturingSize
+								}
+
+							});
+							var orderMasterId =  data.rows[0].orderMasterId;
+							var topScope = scope;
+							var modalInstance = $uibModal.open({
+								animation: true,
+								ariaLabelledBy: 'modal-title',
+								ariaDescribedBy: 'modal-body',
+								templateUrl: 'set-split-order.html',
+								size: "md",
+								controller: function($scope, $uibModalInstance) {
+
+									$scope.sizeObjArr = topScope.sizeObjArr;
+									$scope.selectedSizeIds = [];
+									$scope.submit = function() {
+										if(!$scope.batchNo || !$scope.bNo || !$scope.valueOf168No || !$scope.selectedSizeIds.length) {
+											modalAlert(CommonService, 2, $translate.instant('errorMsg.THE_STAR_FLAG_IS_REQUIRED'), null);
+											return;
+										}
+										$uibModalInstance.resolve({
+											'ediOrderSizeIds': $scope.selectedSizeIds,
+											'orderMasterId': orderMasterId,
+											'batchNo': $scope.batchNo,
+											'bNo': $scope.bNo,
+											'valueOf168No': $scope.valueOf168No
+										});
+										$uibModalInstance.dismiss();
+									};
+									$scope.dismiss = function() {
+										$uibModalInstance.dismiss();
+									}
+									$scope.idPropertySettings = {
+										smartButtonMaxItems: 100,
+										smartButtonTextConverter: function(itemText, originalItem) {
+											return itemText;
+										},
+										showCheckAll:false,
+										showUncheckAll:false
+									};
+
+								}
+
+							});
+
+							modalInstance.resolve = function(result) {
+
+								var param = {};
+								if(result.orderMasterId) {
+									param['orderMasterId'] = result.orderMasterId;
+								}
+								if(result.batchNo) {
+									param['batchNo'] = result.batchNo;
+								}
+								if(result.bNo) {
+									param['bNo'] = result.bNo;
+								}
+								if(result.valueOf168No) {
+									param['168No'] = result.valueOf168No;
+								}
+								param['ediOrderSizeIds'] = '';
+								if(result.ediOrderSizeIds && result.ediOrderSizeIds.length) {
+									for(var i = 0; i < result.ediOrderSizeIds.length; i++) {
+										param['ediOrderSizeIds'] += result.ediOrderSizeIds[i].id;
+										if(i != result.ediOrderSizeIds.length - 1) {
+											param['ediOrderSizeIds'] += ',';
+										}
+									}
+								}
+								GLOBAL_Http($http, "cpo/api/worktable/split_order", 'POST', param, function(data) {
+									if(data.status == 0) {
+										modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
+										_this.refreshAll(scope);
+									} else {
+										modalAlert(CommonService, 2, data.message, null);
+									}
+								}, function(data) {
+
+									modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+								});
+
+							}
+
+						} else {
+							var message = data.message ? data.message : $translate.instant('errorMsg.NO_ARTICLE_SEASON_IN_RANGEE_FOUND');
+							modalAlert(CommonService, 2, message, null);
+						}
+					}, function(data) {
+
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+				
 				this.checkOrderInfo=function(scope){
 					var gridApi = scope.gridApi3;
 					var _this = this;
@@ -2994,6 +3114,9 @@
 				}
 				$scope.refresh168No = function() {
 					BulkOrderService.refresh168No($scope);
+				}
+				$scope.splitOrder = function() {
+					BulkOrderService.splitOrder($scope);
 				}
 				$scope.checkOrderInfo = function() {
 					BulkOrderService.checkOrderInfo($scope);
