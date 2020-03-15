@@ -49,11 +49,19 @@
 				/**
 				 * init
 				 */
-				this.init = function(scope) {
+				this.init = function(scope,cs) {
 					// 初期化
 					scope.selectRowGridAppScore = null;
 					var _this = this;
-					scope.activeTab = 1;
+					scope.userArea;
+					if(cs.userInfo){
+						scope.userArea=cs.userInfo.areaname;
+					}
+					if(scope.userArea&&scope.userArea=='BVN'){
+						scope.activeTab = 4;
+					}else{
+						scope.activeTab = 1;
+					}
 					scope.$on('detailPage.close', function(data) {
 						scope.showDetailView = '';
 					});
@@ -62,7 +70,11 @@
 						scope.selectRowGridAppScore.refreshAll();
 					});
 
-					scope.showView = 'MarketingForecast';
+					if(scope.userArea&&scope.userArea=='BVN'){
+						scope.showView = 'SampleOrder';
+					}else{
+						scope.showView = 'MarketingForecast';
+					}
 					scope.$on('workTableDetail.init', function(event, data) {
 						scope.$broadcast('workTableDetail.afterInit', scope.factoryAssingmentResultDetail);
 					});
@@ -71,7 +83,6 @@
 		])
 		.filter('quantityFilter', function() {
 			return function(input) {
-
 				if(!isNaN(input)) {
 
 					var parts = input.toString().split(".");
@@ -84,15 +95,15 @@
 
 			}
 		})
-		.controller('workTableCtrl', ['$scope', 'workTableService',
-			function($scope, workTableService) {
+		.controller('workTableCtrl', ['$scope', 'workTableService','CommonService',
+			function($scope, workTableService,CommonService) {
 				$scope.selectTab = function(Tab) {
 					workTableService.selectTab($scope, Tab);
 				}
 				$scope.rowSelect = function(row,subScope) {
 					workTableService.rowSelect($scope, row,subScope);
 				}
-				workTableService.init($scope);
+				workTableService.init($scope,CommonService);
 			}
 		])
 })();

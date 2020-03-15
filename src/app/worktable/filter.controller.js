@@ -58,8 +58,8 @@
 				return newsearchKey;
 			}
 		}])
-		.controller('filterCtrl', ['$filter','$scope', '$timeout', '$http', 'FilterInGridService',
-			function($filter,$scope, $timeout, $http, FilterInGridService) {
+		.controller('filterCtrl', ['$filter', '$scope', '$timeout', '$http', 'FilterInGridService',
+			function($filter, $scope, $timeout, $http, FilterInGridService) {
 
 				$scope.example1data = [];
 				$scope.example1model = [];
@@ -129,9 +129,9 @@
 
 					var result = null;
 
-          $scope.example1model = $filter('multFilterSpecial')($scope.example1model , angular.element("#zsSearchInput").val());
+					$scope.example1model = $filter('multFilterSpecial')($scope.example1model, angular.element("#zsSearchInput").val());
 
-          if($scope.example1model.length == $scope.example1data.length) {
+					if($scope.example1model.length == $scope.example1data.length) {
 
 						$scope.col.filters = [{
 							term: ""
@@ -255,7 +255,7 @@
 					angular.forEach(scope.col.grid.columns, function(column, index) {
 						if(column.isFiltering && column.filters && column.filters[0].term && column.filters[0].term.length > 0) {
 
-								if(!column.filters[2].term) {
+							if(!column.filters[2].term) {
 								newsearchKey["in_" + column.field] = column.filters[0].term;
 							} else {
 								newsearchKey2["nin_" + column.field] = column.filters[1].term;
@@ -281,16 +281,17 @@
 					scope.showLoading = true;
 					/// return;
 
-          var type = "GET";
-          if(requestUrl=="cpo/api/worktable/query_assignment_result_filter?"){
-            type = "POST";
-          }else if(requestUrl == "cpo/api/worktable/get_change_order_filter?"){
-            type = "POST";
-          }
+					var type = "GET";
+					if(requestUrl == "cpo/api/worktable/query_assignment_result_filter?") {
+						type = "POST";
+					} else if(requestUrl == "cpo/api/worktable/get_change_order_filter?") {
+						type = "POST";
+					}
 
-
-          var inkey = "in_" + field; delete param[inkey];
-          var minkey = "min_"+field; delete param[minkey];
+					var inkey = "in_" + field;
+					delete param[inkey];
+					var minkey = "min_" + field;
+					delete param[minkey];
 
 					GLOBAL_Http($http, encodeURI(requestUrl), type, param, function(data) {
 

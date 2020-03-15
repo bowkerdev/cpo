@@ -264,7 +264,8 @@
 							"logo": scope.updateObj.logo,
 							"sublimationPrinting": scope.updateObj.sblimiation,
 							"nAndN": scope.updateObj.nn,
-							"hemInsert": scope.updateObj.insert
+							"hemInsert": scope.updateObj.insert,
+							"addOrderTimes":scope.updateObj.addOrderTimes
 						}
 					})
 					var param = {
@@ -277,7 +278,7 @@
 						scope.updateObj.sblimiation = ""
 						scope.updateObj.nn = ""
 						scope.updateObj.insert = ""
-
+						scope.updateObj.addOrderTimes=""
 					})
 
 				}
@@ -319,9 +320,10 @@
 				 * @param {*} scope
 				 */
 				this.allSave = function(scope) {
+					
 					scope.miOrderEdit = !scope.miOrderEdit
 					var selectRow = scope.gridApi2.selection.getSelectedRows()
-					if(selectRow.length <= 0) {
+					if(selectRow.length !=1) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
 						return;
 					}
@@ -410,14 +412,14 @@
 								name: 'updateTime',
 								displayName: $translate.instant('worktable.UPDATE_TIME'),
 								field: 'utcUpdate',
-								minWidth: '100',
+								minWidth: '30',
 								enableCellEdit: false,
 							},
 							{
 								name: 'uploadType',
 								displayName: "",
 								field: 'uploadType',
-								minWidth: '220',
+								minWidth: '350',
 								enableCellEdit: false,
 								cellTemplate: functionButtonTemplate
 							},
@@ -425,7 +427,7 @@
 								name: 'orderQuantity',
 								displayName: $translate.instant('worktable.NEW_ORDER_IN_TRADE_CARD'),
 								field: 'orderQuantity',
-								minWidth: '180',
+								minWidth: '120',
 								enableCellEdit: false
 							}
 						],
@@ -711,7 +713,7 @@
 									_this.getTransitOrder(scope, scope.page3, 5, 5);
 								} else if(i == 4) {
 									searchKey4 = newsearchKey;
-									_this.getTransitOrder(scope, scope.page4, 5, 4);
+									_this.getTransitOrder(scope, scope.page4, 4, 4);
 								}
 
 							});
@@ -725,9 +727,9 @@
 					scope.page2.curPage = 1;
 					scope.page3.curPage = 1;
 
-					_this.getAssignFactoryResult(scope, '5', 2, scope.page2);
-					_this.getTransitOrder(scope, scope.page3, 5);
-					_this.getTransitOrder(scope, scope.page4, 4);
+					_this.getAssignFactoryResult(scope, '5', 2, scope.page2 ,2);
+					_this.getTransitOrder(scope, scope.page3, 5 ,5);
+					_this.getTransitOrder(scope, scope.page4, 4 ,4);
 				}
 				this.getDailyOrder = function(scope, type, doc, documentType, finallyCallback) {
 					var _this = this;
@@ -936,8 +938,8 @@
 						}
 					}
 					var _this = this;
-					param['sort']="po";
-					param['order']='asc';
+//					param['sort']="po";
+//					param['order']='asc';
 
 
 					scope.navList[0].loading = true;
@@ -1086,7 +1088,8 @@
 						logo : "",
 						sblimiation : "",
 						nn : "",
-						insert :""
+						insert :"",
+						addOrderTimes:""
 					}
 					scope.allCapData = {
 						factoryCapData: [],
@@ -1335,7 +1338,7 @@
 							}
 					}
 				}
-				this.releaseOrderPending = function(scope) {
+				this.releaseOrderPending = function(scope,flag) {
 					var pendingSelect = scope.gridApi4.selection.getSelectedRows()
 					if(pendingSelect.length == 0) {
 						modalAlert(CommonService, 2, $translate.instant('worktable.NO_NEW_ORDER_CAN_RELEASE'), null);
@@ -1355,6 +1358,9 @@
 						"assignResultIds": listToString(pendingSelect, 'assignResultId'),
 						"status": "4"
 					};
+					if(flag){
+						param['checkMi']='YES';
+					}
 					scope.disableReleaseOrderButton = true;
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
 						if(data.status == 0) {
@@ -1363,14 +1369,21 @@
 
 							_this.refreshAll(scope);
 						} else {
-							modalAlert(CommonService, 2, data.message, null);
+							if('Some order do not have td print / mi csv /working no base ,please check .'==data.message){
+								modalAlert(CommonService, 0, data.message, function(data){
+									_this.releaseOrder(scope,'YES');
+								});
+							}else{
+								modalAlert(CommonService, 2, data.message, null);
+							}
+							debugger;
 						}
 					}, function(data) {
 						scope.disableReleaseOrderButton = false;
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
-				this.releaseOrder = function(scope) {
+				this.releaseOrder = function(scope,flag) {
 					var pendingSelect = scope.gridApi2.selection.getSelectedRows()
 					if(pendingSelect.length == 0) {
 						modalAlert(CommonService, 2, $translate.instant('worktable.NO_NEW_ORDER_CAN_RELEASE'), null);
@@ -1388,6 +1401,9 @@
 						"assignResultIds": listToString(pendingSelect, 'assignResultId'),
 						"status": "4"
 					};
+					if(flag){
+						param['checkMi']='YES';
+					}
 					scope.disableReleaseOrderButton = true;
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
 						if(data.status == 0) {
@@ -1395,15 +1411,22 @@
 
 							_this.refreshAll(scope);
 						} else {
-							modalAlert(CommonService, 2, data.message, null);
+							if('Some order do not have td print / mi csv /working no base ,please check .'==data.message){
+								modalAlert(CommonService, 0, data.message, function(data){
+									_this.releaseOrder(scope,'YES');
+								});
+							}else{
+								modalAlert(CommonService, 2, data.message, null);
+							}
 						}
+							debugger;
 						scope.disableReleaseOrderButton = false;
 					}, function(data) {
 						scope.disableReleaseOrderButton = false;
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
-				this.releaseAllOrder = function(scope) {
+				this.releaseAllOrder = function(scope,flag) {
 
 					var _this = this;
 					scope.disableReleaseOrderButton = true;
@@ -1421,13 +1444,23 @@
 						"documentIds": documentid,
 						"status": "4"
 					};
+					if(flag){
+						param['checkMi']='YES';
+					}
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
 						scope.disableReleaseOrderButton = false;
 						if(data.status == 0) {
 							modalAlert(CommonService, 2, $translate.instant('notifyMsg.RELEASE_SUCCESS'), null);
 							_this.refreshAll(scope);
 						} else {
-							modalAlert(CommonService, 2, data.message, null);
+							if('Some order do not have td print / mi csv /working no base ,please check .'==data.message){
+								modalAlert(CommonService, 0, data.message, function(data){
+									_this.releaseOrder(scope,'YES');
+								});
+							}else{
+								modalAlert(CommonService, 2, data.message, null);
+							}
+							debugger;
 						}
 					}, function(data) {
 						scope.disableReleaseOrderButton = false;
@@ -1505,7 +1538,7 @@
 							if(data.status != 0) {
 								modalAlert(CommonService, 2, data.message, null);
 							}else{
-								_this.getDailyOrder(scope, 3);
+								_this.getDailyOrder(scope, 5);
 							}
 							entity.disableRefreshButton = false;
 						}, function(data) {
@@ -1528,6 +1561,32 @@
 							planGroups: function() {
 								return {
 									fileType: "504"
+
+								};
+							}
+						}
+					});
+					modalInstance.result.then(function(returnData) {
+
+						if(returnData) {
+							modalAlert(CommonService, 2, $translate.instant('notifyMsg.UPLOAD_SUCCESS'), null);
+							_this.refreshAll(scope);
+						}
+					}, function() {});
+
+				}
+
+				this.importMiCSVFile = function(scope,documentType) {
+					var _this = this;
+					var modalInstance = $uibModal.open({
+						templateUrl: 'FileModal',
+						controller: 'FileController',
+						backdrop: 'static',
+						size: 'md',
+						resolve: {
+							planGroups: function() {
+								return {
+									fileType: documentType
 
 								};
 							}
@@ -1726,6 +1785,218 @@
 					});
 
 				}
+				
+				this.refreshTDPrint=function(scope){
+					var _this = this;
+					var param={
+						systemType:'EDI',
+						interfaceType:'D365TD'
+					}
+					scope.disableRefreshTDPrintButton = true;
+					GLOBAL_Http($http, "cpo/api/schedule/do_schedule?", 'GET', param, function(data) {
+						scope.disableRefreshTDPrintButton = false;
+						if(data.status == 0) {
+							_this.getAssignFactoryResult(scope, '5', 2, scope.page2, 2);
+							modalAlert(CommonService, 2,  $translate.instant('notifyMsg.REFRESH_DATA_SUCCESS'), null);
+						} else {
+							modalAlert(CommonService, 2, data.message, null);
+						}
+					}, function(data) {
+						scope.disableRefreshTDPrintButton = false;
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+				this.generateBatchNo = function(scope) {
+					var _this = this;
+
+					var documentId = "";
+
+					if(scope.newOrderData.length > 0) {
+						documentId = scope.newOrderData[0].documentId;
+					}  else {
+
+					}
+					if(!documentId) {
+						modalAlert(CommonService, 3, "No document", null);
+						return;
+					}
+					scope.generateBatchNoButtonDisabled = true;
+					GLOBAL_Http($http, "cpo/api/worktable/generate_batch_no?", 'GET', {
+						document_id: documentId
+					}, function(data) {
+						scope.generateBatchNoButtonDisabled = false;
+						if(data.status == 0) {
+							modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
+							_this.refreshAll(scope);
+						} else {
+							modalAlert(CommonService, 2, data.message, null);
+						}
+					}, function(data) {
+						scope.generateBatchNoButtonDisabled = false;
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+
+				}
+				
+				
+				this.setSeason = function(scope) {
+					var _this = this;
+					var selectedRows = scope.gridApi2.selection.getSelectedRows();
+					if(selectedRows.length <= 0) {
+						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
+						return;
+					}
+					var ids=[];
+					for(var index in selectedRows) {
+						var row = selectedRows[index];
+						ids.push(row.factAssignId);
+						// if ( row.season ) {
+						//   var text = "No need to set season for article(" + row.articleNo + ") since it is exists.";
+						//   modalAlert(CommonService , 2 , text , null);
+						//   return;
+						// }else{
+						//   ids.push(row.factAssignId);
+						// }
+					}
+
+					GLOBAL_Http($http, "cpo/api/worktable/query_season?", 'GET', {}, function(data) {
+						if(data.output && data.output.length > 0) {
+
+							scope.seasons = data.output.map(function(item) {
+								return {
+									id: item.value,
+									label: item.value
+								}
+
+							});
+
+							var topScope = scope;
+							var modalInstance = $uibModal.open({
+								animation: true,
+								ariaLabelledBy: 'modal-title',
+								ariaDescribedBy: 'modal-body',
+								templateUrl: 'set-season.html',
+								size: "sm",
+								controller: function($scope, $uibModalInstance) {
+
+									$scope.seasons = topScope.seasons;
+									$scope.selectSeason = $scope.seasons[0];
+
+									$scope.submit = function() {
+
+										$uibModalInstance.resolve({
+											season: $scope.selectSeason.id
+										});
+										$uibModalInstance.dismiss();
+									};
+									$scope.dismiss = function() {
+										$uibModalInstance.dismiss();
+									}
+
+								}
+
+							});
+
+							modalInstance.resolve = function(result) {
+
+								var season = result.season;
+
+								var param = {
+									orderType: 3,
+									season: season,
+									ids: ids.join(",")
+								}
+								GLOBAL_Http($http, "cpo/api/worktable/set_season", 'POST', param, function(data) {
+									if(data.status == 0) {
+										modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
+										_this.refreshAll(scope);
+									} else {
+										modalAlert(CommonService, 2, data.message, null);
+									}
+								}, function(data) {
+
+									modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+								});
+
+							}
+
+						} else {
+							var message = data.message ? data.message : $translate.instant('errorMsg.NO_ARTICLE_SEASON_IN_RANGEE_FOUND');
+							modalAlert(CommonService, 2, message, null);
+						}
+					}, function(data) {
+
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+
+				this.requestFactoryChange = function(scope, tabIndex) {
+					var gridApi = {}
+					if(tabIndex == '2') {
+						gridApi = scope.gridApi3
+					} else if(tabIndex == '1') {
+						gridApi = scope.gridApi4
+					}
+					debugger;
+					var _this = this;
+					var selectedRows = gridApi.selection.getSelectedRows();
+					if(selectedRows.length <= 0) {
+						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
+						return;
+					}
+
+					var modalInstance =
+						$uibModal.open({
+							animation: true,
+							ariaLabelledBy: "modal-header",
+							templateUrl: 'app/worktable/changeApplication.html',
+							controller: 'changeApplicationCtrl',
+							resolve: {
+								parameter: function() {
+									return {
+										showFactorySelect: 1
+									};
+								}
+							}
+						});
+					modalInstance.resolve = function(result) {
+						var ediOrderApprovals = [];
+						for(var i = 0; i < selectedRows.length; i++) {
+							var ediOrderApproval = {
+								assignResultId: selectedRows[i].assignResultId,
+								orderMasterId: selectedRows[i].orderMasterId,
+								originalPo: selectedRows[i].po,
+								fromFactory: selectedRows[i].confirmFactory,
+								toFactory: result.factory
+							};
+							ediOrderApprovals.push(ediOrderApproval);
+						}
+						var param = {
+							ediOrderApprovals: ediOrderApprovals,
+							transferReason: result.reason,
+							transferRemark: result.remark,
+							isNeedApproval: tabIndex == '1' ? "NO" : "YES",
+							MI_ORDER:"YES"
+						}
+							//新单，直接转厂
+							CommonService.showLoadingView("Loading...");
+							GLOBAL_Http($http, "cpo/api/worktable/orderapproval/release_approval", 'POST', param, function(data) {
+								CommonService.hideLoadingView();
+								if(data.status == 0) {
+									modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
+									_this.getTransitOrder(scope, scope.page3, 5 ,5);
+									_this.getTransitOrder(scope, scope.page4, 4 ,4);
+								} else {
+									modalAlert(CommonService, 2, data.message, null);
+								}
+							}, function(data) {
+								CommonService.hideLoadingView();
+								modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+							});
+					}
+				}
+				
+				
 			}
 		])
 		.controller('MIOrderCtrl', ['$scope', 'MIOrderService',
@@ -1733,7 +2004,9 @@
 				$scope.refreshAll = function() {
 					MIOrderService.refreshAll($scope);
 				}
-
+				$scope.requestFactoryChange = function(tabIndex) {
+					MIOrderService.requestFactoryChange($scope, tabIndex);
+				}
 				$scope.adjustFactoryAssignment = function(mode, tab) {
 					MIOrderService.adjustFactoryAssignment($scope, mode, tab);
 				}
@@ -1748,6 +2021,9 @@
 				}
 				$scope.refreshBno = function() {
 					MIOrderService.refreshBno($scope);
+				}
+				$scope.refreshTDPrint = function() {
+					MIOrderService.refreshTDPrint($scope);
 				}
 				$scope.refreshOrder = function(entity) {
 					MIOrderService.refreshOrder($scope, entity);
@@ -1784,18 +2060,27 @@
 				$scope.releaseOrderPending = function(type) {
 					MIOrderService.releaseOrderPending($scope, type);
 				}
+				
 				$scope.assignFactory = function() {
 					MIOrderService.assignFactory($scope);
 				}
+				
 				$scope.importFile = function(mode, confirmFactory) {
 					MIOrderService.importFile($scope);
-				};
+				}
+				
+				$scope.importMiCSVFile = function(documentType) {
+					MIOrderService.importMiCSVFile($scope,documentType);
+				}
+				
 				$scope.selectDocument = function() {
 					MIOrderService.selectDocument($scope);
 				}
+				
 				$scope.selectDocumentTypeChanged = function() {
 					MIOrderService.selectDocumentTypeChanged($scope);
 				}
+				
 				$scope.selectDocumentChanged = function() {
 					MIOrderService.selectDocumentChanged($scope);
 				}
@@ -1806,13 +2091,20 @@
 
 				$scope.deleteDom = function(entity) {
 					MIOrderService.deleteDom($scope, entity);
-				};
+				}
+				
 				$scope.toggleFilterRow = function() {
 					MIOrderService.toggleFilterRow($scope);
 				};
+				
 				$scope.reAssign = function() {
 					MIOrderService.reAssign($scope)
 				}
+				
+				$scope.generateBatchNo = function() {
+					MIOrderService.generateBatchNo($scope);
+				}
+				
 				$scope.bottomGridHeight = function() {
 					if(!$scope.hideTopInfo) {
 						return {
@@ -1843,6 +2135,9 @@
 
 				$scope.selectRow = function(row) {
 					MIOrderService.selectRow($scope, row)
+				}
+				$scope.setSeason = function() {
+					MIOrderService.setSeason($scope);
 				}
 				MIOrderService.init($scope);
 			}

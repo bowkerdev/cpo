@@ -2,8 +2,8 @@
 	'use strict';
 	angular
 		.module('cpo')
-		.service('CustomerForecastReportService', ['$http', '$translate', 'CommonService', '$uibModal',
-			function($http, $translate, CommonService, $uibModal) {
+		.service('CustomerForecastReportService', ['$http', '$translate', 'CommonService', '$uibModal', 'uiGridConstants','FilterInGridService',
+			function($http, $translate, CommonService, $uibModal, uiGridConstants,FilterInGridService) {
 				this.selectBatchDate = function(scope) {
 					if(scope.tabIndex == 1) {
 						this.getCustomerForecastReport(scope);
@@ -48,11 +48,11 @@
 					});
 				}
 				this.exportFile = function(scope) {
-					var _this=this;
-//					if(!scope.reportItems || scope.reportItems.length == 0) {
-//						modalAlert(CommonService, 2, $translate.instant('notifyMsg.NO_DATA_EXPORT'), null);
-//						return;
-//					}
+					var _this = this;
+					//					if(!scope.reportItems || scope.reportItems.length == 0) {
+					//						modalAlert(CommonService, 2, $translate.instant('notifyMsg.NO_DATA_EXPORT'), null);
+					//						return;
+					//					}
 					var param = {
 						pageSize: 100000,
 						pageNo: 1
@@ -72,8 +72,8 @@
 						if(scope.searchRequest.searchWorkingNo) {
 							param.like_workingNo = scope.searchRequest.searchWorkingNo;
 						}
-					} else if(scope.tabIndex==5){
-						param=_this.buildFcComparisonReportRequestParameter(scope);
+					} else if(scope.tabIndex == 5) {
+						param = _this.buildFcComparisonReportRequestParameter(scope);
 						param.documentType = 40001;
 						exportExcel(param, "cpo/portal/document/export_file?", "_blank");
 						return;
@@ -357,6 +357,9 @@
 					});
 				}
 
+				var lastSearchKey=null;
+				var compareNumberList=[];
+				var compareNotNumberList=[];
 				this.getFcComparisonReport = function(scope) {
 					var _this = this;
 					if(scope.searchRequest.fcComparisonDocs.length < 2) {
@@ -364,43 +367,95 @@
 						return;
 					}
 					var param = _this.buildFcComparisonReportRequestParameter(scope);
-					scope.fcComparisonData = [];
-          			scope.gridOptions2.showLoading = true;
+					scope.gridOptions2.zsColumnFilterRequestParam =  angular.copy(param);
+					var searchKey = FilterInGridService.getFilterParams(scope.gridApi2.grid);
+			        for (var key in searchKey) {
+			            param[key] = searchKey[key];
+			        }
+			        if(lastSearchKey){
+			        	var isExistDifferent=false;
+				        for (var key in param) {
+				        	if(compareNumberList.indexOf(key)<0){
+				            	 if(param[key]!=lastSearchKey[key]){
+				            	 	isExistDifferent=true;
+				            	 	break;
+				            	 }
+				        	}
+				        }
+				        if(!isExistDifferent){
+				        	return;
+				        }
+			        }
+			        lastSearchKey=angular.copy(param) ;
+					scope.gridOptions2.showLoading = true;
 					GLOBAL_Http($http, "cpo/api/customer_report/query_customer_forecast_comparison_report?", 'GET', param, function(data) {
-						
-          				scope.gridOptions2.showLoading = false;
+
+						scope.gridOptions2.showLoading = false;
 						if(scope.tabIndex != 5) {
 							return;
 						}
 						var headers = [];
-							angular.forEach(data.jsonExportEntries, function(item, index) {
-								headers.push({
-									name: (item.headerName ? item.headerName : "") + index,
-									displayName: item.headerName,
-									field: item.jsonObjectKey,
-									width: '150'
-								})
-							});
+						compareNumberList=[];
+						compareNotNumberList=[];
+						angular.forEach(data.jsonExportEntries, function(item, index) {
+							var col = {
+								name: (item.headerName ? item.headerName : "") + index,
+								displayName: item.headerName,
+								field: item.jsonObjectKey,
+								width: '150'
+							};
+							if(!isNaN(item.headerName.substr(0, 3))) {
+								compareNumberList.push(item.jsonObjectKey);
+								col.enableFiltering=true;
+								col.filters = [{
+										condition: uiGridConstants.filter.GREATER_THAN,
+										placeholder: 'greater than'
+									},
+									{
+										condition: uiGridConstants.filter.LESS_THAN,
+										placeholder: 'less than'
+									}
+								];
+							} else {
+								compareNotNumberList.push(item.jsonObjectKey);
+								col.enableFiltering = false;
+								col.headerCellTemplate = 'app/worktable/filter.html';
+							}
+							headers.push(col);
+						});
+						angular.forEach(scope.gridApi2.grid.columns, function(item, index) {
+							if(compareNotNumberList.indexOf(item.field)>-1){
+								item.filters=[];
+							}
+						});
 						scope.gridOptions2.columnDefs = angular.copy(headers);
-						scope.gridOptions2.totalItems=data.output.length;
-						scope.fcComparisonData = data.output;
-
+						scope.fcComparisonData=data.output;
+						scope.gridOptions2.totalItems = data.output.length;
+						debugger;
 					}, function(data) {
-          				scope.gridOptions2.showLoading = false;
+						scope.gridOptions2.showLoading = false;
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 
 				}
-				
-				this.buildFcComparisonReportRequestParameter=function (scope){
+
+				this.buildFcComparisonReportRequestParameter = function(scope) {
 					var param = {
 						group_by_field: listToString(scope.searchRequest.fcComparisonFields, "id"),
 						compareField: scope.searchRequest.fcComparisonQuantityType.id,
 						in_document_id: listToString(scope.searchRequest.fcComparisonDocs, "id")
 					};
-					return  param;
+					if(scope.searchRequest.fromMonth) {
+						param.fromMonth = scope.searchRequest.fromMonth;
+					}
+					if(scope.searchRequest.toMonth) {
+						param.toMonth = scope.searchRequest.toMonth;
+					}
+					param.compareOrder=scope.compareOrder;
+					debugger;
+					return param;
 				}
-				
+
 				this.searchlist = function(scope) {
 					var _this = this;
 					scope.page.pageSize = 20;
@@ -504,6 +559,7 @@
 							});
 						}
 					};
+					var url = "cpo/api/customer_report/query_customer_forecast_comparison_report_filter?";
 					scope.gridOptions2 = {
 						data: 'fcComparisonData',
 						rowEditWaitInterval: -1,
@@ -517,13 +573,23 @@
 						enableGridMenu: true,
 						enableSorting: true,
 						enableHorizontalScrollbar: 1,
-						gridMenuCustomItems: CommonService.zsZoomGridMenuCustomItems(),
+						enableFiltering: true,
 						enableVerticalScrollbar: 1,
 						totalItems: scope.page.totalNum,
 						useExternalPagination: false,
 						enablePagination: true,
 						enablePaginationControls: true,
-						columnDefs: []
+						zsGridName: "customerForecastReportTwo",
+						zsColumnFilterRequestUrl: url,
+						gridMenuCustomItems: CommonService.zsZoomGridMenuCustomItems(),
+						columnDefs: [],
+						onRegisterApi: function(gridApi) {
+							scope.gridApi2 = gridApi;
+							gridApi.core.on.filterChanged(scope, function(col) {
+								_this.getFcComparisonReport(scope);
+							});
+
+						}
 					};
 				}
 
@@ -558,6 +624,7 @@
 					scope.headerList = [];
 					//					_this.getSeasonList(scope);
 					scope.reportItems = [];
+					scope.fcComparisonData=[];
 					_this.initCustomerReport(scope);
 					//	_this.getCustomerForecastReport(scope);
 					//  _this.getOpenFCSummaryReport(scope);
@@ -582,7 +649,6 @@
 						CustomerForecastReportService.getCustomerForecastDocuments($scope);
 					} else if(index == 5) {
 						CustomerForecastReportService.getCustomerForecastDocuments($scope, index);
-						debugger;
 					}
 				}
 				$scope.searchActualOpenForecast = function() {
@@ -600,6 +666,10 @@
 				}
 				$scope.search = function() {
 					CustomerForecastReportService.getFcComparisonReport($scope);
+				}
+				$scope.compareOrderChange = function(compareOrder) {
+					$scope.compareOrder=compareOrder;
+					debugger;
 				}
 				CustomerForecastReportService.init($scope);
 			}

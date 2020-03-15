@@ -47,6 +47,21 @@
 					if($("#searchWorkingNo").val()) {
 						param.like_working_no = $("#searchWorkingNo").val();
 					}
+					if($("#searchSeason").val()) {
+						param.like_season = $("#searchSeason").val();
+					}
+					if($("#searchSizeGroup").val()) {
+						param.like_size_group = $("#searchSizeGroup").val();
+					}
+					if($("#searchLikeSize").val()) {
+						param.like_size = $("#searchLikeSize").val();
+					}
+					if($("#searchNotLikeSize").val()) {
+						param.nin_size = $("#searchNotLikeSize").val();
+					}
+					if($("#searchSizeList").val()) {
+						param.in_size = $("#searchSizeList").val().split(',');
+					}
 					if(shouldPageNumberReset) {
 						page.curPage = 1;
 						param.pageNo = page.curPage;
@@ -62,6 +77,69 @@
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
+				
+				$scope.updateBNumber = function() {
+					var _this = this;
+					var selectedRows = null; //scope.gridApi5.selection.getSelectedRows();
+					var ids = new Array();
+					selectedRows = $scope.gridApi1.selection.getSelectedRows();
+					if(selectedRows.length < 1) {
+						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
+						return;
+					}
+					for(var index in selectedRows) {
+						var row = selectedRows[index];
+						ids.push(row.workingNoSizeGroupId);
+					}
+					
+					var modalInstance = $uibModal.open({
+						animation: true,
+						ariaLabelledBy: 'modal-title',
+						ariaDescribedBy: 'modal-body',
+						templateUrl: 'update-b-number.html',
+						size: "md",
+						controller: function($scope, $uibModalInstance) {
+
+							debugger;
+							$scope.submit = function() {
+
+								$uibModalInstance.resolve({
+									bNumber: $scope.bNumber
+								});
+								$uibModalInstance.dismiss();
+							};
+							$scope.dismiss = function() {
+								$uibModalInstance.dismiss();
+							}
+
+						}
+
+					});
+					
+					modalInstance.resolve = function(result) {
+
+						var bNumber = result.bNumber;
+
+						var param = {
+							bNumber: bNumber,
+							ids: ids.join(",")
+						}
+						GLOBAL_Http($http, "cpo/api/worktable/workingnosizegroup/updateList", 'POST', param, function(data) {
+							if(data.status == 0) {
+								modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
+								 _this.search($scope);
+							} else {
+								modalAlert(CommonService, 2, data.message, null);
+							}
+						}, function(data) {
+
+							modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+						});
+
+					}
+				}
+				
+				
 				$scope.initBNumGrid = function(scope) {
 					var _this = this;
 
@@ -98,11 +176,36 @@
 
 						}
 					};
-
 				}
 
-				$scope.initBNumGrid($scope);
 
+
+
+
+
+				$scope.initLC0190NewDate = function(scope) {
+					var _this = this;
+			          var param = {
+			            in_code : 'LC0190NewOrderDate'
+			          }
+
+					GLOBAL_Http($http , "cpo/api/sys/admindict/translate_code?" , 'GET' , param , function ( data ) {
+						if(data.LC0190NewOrderDate && data.LC0190NewOrderDate.length > 0) {
+							scope.LC0190Date = data.LC0190NewOrderDate[0].label;			
+						} else {
+							var message = data.message ? data.message : $translate.instant('errorMsg.NO_ARTICLE_SEASON_IN_RANGEE_FOUND');
+							modalAlert(CommonService, 2, message, null);
+						}
+					}, function(data) {
+
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+
+
+
+				$scope.initBNumGrid($scope);
+                $scope.initLC0190NewDate($scope);
 				$scope.selectTab = function(index) {
 					$scope.tabIndex = index;
 					if(index == 1) {
@@ -160,6 +263,92 @@
 						}
 					}
 				}
+				
+				
+				
+				
+				$scope.changeLC0190Date = function() {
+					 var _this = this;
+			          var param = {
+			            in_code : 'LC0190NewOrderDateOption'
+			          }
+
+					GLOBAL_Http($http , "cpo/api/sys/admindict/translate_code?" , 'GET' , param , function ( data ) {
+						if(data.LC0190NewOrderDateOption && data.LC0190NewOrderDateOption.length > 0) {
+
+							$scope.newOrderDates = data.LC0190NewOrderDateOption.map(function(item) {
+								return {
+									id: item.value,
+									label: item.label,
+									value:item.value
+								}
+
+							});
+
+							var topScope = $scope;
+							var modalInstance = $uibModal.open({
+								animation: true,
+								ariaLabelledBy: 'modal-title',
+								ariaDescribedBy: 'modal-body',
+								templateUrl: 'set-lc0190-date.html',
+								size: "md",
+								controller: function($scope, $uibModalInstance) {
+
+									$scope.newOrderDates = topScope.newOrderDates;
+									$scope.selectNewOrderDate = $scope.newOrderDates[0];
+
+									$scope.submit = function() {
+
+										$uibModalInstance.resolve({
+											value: $scope.selectNewOrderDate.value
+										});
+										$uibModalInstance.dismiss();
+									};
+									$scope.dismiss = function() {
+										$uibModalInstance.dismiss();
+									}
+
+								}
+
+							});
+
+							modalInstance.resolve = function(result) {
+
+								var param = {
+									value: result.value
+								}
+								GLOBAL_Http($http, "cpo/api/worktable/set_lc0190_by_date", 'POST', param, function(data) {
+									if(data.status == 0) {
+										$scope.initLC0190NewDate($scope);
+										modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
+									} else {
+										modalAlert(CommonService, 2, data.message, null);
+									}
+								}, function(data) {
+
+									modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+								});
+
+							}
+
+						} else {
+							var message = data.message ? data.message : $translate.instant('errorMsg.NO_ARTICLE_SEASON_IN_RANGEE_FOUND');
+							modalAlert(CommonService, 2, message, null);
+						}
+					}, function(data) {
+
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			}
 		])
 })();

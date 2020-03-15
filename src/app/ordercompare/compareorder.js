@@ -1,136 +1,159 @@
 (function() {
-  'use strict';
-  angular
-    .module('cpo')
-    .service('orderCompareService', ['$http', '$translate', 'CommonService', '$uibModal',
-      function($http, $translate, CommonService, $uibModal) {
-        /**
-         * init
-         */
-        this.init = function(scope) {
-          // 初期化
-          var _this = this;
-          scope.gridOptions = {
-            data: 'items',
-            paginationPageSizes: [10, 20, 30, 40, 50],
-            paginationPageSize: 10,
-            rowEditWaitInterval: -1,
-            enableRowSelection: true,
-            enableRowHeaderSelection: true,
-            enableColumnMenus: true,
+	'use strict';
+	angular
+		.module('cpo')
+		.service('orderCompareService', ['$http', '$translate', 'CommonService', '$uibModal',
+			function($http, $translate, CommonService, $uibModal) {
+				var searchKey = [];
+				/**
+				 * init
+				 */
+				this.init = function(scope) {
+					// 初期化
+					var _this = this;
+					scope.searchRequest={};
+					scope.gridOptions = {
+						data: 'items',
+						rowEditWaitInterval: -1,
+						enableRowSelection: false,
+						enableRowHeaderSelection: false,
+						enableColumnMenus: true,
 						enableGridMenu: true,
-            enableSorting: true,
-            enableHorizontalScrollbar: 1,
-            gridMenuCustomItems: CommonService.zsZoomGridMenuCustomItems(),
-            enableVerticalScrollbar: 0,
-            totalItems: scope.page.totalNum,
-            useExternalPagination: true,
-            columnDefs: []
-          };
-        };
-        
-        this.getCompareOrder = function(scope) {
+						enableSorting: true,
+						enableFiltering:true,
+						enableHorizontalScrollbar: 1,
+						gridMenuCustomItems: CommonService.zsZoomGridMenuCustomItems(),
+						enableVerticalScrollbar: 1,
+						totalItems: scope.page.totalNum,
+						columnDefs: []
+					};
+//					_this.getCompareOrder(scope);
+						_this.fetchBatchDates(scope);
+				};
+
+				this.fetchBatchDates = function(scope) {
+					var _this = this;
+					var param = {
+						in_code: 'LOCOMPAREDOCS'
+					}
+					GLOBAL_Http($http, "cpo/api/sys/admindict/translate_code?", 'GET', param, function(data) {
+
+						if(data.LOCOMPAREDOCS) {
+
+							scope.docs = data.LOCOMPAREDOCS;
+
+							for(var i = 0; i < scope.docs.length; i++) {
+								scope.docs[i].id = scope.docs[i].value;
+								scope.docs[i].label = scope.docs[i].label;
+							}
+							if(scope.docs != null && scope.docs.length>0) {
+								scope.searchRequest.doc = scope.docs[0] ;
+								_this.getCompareOrder(scope);
+							}
+						}
+
+					}, function(data) {
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+
+
+				this.getCompareOrder = function(scope) {
 					var param = {};
 
-					if(scope.selectDoc && scope.selectDoc.id) {
-						param.eq_document_id = scope.selectDoc.id;
+					if(scope.searchRequest.doc && scope.searchRequest.doc.id) {
+						param.eq_document_id = scope.searchRequest.doc.id;
 					}
-					for(var attr in searchKey5) {
-							if(searchKey5[attr]) {
-								param[attr] = urlCharTransfer(searchKey5[attr]);
-							}
+					for(var attr in searchKey) {
+						if(searchKey[attr]) {
+							param[attr] = urlCharTransfer(searchKey[attr]);
+						}
 					}
 					var _this = this;
 					scope.showLoading = true;
-					var staticColumns = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_new", true, 100);
 					GLOBAL_Http($http, "cpo/api/worktable/query_lo_order_compare?", 'POST', param, function(data) {
 
-						if(status == '4') {
-							scope.gridOptions5.showLoading = false;
-							scope.navList[2].loading = false;
-						} else if(status == '5') {
-							scope.gridOptions6.showLoading = false;
-							scope.navList[3].loading = false;
-						}
-
 						if(data.status == 0) {
-							if(data.output) {
-								if(status == '4') {
-									scope.gridOptions5.data = translateData(data.output);
-									scope.gridOptions5.columnDefs = angular.copy(staticColumns);
-									scope.navList[2].count = data.totalCount ? data.totalCount : "0";
-									workTableCommonService.bulkorderDynamicColumns(data.sizeListCount, scope.gridOptions5);
-
-									if(scope.gridOptions5.data && scope.gridOptions5.data.length > 0) {
-										for(var index in scope.gridOptions5.data) {
-											var item = scope.gridOptions5.data[index];
-											var manufacturingSize = item.ediOrderSizes;
-											if(manufacturingSize) {
-												for(var index2 = 0; index2 < manufacturingSize.length; index2++) {
-													var xx = manufacturingSize[index2];
-
-													if(xx) {
-														item["OQTY_" + (index2 + 1)] = xx.sizeQuantity ? xx.sizeQuantity : "";
-														item["TS_" + (index2 + 1)] = xx.manufacturingSize ? xx.manufacturingSize : "";
-														item['SIZENAME_' + (index2 + 1)] = xx.sizeName ? xx.sizeName : "";
-														item["unitPrice_" + (index2 + 1)] = xx.unitPrice ? xx.unitPrice : "";
-													}
-												}
-											}
-										}
-									}
-									scope.page4.totalNum = data.total;
-									scope.gridOptions5.totalItems = scope.page4.totalNum;
-									scope.tabStatus.tabIndex1 = true;
-								} else if(status == '5') {
-									scope.gridOptions6.data = translateData(data.output);
-									scope.gridOptions6.columnDefs = angular.copy(staticColumns);
-
-									workTableCommonService.bulkorderDynamicColumns(data.sizeListCount, scope.gridOptions6);
-
-									if(scope.gridOptions6.data && scope.gridOptions6.data.length > 0) {
-										for(var index in scope.gridOptions6.data) {
-											var item = scope.gridOptions6.data[index];
-											var manufacturingSize = item.ediOrderSizes;
-											if(manufacturingSize) {
-												for(var index2 = 0; index2 < manufacturingSize.length; index2++) {
-													var xx = manufacturingSize[index2];
-
-													if(xx) {
-														item["OQTY_" + (index2 + 1)] = xx.sizeQuantity ? xx.sizeQuantity : "";
-														item["TS_" + (index2 + 1)] = xx.manufacturingSize ? xx.manufacturingSize : "";
-														item['SIZENAME_' + (index2 + 1)] = xx.sizeName ? xx.sizeName : "";
-														item["unitPrice_" + (index2 + 1)] = xx.unitPrice ? xx.unitPrice : "";
-													}
-												}
-											}
-										}
-									}
-									scope.page5.totalNum = data.total;
-									scope.navList[3].count = data.totalCount ? data.totalCount : "0";
-									scope.gridOptions6.totalItems = scope.page5.totalNum;
-									scope.tabStatus.tabIndex1 = true;
-								}
+							if(data.jsonExportEntries) {
+								var headers = [];
+								angular.forEach(data.jsonExportEntries, function(item, index) {
+									headers.push({
+										name: (item.headerName ? item.headerName : "") + index,
+										displayName: item.headerName,
+										field: item.jsonObjectKey,
+										width: '150'
+									})
+								});
+								scope.gridOptions.columnDefs = angular.copy(headers);
+							}
+							if(data.output.data) {
+								scope.loTotal=data.output.loTotalQuantity;
+								scope.cpoTotal= data.output.cpoTotalQuantity;
+								data.output.data = translateData(data.output.data);
+								scope.items = data.output.data;
+							} else {
 
 							}
 						} else {
+
 							modalAlert(CommonService, 2, data.message, null);
 						}
+
 					}, function(data) {
-						if(status == '4') {
-							scope.gridOptions5.showLoading = false;
-						} else if(status == '5') {
-							scope.gridOptions6.showLoading = false;
-						}
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 
 				}
-      }
-    ])
-    .controller('orderCompareCtrl', ['$scope', 'orderCompareService',
-      function($scope, orderCompareService) {
-        orderCompareService.init($scope);
-      }
-    ])
+				
+				
+				this.importFile = function(scope,documentType) {
+					var _this = this;
+					var modalInstance = $uibModal.open({
+						templateUrl: 'FileModal',
+						controller: 'FileController',
+						backdrop: 'static',
+						size: 'md',
+						resolve: {
+							planGroups: function() {
+								return {
+									fileType: documentType
+
+								};
+							}
+						}
+					});
+					modalInstance.result.then(function(returnData) {
+
+						if(returnData) {
+							modalAlert(CommonService, 2, $translate.instant('notifyMsg.UPLOAD_SUCCESS'), null);
+							_this.fetchBatchDates(scope);
+						}
+					}, function() {});
+
+				}
+				this.exportFile = function(scope,documentType) {
+					var param={};
+					if(scope.searchRequest.doc && scope.searchRequest.doc.id) {
+						param.eq_document_id = scope.searchRequest.doc.id;
+					}else{
+						modalAlert(CommonService, 3,'Please Select Document.', null);
+						return ;
+					}
+					param['documentType']=documentType;
+					exportExcel(param, "cpo/portal/document/export_file?", "_blank");
+				}
+			}
+		])
+		.controller('orderCompareCtrl', ['$scope', 'orderCompareService',
+			function($scope, orderCompareService) {
+				
+				$scope.importFile = function(documentType) {
+					orderCompareService.importFile($scope,documentType);
+				};
+				$scope.exportFile = function(documentType) {
+					orderCompareService.exportFile($scope,documentType);
+				};
+				orderCompareService.init($scope);
+			}
+		])
 })();

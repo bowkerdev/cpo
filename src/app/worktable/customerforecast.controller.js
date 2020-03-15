@@ -2173,6 +2173,25 @@
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
+				
+				
+
+				this.releaseToBUERP = function(scope) {
+					var param={
+						 "interfaceType":"TRIGGER_BU_ERP_IMPORT",
+						 "systemType":"FR"
+					}
+					scope.disableReleaseERPButton=true;
+					GLOBAL_Http($http, "cpo/api/schedule/do_schedule?", 'GET', param, function(data) {
+						scope.disableReleaseERPButton=false;
+						modalAlert(CommonService, 2, $translate.instant('notifyMsg.RELEASE_SUCCESS'), null);
+					}, function(data) {
+						scope.disableReleaseERPButton=false;
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+				
+				
 				this.refreshBno = function(scope, entity) {
 
 					if(scope.gridOptions7.data.length == 0) {
@@ -2392,6 +2411,9 @@
 				}
 				$scope.setSeason = function() {
 					CustomerForecastService.setSeason($scope);
+				}
+				$scope.releaseToBUERP = function() {
+					CustomerForecastService.releaseToBUERP($scope);
 				}
 				$scope.selectDocumentTypeChanged = function() {
 					CustomerForecastService.selectDocumentTypeChanged($scope);

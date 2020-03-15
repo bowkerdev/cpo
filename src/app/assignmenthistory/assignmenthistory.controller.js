@@ -553,6 +553,103 @@
           }
         }
 
+
+				this.transferDocumnet = function(scope) {
+					var _this = this;
+					var selectedRows = null; //scope.gridApi5.selection.getSelectedRows();
+					var ids = new Array();
+					if(scope.activeTab == 1) {
+						selectedRows = scope.gridApi1.selection.getSelectedRows();
+					} else if(scope.activeTab == 2) {
+						selectedRows = scope.gridApi2.selection.getSelectedRows();
+					} else if(scope.activeTab == 3) {
+						selectedRows = scope.gridApi3.selection.getSelectedRows();
+					} else if(scope.activeTab == 4) {
+						selectedRows = scope.gridApi4.selection.getSelectedRows();
+					};
+					if(selectedRows.length < 1) {
+						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
+						return;
+					}
+
+					for(var index in selectedRows) {
+						var row = selectedRows[index];
+						ids.push(row.factAssignId);
+					}
+					var param={
+						documentType: scope.orderType.value,
+						pageNo: '1',
+						pageSize: '100000'
+					}
+					GLOBAL_Http($http, "cpo/api/document/query_document?", 'GET', param, function(data) {
+						if(data.output && data.output.documents &&data.output.documents.length > 0) {
+				
+							scope.documents = data.output.documents.map(function(item) {
+								return {
+									id: item.documentId,
+									label: item.documentOldName + " (" + new Date(item.utcCreate).toLocaleDateString() + ")"
+								}
+							});
+							var topScope = scope;
+							var modalInstance = $uibModal.open({
+								animation: true,
+								ariaLabelledBy: 'modal-title',
+								ariaDescribedBy: 'modal-body',
+								templateUrl: 'transfer-document.html',
+								size: "md",
+								controller: function($scope, $uibModalInstance) {
+
+									$scope.documents = topScope.documents;
+									$scope.selectDocument = $scope.documents[0];
+
+									$scope.submit = function() {
+
+										$uibModalInstance.resolve({
+											documentId: $scope.selectDocument.id
+										});
+										$uibModalInstance.dismiss();
+									};
+									$scope.dismiss = function() {
+										$uibModalInstance.dismiss();
+									}
+
+								}
+
+							});
+
+							modalInstance.resolve = function(result) {
+
+								var documentId = result.documentId;
+
+								var param = {
+									documentId: documentId,
+									ids: ids.join(",")
+								}
+								GLOBAL_Http($http, "cpo/api/worktable/transfer_order_document", 'POST', param, function(data) {
+									if(data.status == 0) {
+										modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
+										 _this.searchlist(scope);
+									} else {
+										modalAlert(CommonService, 2, data.message, null);
+									}
+								}, function(data) {
+
+									modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+								});
+
+							}
+
+						} else {
+							var message = data.message ? data.message : $translate.instant('errorMsg.NO_ARTICLE_SEASON_IN_RANGEE_FOUND');
+							modalAlert(CommonService, 2, message, null);
+						}
+					}, function(data) {
+
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+
+
         this.initSampleOrderGrid = function ( scope , i , gridData ) {
           var _this = this;
 
@@ -664,6 +761,13 @@
           if(scope.activeTab!=5&&scope.activeTab!=6){
           	if(scope.po){
           		param[ 'like_po' ] = scope.po;
+          	}
+          }
+          
+          if(scope.activeTab!=5&&scope.activeTab!=6){
+          	if(scope.pos){
+          		param[ 'in_po' ] = scope.pos.replace(',','**').replace('\n','**').replace(' ','**');
+          		debugger;
           	}
           }
           
@@ -903,6 +1007,9 @@
         }
         $scope.searchlist = function () {
           assignmentHistoryService.searchlist($scope);
+        }
+        $scope.transferDocumnet = function () {
+          assignmentHistoryService.transferDocumnet($scope);
         }
         assignmentHistoryService.init($scope);
       }

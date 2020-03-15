@@ -6,22 +6,22 @@
       <div class="page-title" style="height: 60px">
         <scrollable-tabset show-tooltips="false" api="scrlTabsApi" class="no-content-tab">
           <uib-tabset>
-            <uib-tab select="selectTab('1')">
+            <uib-tab select="selectTab('1')" ng-if="userArea!='BVN'">
               <uib-tab-heading translate="workTableTitle.MKT_FC_ASSIGNMENT"></uib-tab-heading>
             </uib-tab>
-            <uib-tab select="selectTab('2')">
+            <uib-tab select="selectTab('2')" ng-if="userArea!='BVN'">
               <uib-tab-heading translate="workTableTitle.CUS_FC_ASSIGNMENT"></uib-tab-heading>
             </uib-tab>
-            <uib-tab select="selectTab('3')">
+            <uib-tab select="selectTab('3')" ng-if="userArea!='BVN'">
               <uib-tab-heading translate="workTableTitle.BULK_ORDER_ASSIGNMENT"></uib-tab-heading>
             </uib-tab>
-            <uib-tab select="selectTab('4')">
+            <uib-tab select="selectTab('4')" ng-if="userArea=='BVN'||1==1">
               <uib-tab-heading translate="workTableTitle.SAMPLE_ORDER_ASSIGNMENT"></uib-tab-heading>
             </uib-tab>
-            <uib-tab select="selectTab('5')">
+            <uib-tab select="selectTab('5')" ng-if="userArea!='BVN'">
               <uib-tab-heading translate="workTableTitle.MI_ORDER_ASSIGNMENT"></uib-tab-heading>
             </uib-tab>
-            <uib-tab select="selectTab('6')">
+            <uib-tab select="selectTab('6')" ng-if="userArea!='BVN'">
               <uib-tab-heading translate="workTableTitle.NON_TRADE_CARD_ORDER_ASSIGNMENT"></uib-tab-heading>
             </uib-tab>
           </uib-tabset>
@@ -32,7 +32,7 @@
     <ng-include src="'app/worktable/customerforecast.html'" ng-if="showView=='CustomerForecast'"></ng-include>
     <ng-include src="'app/worktable/marketingforecast.html'" ng-if="showView=='MarketingForecast'"></ng-include>
     <ng-include src="'app/worktable/bulkorder.html'" ng-if="showView=='LC0190'"></ng-include>
-    <ng-include src="'app/worktable/sampleorder.html'" ng-if="showView=='SampleOrder'"></ng-include>
+    <ng-include src="'app/worktable/sampleordernew.html'" ng-if="showView=='SampleOrder'"></ng-include>
     <ng-include src="'app/worktable/nontradecard.html'" ng-if="showView=='NonTradeCard'"></ng-include>
     <ng-include src="'app/worktable/miorder.html'" ng-if="showView=='MIOrder'"></ng-include>
   </div>
@@ -89,7 +89,7 @@
     <div ng-if="row.entity.uploadType == '1'" class="work-table-button-width">
 			<button  class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.toUpload(row.entity)"  ng-bind-html="row.entity.uploadHtml" ng-disabled="row.entity.Uploading"></button>
 			<button  class="btn-bowker-theme" style="height: 24px;line-height: 12px;background-color: #ed6044;border: #ed6044 1px solid;" ng-click="grid.appScope.deleteDom(row.entity)" ng-disabled="row.entity.Deleting"><i class="fa fa-trash-o"></i> Delete</button>
-      <button ng-if="row.entity.documentType == '3'||row.entity.documentType == '4'||row.entity.documentType == '6' ||row.entity.documentType == '9'||row.entity.documentType == '7'||row.entity.documentType == '8' " class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.refreshOrder(row.entity)" ng-disabled="row.entity.disableRefreshButton"><i class="fa fa-refresh"></i> Refresh</button>
+      <button ng-if="row.entity.documentType == '3'||row.entity.documentType == '4'||row.entity.documentType == '6' ||row.entity.documentType == '9'||row.entity.documentType == '7'||row.entity.documentType == '8'||row.entity.documentType == '10' " class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.refreshOrder(row.entity)" ng-disabled="row.entity.disableRefreshButton"><i class="fa fa-refresh"></i> Refresh</button>
     </div>
     <div ng-if="row.entity.uploadType == '2'" ng-class="{'work-table-button-width':grid.appScope.existUploadType}">
       <button class="btn-bowker-theme" style="height: 24px;line-height: 12px;" ng-click="grid.appScope.refreshOrder(row.entity)" ng-disabled="row.entity.disableRefreshButton"><i

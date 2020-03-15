@@ -23,7 +23,6 @@
 
 				}
 
-
 				this.getSeasonList = function(scope) {
 					var _this = this;
 					GLOBAL_Http($http, "cpo/api/worktable/query_season?", 'GET', {}, function(data) {
@@ -34,7 +33,7 @@
 							for(var i = 0; i < scope.seasonList.length; i++) {
 								scope.seasonList[i].id = scope.seasonList[i].value;
 							}
-                scope.season=scope.seasonList[1];
+							scope.season = scope.seasonList[1];
 						} else {
 							modalAlert(CommonService, 2, data.message, null);
 						}
@@ -45,17 +44,17 @@
 				/**
 				 * init
 				 */
-				this.UploadFile=function(scope,file){
+				this.UploadFile = function(scope, file) {
 
-					scope.file=file;
-					scope.fileName=file.name;
+					scope.file = file;
+					scope.fileName = file.name;
 				}
 
-				this.onSeasonChange = function(scope,season) {
-					scope.season=season;
+				this.onSeasonChange = function(scope, season) {
+					scope.season = season;
 				}
 
-				this.Upload=function(scope){
+				this.Upload = function(scope,reUpload) {
 
 					if(scope.fileType == 901) {
 						if(!scope.season.id) {
@@ -63,13 +62,13 @@
 							return;
 						}
 					}
-					if(!scope.file){
+					if(!scope.file) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.PLEASE_SELECT_FILE'), null);
 						return;
 					}
 					var _this = this;
 					var fileType = getFileType(scope.file.name);
-					if(fileType !== 'xlsx'&&fileType !== 'XLSX' && fileType !== 'xls' && fileType !== 'XLS'&& fileType !== 'xlsm' && fileType !== 'xltx' && fileType !== 'xltm' && fileType !== 'xlsb' && fileType !== 'xlam') {
+					if(fileType !== 'xlsx' && fileType !== 'XLSX' && fileType !== 'xls' && fileType !== 'XLS' && fileType !== 'xlsm' && fileType !== 'xltx' && fileType !== 'xltm' && fileType !== 'xlsb' && fileType !== 'xlam') {
 						modalAlert(CommonService, 3, $translate.instant('errorMsg.ERROR_FILE_FORMAT'), null);
 						return;
 					}
@@ -79,23 +78,31 @@
 					if(scope.fileType == 901) {
 						fd.append("season", scope.season.label);
 					}
-					if(scope.criteriaVersionId){
+					if(scope.criteriaVersionId) {
 						fd.append("criteriaVersionId", scope.criteriaVersionId);
 					}
-
+					if(reUpload=='YES'){
+						fd.append("isReUpload", reUpload);
+					}
 					scope.uploadHtml = 'Uploading... ';
 					scope.Uploading = true;
 					GLOBAL_Http_UploadFile($http, "cpo/api/worktable/upload_factory_assignment_document?", fd, function(data) {
 
 						if(data.status == 0) {
-							if(scope.doResolve){
+							if(scope.doResolve) {
 								gModalInstance.resolve(data);
 							}
 							gModalInstance.close("YES");
 						} else {
-              scope.uploadHtml = '<i class="fa fa-upload"></i> Upload ';
-              scope.Uploading = false;
-							modalAlert(CommonService, 3, data.message, null);
+							scope.uploadHtml = '<i class="fa fa-upload"></i> Upload ';
+							scope.Uploading = false;
+							if(data.message&&data.message.indexOf("MOs have been exist in those POs")>-1){
+								modalAlert(CommonService, 0, data.message, function(data){
+									_this.Upload(scope,'YES');
+								});
+							}else{
+								modalAlert(CommonService, 3, data.message, null);
+							}
 						}
 					}, function(data) {
 						scope.uploadHtml = '<i class="fa fa-upload"></i> Upload ';
@@ -107,11 +114,11 @@
 					var _this = this;
 					scope.uploadHtml = '<i class="fa fa-upload"></i> Upload ';
 					scope.Uploading = false;
-					scope.fileName='Please Select File...';
-					scope.fileType=planGroups.fileType;
-					scope.criteriaVersionId=planGroups.criteriaVersionId;
-					scope.season={};
-					scope.doResolve=planGroups.doResolve;
+					scope.fileName = 'Please Select File...';
+					scope.fileType = planGroups.fileType;
+					scope.criteriaVersionId = planGroups.criteriaVersionId;
+					scope.season = {};
+					scope.doResolve = planGroups.doResolve;
 					_this.getSeasonList(scope);
 				};
 			}
@@ -126,8 +133,8 @@
 					UploadFileService.save($scope);
 				}
 				$scope.UploadFile = function(file) {
-					if(file){
-					UploadFileService.UploadFile($scope,file);
+					if(file) {
+						UploadFileService.UploadFile($scope, file);
 					}
 				}
 
@@ -135,7 +142,7 @@
 					UploadFileService.Upload($scope);
 				}
 				$scope.onSeasonChange = function(season) {
-					UploadFileService.onSeasonChange($scope,season);
+					UploadFileService.onSeasonChange($scope, season);
 				}
 				UploadFileService.init($scope, planGroups);
 			}

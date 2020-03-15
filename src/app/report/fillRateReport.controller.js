@@ -154,6 +154,9 @@
 	          if(result.documentType){
 	          	param.orderRange=result.documentType;
 	          }
+	          if(result.exportCancelOrder){
+	          	param.exportCancelOrder=result.exportCancelOrder;
+	          }
 	          param.documentType=7001;
 						debugger;
 	        	exportExcel(param , "cpo/portal/document/export_file?" , "_blank");

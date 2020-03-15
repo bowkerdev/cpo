@@ -1436,6 +1436,9 @@
 						doc['orderDate'] = result.orderTime;
 						doc['documentName'] = result.documentName;
 						doc['orderType'] = 4;
+						if(scope.userInfo){
+							doc['areaname']=scope.userInfo.areaname;
+						}
 						entity.disableRefreshButton = true;
 						GLOBAL_Http($http, "cpo/api/worktable/refresh_order?", 'POST', doc, function(data) {
 							if(data.status != 0) {
@@ -1460,6 +1463,9 @@
 						param['value'] = '4';
 						param['orderDate'] = doc.orderDate;
 						param['documentName'] = doc.documentName;
+						if(scope.userInfo){
+							param['areaname']=scope.userInfo.areaname;
+						}
 					}
 					var _this = this;
 					this.getAllHistoryOrder(scope);
@@ -1561,8 +1567,8 @@
 				}
 			}
 		])
-		.controller('SampleOrderCtrl', ['$scope', 'SampleOrderService',
-			function($scope, SampleOrderService) {
+		.controller('SampleOrderCtrl', ['$scope', 'SampleOrderService','CommonService',
+			function($scope, SampleOrderService,CommonService) {
 				$scope.refreshAll = function() {
 					SampleOrderService.refreshAll($scope);
 				}
@@ -1649,6 +1655,7 @@
 					}
 
 				}
+				$scope.userInfo=CommonService.userInfo;
 				SampleOrderService.init($scope);
 			}
 		])

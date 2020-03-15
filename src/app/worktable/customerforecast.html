@@ -199,6 +199,10 @@
 		          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
 		          translate="">Check matter order</span>
 		        </button>
+					<button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseToBUERP()">
+            <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+            translate="">Release To BU ERP</span>
+          </button>
 				</div>
 			</div>
 			<div ng-show="tabIndex=='2'">
@@ -241,6 +245,10 @@
             <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
             translate="">Set Season</span>
           </button>
+					<button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseToBUERP()">
+            <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+            translate="">Release To BU ERP</span>
+          </button>
 				</div>
 			</div>
 
@@ -253,6 +261,10 @@
 					<button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseTransitOrder()" ng-disabled="disableReleaseOrderButton">
             <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
             translate="worktable.RELEASE"></span>
+          </button>
+					<button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseToBUERP()" ng-disabled="disableReleaseERPButton">
+            <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+            translate="">Release To BU ERP</span>
           </button>
 
 				</div>

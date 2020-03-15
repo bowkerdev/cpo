@@ -58,6 +58,8 @@
     .service('CommonService', ['$modal', '$translate', 'COMMON_CONFIG','uiGridConstants',
       function ($uibModal, $translate, COMMON_CONFIG,uiGridConstants) {
 
+			this.userInfo;
+
       this.setFlg = function(checkParam1, checkParam2){
         var checkResult = null;
         if (angular.isDefined(checkParam2)) {

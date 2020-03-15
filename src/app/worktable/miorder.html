@@ -216,6 +216,10 @@
             <i class="fa fa-upload"></i>
             <span translate="">Import</span>
           </button>
+	        <button style="float: right;margin-top: 10px;margin-right: 10px;" class="btn btn-secondary btn-single" ng-click="requestFactoryChange(tabIndex)" ng-if="tabIndex=='1'||tabIndex=='2'">
+	          <i class="fa fa-share"></i>
+	          <span translate="">Change Application</span>
+	        </button>
           <!--<button style="float: right;margin-top: 10px;margin-right: 20px;" class="btn btn-secondary btn-single" ng-click="toggleFilterRow()" >-->
           <!--<i class="fa fa-search"></i>-->
           <!--<span translate="index.SEARCH"></span>-->
@@ -245,34 +249,40 @@
           </button>
         </div>
         <div ng-if="tabIndex=='0'">
-          <div class="col-md-2">
+          <div class="col-md-1">
             <div>Stripes</div>
             <div class="input-group" style="width: 100%;">
               <input type="text" class="form-control" aria-label="" ng-model="updateObj.stripes" style="width: 100%;">
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-1">
             <div>Logo</div>
             <div class="input-group" style="width: 100%;">
               <input type="text" class="form-control" aria-label="" ng-model="updateObj.logo" style="width: 100%;">
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-1">
             <div>Sblimiation</div>
             <div class="input-group" style="width: 100%;">
               <input type="text" class="form-control" aria-label="" ng-model="updateObj.sblimiation" style="width: 100%;">
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-1">
             <div>N&N</div>
             <div class="input-group" style="width: 100%;">
               <input type="text" class="form-control" aria-label="" ng-model="updateObj.nn" style="width: 100%;">
             </div>
           </div>
-          <div class="col-md-2">
-            <div>MT2FB4 Hem Insert</div>
+          <div class="col-md-1">
+            <div>Hem Insert</div>
             <div class="input-group" style="width: 100%;">
               <input type="text" class="form-control" aria-label="" ng-model="updateObj.insert" style="width: 100%;">
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div>Add Order Times</div>
+            <div class="input-group" style="width: 100%;">
+              <input type="text" class="form-control" aria-label="" ng-model="updateObj.addOrderTimes" style="width: 100%;">
             </div>
           </div>
           <div class="col-md-2">
@@ -298,21 +308,37 @@
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span translate="worktable.CONFIRM_TO_AX"></span>
             </button>
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="setSeason()" >
+		          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+		          translate="">Set Season</span>
+		        </button>
 		        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
 		          <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
 		          translate="">Refresh 168 No.</span>
 		        </button>
-            <button ng-if="!miOrderEdit" class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="allUpdate()" ng-disabled="newOrderData.length===0">
+            <button  class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="allSave()" ng-disabled="newOrderData.length===0">
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span>Update</span>
-            </button>
-            <button ng-if="miOrderEdit" class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="allSave()" ng-disabled="newOrderData.length===0">
-              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
-              <span>Save</span>
             </button>
 		        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refreshBno()" ng-disabled="disableRefreshBNoButton">
 		          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
 		          translate="worktable.REFRESH_B_NO"></span>
+		        </button>
+		        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refreshTDPrint()" ng-disabled="disableRefreshTDPrintButton">
+		          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+		          >Refresh TD Print</span>
+		        </button>
+		        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="generateBatchNo()" ng-disabled="generateBatchNoButtonDisabled">
+		          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+		          translate="">Generate Batch No.</span>
+		        </button>
+		        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="importMiCSVFile(80000)" >
+		          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+		          translate="">Import MI CSV.</span>
+		        </button>
+		        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="importMiCSVFile(80001)" >
+		          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+		          translate="">Import Working No Base Attribute.</span>
 		        </button>
           </div>
         </div>
@@ -346,6 +372,20 @@
     </div>
 
   </div>
+  
+
+<script type="text/ng-template" id="set-season.html">
+  <div class="modal-header">
+    <h3 class="modal-title" >Set season</h3>
+  </div>
+  <div class="modal-body" >
+    <select ng-model="selectSeason" ng-options="season.label for season in seasons" style="height: 32px;width:100%;padding-left: 10px;"></select>
+  </div>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
+</script>
   <script id="stripesTemplate" type="text/template">
     <div ng-if="!grid.appScope.miOrderEdit" class="templatestyle" style="text-align: left">
       <span>{{row.entity.miStripes}}</span>

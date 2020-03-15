@@ -44,7 +44,11 @@
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
           </span>
     </div>
-
+    
+    <div class="form-group" ng-show="checkDocumentType('Order')>-1">
+    	<input type="checkbox" ng-model="exportCancelOrder" class="col-sm-3 control-label"> Export Cancel Order</input>
+    </div>
+    
   </form>
   <div class="modal-footer">
     <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>

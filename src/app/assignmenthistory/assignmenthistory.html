@@ -44,23 +44,16 @@
 
 					</div>
 					<div class="pull-left">
-						<!--<span translate="worktable.SEASON">:</span>-->
-						<!--<select style="font-size: 14px;width: 80px;height: 30px;" ng-model="season" class="form-control"-->
-						<!--ng-options="season.label for season in seasonList">-->
-						<!--</select>-->
-						<span translate="worktable.workingNo" style="margin-left: 30px;">:</span>
+						<span  style="margin-left: 30px;">Working No:</span>
 						<input ng-model="workingNo" style="height: 30px;" type="text" />
 
-						<!--<div ng-show="activeTab!=5&&activeTab!=6">-->
-						<span ng-show="activeTab!=5&&activeTab!=6" translate="worktable.ADIDAS_PO" style="margin-left: 30px;">:</span>
+						<span ng-show="activeTab!=5&&activeTab!=6"  style="margin-left: 30px;">PO:</span>
 						<input ng-show="activeTab!=5&&activeTab!=6" ng-model="po" style="height: 30px;" type="text" />
-						<!--</div>-->
-						<!--<span translate="worktable.round" style="margin-left: 30px;">:</span>-->
-						<!--<select style="font-size: 14px;width: 100px;height: 30px;" ng-model="round" class="form-control"-->
-						<!--ng-options="round.label for round in roundList">-->
-						<!--</select>-->
 
-						<span ng-show="activeTab!=5&&activeTab!=4" translate="worktable.ORDER_TYPE" style="margin-left: 30px;">:</span>
+						<span ng-show="activeTab!=5&&activeTab!=6"  style="margin-left: 30px;">POs:</span>
+						<input ng-show="activeTab!=5&&activeTab!=6" ng-model="pos" style="height: 30px;" type="text" />
+						
+						<span ng-show="activeTab!=5&&activeTab!=4" style="margin-left: 30px;">Order Type:</span>
 
 						<select id="orderTypeSelect" style="font-size: 14px;width: 200px;height: 30px;" ng-model="orderType" class="form-control" ng-options="orderType.label for orderType in orderTypeList">
 						</select>
@@ -85,13 +78,17 @@
 
 						<div class="form-group container-flex-start">
 							<button class="btn btn-secondary btn-single" ng-click="searchlist()">
-                <i class="fa-search"></i>&nbsp;&nbsp;
-                <span translate="index.SEARCH"></span>
-              </button>
+				                <i class="fa-search"></i>&nbsp;&nbsp;
+				                <span translate="index.SEARCH"></span>
+			              </button>
 							<button style="float: right;" class="btn btn-secondary btn-single" ng-click="exportFile()">
-                <i class="fa fa-download"></i>
-                <span translate="">Export</span>
-              </button>
+				                <i class="fa fa-download"></i>
+				                <span translate="">Export</span>
+			              </button>
+							<button ng-show="activeTab!=5&&activeTab!=4"  style="float: right;" class="btn btn-secondary btn-single" ng-click="transferDocumnet()">
+				                <i class="fa fa-exchange"></i>
+				                <span translate="">Transfer Document</span>
+			              </button>
 						</div>
 
 					</div>
@@ -155,6 +152,21 @@
 	<div class="ui-grid-cell-contents" title="TOOLTIP">
 		{{COL_FIELD CUSTOM_FILTERS}}
 	</div>
+</script>
+
+
+<script type="text/ng-template" id="transfer-document.html">
+  <div class="modal-header">
+    <h3 class="modal-title" >Transfer Document</h3>
+  </div>
+  <div class="modal-body" style="display: flex;">
+  	<span class="input-group-addon" style="width: 100px;">Document:&nbsp;</span>
+    <select ng-model="selectDocument" ng-options="document.label for document in documents" style="height: 32px;width:100%;padding-left: 10px;"></select>
+  </div>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
 </script>
 
 <script id="redLabelTemplate" type="text/template">

@@ -2,7 +2,31 @@
   <div class="row" >
     <div class="col-md-12">
       <div class="page-title">
-        <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize></div>
+      	<div style="display: inline-flex">
+	      	<div class="input-group" style="">
+						<span class="input-group-addon">Document :&nbsp</span>
+						<select ng-model="searchRequest.doc" ng-options="doc.label for doc in docs" style="height: 32px;min-width: 100px;padding-left: 10px" ng-change="selectDocument(searchRequest.doc)"></select>
+					</div>
+					<button style="margin-left: 10px;" class="btn btn-secondary btn-single" ng-click="importFile(60001)" >
+	          <i class="fa fa-upload"></i>
+	          <span translate="">Import LO Order</span>
+	        </button>
+					<button style="margin-left: 10px;" class="btn btn-secondary btn-single" ng-click="exportFile(60001)" >
+	          <i class="fa fa-download"></i>
+	          <span translate="">Export</span>
+	        </button>
+        </div>
+        <div style="display: flex;">
+	        <div style="color: rgb(78,128,241);margin: 15px 0px 0px 15px;font-size: 16px;">
+						<i class="fa  fa-info-circle"></i>
+						<label>&nbsp;LO Total :&nbsp;&nbsp;&nbsp;</label>{{loTotal}}
+					</div>
+					<div style="color: rgb(78,128,241);margin: 15px 0px 0px 50px;font-size: 16px;">
+						<i class="fa  fa-info-circle"></i>
+						<label>&nbsp;CPO Total :&nbsp;&nbsp;&nbsp;</label>{{cpoTotal}}
+					</div>
+        </div>
+        <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom></div>
       </div>
     </div>
   </div>

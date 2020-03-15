@@ -26,9 +26,13 @@
 						}
 					}
 					
-                    scope.documentTypes=[{label:'MKTFC',value:'MKTFC',id:'MKTFC'},
-                    {label:'CUSFC',value:'FC',id:'FC'},
-                    {label:'Order',value:'Order',id:'Order'}];
+                    scope.documentTypes=[
+	                    {label:'MKTFC',value:'MKTFC',id:'MKTFC'},
+	                    {label:'CUSFC',value:'FC',id:'FC'},
+	                    {label:'Order',value:'Order',id:'Order'},
+	                    {label:'PPC Contract',value:'PPC Contract',id:'PPC Contract'},
+	                    {label:'Non Trade Card',value:'Non Trade Card',id:'Non Trade Card'}
+                    ];
 					scope.documentTypeList=angular.copy(scope.documentTypes) ;
 					scope.documentType=[];
 					for(var i=0;i<scope.documentTypeList.length;i++){
@@ -49,6 +53,8 @@
 					result['toFpd']=$scope.toFpd;
 				}
 				result['documentType']=$scope.documentType.join(',');
+				result['exportCancelOrder']=$scope.exportCancelOrder?"YES":"NO";
+				debugger;
 				$uibModalInstance.result(result);
 				$uibModalInstance.dismiss();
 			};

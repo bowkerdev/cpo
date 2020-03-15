@@ -8,25 +8,31 @@
 //var urlDEV = "http://112.74.191.64:8080/service/";
 //LOCAL
 var urlLOCAL = "http://localhost:12345/";
+//var urlLOCAL = "https://bowkercpodev.azurewebsites.net/cpo1/";
 //var urlLOCAL = "http://bowkerwecareapp.azurewebsites.net/service/";
 //SIT
 var urlSIT = "http://52.229.205.22:8080/cpo/";
 //UAT
 var urlUAT = "https://bowkercpodev.azurewebsites.net/cpo/";
+//var urlUAT = "https://bowkercpo-dev.azurewebsites.net/cpo/";
 //PROD
 var urlPROD = "http://bowkercpov2.azurewebsites.net/cpo/";
 //PUBLIC
 var urlPUBLIC = "http://120.77.214.38:8090/";
 
 var urlALi="http://47.52.22.37:8080/service/";
+var urlDemo="http://zhimi0win.eastasia.cloudapp.azure.com:8087/cpo/";
+
+
+
 var urlBasePortalAli="http://47.52.22.37:8080/baseportal/";
 //Base Portal
 var urlBasePortalDEV = "http://112.74.191.64:8080/baseportal/";
 //LOCAL
 //var urlBasePortalLOCAL = "http://52.229.205.22:8080/baseportal/";
 //UAT
-//var urlBasePortalLOCAL = "https://bowkerbaseportalapp.azurewebsites.net/baseportal/";
-var urlBasePortalLOCAL = "http://bowkerbaseportalprod.azurewebsites.net/baseportal/";
+//var urlBasePortalLOCAL = "http://bowkerbaseportalprod.azurewebsites.net/baseportal/";
+var urlBasePortalLOCAL = "https://bowkerbaseportalapp.azurewebsites.net/baseportal/";
 //SIT
 var urlBasePortalSIT = "http://52.229.205.22:8080/baseportal/";
 //UAT
@@ -35,6 +41,8 @@ var urlBasePortalUAT = "https://bowkerbaseportalapp.azurewebsites.net/baseportal
 var urlBasePortalPROD = "http://bowkerbaseportalprod.azurewebsites.net/baseportal/";
 //PUBLIC
 var urlBasePortalPUBLIC = "http://120.77.214.38:8090/";
+//PUBLIC
+var urlBasePortalDemo = "http://zhimi0win.eastasia.cloudapp.azure.com:8080/baseportal/";
 
 /*
  dev = 1
@@ -51,9 +59,10 @@ if(typeof environment == "undefined") {
 	environment.PUBLIC = 5;
 	environment.SIT = 6;
 	environment.ALI=7;
+	environment.DEMO=8;
 }
 
-var CURRENT_ENVIRONMENT =  environment.LOCAL;
+var CURRENT_ENVIRONMENT =  environment.DEMO;
 
 function getBaseURL() {
 	switch(CURRENT_ENVIRONMENT) {
@@ -71,6 +80,8 @@ function getBaseURL() {
 			return urlSIT;
 		case environment.ALI:
 		    return urlALi;
+		case environment.DEMO:
+		    return urlDemo;
 	}
 
 }
@@ -90,6 +101,8 @@ function getEnvironment() {
       return "SIT";
     case environment.ALI:
       return "ALI";
+	case environment.DEMO:
+      return "";
   }
 
 }
@@ -109,6 +122,8 @@ function getBasePortalURL() {
 			return urlBasePortalSIT;
 		case environment.ALI:
 			return urlBasePortalAli;
+		case environment.DEMO:
+			return urlBasePortalDemo;
 	}
 }
 
@@ -127,6 +142,8 @@ function getEnvironmentTitle() {
 		case environment.SIT:
 			return "CPO";
 		case environment.ALI:
+		    return "CPO";
+		case environment.DEMO:
 		    return "CPO";
 	}
 	return "未知环境";

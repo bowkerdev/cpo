@@ -1,87 +1,89 @@
 var DebugLog = true;
-var transferDateKey = ["createDate", "publishTime", "editTime", "validityFrom", "validityTo", "approveTime", "voteTime", "utcUpdate","utcCreate", "createdate","planDate","orderReleaseDate","requestTransferMonthFrom","requestTransferMonthTo","releaseDate","remarkDate",'byReadyDate','createdDate','fpdMidEnd','psddMidEnd','originalLc0190Date','crdMidOrEnd','pdMidOrEnd','crdPdMidOrEnd','lc0190Date'];
-var transferSimpleDateKey = ["startTime", "endTime","firstProdDate","lastProdDate","planDate","poBatchDate","requestDate","psdd","podd",'customerRequestDate','psddFactory','fpd','fpdFactory','customerRequestDateCs',"orderReleaseDate","pvMonth","toPvMonth",'byReadyDate','byReady','latestFabricPiEta','latestTrimPiEta','fabricPiDate','etd','byReady','orderDate','poBatchDate','byReadyDate','createdDate','originalLc0190Date'];
-var transferFixTo2NumberKey  = ["ttlSmv"];
-var splitThrousandCount=["totalQty"];
+var transferDateKey = ["createDate", "publishTime", "editTime", "validityFrom", "validityTo", "approveTime", "voteTime", "utcUpdate", "utcCreate", "createdate", "planDate", "orderReleaseDate", "requestTransferMonthFrom", "requestTransferMonthTo", "releaseDate", "remarkDate", 'byReadyDate', 'createdDate', 'fpdMidEnd', 'psddMidEnd', 'originalLc0190Date', 'crdMidOrEnd', 'pdMidOrEnd', 'crdPdMidOrEnd', 'lc0190Date'];
+var transferSimpleDateKey = ["startTime", "endTime", "firstProdDate", "lastProdDate", "planDate", "poBatchDate", "requestDate", "psdd", "podd", 'customerRequestDate', 'psddFactory', 'fpd', 'fpdFactory', 'customerRequestDateCs', "orderReleaseDate", "pvMonth", "toPvMonth", 'byReadyDate', 'byReady', 'latestFabricPiEta', 'latestTrimPiEta', 'fabricPiDate', 'etd', 'byReady', 'orderDate', 'poBatchDate', 'byReadyDate', 'createdDate', 'originalLc0190Date'];
+var transferFixTo2NumberKey = ["ttlSmv"];
+var splitThrousandCount = ["totalQty"];
 var pageStatus = {
 	"EDIT": "EDIT",
 	"VIEW": "VIEW"
 }
-function getMonths(fromMonth,toMonth) {
-  var param = new Array();
-  if(fromMonth && toMonth) {
-    var fromDateArray = fromMonth.split('-');
-    var toDateArray = toMonth.split('-');
-    var fromYear;
-    var fromMonth;
-    var toYear;
-    var toMonth;
-    if(fromDateArray && fromDateArray.length > 1) {
-      fromYear = fromDateArray[0];
-      fromMonth = fromDateArray[1];
-    } else {
-      return null;
-    }
 
-    if(toDateArray && toDateArray.length > 1) {
-      toYear = toDateArray[0];
-      toMonth = toDateArray[1];
-    } else {
-      return null;
-    }
+function getMonths(fromMonth, toMonth) {
+	var param = new Array();
+	if(fromMonth && toMonth) {
+		var fromDateArray = fromMonth.split('-');
+		var toDateArray = toMonth.split('-');
+		var fromYear;
+		var fromMonth;
+		var toYear;
+		var toMonth;
+		if(fromDateArray && fromDateArray.length > 1) {
+			fromYear = fromDateArray[0];
+			fromMonth = fromDateArray[1];
+		} else {
+			return null;
+		}
 
-    if(fromYear == toYear) {
-      for(var month = fromMonth; month <= toMonth && month <= 12; month++) {
-        param.push(fromYear.toString() + (month.toString().length <= 1 ? ("0" + month.toString()) : month.toString()));
-      }
-    } else {
-      for(var year = fromYear; year <= toYear; year++) {
-        if(year == fromYear) {
-          for(var month = fromMonth; month <= 12; month++) {
-            param.push(year.toString() + (month.toString().length <= 1 ? ("0" + month.toString()) : month.toString()));
-          }
-        } else if(year == toYear) {
-          for(var month = 1; month <= toMonth && month <= 12; month++) {
-            param.push(year.toString() + (month.toString().length <= 1 ? ("0" + month.toString()) : month.toString()));
-          }
-        } else {
-          for(var month = 1; month <= 12; month++) {
-            param.push(year.toString() + (month.toString().length <= 1 ? ("0" + month.toString()) : month.toString()));
-          }
-        }
-      }
-    }
+		if(toDateArray && toDateArray.length > 1) {
+			toYear = toDateArray[0];
+			toMonth = toDateArray[1];
+		} else {
+			return null;
+		}
 
-    if(param && param.length) {
-      return  param.join(',')
-    } else {
-      return null;
-    }
-  } else if((!fromMonth && toMonth) || (fromMonth && !toMonth)) {
-    return null;
-  } else {
-    return null;
-  }
+		if(fromYear == toYear) {
+			for(var month = fromMonth; month <= toMonth && month <= 12; month++) {
+				param.push(fromYear.toString() + (month.toString().length <= 1 ? ("0" + month.toString()) : month.toString()));
+			}
+		} else {
+			for(var year = fromYear; year <= toYear; year++) {
+				if(year == fromYear) {
+					for(var month = fromMonth; month <= 12; month++) {
+						param.push(year.toString() + (month.toString().length <= 1 ? ("0" + month.toString()) : month.toString()));
+					}
+				} else if(year == toYear) {
+					for(var month = 1; month <= toMonth && month <= 12; month++) {
+						param.push(year.toString() + (month.toString().length <= 1 ? ("0" + month.toString()) : month.toString()));
+					}
+				} else {
+					for(var month = 1; month <= 12; month++) {
+						param.push(year.toString() + (month.toString().length <= 1 ? ("0" + month.toString()) : month.toString()));
+					}
+				}
+			}
+		}
+
+		if(param && param.length) {
+			return param.join(',')
+		} else {
+			return null;
+		}
+	} else if((!fromMonth && toMonth) || (fromMonth && !toMonth)) {
+		return null;
+	} else {
+		return null;
+	}
 }
+
 function GLOBAL_Http($http, url, method, data, successCallBack, errorCallBack) {
 	var token = window.localStorage ? localStorage.getItem("token") : Cookie.read("token");
 
-  // for(var a in data){
-  //     if(data[a]){
-  //       data[a] = encodeURIComponent(data[a]);
-  //     }
-  // }
-  var myUrl = "";
+	// for(var a in data){
+	//     if(data[a]){
+	//       data[a] = encodeURIComponent(data[a]);
+	//     }
+	// }
+	var myUrl = "";
 	if(method == "GET") {
 		var array = new Array();
 		//		data['noCacheTimeStamp']=new Date().getTime();
 		//		console.log(data);
 		var existAttr = false;
 		for(var a in data) {
-		  if (data[a]!=null&&data[a]!==''){
-        array.push(a + "=" + data[a]);
-        existAttr = true;
-      }
+			if(data[a] != null && data[a] !== '') {
+				array.push(a + "=" + data[a]);
+				existAttr = true;
+			}
 
 		}
 		if(existAttr) {
@@ -93,29 +95,29 @@ function GLOBAL_Http($http, url, method, data, successCallBack, errorCallBack) {
 	} else {
 		myUrl = getBaseURL() + url;
 	}
-	myUrl =  encodeURI(myUrl);
-  myUrl= myUrl
-       // .replace(/;/g,encodeURIComponent(";"))
-       // .replace(/\?/g,encodeURIComponent("?"))
-       // .replace(/:/g,encodeURIComponent(":"))
-       // .replace(/@/g,encodeURIComponent("@"))
-       // .replace(/&/g,encodeURIComponent("&"))
-       // .replace(/=/g,encodeURIComponent("="))
-        .replace(/\+/g,encodeURIComponent("+"))
-       // .replace(/$/g,encodeURIComponent("$"))
-       // .replace(/,/g,encodeURIComponent(","))
-       // .replace(/#/g,encodeURIComponent("#"));
-  //;/?:@&=+$,#
-  //myUrl.replace()
+	myUrl = encodeURI(myUrl);
+	myUrl = myUrl
+		// .replace(/;/g,encodeURIComponent(";"))
+		// .replace(/\?/g,encodeURIComponent("?"))
+		// .replace(/:/g,encodeURIComponent(":"))
+		// .replace(/@/g,encodeURIComponent("@"))
+		// .replace(/&/g,encodeURIComponent("&"))
+		// .replace(/=/g,encodeURIComponent("="))
+		.replace(/\+/g, encodeURIComponent("+"))
+	// .replace(/$/g,encodeURIComponent("$"))
+	// .replace(/,/g,encodeURIComponent(","))
+	// .replace(/#/g,encodeURIComponent("#"));
+	//;/?:@&=+$,#
+	//myUrl.replace()
 
 	return $http({
 			method: method,
-			url:myUrl,
-			cache:false,
+			url: myUrl,
+			cache: false,
 			data: data,
-    		timeout: 1000*60*10,
+			timeout: 1000 * 60 * 10,
 			headers: {
-				"pragma":"no-cache",
+				"pragma": "no-cache",
 				'Cache-Control': 'no-cache',
 				'Content-Type': 'application/json;charset=UTF-8',
 				'Accept-Language': 'en-US',
@@ -168,7 +170,7 @@ function GLOBAL_Http_UploadFile($http, url, data, successCallBack, errorCallBack
 	return $http({
 			method: "POST",
 			url: getBaseURL() + url,
-    timeout: 1000*60*10,
+			timeout: 1000 * 60 * 10,
 			data: data,
 			headers: {
 				'Content-Type': undefined,
@@ -220,9 +222,9 @@ function transferDateToTimeStamp(dateTimeString) {
 }
 
 function simpleDateFormat(timestamp) {
-    if(!timestamp){
-    	return;
-    }
+	if(!timestamp) {
+		return;
+	}
 	var date = new Date();
 	// new Date(timestamp).toLocaleDateString()
 	date.setTime(timestamp);
@@ -231,9 +233,9 @@ function simpleDateFormat(timestamp) {
 }
 
 function translateData(rows) {
-  if(!rows){
-    return null;
-  }
+	if(!rows) {
+		return null;
+	}
 
 	for(var i = 0; i < rows.length; i++) {
 		var dataSource = rows[i];
@@ -245,14 +247,14 @@ function translateData(rows) {
 			} else if(transferSimpleDateKey.indexOf(key) > -1) {
 				if(value)
 					rows[i][key] = simpleDateFormat(value);
-			}else if(splitThrousandCount.indexOf(key)>-1){
-				if(value){
+			} else if(splitThrousandCount.indexOf(key) > -1) {
+				if(value) {
 					rows[i][key] = splitCount(value);
 				}
-			}else if(transferFixTo2NumberKey.indexOf(key)>-1){
+			} else if(transferFixTo2NumberKey.indexOf(key) > -1) {
 
-        rows[i][key] = value?value.toFixed(2):0;
-      }
+				rows[i][key] = value ? value.toFixed(2) : 0;
+			}
 
 		}
 	}
@@ -366,20 +368,20 @@ function modalAlert(service, modalType, message, callBack) {
  */
 
 function sortParams(sortColumns, finishBlock) {
-  if(sortColumns && sortColumns[0]) {
-    if(sortColumns[0].field && sortColumns[0].sort && sortColumns[0].sort.direction) {
-      if(finishBlock) {
+	if(sortColumns && sortColumns[0]) {
+		if(sortColumns[0].field && sortColumns[0].sort && sortColumns[0].sort.direction) {
+			if(finishBlock) {
 
-        finishBlock(sortColumns[0].field, sortColumns[0].sort.direction);
-      }
-    } else {
-      if(finishBlock) {
-        finishBlock(null, null);
-      }
-    }
-  } else {
-    finishBlock(null, null);
-  }
+				finishBlock(sortColumns[0].field, sortColumns[0].sort.direction);
+			}
+		} else {
+			if(finishBlock) {
+				finishBlock(null, null);
+			}
+		}
+	} else {
+		finishBlock(null, null);
+	}
 }
 
 /*
@@ -584,9 +586,11 @@ function findLanguage() {
 		return "en-US";
 	}
 }
+
 function fix(num, length) {
-  return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+	return('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
 }
+
 function listToString(list, field) {
 	var str = "";
 	for(var i = 0; i < list.length; i++) {
@@ -601,7 +605,7 @@ function listToString(list, field) {
 	}
 }
 
-function listToString2(list, field ,splitType) {
+function listToString2(list, field, splitType) {
 	var str = "";
 	for(var i = 0; i < list.length; i++) {
 		if(list[i][field]) {
@@ -615,7 +619,7 @@ function listToString2(list, field ,splitType) {
 	}
 }
 
-function stringListToString(list){
+function stringListToString(list) {
 	var str = "";
 	for(var i = 0; i < list.length; i++) {
 		if(list[i]) {
@@ -629,8 +633,8 @@ function stringListToString(list){
 	}
 }
 
-function isFloat(num){
-	var re=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+function isFloat(num) {
+	var re = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
 	return re.test(num);
 }
 
@@ -639,28 +643,27 @@ this.judgeDifferent = function(listAAA, listBBB, idFieldName, MonthFieldName, id
 	for(var i = 0; i < listAAA.length; i++) {
 		for(var j = 0; j < listBBB.length; j++) {
 			if(listAAA[i][idFieldName] == listBBB[j][idFieldName]) {
-			  if(capacityFieldName){
-          // var data = {};
-			    for(var z = 0; z < listAAA[i][MonthFieldName].length; z++){
-			      for(var k = 0; k < listBBB[j][MonthFieldName].length; k++){
-			        var listAAACapacity = listAAA[i][MonthFieldName][z];
-              var listBBBCapacity = listBBB[i][MonthFieldName][k];
-              if(listAAACapacity[idFieldName2] == listBBBCapacity[idFieldName2]){
-                if(listAAACapacity[capacityFieldName] != listBBBCapacity[capacityFieldName]) {
-                  // if(!data[idFieldName]) data[idFieldName] = listAAA[i][idFieldName];
-                  // if(!data[MonthFieldName]) data[MonthFieldName] = [];
-                  // data[MonthFieldName].push(listAAACapacity);
-                  differentList.push(listAAACapacity);
-                }
-                break;
-              }
-            }
-          }
-          // if(!isEmptyObject(data)){
-          //   differentList.push(data);
-          // }
-        }
-        else if(listAAA[i][MonthFieldName] != listBBB[j][MonthFieldName]) {
+				if(capacityFieldName) {
+					// var data = {};
+					for(var z = 0; z < listAAA[i][MonthFieldName].length; z++) {
+						for(var k = 0; k < listBBB[j][MonthFieldName].length; k++) {
+							var listAAACapacity = listAAA[i][MonthFieldName][z];
+							var listBBBCapacity = listBBB[i][MonthFieldName][k];
+							if(listAAACapacity[idFieldName2] == listBBBCapacity[idFieldName2]) {
+								if(listAAACapacity[capacityFieldName] != listBBBCapacity[capacityFieldName]) {
+									// if(!data[idFieldName]) data[idFieldName] = listAAA[i][idFieldName];
+									// if(!data[MonthFieldName]) data[MonthFieldName] = [];
+									// data[MonthFieldName].push(listAAACapacity);
+									differentList.push(listAAACapacity);
+								}
+								break;
+							}
+						}
+					}
+					// if(!isEmptyObject(data)){
+					//   differentList.push(data);
+					// }
+				} else if(listAAA[i][MonthFieldName] != listBBB[j][MonthFieldName]) {
 					var data = {};
 					data[idFieldName] = listAAA[i][idFieldName];
 					data[MonthFieldName] = listAAA[i][MonthFieldName];
@@ -707,72 +710,85 @@ this.compareListOpType = function(scope, ListAAA, ListBBB, field) {
 		}
 	}
 };
+
 function isEmptyObject(e) {
-  for (var t in e)
-    return !1;
-  return !0
+	for(var t in e)
+		return !1;
+	return !0
 }
+
 function isDot(num) {
-  var result = (num.toString()).indexOf(".");
-  if (result != -1) {
-    return true;
-  } else {
-    return false;
-  }
+	var result = (num.toString()).indexOf(".");
+	if(result != -1) {
+		return true;
+	} else {
+		return false;
+	}
 }
-function scrollGuild(id,height){
+
+function scrollGuild(id, height) {
 	jQuery(id).animate({
 		scrollTop: height
 	}, 1000);
 }
-var specialCharSet={
-	'\\*':'%2A',
-	'\\+':'%2B',
-	'\\-':'%2D',
-	'\\/':'%2F',
-	'\\?':'%3F',
-	'\\%':'%25',
-	'\\#':'%23',
-	'\\&':'%26',
-	'\\=':'%3D',
-	' ':'%20'
+var specialCharSet = {
+	'\\*': '%2A',
+	'\\+': '%2B',
+	'\\-': '%2D',
+	'\\/': '%2F',
+	'\\?': '%3F',
+	'\\%': '%25',
+	'\\#': '%23',
+	'\\&': '%26',
+	'\\=': '%3D',
+	' ': '%20'
 }
 
-function urlCharTransfer(charSet){
+function urlCharTransfer(charSet) {
 	//console.log(charSet);
-//	for(var key in specialCharSet){
-//		if(charSet.indexOf(key)>=0){
-//			charSet=charSet.replace(key,specialCharSet[key]);
-//		}
-//	}
+	//	for(var key in specialCharSet){
+	//		if(charSet.indexOf(key)>=0){
+	//			charSet=charSet.replace(key,specialCharSet[key]);
+	//		}
+	//	}
 	//console.log(charSet);
 	return charSet;
 }
 
-function splitCount(count){
-	return count.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+function splitCount(count) {
+	if(!isNaN(count)) {
+
+		var parts = count.toString().split(".");
+		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		return parts[0] ;
+
+	} else {
+		return count;
+	}
 }
+
 function IEVersion() {
-  var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-  var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
-  var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
-  var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
-  if(isIE) {
-    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
-    reIE.test(userAgent);
-    var fIEVersion = parseFloat(RegExp["$1"]);
-    if(fIEVersion == 10) {
-      return "IE10";
-    }
-  }else if(isIE11) {
-    return "IE11"; //IE11
-  }else{
-    return -1;
-  }
+	var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+	var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+	var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+	var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+	if(isIE) {
+		var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+		reIE.test(userAgent);
+		var fIEVersion = parseFloat(RegExp["$1"]);
+		if(fIEVersion == 10) {
+			return "IE10";
+		}
+	} else if(isIE11) {
+		return "IE11"; //IE11
+	} else {
+		return -1;
+	}
 }
+
 function isIE10_11() {
-  if(IEVersion()!=-1){
-    return true;
-  }
-    return false;
+	if(IEVersion() != -1) {
+		return true;
+	}
+	return false;
 }
