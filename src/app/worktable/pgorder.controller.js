@@ -3,7 +3,7 @@
 
 	angular
 		.module('cpo')
-		.service('BulkOrderService', ['$timeout', '$http', '$translate', 'CommonService', '$uibModal', 'uiGridConstants', 'uiGridGroupingConstants', 'workTableCommonService',
+		.service('PGOrderService', ['$timeout', '$http', '$translate', 'CommonService', '$uibModal', 'uiGridConstants', 'uiGridGroupingConstants', 'workTableCommonService',
 			function($timeout, $http, $translate, CommonService, $uibModal, uiGridConstants, uiGridGroupingConstants, workTableCommonService) {
 				var searchKey2 = {};
 				var searchKey3 = {};
@@ -89,7 +89,7 @@
 				this.getAllHistoryOrder = function(scope) {
 					var _this = this;
 					GLOBAL_Http($http, "/cpo/api/document/query_order_document?", 'GET', {
-						orderType: "3"
+						orderType: "7"
 					}, function(data) {
 
 						if(data.status == 0) {
@@ -348,14 +348,6 @@
 								minWidth: '350',
 								enableCellEdit: false,
 								cellTemplate: functionButtonTemplate
-							},
-							{
-								name: 'orderQuantity',
-								displayName: $translate.instant('worktable.NEW_ORDER_IN_TRADE_CARD'),
-								field: 'orderQuantity',
-								minWidth: '350',
-								enableCellEdit: false,
-								cellTemplate: exportButtonTemplate,
 							}
 						],
 						onRegisterApi: function(gridApi) {
@@ -420,7 +412,7 @@
 							}
 					}
 					var param = {
-						orderType: "3",
+						orderType: "7",
 						status: status
 					};
 					if(i == 7 || i == 8 || i == 9) {
@@ -430,10 +422,8 @@
 						delete param.orderType;
 					}else if(i==8){
 						param['asin_change_status'] = 'NEW**UPDATE'
-						param['asin_change_status_org'] = '1**2'
 					}else if(i==9){
 						param['asin_change_status'] = 'CONFIRM'
-						param['asin_change_status_org'] = '3'
 					}
 					if(i == 10) {
 						param['eq_order_approval_status'] = '1';
@@ -482,11 +472,11 @@
 								var newsearchKey = CommonService.getFilterParams(grid);
 								if(i == 2) {
 									searchKey2 = newsearchKey;
-									_this.getAssignFactoryResult(scope, '3', '0,3', scope.page2, true);
+									_this.getAssignFactoryResult(scope, '7', '0,3', scope.page2, true);
 
 								} else if(i == 3) {
 									searchKey3 = newsearchKey;
-									_this.getAssignFactoryResult(scope, '3', '2', scope.page2, true);
+									_this.getAssignFactoryResult(scope, '7', '2', scope.page2, true);
 								} else if(i == 5) {
 									searchKey5 = newsearchKey;
 									_this.getTransitOrder(scope, scope.page4, '4', true);
@@ -504,10 +494,10 @@
 									_this.getOrderChange(scope, 'CONFIRMED');
 								} else if(i == 10) {
 									searchKey10 = newsearchKey;
-									_this.getAssignFactoryResult(scope, '3', '5', scope.page10, true, true, '10');
+									_this.getAssignFactoryResult(scope, '7', '5', scope.page10, true, true, '10');
 								} else if(i == 11) {
 									searchKey11 = newsearchKey;
-									_this.getAssignFactoryResult(scope, '3', '5', scope.page11, true, true, '11');
+									_this.getAssignFactoryResult(scope, '7', '5', scope.page11, true, true, '11');
 								}
 
 							});
@@ -537,14 +527,14 @@
 										{
 											scope['page' + i].curPage = newPage;
 											scope['page' + i].pageSize = pageSize;
-											_this.getAssignFactoryResult(scope, '3', '0,3', scope['page' + i], false);
+											_this.getAssignFactoryResult(scope, '7', '0,3', scope['page' + i], false);
 											break;
 										}
 									case 3:
 										{
 											scope['page' + i].curPage = newPage;
 											scope['page' + i].pageSize = pageSize;
-											_this.getAssignFactoryResult(scope, '3', '2', scope['page' + i], false);
+											_this.getAssignFactoryResult(scope, '7', '2', scope['page' + i], false);
 											break;
 
 										}
@@ -587,14 +577,14 @@
 										{
 											scope['page' + i].curPage = newPage;
 											scope['page' + i].pageSize = pageSize;
-											_this.getAssignFactoryResult(scope, '3', '5', scope['page' + i], false, true, '10');
+											_this.getAssignFactoryResult(scope, '7', '5', scope['page' + i], false, true, '10');
 											break;
 										}
 									case 11:
 										{
 											scope['page' + i].curPage = newPage;
 											scope['page' + i].pageSize = pageSize;
-											_this.getAssignFactoryResult(scope, '3', '5', scope['page' + i], false, true, '11');
+											_this.getAssignFactoryResult(scope, '7', '5', scope['page' + i], false, true, '11');
 											break;
 										}
 								}
@@ -606,16 +596,16 @@
 
 				this.refreshAll = function(scope,onlyOrder) {
 
-					this.getAssignFactoryResult(scope, '3', '0,3', scope.page2, true);
-					this.getAssignFactoryResult(scope, '3', '2', scope.page3, true);
+					this.getAssignFactoryResult(scope, '7', '0,3', scope.page2, true);
+					this.getAssignFactoryResult(scope, '7', '2', scope.page3, true);
 					this.getTransitOrder(scope, scope.page4, '4', true);
 					this.getTransitOrder(scope, scope.page5, '5', true);
 					this.getConfimrOrder(scope);
 					if('YES'!=onlyOrder){
 						this.getOrderChange(scope, 'PENDING');
 						this.getOrderChange(scope, 'CONFIRMED');
-						this.getAssignFactoryResult(scope, '3', '5', scope.page10, true, true, '10');
-						this.getAssignFactoryResult(scope, '3', '5', scope.page11, true, true, '11');
+						this.getAssignFactoryResult(scope, '7', '5', scope.page10, true, true, '10');
+						this.getAssignFactoryResult(scope, '7', '5', scope.page11, true, true, '11');
 					}
 
 				}
@@ -631,7 +621,7 @@
 					// }
 					if(doc) {
 						param['documentType'] = doc.documentType;
-						param['value'] = '3';
+						param['value'] = '7';
 						param['orderDate'] = doc.orderDate;
 						param['documentName'] = doc.documentName;
 					}
@@ -777,7 +767,7 @@
 					});
 					modalInstance.result.then(function(returnData) {
 						if(returnData) {
-							_this.getDailyOrder(scope, 3);
+							_this.getDailyOrder(scope, 7);
 						}
 					}, function() {});
 				}
@@ -806,7 +796,7 @@
 							entity.Deleting = false;
 							if(data.status == 0) {
 								modalAlert(CommonService, 2, $translate.instant('notifyMsg.DELETE_SUCCESS'), null);
-								_this.getDailyOrder(scope, 3);
+								_this.getDailyOrder(scope, 7);
 								_this.refreshAll(scope);
 							} else {
 								modalAlert(CommonService, 2, data.message, null);
@@ -895,7 +885,7 @@
 						navIndex = 6
 					}
 					var param = {
-						orderType: "3",
+						orderType: "7",
 						pageSize: page.pageSize,
 						pageNo: page.curPage
 					};
@@ -914,10 +904,8 @@
 					}
 					if(navIndex === 5) {
 						param['in_change_status'] = 'NEW,UPDATE'
-						param['in_changeStatusOrg'] = '1**2'
 					} else {
 						param['in_change_status'] = 'CONFIRM'
-						param['in_changeStatusOrg'] = '3'
 
 					}
 					scope.navList[navIndex].loading = true;
@@ -988,7 +976,7 @@
 
 					scope.disableReleaseOrderButton = false;
 					var param = {
-						orderType: "3",
+						orderType: "7",
 						status: status,
 						pageSize: page.pageSize,
 						pageNo: page.curPage
@@ -1121,7 +1109,7 @@
 					modalInstance.resolve = function(result) {
 						var param = {
 							criteriaVersionId: scope.version.id,
-							documentType: 3,
+							documentType: 7,
 							isAssignByFactoryId:result.isAssignByFactoryId
 						}
 						_this.assigningStatus(scope);
@@ -1139,7 +1127,7 @@
 	
 								//	modalAlert(CommonService, 2, $translate.instant('worktable.SUCCESS_ASSIGN'), null);
 								_this.refreshAll(scope);
-								_this.getDailyOrder(scope, 3);
+								_this.getDailyOrder(scope, 7);
 							} else {
 								modalAlert(CommonService, 3, data.message, null);
 							}
@@ -1550,7 +1538,7 @@
 						"ids": listToString(selectedRows, 'assignResultId'),
 						"workingNos": workingNos,
 						"mode": mode,
-						"orderType": "3"
+						"orderType": "7"
 					}
 					GLOBAL_Http($http, "cpo/api/worktable/adjust_assign", 'POST', param, function(data) {
 						if(data.status == 0) {
@@ -1739,7 +1727,7 @@
 					this.initGripOptionFour(scope, 10, scope.approvedPending);
 					this.initGripOptionFour(scope, 11, scope.retransitOrder);
 
-					_this.getDailyOrder(scope, 3);
+					_this.getDailyOrder(scope, 7);
 					this.getSelectedData(scope);
 
 				};
@@ -2295,7 +2283,7 @@
 				}
 				this.reAssign = function(scope) {
 					var param = {
-						orderType: "3",
+						orderType: "7",
 						status: "0,2,3",
 						pageSize: 1,
 						pageNo: 1
@@ -2391,7 +2379,7 @@
 						pageNo: 1,
 						isExportCSV: 'YES',
 						documentType: 6,
-						orderType: 3,
+						orderType: 7,
 						isOrderChange: 'YES',
 						in_assign_result_id: listToString(selectedRows, 'assignResultId')
 					};
@@ -2420,7 +2408,7 @@
 						case 0:
 							{
 								//  param[ 'documentType' ] = '203';
-								param['orderType'] = '3';
+								param['orderType'] = '7';
 								param['status'] = '0,2,3';
 								param['documentType'] = scope.selectDocumentType.id;
 								break;
@@ -2428,7 +2416,7 @@
 						case 1:
 							{
 								//param[ 'documentType' ] = '203';
-								param['orderType'] = '3';
+								param['orderType'] = '7';
 								param['status'] = '0,2,3';
 								param['documentType'] = scope.selectDocumentType.id;
 								break;
@@ -2436,7 +2424,7 @@
 						case 3:
 							{
 								// param[ 'documentType' ] = '203';
-								param['orderType'] = '3';
+								param['orderType'] = '7';
 								param['status'] = '4';
 								param['documentType'] = scope.selectDocumentType.id;
 								break;
@@ -2444,25 +2432,24 @@
 						case 4:
 							{
 								// param[ 'documentType' ] = '203';
-								param['orderType'] = '3';
+								param['orderType'] = '7';
 								param['status'] = '5';
 								param['documentType'] = scope.selectDocumentType.id;
 								break;
 							}
 						case 5:
 							{
-								param['orderType'] = '3';
+								param['orderType'] = '7';
 								param['documentType'] = "212";
 								break;
 							}
 
 						case 6:
 							{
-								param['orderType'] = '3';
+								param['orderType'] = '7';
 								param['documentType'] = "211";
 								param['isOrderChange'] = 'YES';
 								param['in_change_status'] = 'NEW,UPDATE';
-								param['in_changeStatusOrg'] = '1**2';
 								for(var attr in searchKey8) {
 									if(searchKey8[attr]) {
 										param[attr] = urlCharTransfer(searchKey8[attr]);
@@ -2472,11 +2459,10 @@
 							}
 						case 7:
 							{
-								param['orderType'] = '3';
+								param['orderType'] = '7';
 								param['documentType'] = "211";
 								param['isOrderChange'] = 'YES';
 								param['in_change_status'] = 'CONFIRM';
-								param['in_changeStatusOrg'] = '3';
 								for(var attr in searchKey8) {
 									if(searchKey8[attr]) {
 										param[attr] = urlCharTransfer(searchKey8[attr]);
@@ -2486,7 +2472,7 @@
 							}
 						case 8:
 							{
-								param['orderType'] = '3';
+								param['orderType'] = '7';
 								param['documentType'] = scope.selectDocumentType.id;
 								param['status'] = '5';
 								param['isOrderFactoryChange'] = 'YES';
@@ -2495,7 +2481,7 @@
 							}
 						case 9:
 							{
-								param['orderType'] = '3';
+								param['orderType'] = '7';
 								param['documentType'] = scope.selectDocumentType.id;
 								param['status'] = '5';
 								param['isOrderFactoryChange'] = 'YES';
@@ -2536,7 +2522,7 @@
 								parameter: function() {
 									return {
 										documentType: entity.documentType,
-										orderType: 3
+										orderType: 7
 									};
 								}
 							}
@@ -2546,13 +2532,13 @@
 						doc['documentType'] = entity.documentType;
 						doc['orderDate'] = result.orderTime;
 						doc['documentName'] = result.documentName;
-						doc['orderType'] = 3;
+						doc['orderType'] = 7;
 						entity.disableRefreshButton = true;
 						GLOBAL_Http($http, "cpo/api/worktable/refresh_order?", 'POST', doc, function(data) {
 							if(data.status!=0 ) {
 									modalAlert(CommonService, 2, data.message, null);
 							}else{
-								_this.getDailyOrder(scope, 3);
+								_this.getDailyOrder(scope, 7);
 							}
 							entity.disableRefreshButton = false;
 						}, function(data) {
@@ -2633,7 +2619,7 @@
 								var season = result.season;
 
 								var param = {
-									orderType: 3,
+									orderType: 7,
 									season: season,
 									ids: ids.join(",")
 								}
@@ -2777,8 +2763,8 @@
 								CommonService.hideLoadingView();
 								if(data.status == 0) {
 									modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
-									_this.getAssignFactoryResult(scope, '3', '5', scope.page10, true, true, '10');
-									_this.getAssignFactoryResult(scope, '3', '5', scope.page11, true, true, '11');
+									_this.getAssignFactoryResult(scope, '7', '5', scope.page10, true, true, '10');
+									_this.getAssignFactoryResult(scope, '7', '5', scope.page11, true, true, '11');
 								} else {
 									modalAlert(CommonService, 2, data.message, null);
 								}
@@ -2821,8 +2807,8 @@
 						scope.disableApprovalButton = false;
 						if(data.status == 0) {
 							modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
-							_this.getAssignFactoryResult(scope, '3', '5', scope.page10, true, true, '10');
-							_this.getAssignFactoryResult(scope, '3', '5', scope.page11, true, true, '11');
+							_this.getAssignFactoryResult(scope, '7', '5', scope.page10, true, true, '10');
+							_this.getAssignFactoryResult(scope, '7', '5', scope.page11, true, true, '11');
 						} else {
 							modalAlert(CommonService, 2, data.message, null);
 						}
@@ -2967,9 +2953,9 @@
 									if(data.status == 0) {
 										modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
 										if(scope.tabIndex == 0) {
-											_this.getAssignFactoryResult(scope, '3', '0,3', scope.page2, true);
+											_this.getAssignFactoryResult(scope, '7', '0,3', scope.page2, true);
 										} else if(scope.tabIndex == 1) {
-											_this.getAssignFactoryResult(scope, '3', '2', scope.page3, true);
+											_this.getAssignFactoryResult(scope, '7', '2', scope.page3, true);
 										} else if(scope.tabIndex == 3) {
 											_this.getTransitOrder(scope, scope.page4, '4', true);
 										};
@@ -3023,21 +3009,21 @@
 				}
 			}
 		])
-		.controller('BulkOrderCtrl', ['$scope', 'BulkOrderService',
-			function($scope, BulkOrderService) {
+		.controller('PGOrderCtrl', ['$scope', 'PGOrderService',
+			function($scope, PGOrderService) {
 				$scope.refreshAll = function() {
-					BulkOrderService.refreshAll($scope);
+					PGOrderService.refreshAll($scope);
 				}
 
 				$scope.confirmOrder = function() {
-					BulkOrderService.confirmOrder($scope);
+					PGOrderService.confirmOrder($scope);
 				}
 				$scope.confirmAllOrder = function() {
-					BulkOrderService.confirmAllOrder($scope);
+					PGOrderService.confirmAllOrder($scope);
 				}
 
 				$scope.selectTab = function(index) {
-					BulkOrderService.selectTab($scope, index);
+					PGOrderService.selectTab($scope, index);
 				}
 				$scope.setupScrollableTabSet = function(length, index) {
 					if(length >= index + 1) {
@@ -3047,7 +3033,7 @@
 					}
 				};
 				$scope.selectTab2 = function(index) {
-					BulkOrderService.selectTab2($scope, index);
+					PGOrderService.selectTab2($scope, index);
 				}
 				$scope.setupScrollableTabSet2 = function(length, index) {
 					if(length >= index + 1) {
@@ -3058,104 +3044,104 @@
 				};
 
 				$scope.adjustFactoryAssignment = function(mode, tab) {
-					BulkOrderService.adjustFactoryAssignment($scope, mode, tab);
+					PGOrderService.adjustFactoryAssignment($scope, mode, tab);
 				}
 				$scope.releaseOrder = function(type) {
-					BulkOrderService.releaseOrder($scope, type);
+					PGOrderService.releaseOrder($scope, type);
 				}
 				$scope.releaseAllOrder = function(type) {
-					BulkOrderService.releaseAllOrder($scope, type);
+					PGOrderService.releaseAllOrder($scope, type);
 				}
 				$scope.holdPendingOrder = function(type) {
-					BulkOrderService.holdPendingOrder($scope, type);
+					PGOrderService.holdPendingOrder($scope, type);
 				}
 				$scope.releaseTransitPendingOrder = function(type) {
-					BulkOrderService.releaseTransitPendingOrder($scope, type);
+					PGOrderService.releaseTransitPendingOrder($scope, type);
 				};
 				$scope.exportFile = function() {
-					BulkOrderService.exportFile($scope);
+					PGOrderService.exportFile($scope);
 				}
 				$scope.exportCSV = function(type) {
-					BulkOrderService.exportCSV($scope, type);
+					PGOrderService.exportCSV($scope, type);
 				}
 				$scope.toUpload = function(entity) {
-					BulkOrderService.toUpload($scope, entity);
+					PGOrderService.toUpload($scope, entity);
 				};
 				$scope.assignFactory = function() {
-					BulkOrderService.assignFactory($scope);
+					PGOrderService.assignFactory($scope);
 				}
 				$scope.viewCapacity = function(type) {
-					BulkOrderService.viewCapacity($scope, type);
+					PGOrderService.viewCapacity($scope, type);
 				}
 
 				$scope.refreshOrder = function(entity) {
-					BulkOrderService.refreshOrder($scope, entity);
+					PGOrderService.refreshOrder($scope, entity);
 				}
 				$scope.refreshBno = function(entity) {
-					BulkOrderService.refreshBno($scope, entity);
+					PGOrderService.refreshBno($scope, entity);
 				}
 				$scope.refreshCountryCode = function(entity) {
-					BulkOrderService.refreshCountryCode($scope, entity);
+					PGOrderService.refreshCountryCode($scope, entity);
 				}
 				$scope.deleteDom = function(entity) {
-					BulkOrderService.deleteDom($scope, entity);
+					PGOrderService.deleteDom($scope, entity);
 				};
 				$scope.toggleFilterRow = function() {
-					BulkOrderService.toggleFilterRow($scope);
+					PGOrderService.toggleFilterRow($scope);
 				};
 				$scope.adjustFactoryAssignment2 = function(mode, confirmFactory) {
-					BulkOrderService.adjustFactoryAssignment2($scope, mode, confirmFactory);
+					PGOrderService.adjustFactoryAssignment2($scope, mode, confirmFactory);
 				};
 				$scope.importFile = function(documentType) {
-					BulkOrderService.importFile($scope,documentType);
+					PGOrderService.importFile($scope,documentType);
 				};
 				$scope.reAssign = function() {
-					BulkOrderService.reAssign($scope)
+					PGOrderService.reAssign($scope)
 				}
 				$scope.confirmChange = function(type) {
-					BulkOrderService.confirmChange($scope, type)
+					PGOrderService.confirmChange($scope, type)
 				}
 				$scope.setSeason = function() {
-					BulkOrderService.setSeason($scope);
+					PGOrderService.setSeason($scope);
 				}
 				$scope.generateBatchNo = function() {
-					BulkOrderService.generateBatchNo($scope);
+					PGOrderService.generateBatchNo($scope);
 				}
 				$scope.selectDocument = function() {
-					BulkOrderService.selectDocument($scope);
+					PGOrderService.selectDocument($scope);
 				}
 				$scope.selectDocumentTypeChanged = function() {
-					BulkOrderService.selectDocumentTypeChanged($scope);
+					PGOrderService.selectDocumentTypeChanged($scope);
 				}
 				$scope.selectDocumentChanged = function() {
-					BulkOrderService.selectDocumentChanged($scope);
+					PGOrderService.selectDocumentChanged($scope);
 				}
 				$scope.releaseOrderChangeOrder = function(type) {
-					BulkOrderService.releaseOrderChangeOrder($scope, type);
+					PGOrderService.releaseOrderChangeOrder($scope, type);
 				}
 				$scope.downloadNewOrderInTradeCard = function(entity) {
-					BulkOrderService.downloadNewOrderInTradeCard($scope, entity);
+					PGOrderService.downloadNewOrderInTradeCard($scope, entity);
 				}
 				$scope.downloadEmailChecking = function(entity) {
-					BulkOrderService.downloadEmailChecking($scope, entity);
+					PGOrderService.downloadEmailChecking($scope, entity);
 				}
 				$scope.requestFactoryChange = function(tabIndex) {
-					BulkOrderService.requestFactoryChange($scope, tabIndex);
+					PGOrderService.requestFactoryChange($scope, tabIndex);
 				}
 				$scope.approvalFactoryChange = function(tabIndex) {
-					BulkOrderService.approvalFactoryChange($scope, tabIndex);
+					PGOrderService.approvalFactoryChange($scope, tabIndex);
 				}
 				$scope.refresh168No = function() {
-					BulkOrderService.refresh168No($scope);
+					PGOrderService.refresh168No($scope);
 				}
 				$scope.splitOrder = function() {
-					BulkOrderService.splitOrder($scope);
+					PGOrderService.splitOrder($scope);
 				}
 				$scope.checkOrderInfo = function() {
-					BulkOrderService.checkOrderInfo($scope);
+					PGOrderService.checkOrderInfo($scope);
 				}
 				$scope.exportMTFContractTotalList = function() {
-					BulkOrderService.exportMTFContractTotalList($scope);
+					PGOrderService.exportMTFContractTotalList($scope);
 				}
 				$scope.bottomGridHeight = function() {
 
@@ -3170,7 +3156,7 @@
 					}
 
 				}
-				BulkOrderService.init($scope);
+				PGOrderService.init($scope);
 			}
 		]);
 

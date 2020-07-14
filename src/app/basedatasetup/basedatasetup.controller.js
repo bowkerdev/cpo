@@ -27,6 +27,24 @@
 
 					}, function() {});
 				}
+				$scope.importLineSheetDataByStyle = function() {
+					var modalInstance = $uibModal.open({
+						templateUrl: 'uploadFileModal',
+						controller: 'UploadFileController',
+						backdrop: 'static',
+						size: 'md',
+						resolve: {
+							planGroups: function() {
+								return {
+									fileType: "902"
+								};
+							}
+						}
+					});
+					modalInstance.result.then(function(returnData) {
+
+					}, function() {});
+				}
 				$scope.page = {
 					curPage: 1,
 					pageSize: 100,

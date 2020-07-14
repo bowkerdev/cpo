@@ -89,6 +89,10 @@
 				                <i class="fa fa-exchange"></i>
 				                <span translate="">Transfer Document</span>
 			              </button>
+							<button ng-show="activeTab==1"  style="float: right;" class="btn btn-secondary btn-single" ng-click="changeManualOrderStatus()">
+				                <i class="fa fa-exchange"></i>
+				                <span translate="">Change Manual Order Status</span>
+			              </button>
 						</div>
 
 					</div>
@@ -166,6 +170,20 @@
   <div class="modal-footer">
     <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
     <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="changeOrderStatus.html">
+  <div class="modal-header">
+    <h3 class="modal-title" >Change Order Status</h3>
+  </div>
+  <div class="modal-body" style="display: flex;">
+  	<span class="input-group-addon" style="width: 100px;">Order Status:&nbsp;</span>
+    <select ng-model="selectorderStatus" ng-options="orderStatus.label for orderStatus in orderStatusList" style="height: 32px;width:100%;padding-left: 10px;"></select>
+  </div>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit(selectorderStatus)">Submit</button>
   </div>
 </script>
 

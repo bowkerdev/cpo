@@ -20,6 +20,9 @@
 					} else if(Tab == 6) {
 						scope.showView = 'NonTradeCard';
 					}
+//					else if(Tab == 7) {
+//						scope.showView = 'PGOrder';
+//					}
 				}
 				this.rowSelect = function(scope, row,subScope) {
 
@@ -69,12 +72,14 @@
 
 						scope.selectRowGridAppScore.refreshAll();
 					});
+//					scope.showView= 'PGOrder';
 
 					if(scope.userArea&&scope.userArea=='BVN'){
 						scope.showView = 'SampleOrder';
 					}else{
 						scope.showView = 'MarketingForecast';
 					}
+//					
 					scope.$on('workTableDetail.init', function(event, data) {
 						scope.$broadcast('workTableDetail.afterInit', scope.factoryAssingmentResultDetail);
 					});

@@ -24,6 +24,9 @@
             <uib-tab select="selectTab('6')" ng-if="userArea!='BVN'">
               <uib-tab-heading translate="workTableTitle.NON_TRADE_CARD_ORDER_ASSIGNMENT"></uib-tab-heading>
             </uib-tab>
+            <!--<uib-tab select="selectTab('7')" ng-if="userArea!='BVN'">
+              <uib-tab-heading translate="workTableTitle.PG_ORDER_ASSIGNMENT"></uib-tab-heading>
+            </uib-tab>-->
           </uib-tabset>
         </scrollable-tabset>
       </div>
@@ -35,11 +38,12 @@
     <ng-include src="'app/worktable/sampleordernew.html'" ng-if="showView=='SampleOrder'"></ng-include>
     <ng-include src="'app/worktable/nontradecard.html'" ng-if="showView=='NonTradeCard'"></ng-include>
     <ng-include src="'app/worktable/miorder.html'" ng-if="showView=='MIOrder'"></ng-include>
+    <!--<ng-include src="'app/worktable/pgorder.html'" ng-if="showView=='PGOrder'"></ng-include>-->
   </div>
   <ng-include src="'app/worktable/worktabledetail.html'" ng-if="showDetailView=='showDetail'"></ng-include>
 </div>
 <ng-include src="'app/common/commonconfirm.html'"></ng-include>
-<ng-include src="'app/worktable/factorycapacity.html'"></ng-include>
+<!--<ng-include src="'app/worktable/factorycapacity.html'"></ng-include>-->
 <script id="blueGreenTemplate" type="text/template">
 	<div class="container-flex-center-center" style="width: 100%;height: 100%;" ng-class="{'background-blue':row.entity.documentStatus !='1','background-green':row.entity.documentStatus =='1'}">
 		<div ng-bind="row.entity.documentTypeName" class="icon-training-plan-online-offline"></div>

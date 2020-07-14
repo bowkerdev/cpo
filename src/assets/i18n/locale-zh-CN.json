@@ -56,6 +56,7 @@
     "BULK_ORDER_ASSIGNMENT": "Bulk Order Assignment",
     "MI_ORDER_ASSIGNMENT": "MI Order Assignment",
     "NON_TRADE_CARD_ORDER_ASSIGNMENT":"Non Trade Card Assignment",
+    "PG_ORDER_ASSIGNMENT":"PG Order Assignment",
     "FROM_FACTORY":"From Factory"
   },
   "reportTitle":{
