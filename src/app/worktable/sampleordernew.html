@@ -219,6 +219,10 @@
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="splitOrder()">
           <span translate="">Split Order</span>
         </button>
+
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="addSampleQty()">
+          <span translate="">Add Sample Qty</span>
+        </button>
         <!--<button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="generateBatchNo()" ng-disabled="generateBatchNoButtonDisabled">-->
           <!--<i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span-->
           <!--translate="">Generate Batch No.</span>-->
@@ -268,6 +272,9 @@
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="splitOrder()">
           <span translate="">Split Order</span>
         </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="addSampleQty()">
+          <span translate="">Add Sample Qty</span>
+        </button>
       </div>
     </div>
     <div ng-show="tabIndex=='3'">
@@ -309,6 +316,9 @@
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="splitOrder()">
           <span translate="">Split Order</span>
         </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="addSampleQty()">
+          <span translate="">Add Sample Qty</span>
+        </button>
       </div>
     </div>
     <div ng-show="tabIndex=='4'">
@@ -340,6 +350,9 @@
           <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="">Refresh 168 No.</span>
         </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="addSampleQty()">
+          <span translate="">Add Sample Qty</span>
+        </button>
       </div>
     </div>
 
@@ -358,6 +371,9 @@
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
           <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="">Refresh 168 No.</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="addSampleQty()">
+          <span translate="">Add Sample Qty</span>
         </button>
       </div>
     </div>
@@ -449,6 +465,33 @@
   <div class="modal-footer">
     <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
     <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
+</script>
+
+<script id="addSampleQtySizeTemplate" type="text/template">
+  <select ng-if="row.entity.Edit" ng-model="row.entity.size" class="form-control" style="padding:5px!important;" ng-options="size.manufacturingSize for size in grid.appScope.sizeList" >
+    <option ng-bind="row.entity.size"></option>
+  </select>
+  <div ng-if="!row.entity.Edit" ng-bind="row.entity.size" class="table-text"></div>
+</script>
+<script id="addSampleQtyTypeTemplate" type="text/template">
+  <select ng-if="row.entity.Edit" ng-model="row.entity.sampleType" class="form-control" style="padding:5px!important;" ng-options="sampleType.label for sampleType in grid.appScope.sampleTypeList" >
+    <option ng-bind="row.entity.sampleType"></option>
+  </select>
+  <div ng-if="!row.entity.Edit" ng-bind="row.entity.sampleType" class="table-text"></div>
+</script>
+<script id="addSampleQtyInputTemplate" type="text/template">
+  <input ng-if="row.entity.Edit" ng-model="row.entity.sampleQty" class="form-control" style="padding:5px!important;" />
+  <div ng-if="!row.entity.Edit" ng-bind="row.entity.sampleQty" class="table-text"></div>
+</script>
+<script id="addSampleQtyOperationTemplate" type="text/template">
+  <div class="operation">
+    <button ng-if="!row.entity.Edit" type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.edit(row)">
+      <span translate="index.EDIT"></span>
+    </button>
+    <button ng-if="row.entity.Edit" type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.cancel(row)">
+      <span translate="index.CANCEL"></span>
+    </button>
   </div>
 </script>
 
@@ -547,7 +590,7 @@
   .dynamic-template-modal-window  .modal {
     margin: auto;
   }
-  
+
    .dynamic-template-modal-window  .modal >div:last-child{
     width: 1500px;
   }
