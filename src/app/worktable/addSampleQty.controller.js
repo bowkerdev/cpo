@@ -43,11 +43,12 @@
               }
               row.entity[key] = row.entity.dataTemp[key];
             }
-          } else {
-            for (var i = 0; i < scope.items.length; i++) {
-              if (scope.items[i].$$hashKey == row.entity.$$hashKey) {
-                scope.items.splice(i, 1);
-              }
+          }
+        }
+        this.delete = function(scope, row) {
+          for (var i = 0; i < scope.items.length; i++) {
+            if (scope.items[i].$$hashKey == row.entity.$$hashKey) {
+              scope.items.splice(i, 1);
             }
           }
         }
@@ -62,7 +63,6 @@
         }
         this.submit = function(scope,finishBlock) {
           if (scope.items && scope.items.length) {
-            console.log(scope.items)
             var param = {
               'order_master_id':scope.orderMasterId,
               'sample_info':scope.items.map(function(rowEntity){
@@ -174,6 +174,9 @@
       }
       $scope.add = function() {
         addSampleQtyService.add($scope);
+      }
+      $scope.delete = function(row) {
+        addSampleQtyService.delete($scope,row);
       }
       $scope.submit = function() {
         addSampleQtyService.submit($scope,function(){
