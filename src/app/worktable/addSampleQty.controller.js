@@ -30,21 +30,6 @@
           });
         }
 
-        this.getAddSampleQty = function(scope, param) {
-          var _this = this;
-          scope.items = [];
-          return;
-          scope.gridOptions.showLoading = true;
-          GLOBAL_Http($http, "cpo/api/worktable/", 'POST', param, function(data) {
-            scope.gridOptions.showLoading = false;
-            scope.items = data.output;
-          }, function(data) {
-            scope.gridOptions.showLoading = false;
-            modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
-          });
-
-        }
-
         this.edit = function(scope, row) {
           row.entity.Edit = true;
           row.entity.dataTemp = angular.copy(row.entity);
@@ -75,15 +60,48 @@
           obj.isNew = true;
           scope.items.unshift(obj);
         }
-        this.submit = function(scope) {
-
+        this.submit = function(scope,finishBlock) {
+          if (scope.items && scope.items.length) {
+            console.log(scope.items)
+            var param = {
+              'order_master_id':scope.orderMasterId,
+              'sample_info':scope.items.map(function(rowEntity){
+                return (typeof(rowEntity.size) == 'object'?rowEntity.size.manufacturingSize:rowEntity.size) + '::' + (typeof(rowEntity.sampleType) == 'object'?rowEntity.sampleType.label:rowEntity.sampleType) + '::' + rowEntity.sampleQty
+              }).join(',')
+            }
+            scope.submiting = true;
+            GLOBAL_Http($http, "cpo/api/worktable/update_add_sample_info", 'POST', param, function(data) {
+              scope.submiting = false;
+              modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
+              if(finishBlock){
+                finishBlock();
+              }
+            }, function(data) {
+              scope.submiting = false;
+              modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+            });
+          }
         }
 
         this.init = function(scope, parameter) {
           scope.items = [];
+          if(parameter.sampleInfo){
+            scope.items = parameter.sampleInfo.split(',').map(function(arrayElement){
+              var temp = arrayElement.split('::');
+              return {
+                size: temp&&temp.length>0?temp[0]:'',
+                sampleType:temp&&temp.length>1?temp[1]:'',
+                sampleQty:temp&&temp.length>2?temp[2]:''
+              }
+            })
+          }
           scope.po = parameter.po;
           scope.workingNo = parameter.workingNo;
           scope.articleNo = parameter.articleNo;
+          scope.orderMasterId = parameter.orderMasterId;
+
+          scope.submiting = false;
+
           var addSampleQtySizeTemplate = document.getElementById('addSampleQtySizeTemplate').innerText;
           var addSampleQtyTypeTemplate = document.getElementById('addSampleQtyTypeTemplate').innerText;
           var addSampleQtyInputTemplate = document.getElementById('addSampleQtyInputTemplate').innerText;
@@ -140,15 +158,11 @@
             }
           };
           this.getOptionList(scope, parameter);
-          this.getAddSampleQty(scope, parameter);
         }
       }
     ])
     .controller('addSampleQtyCtrl', ['$uibModalInstance', '$scope', 'addSampleQtyService', 'parameter', function(
       $uibModalInstance, $scope, addSampleQtyService, parameter) {
-      $scope.submit = function() {
-        $uibModalInstance.dismiss();
-      };
       $scope.dismiss = function() {
         $uibModalInstance.dismiss();
       }
@@ -162,7 +176,10 @@
         addSampleQtyService.add($scope);
       }
       $scope.submit = function() {
-        addSampleQtyService.submit($scope);
+        addSampleQtyService.submit($scope,function(){
+          $uibModalInstance.resolve({});
+          $uibModalInstance.dismiss();
+        });
       }
       addSampleQtyService.init($scope, parameter);
 

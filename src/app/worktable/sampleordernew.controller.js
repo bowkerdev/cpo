@@ -387,7 +387,7 @@
 
 					var columns;
 					var canFilter = true; //(i!=7);
-					columns = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_new", canFilter, 100);
+					columns = workTableCommonService.constructeAssignmentStaticColumns(scope, "sampleorder_new", canFilter, 100);
 					var url = "cpo/api/worktable/query_assignment_result_filter?";
 					if(i == 8 || i == 9) {
 						url = "cpo/api/worktable/get_change_order_filter?";
@@ -831,11 +831,11 @@
 						}
 					}
 					var _this = this;
-					var staticColumns = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_new", true, 100);
+					var staticColumns = workTableCommonService.constructeAssignmentStaticColumns(scope, "sampleorder_new", true, 100);
 
 					scope.gridOptions7.showLoading = true;
 					scope.navList[4].loading = true;
-					
+
 					if(scope.userInfo &&scope.userInfo.areaname=='BVN'){
 							param['eq_factory_number']='APU008';
 					}
@@ -1025,7 +1025,7 @@
 					}
 					var _this = this;
 					scope.showLoading = true;
-					var staticColumns = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_new", true, 100);
+					var staticColumns = workTableCommonService.constructeAssignmentStaticColumns(scope, "sampleorder_new", true, 100);
 					if(scope.userInfo &&scope.userInfo.areaname=='BVN'){
 							param['eq_factory_number']='APU008';
 					}
@@ -1131,16 +1131,16 @@
 						_this.assigningStatus(scope);
 						GLOBAL_Http($http, "cpo/api/worktable/assign_factory?", 'GET', param, function(data) {
 							_this.assignedStatus(scope);
-	
+
 							if(data.status == 0) {
-	
+
 								if(data.tips && data.tips != "0") {
 									modalAlert(CommonService, 2, "Assign Successfully with factory adjustment rules.", null);
 								} else {
 									modalAlert(CommonService, 2, $translate.instant('worktable.SUCCESS_ASSIGN'), null);
-	
+
 								}
-	
+
 								//	modalAlert(CommonService, 2, $translate.instant('worktable.SUCCESS_ASSIGN'), null);
 								_this.refreshAll(scope);
 								_this.getDailyOrder(scope, 4);
@@ -1245,7 +1245,7 @@
 						}
 					}
 
-					var staticColumns = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_new", true, 100);
+					var staticColumns = workTableCommonService.constructeAssignmentStaticColumns(scope, "sampleorder_new", true, 100);
 
 					if(scope.userInfo &&scope.userInfo.areaname=='BVN'){
 							param['eq_factory_number']='APU008';
@@ -2281,7 +2281,7 @@
 				this.refreshBno = function(scope, entity) {
 					var _this = this;
 					scope.disableRefreshBNoButton = true;
-					var param = {	
+					var param = {
 						"documentId": '-1'
 					};
 
@@ -3001,7 +3001,7 @@
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
-				
+
 				this.checkOrderInfo=function(scope){
 					var gridApi = scope.gridApi3;
 					var _this = this;
@@ -3010,7 +3010,7 @@
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
 						return;
 					}
-					
+
 					var modalInstance =
 						$uibModal.open({
 							animation: true,
@@ -3068,11 +3068,15 @@
                     po: selectedRows[0].po,
                     workingNo: selectedRows[0].workingNo,
                     articleNo: selectedRows[0].articleNo,
-                    orderMasterId: selectedRows[0].orderMasterId
+                    orderMasterId: selectedRows[0].orderMasterId,
+                    sampleInfo: selectedRows[0].addSampleInfo
         					};
         				}
         			}
         		});
+            modalInstance.resolve = function(result) {
+              _this.refreshAll(scope);
+            }
         }
 			}
 		])
