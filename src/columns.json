@@ -2144,6 +2144,479 @@
       "field": "tradeCardOrderStatus"
     }
   ],
+  "sampleorder_new": [
+    {
+      "displayName": "Release to AX Status",
+      "field": "flagAx"
+    },
+    {
+      "displayName": "Release to FR Status",
+      "field": "flagFr"
+    },
+    {
+      "displayName": "Release to AX Remark",
+      "field": "transitAxRemark"
+    },
+    {
+      "displayName": "Release to FR Remark",
+      "field": "transitFrRemark"
+    },
+    {
+      "displayName": "TC PO",
+      "field": "po"
+    },
+    {
+      "displayName": "Original PO",
+      "field": "originalPo"
+    },
+    {
+      "displayName": "IPMT_NO",
+      "field": "workingNo"
+    },
+    {
+      "displayName": "BNO",
+      "field": "bNo"
+    },
+    {
+      "displayName": "BatchNO",
+      "field": "batchNo"
+    },
+    {
+      "displayName": "Athlete",
+      "field": "athlete"
+    },
+    {
+      "displayName": "B+Batch",
+      "field": "mo"
+    },
+    {
+      "displayName": "Article",
+      "field": "articleNo"
+    },
+    {
+      "displayName": "Article Name",
+      "field": "articleName"
+    },
+    {
+      "field": "articleSeasonHistory",
+      "displayName": "Article Season History"
+    },
+    {
+      "displayName": "Order Article Season",
+      "field": "season"
+    },
+    {
+      "displayName": "Style Status",
+      "field": "styleStatus"
+    },
+    {
+      "displayName": "Earier by ready date",
+      "field": "byReadyDate"
+    },
+    {
+      "field": "seasonRemark",
+      "displayName": "Article Season Remark"
+    },
+    {
+      "displayName": "Factory",
+      "field": "factoryNumber"
+    },
+    {
+      "displayName": "A Source",
+      "field": "aSource"
+    },
+    {
+      "displayName": "System Assign Result ",
+      "field": "suggFactory"
+    },
+    {
+      "displayName": "CPO Confirmation Factory",
+      "field": "confirmFactory"
+    },
+		{
+			"displayName": "New Fty",
+			"field": "newFactory"
+		},
+		{
+			"displayName": "Old Fty",
+			"field": "oldFactory"
+		},
+    {
+      "displayName": "Fty Name",
+      "field": "ftyName"
+    },
+    {
+      "displayName": "Remark",
+      "field": "assignmentRemark"
+    },
+    {
+      "displayName": "Transfer Reason",
+      "field": "transferReason"
+    },
+    {
+      "displayName": "Transfer Remark",
+      "field": "transferRemark"
+    },
+    {
+      "displayName": "CPO No",
+      "field": "cpoNo"
+    },
+    {
+      "displayName": "168#",
+      "field": "no168"
+    },
+    {
+      "displayName": "CLASSI",
+      "field": "classCode"
+    },
+    {
+      "displayName": "CST Order No.",
+      "field": "cstOrderNo"
+    },
+    {
+      "displayName": "Order Qty",
+      "field": "totalQty",
+      "special": {
+        "thousands": true
+      }
+    },
+    {
+      "displayName": "Balance",
+      "field": "balance"
+    },
+    {
+      "displayName": "Model",
+      "field": "modelNumber"
+    },
+    {
+      "displayName": "CTRY TO",
+      "field": "ctryNo"
+    },
+    {
+      "displayName": "Customer",
+      "field": "customerNo"
+    },
+    {
+      "displayName": "EU/Non-EU",
+      "field": "orderCountry"
+    },
+    {
+      "displayName": "CRD",
+      "field": "customerRequestDate"
+    },
+    {
+      "displayName": "Planned Date",
+      "field": "planDate"
+    },
+    {
+      "displayName": "CRD Mid Or End",
+      "field": "crdMidOrEnd"
+    },
+    {
+      "displayName": "PD Mid Or End",
+      "field": "pdMidOrEnd"
+    },
+    {
+      "displayName": "CRD&PD Mid or End",
+      "field": "crdPdMidOrEnd"
+    },
+    {
+      "displayName": "LC0190 Issue Date",
+      "field": "orderDate"
+    },
+    {
+      "displayName": "PO Batch Date",
+      "field": "poBatchDate"
+    },
+    {
+      "displayName": "LC0190 Date Remark",
+      "field": "dateRemark"
+    },
+    {
+      "displayName": "CRD Confirm Satus",
+      "field": "crdConfirmStatus"
+    },
+    {
+      "displayName": "PD Confirm Status",
+      "field": "pdConfirmStatus"
+    },
+    {
+      "displayName": "PSDD",
+      "field": "psdd"
+    },
+    {
+      "displayName": "FPD",
+      "field": "fpd"
+    },
+    {
+      "displayName": "PODD",
+      "field": "podd"
+    },
+    {
+      "displayName": "LPD",
+      "field": "lastProdDate"
+    },
+    {
+      "displayName": "PSDD(Factory)",
+      "field": "psddFactory"
+    },
+    {
+      "displayName": "FPD(Factory)",
+      "field": "fpdFactory"
+    },
+    {
+      "displayName": "PSDD Mid or End",
+      "field": "psddMidEnd"
+    },
+    {
+      "displayName": "FPD Mid or End",
+      "field": "fpdMidEnd"
+    },
+    {
+      "displayName": "Packing Type",
+      "field": "packingType"
+    },
+    {
+      "displayName": "Packaging Requirement",
+      "field": "packagingRequirement"
+    },
+    {
+      "displayName": "Retailer Order Number",
+      "field": "retailerOrderNumber"
+    },
+    {
+      "displayName": "MDPfailreason",
+      "field": "mdpFailReason"
+    },
+    {
+      "displayName": "PDPfailreason",
+      "field": "pdpFailReason"
+    },
+    {
+      "displayName": "New Style",
+      "field": "newStyle"
+    },
+    {
+      "displayName": "Range",
+      "field": "workingNoRange"
+    },
+    {
+      "displayName": "DD Style",
+      "field": "ddStyle"
+    },
+    {
+      "displayName": "Unit",
+      "field": "unit"
+    },
+    {
+      "displayName": "Print Qty",
+      "field": "printQty"
+    },
+    {
+      "displayName": "Production LT",
+      "field": "productionLeadTime"
+    },
+    {
+      "displayName": "Garment LT",
+      "field": "garmentProductingDay"
+    },
+    {
+      "displayName": "Special Order",
+      "field": "specialOrder"
+    },
+    {
+      "displayName": "Order Remark",
+      "field": "orderRemark"
+    },
+    {
+      "displayName": "Updated Information",
+      "field": "updatedInformation"
+    },
+    {
+      "displayName": "MTF Order/PPC Order",
+      "field": "mtfcNumber"
+    },
+    {
+      "displayName": "BU LC0190 Date",
+      "field": "originalLc0190Date"
+    },
+    {
+      "displayName": "Internal Pull Forward Factory",
+      "field": "lasterCusFcFactory"
+    },
+    {
+      "displayName": "CUS FC Assigned Factory",
+      "field": "assignedFactory"
+    },
+    {
+      "displayName": "GSP",
+      "field": "gsp"
+    },
+    {
+      "displayName": "Serviceidentify",
+      "field": "serviceIdentify"
+    },
+    {
+      "displayName": "Customization Status",
+      "field": "customizationStatus"
+    },
+    {
+      "displayName": "Test",
+      "field": "test"
+    },
+    {
+      "displayName": "Ship Mode",
+      "field": "shipMode"
+    },
+    {
+      "displayName": "UD ShipMode",
+      "field": "udShipMode"
+    },
+    {
+      "displayName": "Customer Over FC Qty",
+      "field": "customerOverFc"
+    },
+    {
+      "displayName": "Latest Fabric PI ETA",
+      "field": "latestFabricPiEta"
+    },
+    {
+      "displayName": "Latest Trim PI ETA",
+      "field": "latestTrimPiEta"
+    },
+    {
+      "displayName": "Main MPO#",
+      "field": "mainMpo"
+    },
+    {
+      "displayName": "1st T2 Name",
+      "field": "t2Name1st"
+    },
+    {
+      "displayName": "1st Fabric RMS#",
+      "field": "fabricRms1st"
+    },
+    {
+      "displayName": "1st Fabric PO#",
+      "field": "fabricPo1st"
+    },
+    {
+      "displayName": "1st Fabric PI Date",
+      "field": "fabricPiDate"
+    },
+    {
+      "displayName": "Brand",
+      "field": "brand"
+    },
+    {
+      "displayName": "Unit Price",
+      "field": "unitPrice"
+    },
+    {
+      "displayName": "Client",
+      "field": "client"
+    },
+    {
+      "displayName": "Sports Code",
+      "field": "sportsCode"
+    },
+    {
+      "displayName": "Size Group",
+      "field": "sizeGroup"
+    },
+    {
+      "displayName": "Quantity",
+      "field": "quantity"
+    },
+    {
+      "displayName": "LC0190 Order Type",
+      "field": "orderType"
+    },
+    {
+      "displayName": "Leftover(Piece)",
+      "field": "leftover"
+    },
+    {
+      "displayName": "Leftover Factory",
+      "field": "leftoverFactory"
+    },
+    {
+      "displayName": "Fabric Type",
+      "field": "fabricType"
+    },
+    {
+      "displayName": "Product Type",
+      "field": "productTypeAx"
+    },
+    {
+      "displayName": "Product Type-FR",
+      "field": "productTypeFr"
+    },
+    {
+      "displayName": "Plan Group",
+      "field": "planGroup"
+    },
+    {
+      "displayName": "T&A",
+      "field": "timetable"
+    },
+    {
+      "displayName": "Special Process",
+      "field": "process"
+    },
+    {
+      "displayName": "Special process remark",
+      "field": "specialProcessRemark"
+    },
+    {
+      "displayName": "Order Type",
+      "field": "orderActualType"
+    },
+    {
+      "displayName": "Adidas Order Type",
+      "field": "adidasOrderType"
+    },
+    {
+      "displayName": "SMV",
+      "field": "smv"
+    },
+    {
+      "displayName": "TTL SMV",
+      "field": "ttlSmv"
+    },
+    {
+      "displayName": "FOB",
+      "field": "fob"
+    },
+    {
+      "displayName": "TC Order Status",
+      "field": "orderStatus"
+    },
+    {
+      "displayName": "Change Remark",
+      "field": "transferOrderInfo"
+    },
+    {
+      "displayName": "SIZE_RUN",
+      "field": "customerSizeRun"
+    },
+    {
+      "displayName": "Technical Notation",
+      "field": "technicalNotation"
+    },
+    {
+      "displayName": "TS COUNT",
+      "field": "tsCount"
+    },
+    {
+      "displayName": "PPC Order Status",
+      "field": "ppcOrderStatus"
+    },
+    {
+      "displayName": "Trade Card Order Status",
+      "field": "tradeCardOrderStatus"
+    }
+  ],
   "assignBulkorder_new": [
     {
       "displayName": "Release to AX Status",
