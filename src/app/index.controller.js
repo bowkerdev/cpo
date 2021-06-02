@@ -4,7 +4,7 @@
 	angular
 		.module('cpo')
 
-		.controller('rootCtrl', ['$scope', '$compile', '$location', '$http', '$window', '$translate', '$timeout','CommonService', function($scope, $compile, $location, $http, $window, $translate, $timeout,CommonService) {
+		.controller('rootCtrl', ['$scope', '$compile', '$location', '$http', '$window', '$translate', '$timeout','CommonService', 'externalUrlService', function($scope, $compile, $location, $http, $window, $translate, $timeout,CommonService, externalUrlService) {
 			var token = $location.search().token;
 
 			$scope.rootColumnDef = {};
@@ -88,7 +88,11 @@
 					if($('.page-show').length) {
 						$('.page-show').removeClass('page-show');
 					}
-
+          var tempUrl = pageUrl;
+					if(tempUrl.toLowerCase().indexOf('http') > -1){
+						externalUrlService.setExternalUrl(pageUrl);
+						pageUrl = 'app/externalpage/index.html'
+					}
 					//通过$compile动态编译html
 					var html = '<div id="' + pageID + '" class="page-init-hide" ng-class="{\'page-show\':activePage===\'' + pageID + '\'}" ng-include=\'"' + pageUrl + '"\'></div>';
 					var template = angular.element(html);
@@ -146,7 +150,7 @@
 				var timeStamp = dateTimeFormat(new Date());
 				//				var userName = "WeCAREC001";
 				var userName = "zhimi";
-				var pwd = "123456";
+				var pwd = "zm@123";
 				var newPassword = SHA256(pwd);
 				var signStr = SHA256(userName + newPassword + timeStamp + userName);
 				var requestData = {
