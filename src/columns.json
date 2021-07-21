@@ -2198,6 +2198,26 @@
       "field": "mo"
     },
     {
+      "displayName": "Sample Order No",
+      "field": "sampleOrderNo"
+    },
+    {
+      "displayName": "Merchandising Team",
+      "field": "merchandisingTeam"
+    },
+    {
+      "displayName": "BU Merchandiser",
+      "field": "buMerchandiser"
+    },
+    {
+      "displayName": "Product Decription",
+      "field": "productDecription"
+    },
+    {
+      "displayName": "Add Sample Info",
+      "field": "addSampleInfo"
+    },
+    {
       "displayName": "Article",
       "field": "articleNo"
     },

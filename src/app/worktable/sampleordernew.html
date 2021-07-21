@@ -489,8 +489,11 @@
     <button ng-if="!row.entity.Edit" type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.edit(row)">
       <span translate="index.EDIT"></span>
     </button>
-    <button ng-if="row.entity.Edit" type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.cancel(row)">
+    <button ng-if="row.entity.Edit && !row.entity.isNew" type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.cancel(row)">
       <span translate="index.CANCEL"></span>
+    </button>
+    <button type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.delete(row)">
+      <span translate="index.DELETE"></span>
     </button>
   </div>
 </script>

@@ -17,8 +17,8 @@
   	</div>
   </form>
   <div class="modal-footer">
-    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
-    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white" ng-disabled="submiting">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()" ng-disabled="submiting">Submit</button>
   </div>
 </div>
 
