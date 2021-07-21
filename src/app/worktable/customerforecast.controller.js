@@ -1383,6 +1383,7 @@
 						"status": "5",
 						"assignResultIds": listToString(selectedRows, 'assignResultId')
 					};
+					param.releaseTo365='0';
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
 						scope.disableReleaseOrderButton = false;
 						if(data.status == 0) {
@@ -1913,6 +1914,7 @@
 						"status": "4"
 					};
 
+					param.releaseTo365='0';
 					scope.disableReleaseOrderButton = true;
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
 						scope.disableReleaseOrderButton = false;

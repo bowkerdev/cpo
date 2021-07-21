@@ -141,7 +141,7 @@
           <i class="fa fa-share"></i>
           <span translate="">Change Application</span>
         </button>
-        <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="importFile(501)" ng-if="tabIndex!='5'">
+        <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="importFile(501)" ng-if="tabIndex!='5'&&tabIndex!='6'&&tabIndex!='7'&&tabIndex!='8'">
           <i class="fa fa-upload"></i>
           <span translate="">Import</span>
         </button>
@@ -219,6 +219,10 @@
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="splitOrder()">
           <span translate="">Split Order</span>
         </button>
+
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="changeUnit()">
+          <span translate="">Change Unit</span>
+        </button>
         <!--<button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="generateBatchNo()" ng-disabled="generateBatchNoButtonDisabled">-->
           <!--<i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span-->
           <!--translate="">Generate Batch No.</span>-->
@@ -240,6 +244,12 @@
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="worktable.RELEASE"></span>
         </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrder('D365')" ng-disabled="disableReleaseOrderButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To D365</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrder('FR')" ng-disabled="disableReleaseOrderButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To FR</span>
+        </button>
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="holdPendingOrder()" ng-disabled="disableReleaseOrderButton">
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="worktable.HOLD_PENDING"></span>
@@ -247,6 +257,9 @@
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="setSeason()" >
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="">Set Season</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="changeUnit()">
+          <span translate="">Change Unit</span>
         </button>
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="generateBatchNo()" ng-disabled="generateBatchNoButtonDisabled">
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
@@ -289,9 +302,18 @@
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="worktable.RELEASE"></span>
         </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseTransitPendingOrder('D365')" ng-disabled="disableReleaseOrderButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To D365</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseTransitPendingOrder('FR')" ng-disabled="disableReleaseOrderButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To FR</span>
+        </button>
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="setSeason()" >
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="">Set Season</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="changeUnit()">
+          <span translate="">Change Unit</span>
         </button>
         <!--<button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="confirmOrder()" ng-disabled="confirmOrderButtonDisabled">-->
           <!--<i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span-->
@@ -327,6 +349,12 @@
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="worktable.RELEASE"></span>
         </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseTransitPendingOrder('D365')" ng-disabled="disableReleaseOrderButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To D365</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseTransitPendingOrder('FR')" ng-disabled="disableReleaseOrderButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To FR</span>
+        </button>
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="confirmOrder()" ng-disabled="confirmOrderButtonDisabled">
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="">Confirm Order</span>
@@ -335,10 +363,17 @@
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="">Confirm All</span>
         </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="changeUnit()">
+          <span translate="">Change Unit</span>
+        </button>
 
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
           <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="">Refresh 168 No.</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="setSeason()" >
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+          translate="">Set Season</span>
         </button>
       </div>
     </div>
@@ -354,10 +389,23 @@
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="worktable.RELEASE"></span>
         </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseTransitPendingOrder('D365')" ng-disabled="disableReleaseOrderButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To D365</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseTransitPendingOrder('FR')" ng-disabled="disableReleaseOrderButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To FR</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="changeUnit()">
+          <span translate="">Change Unit</span>
+        </button>
 
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="refresh168No()" ng-disabled="refresh68NoButtonDisabled">
           <i class="fa fa-refresh" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="">Refresh 168 No.</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="setSeason()" >
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+          translate="">Set Season</span>
         </button>
       </div>
     </div>
@@ -374,10 +422,14 @@
           translate="index.CONFIRM"></span>
         </button>
         <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder('PENDING')" ng-disabled="disableReleaseOrderButton">
-          <i class="fa fa-check-circle-o" style="font-size: 20px;">	</i>&nbsp;&nbsp;<span
-          >Confirm and Release</span>
+          <i class="fa fa-check-circle-o" style="font-size: 20px;">	</i>&nbsp;&nbsp;<span>Confirm and Release</span>
         </button>
-
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder('PENDING','D365')" ng-disabled="disableReleaseOrderButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To D365</span>
+        </button>
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder('PENDING','FR')" ng-disabled="disableReleaseOrderButton">
+          <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To FR</span>
+        </button>
       </div>
     </div>
     <div ng-show="tabIndex=='7'">
@@ -417,6 +469,26 @@
   </div>
   <div class="modal-body" >
     <select ng-model="selectSeason" ng-options="season.label for season in seasons" style="height: 32px;width:100%;padding-left: 10px;"></select>
+  </div>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="set-unit.html">
+  <div class="modal-header">
+    <h3 class="modal-title" >Set Unit</h3>
+  </div>
+  <div class="modal-body" >
+   <div class="split-order-item">
+  	<div class="split-order-item-title"><span class="must-input-star">*</span>Unit:</div>
+    <select ng-model="selectUnit" ng-options="unit.label for unit in units" class="split-order-item-value"></select>
+   </div>
+   <div class="split-order-item">
+    <div class="split-order-item-title"><span class="must-input-star">*</span>Unit Change Rate:</div>
+    <div class="split-order-item-value"><input class="input-place" type="text" ng-model="unitChangeRate"></div>
+   </div>
   </div>
   <div class="modal-footer">
     <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
@@ -563,7 +635,7 @@
 }
 
 .split-order-item-title {
-  width: 20%;
+  width: 30%;
   margin-right: 10px;
   text-align: right;
 }

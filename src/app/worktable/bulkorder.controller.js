@@ -1991,7 +1991,7 @@
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
-				this.releaseOrderChangeOrder = function(scope, type) {
+				this.releaseOrderChangeOrder = function(scope, type,system) {
 					var gridApi = {}
 					if(type === 'PENDING') {
 						gridApi = scope.gridApi8
@@ -2023,6 +2023,14 @@
 						"ediOrderChanges": ediOrderChanges
 					};
 
+					if('D365'===system){
+						param.releaseTo365='1';
+						param.releaseToFr='0';
+					}else if('FR'===system){
+						param.releaseTo365='0';
+						param.releaseToFr='1';
+					}
+					
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
 						scope.disableReleaseOrderButton = false;
 						if(data.status == 0) {
@@ -2040,7 +2048,7 @@
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
-				this.releaseOrder = function(scope) {
+				this.releaseOrder = function(scope,system) {
 
 					var _this = this;
 					scope.disableReleaseOrderButton = true;
@@ -2068,7 +2076,15 @@
 						"status": "4",
 						"assignResultIds": listToString(selectedRows, 'assignResultId')
 					};
-
+					
+					if('D365'===system){
+						param.releaseTo365='1';
+						param.releaseToFr='0';
+					}else if('FR'===system){
+						param.releaseTo365='0';
+						param.releaseToFr='1';
+					}
+					
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
 						scope.disableReleaseOrderButton = false;
 						if(data.status == 0) {
@@ -2116,6 +2132,7 @@
 						"documentIds": documentid,
 						"status": "4",
 						"confirmOrder": "YES",
+						"releaseTo365": "0",
 						"assignResultIds": listToString(selectedRows, 'assignResultId')
 					};
 
@@ -2156,6 +2173,7 @@
 					var param = {
 						"documentIds": documentid,
 						"status": "4",
+						"releaseTo365": "0",
 						"confirmOrder": "YES"
 					};
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
@@ -2172,7 +2190,7 @@
 					});
 				}
 
-				this.releaseTransitPendingOrder = function(scope) {
+				this.releaseTransitPendingOrder = function(scope,system) {
 
 					var _this = this;
 					scope.disableReleaseOrderButton = true;
@@ -2208,6 +2226,15 @@
 						"assignResultIds": listToString(selectedRows, 'assignResultId'),
 						releaseTransit: "YES"
 					};
+					
+					if('D365'===system){
+						param.releaseTo365='1';
+						param.releaseToFr='0';
+					}else if('FR'===system){
+						param.releaseTo365='0';
+						param.releaseToFr='1';
+					}
+					
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
 						scope.disableReleaseOrderButton = false;
 						if(data.status == 0) {
@@ -2570,8 +2597,12 @@
 						selectedRows = scope.gridApi2.selection.getSelectedRows();
 					} else if(scope.tabIndex == 1) {
 						selectedRows = scope.gridApi3.selection.getSelectedRows();
+					}else if(scope.tabIndex == 2) {
+						selectedRows = scope.gridApi4.selection.getSelectedRows();
 					} else if(scope.tabIndex == 3) {
 						selectedRows = scope.gridApi5.selection.getSelectedRows();
+					} else if(scope.tabIndex == 4) {
+						selectedRows = scope.gridApi6.selection.getSelectedRows();
 					};
 					if(selectedRows.length < 1) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
@@ -2661,6 +2692,124 @@
 					});
 				}
 
+				this.changeUnit = function(scope) {
+					var _this = this;
+					var selectedRows = null; //scope.gridApi5.selection.getSelectedRows();
+					var ids = new Array();
+					if(scope.tabIndex == 0) {
+						selectedRows = scope.gridApi2.selection.getSelectedRows();
+					} else if(scope.tabIndex == 1) {
+						selectedRows = scope.gridApi3.selection.getSelectedRows();
+					}else if(scope.tabIndex == 2) {
+						selectedRows = scope.gridApi4.selection.getSelectedRows();
+					} else if(scope.tabIndex == 3) {
+						selectedRows = scope.gridApi5.selection.getSelectedRows();
+					} else if(scope.tabIndex == 4) {
+						selectedRows = scope.gridApi6.selection.getSelectedRows();
+					};
+					
+					
+					
+					if(selectedRows.length < 1) {
+						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
+						return;
+					}
+
+					for(var index in selectedRows) {
+						var row = selectedRows[index];
+						ids.push(row.factAssignId);
+						// if ( row.season ) {
+						//   var text = "No need to set season for article(" + row.articleNo + ") since it is exists.";
+						//   modalAlert(CommonService , 2 , text , null);
+						//   return;
+						// }else{
+						//   ids.push(row.factAssignId);
+						// }
+					}
+					
+					var request = {
+			          	in_code: 'unitTypeList'
+			        }
+					GLOBAL_Http($http, "cpo/api/sys/admindict/translate_code?", 'GET', request, function(data) {
+						if(data.unitTypeList && data.unitTypeList.length > 0) {
+
+							scope.units = data.unitTypeList.map(function(item) {
+								return {
+									id: item.label,
+									label: item.label
+								}
+
+							});
+
+							var topScope = scope;
+							var modalInstance = $uibModal.open({
+								animation: true,
+								ariaLabelledBy: 'modal-title',
+								ariaDescribedBy: 'modal-body',
+								templateUrl: 'set-unit.html',
+								size: "md",
+								controller: function($scope, $uibModalInstance) {
+
+									$scope.units = topScope.units;
+									$scope.selectUnit = $scope.units[0];
+
+									$scope.submit = function() {
+
+										$uibModalInstance.resolve({
+											unit: $scope.selectUnit.label,
+											unitChangeRate: $scope.unitChangeRate
+										});
+										$uibModalInstance.dismiss();
+									};
+									$scope.dismiss = function() {
+										$uibModalInstance.dismiss();
+									}
+
+								}
+
+							});
+
+							modalInstance.resolve = function(result) {
+
+								var unit = result.unit;
+								var unitChangeRate=result.unitChangeRate;
+								
+								if(!unit || !unitChangeRate){
+									modalAlert(CommonService, 3, 'Please Select Unit and Input Unit Rate.', null);
+									return;
+								}
+								
+								var param = {
+									orderType: 3,
+									unit: unit,
+									unitChangeRate:unitChangeRate,
+									ids: ids.join(",")
+								}
+								GLOBAL_Http($http, "cpo/api/worktable/set_unit", 'POST', param, function(data) {
+									if(data.status == 0) {
+										modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
+										_this.refreshAll(scope);
+									} else {
+										modalAlert(CommonService, 2, data.message, null);
+									}
+								}, function(data) {
+
+									modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+								});
+
+							}
+
+						} else {
+							var message = data.message ? data.message : $translate.instant('errorMsg.NO_ARTICLE_SEASON_IN_RANGEE_FOUND');
+							modalAlert(CommonService, 2, message, null);
+						}
+					}, function(data) {
+
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+
+
 				this.confirmChange = function(scope, type) {
 					var gridApi = {}
 					if(type === 'PENDING') {
@@ -2714,13 +2863,13 @@
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
 						return;
 					}
-					for(var i = 0; i < selectedRows.length; i++) {
-						if('MTF Order' == selectedRows[i].orderActualType ||
-							'PPC Order' == selectedRows[i].orderActualType) {
-							modalAlert(CommonService, 2, 'Can Not Change PPC/MTF Order\'s Factory', null);
-							return;
-						}
-					}
+//					for(var i = 0; i < selectedRows.length; i++) {
+//						if('MTF Order' == selectedRows[i].orderActualType ||
+//							'PPC Order' == selectedRows[i].orderActualType) {
+//							modalAlert(CommonService, 2, 'Can Not Change PPC/MTF Order\'s Factory', null);
+//							return;
+//						}
+//					}
 
 					var modalInstance =
 						$uibModal.open({
@@ -3060,8 +3209,8 @@
 				$scope.adjustFactoryAssignment = function(mode, tab) {
 					BulkOrderService.adjustFactoryAssignment($scope, mode, tab);
 				}
-				$scope.releaseOrder = function(type) {
-					BulkOrderService.releaseOrder($scope, type);
+				$scope.releaseOrder = function(system) {
+					BulkOrderService.releaseOrder($scope, system);
 				}
 				$scope.releaseAllOrder = function(type) {
 					BulkOrderService.releaseAllOrder($scope, type);
@@ -3069,8 +3218,8 @@
 				$scope.holdPendingOrder = function(type) {
 					BulkOrderService.holdPendingOrder($scope, type);
 				}
-				$scope.releaseTransitPendingOrder = function(type) {
-					BulkOrderService.releaseTransitPendingOrder($scope, type);
+				$scope.releaseTransitPendingOrder = function(system) {
+					BulkOrderService.releaseTransitPendingOrder($scope,system);
 				};
 				$scope.exportFile = function() {
 					BulkOrderService.exportFile($scope);
@@ -3118,6 +3267,9 @@
 				$scope.setSeason = function() {
 					BulkOrderService.setSeason($scope);
 				}
+				$scope.changeUnit = function() {
+					BulkOrderService.changeUnit($scope);
+				}
 				$scope.generateBatchNo = function() {
 					BulkOrderService.generateBatchNo($scope);
 				}
@@ -3130,8 +3282,8 @@
 				$scope.selectDocumentChanged = function() {
 					BulkOrderService.selectDocumentChanged($scope);
 				}
-				$scope.releaseOrderChangeOrder = function(type) {
-					BulkOrderService.releaseOrderChangeOrder($scope, type);
+				$scope.releaseOrderChangeOrder = function(type,system) {
+					BulkOrderService.releaseOrderChangeOrder($scope, type,system);
 				}
 				$scope.downloadNewOrderInTradeCard = function(entity) {
 					BulkOrderService.downloadNewOrderInTradeCard($scope, entity);

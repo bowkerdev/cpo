@@ -1808,8 +1808,16 @@
       }
     },
     {
-      "displayName": "Balance",
-      "field": "balance"
+      "displayName": "CST Order No.",
+      "field": "cstOrderNo"
+    },
+    {
+      "displayName": "Unit.",
+      "field": "orderUnit"
+    },
+    {
+      "displayName": "Unit Change Rate",
+      "field": "unitChangeRate"
     },
     {
       "displayName": "Model",
@@ -3313,11 +3321,19 @@
     },
     {
       "field": "addOrderTimes",
+      "displayName": "Add Order Times"
+    },
+    {
+      "field": "dateRemark",
       "displayName": "Order Buy"
     },
     {
       "field": "orderRemark",
       "displayName": "remark"
+    },
+    {
+      "field": "cutRemark",
+      "displayName": "Cut Remark"
     },
     {
       "field": "confirmFactory",
@@ -3383,8 +3399,20 @@
       "displayName": "PO Batch Date"
     },
     {
+      "field": "orderDate",
+      "displayName": "Order Date"
+    },
+    {
       "field": "planDate",
       "displayName": "PLNDAT"
+    },
+    {
+      "field": "podd",
+      "displayName": "TC PODD"
+    },
+    {
+      "field": "factoryPodd",
+      "displayName": "PODD(Factory)"
     },
     {
       "field": "shipMode",

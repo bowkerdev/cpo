@@ -1,6 +1,6 @@
 var DebugLog = true;
 var transferDateKey = ["createDate", "publishTime", "editTime", "validityFrom", "validityTo", "approveTime", "voteTime", "utcUpdate", "utcCreate", "createdate", "planDate", "orderReleaseDate", "requestTransferMonthFrom", "requestTransferMonthTo", "releaseDate", "remarkDate", 'byReadyDate', 'createdDate', 'fpdMidEnd', 'psddMidEnd', 'originalLc0190Date', 'crdMidOrEnd', 'pdMidOrEnd', 'crdPdMidOrEnd', 'lc0190Date'];
-var transferSimpleDateKey = ["startTime", "endTime", "firstProdDate", "lastProdDate", "planDate", "poBatchDate", "requestDate", "psdd", "podd", 'customerRequestDate', 'psddFactory', 'fpd', 'fpdFactory', 'customerRequestDateCs', "orderReleaseDate", "pvMonth", "toPvMonth", 'byReadyDate', 'byReady', 'latestFabricPiEta', 'latestTrimPiEta', 'fabricPiDate', 'etd', 'byReady', 'orderDate', 'poBatchDate', 'byReadyDate', 'createdDate', 'originalLc0190Date'];
+var transferSimpleDateKey = ["startTime", "endTime", "firstProdDate", "lastProdDate", "planDate", "poBatchDate", "requestDate", "psdd", "podd", 'customerRequestDate', 'psddFactory', 'fpd', 'fpdFactory', 'factoryPodd', 'customerRequestDateCs', "orderReleaseDate", "pvMonth", "toPvMonth", 'byReadyDate', 'byReady', 'latestFabricPiEta', 'latestTrimPiEta', 'fabricPiDate', 'etd', 'byReady', 'orderDate', 'poBatchDate', 'byReadyDate', 'createdDate', 'originalLc0190Date'];
 var transferFixTo2NumberKey = ["ttlSmv"];
 var splitThrousandCount = ["totalQty"];
 var pageStatus = {
@@ -358,11 +358,12 @@ String.prototype.format = function(args) {
  * callBack：确定按钮的回调函数,无回调设置为null
  *
  * */
-function modalAlert(service, modalType, message, callBack) {
+function modalAlert(service, modalType, message, callBack,cancelCB) {
 
 	var confirmModalInstance = service.outputCommonModal(modalType, message);
-	confirmModalInstance.result.then(callBack);
+	confirmModalInstance.result.then(callBack,cancelCB);
 }
+
 /**
  * Created by mac on 2017/8/24.
  */

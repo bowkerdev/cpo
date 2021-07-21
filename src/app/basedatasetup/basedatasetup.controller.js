@@ -95,7 +95,7 @@
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
-				
+
 				$scope.updateBNumber = function() {
 					var _this = this;
 					var selectedRows = null; //scope.gridApi5.selection.getSelectedRows();
@@ -109,7 +109,7 @@
 						var row = selectedRows[index];
 						ids.push(row.workingNoSizeGroupId);
 					}
-					
+
 					var modalInstance = $uibModal.open({
 						animation: true,
 						ariaLabelledBy: 'modal-title',
@@ -133,7 +133,7 @@
 						}
 
 					});
-					
+
 					modalInstance.resolve = function(result) {
 
 						var bNumber = result.bNumber;
@@ -145,7 +145,7 @@
 						GLOBAL_Http($http, "cpo/api/worktable/workingnosizegroup/updateList", 'POST', param, function(data) {
 							if(data.status == 0) {
 								modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
-								 _this.search($scope);
+								_this.search($scope);
 							} else {
 								modalAlert(CommonService, 2, data.message, null);
 							}
@@ -156,8 +156,20 @@
 
 					}
 				}
-				
-				
+
+				$scope.exportBNumber = function(scope) {
+					var param = {
+						documentType: 70001
+					}
+					if($("#searchWorkingNo").val()) {
+						param.working_no = $("#searchWorkingNo").val();
+					}
+					if($("#searchSeason").val()) {
+						param.season = $("#searchSeason").val();
+					}
+					exportExcel(param, "cpo/portal/document/export_file?", "_blank");
+				}
+
 				$scope.initBNumGrid = function(scope) {
 					var _this = this;
 
@@ -196,20 +208,15 @@
 					};
 				}
 
-
-
-
-
-
 				$scope.initLC0190NewDate = function(scope) {
 					var _this = this;
-			          var param = {
-			            in_code : 'LC0190NewOrderDate'
-			          }
+					var param = {
+						in_code: 'LC0190NewOrderDate'
+					}
 
-					GLOBAL_Http($http , "cpo/api/sys/admindict/translate_code?" , 'GET' , param , function ( data ) {
+					GLOBAL_Http($http, "cpo/api/sys/admindict/translate_code?", 'GET', param, function(data) {
 						if(data.LC0190NewOrderDate && data.LC0190NewOrderDate.length > 0) {
-							scope.LC0190Date = data.LC0190NewOrderDate[0].label;			
+							scope.LC0190Date = data.LC0190NewOrderDate[0].label;
 						} else {
 							var message = data.message ? data.message : $translate.instant('errorMsg.NO_ARTICLE_SEASON_IN_RANGEE_FOUND');
 							modalAlert(CommonService, 2, message, null);
@@ -220,10 +227,8 @@
 					});
 				}
 
-
-
 				$scope.initBNumGrid($scope);
-                $scope.initLC0190NewDate($scope);
+				$scope.initLC0190NewDate($scope);
 				$scope.selectTab = function(index) {
 					$scope.tabIndex = index;
 					if(index == 1) {
@@ -281,24 +286,21 @@
 						}
 					}
 				}
-				
-				
-				
-				
-				$scope.changeLC0190Date = function() {
-					 var _this = this;
-			          var param = {
-			            in_code : 'LC0190NewOrderDateOption'
-			          }
 
-					GLOBAL_Http($http , "cpo/api/sys/admindict/translate_code?" , 'GET' , param , function ( data ) {
+				$scope.changeLC0190Date = function() {
+					var _this = this;
+					var param = {
+						in_code: 'LC0190NewOrderDateOption'
+					}
+
+					GLOBAL_Http($http, "cpo/api/sys/admindict/translate_code?", 'GET', param, function(data) {
 						if(data.LC0190NewOrderDateOption && data.LC0190NewOrderDateOption.length > 0) {
 
 							$scope.newOrderDates = data.LC0190NewOrderDateOption.map(function(item) {
 								return {
 									id: item.value,
 									label: item.label,
-									value:item.value
+									value: item.value
 								}
 
 							});
@@ -358,15 +360,7 @@
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
+
 			}
 		])
 })();

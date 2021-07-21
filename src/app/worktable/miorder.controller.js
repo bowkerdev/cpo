@@ -1510,6 +1510,55 @@
 					});
 
 				}
+				
+				this.exportPDF = function(scope) {
+					var param = {
+						documentType: 70010,
+						pageSize: 1000000,
+						pageNo: 1
+					};
+					
+					var selectRows =[]; 
+					switch(scope.tabIndex) {
+						case 0:
+							{
+								selectRows=scope.gridApi2.selection.getSelectedRows();
+								break;
+							}
+						case 1:
+							{
+								selectRows=scope.gridApi4.selection.getSelectedRows();
+								break
+							}
+						case 2:
+							{
+								selectRows=scope.gridApi3.selection.getSelectedRows();
+								break
+							}
+					}
+					if(selectRows&&selectRows.length > 0){
+						param.in_order_master_id=listToString(selectRows, 'orderMasterId');
+					}
+					param.document_id = (scope.selectDoc.id == null || scope.selectDoc.id == "") ? 0 : scope.selectDoc.id;
+//					exportExcel(param, "cpo/portal/document/export_file?", "_blank");	
+					CommonService.showLoadingView("Exporting...");
+					GLOBAL_Http($http, "cpo/api/worktable/miPdf?", 'POST', param, function(data) {
+						CommonService.hideLoadingView();
+						if(data.status != 0) {
+							modalAlert(CommonService, 2, data.message, null);
+						}else{
+							window.open(data.output, "");
+						}
+					}, function(data) {
+						CommonService.hideLoadingView();
+						modalAlert(CommonService, 3, data.message, null);
+					});
+					
+					
+
+				}
+				
+				
 				this.refreshOrder = function(scope, entity) {
 					var _this = this;
 					var modalInstance =
@@ -2053,6 +2102,9 @@
 				}
 				$scope.exportFile = function() {
 					MIOrderService.exportFile($scope);
+				}
+				$scope.exportPDF = function() {
+					MIOrderService.exportPDF($scope);
 				}
 				$scope.releaseOrder = function(type) {
 					MIOrderService.releaseOrder($scope, type);
