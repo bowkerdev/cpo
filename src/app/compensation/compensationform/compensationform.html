@@ -1,0 +1,142 @@
+<div ng-controller="compensationFormCtrl">
+	<div id="compensationFormPage" class="row">
+		<div class="col-md-12">
+			<div class="page-title">
+				<div class="cps-form-wrap">
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.COMPENSATION_NO" class="labelwidth"></label>
+						<input type="text" ng-model="loadPort" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.CUSTOMER" class="labelwidth"></label>
+						<input type="text" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.FACTORY" class="labelwidth"></label>
+						<input type="text" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.INVOICE_NO" class="labelwidth"></label>
+						<input type="text" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.PO_NUMBER" class="labelwidth"></label>
+						<input type="text" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.ORDER_TYPE" class="labelwidth"></label>
+						<input type="text" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.CREATED_BY" class="labelwidth"></label>
+						<input type="text" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.STATUS" class="labelwidth"></label>
+						<input type="text" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="cps-form-wrap col-xs-12" style="padding: 0;">
+						<div class="form-group col-md-6 col-md-4">
+							<label class="control-label labelwidth" translate="compensation.DATE" style="float: left;line-height: 1.3em;"></label>
+							<div ng-model='inputStartTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputStartTime" style="float: left;margin-left: 4px;">
+								<input ng-model='inputStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>
+								<span class="input-group-addon" ng-click="inputStartTime=''"><i class="fa-close"></i></span>
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+						<div class="form-group col-md-6 col-md-4">
+							<label class="control-label labelwidth end-date-label" translate="to"></label>
+							<div ng-model='inputEndTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="inputEndTime" style="float: left;margin-left: 4px;">
+								<input ng-model='inputEndTime'  ng-change="controlTime('end',1)" class="form-control" size="16" type="text" value="" readonly>
+								<span class="input-group-addon" ng-click="inputEndTime=''"><i class="fa-close"></i></span>
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="search-form-btn-wrap">
+					<button
+						class="btn btn-white btn-icon searchBtn"
+						ng-disabled="searchLoading"
+					>
+						<span class="fa fa-search"></span>
+						<span translate="index.SEARCH"></span>
+					</button>
+				</div>
+				<div class="btn-group">
+					<button class="btn btn-postpone btn-icon">
+						<i class="fa fa-download"></i>
+						<span translate="index.IMPORT"></span>
+					</button>
+					<button class="btn btn-white btn-icon" ng-click="create()">
+						<i class="fa fa-plus"></i>
+						<span translate="compensation.CREATE_COMPENSATION"></span>
+					</button>
+					<button class="btn btn-white btn-icon">
+						<i class="fa fa-upload"></i>
+						<span translate="compensation.CONVERT_TO_COMPENSATION"></span>
+					</button>
+				</div>
+				<div ui-grid="gridOptions" 
+					ui-grid-pagination 
+					ui-grid-selection 
+					ui-grid-resize-columns 
+					ui-grid-auto-resize
+					hight-auto-fill-bottom
+				>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<ng-include src="'app/compensation/compensationform/createform.html'"></ng-include>
+<style>
+#compensationFormPage 	.form-group {
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#compensationFormPage .labelwidth {
+	width: 30%;
+	text-align: right;
+	padding-right: 5px;
+}
+#compensationFormPage .inputwidth {
+	width: 60%;
+	margin-left: 3px;
+}
+#compensationFormPage .searchBtn{
+	margin-right: 20px;
+	background-color: #1664F4;
+	color:white;
+	height: 32px;
+}
+.search-form-btn-wrap {
+	display: flex;
+	justify-content: flex-end;
+}
+.cps-form-wrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+.full-screen-modal .modal-dialog {
+	width: auto;
+	margin: 0;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	bottom: 10px;
+	left: 10px;
+}
+.full-screen-modal .modal-content {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.full-screen-modal.modal .modal-dialog .modal-content .modal-body {
+	flex-grow: 1;
+}
+</style>

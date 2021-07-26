@@ -1,0 +1,48 @@
+<script type="text/ng-template" id="compensationCreateFormModal">
+  <div class="modal-header factory-special-process-modal-header">
+    <span class="pull-left">
+      <h4 class="modal-title blue" translate="compensation.CREATE_COMPENSATION"></h4>
+    </span>
+    <img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" />
+  </div>
+  <div class="bg-operation-monitor modal-body form-border" ng-type-enter>
+    <form class="form-horizontal form-modal" role="form" name="formCountrySiteEntry" novalidate
+      style="padding-right: 50px">
+      <div class="form-group">
+        <label class="col-sm-6 control-label bold">
+          <div><span translate="worktable.FACTORY_NAME"></span></div>
+        </label>
+        <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryLoadingDetail.factoryName"></div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-6 control-label bold">
+          <div><span translate="worktable.FABRIC_TYPE"></span></div>
+        </label>
+        <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryLoadingDetail.wovenKnit"></div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-6 control-label bold">
+          <div><span translate="worktable.PRODUCT_TYPE"></span></div>
+        </label>
+        <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryLoadingDetail.productType"></div>
+      </div>
+      <div ng-repeat="elem in factoryLoadingDetail.factoryMonthLoadings">
+        <div class="form-group container-flex-align-items-center factory-special-process-detail-input">
+          <label class="col-sm-6 control-label bold">
+            <div><span translate="factoryProcess.CAPACITY"></span>&nbsp;&nbsp;<span ng-bind="elem.month"></span></div>
+          </label>
+          <input type="text" class="col-sm-5" style="padding-top: 5px;padding-bottom: 5px;" ng-model="elem.capacity"
+            name="elem.capacity" ng-if="Mode=='EDIT'" />
+          <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="elem.capacity" ng-if="Mode=='VIEW'">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button class="btn btn-blue  btn-w150" ng-click="save()" style="margin:0 auto">
+      <i class="icon-cancel"></i><span translate="index.CONFIRM"></span>
+    </button>
+  </div>
+</script>

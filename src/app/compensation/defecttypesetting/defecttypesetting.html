@@ -1,0 +1,26 @@
+<div ng-controller="defectTypeSettingCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-title">
+				<div class="btn-group">
+					<button class="btn btn-postpone btn-icon">
+						<span translate="index.IMPORT"></span>
+					</button>
+					<button class="btn btn-white btn-icon">
+						<span translate="compensation.CONVERT_TO_COMPENSATION"></span>
+					</button>
+				</div>
+				<div ui-grid="gridOptions" 
+					ui-grid-pagination 
+					ui-grid-selection 
+					ui-grid-resize-columns 
+					ui-grid-auto-resize
+					hight-auto-fill-bottom
+				>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>

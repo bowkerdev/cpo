@@ -1,0 +1,155 @@
+<div ng-controller="complaintCtrl">
+	<div id="complaintPage" class="row">
+		<div class="col-md-12">
+			<div class="page-title">
+				<div class="cps-form-wrap">
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.COMPLAINT_NO" class="labelwidth"></label>
+						<input type="text" ng-model="searchComplaintNo" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.FACTORY" class="labelwidth"></label>
+						<input type="text" ng-model="searchFactory" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.PO_NUMBER" class="labelwidth"></label>
+						<input type="text" ng-model="searchFactory" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.WORKING_NO" class="labelwidth"></label>
+						<input type="text" ng-model="searchWorkingNo" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.ARTICLE" class="labelwidth"></label>
+						<input type="text" ng-model="searchArticle" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.DEFECT_MAIN_ID" class="labelwidth"></label>
+						<input type="text" ng-model="searchDefectMainID" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.DEFECT_SUB_ID" class="labelwidth"></label>
+						<input type="text" ng-model="searchDefectSubID" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.CREATED_BY" class="labelwidth"></label>
+						<input type="text" ng-model="searchCreatedBy" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+					</div>
+					<div class="form-group col-md-6 col-md-4">
+						<label translate="compensation.STATUS" class="labelwidth"></label>
+						<select 
+							ng-model="searchStatus" 
+							ng-change="onSearchStatusChange()" 
+							class="form-control inputwidth" 
+							ng-options="status.label for status in statusList"
+						>
+						</select>
+					</div>
+					<div class="cps-form-wrap col-xs-12" style="padding: 0;">
+						<div class="form-group col-md-6 col-md-4">
+							<label class="control-label labelwidth" translate="compensation.DATE" style="float: left;line-height: 1.3em;"></label>
+							<div ng-model='searchDateStartTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchDateStartTime" style="float: left;margin-left: 4px;">
+								<input ng-model='searchDateStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>
+								<span class="input-group-addon" ng-click="searchDateStartTime=''"><i class="fa-close"></i></span>
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+						<div class="form-group col-md-6 col-md-4">
+							<label class="control-label labelwidth end-date-label" translate="to"></label>
+							<div ng-model='searchDateEndTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchDateEndTime" style="float: left;margin-left: 4px;">
+								<input ng-model='searchDateEndTime'  ng-change="controlTime('end',1)" class="form-control" size="16" type="text" value="" readonly>
+								<span class="input-group-addon" ng-click="searchDateEndTime=''"><i class="fa-close"></i></span>
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="cps-form-wrap col-xs-12" style="padding: 0;">
+						<div class="form-group col-md-6 col-md-4">
+							<label class="control-label labelwidth" translate="compensation.CREATED_DATE" style="float: left;line-height: 1.3em;"></label>
+							<div ng-model='searchCreateStartTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchCreateStartTime" style="float: left;margin-left: 4px;">
+								<input ng-model='searchCreateStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>
+								<span class="input-group-addon" ng-click="searchCreateStartTime=''"><i class="fa-close"></i></span>
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+						<div class="form-group col-md-6 col-md-4">
+							<label class="control-label labelwidth end-date-label" translate="to"></label>
+							<div ng-model='searchCreateEndTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchCreateEndTime" style="float: left;margin-left: 4px;">
+								<input ng-model='searchCreateEndTime'  ng-change="controlTime('end',1)" class="form-control" size="16" type="text" value="" readonly>
+								<span class="input-group-addon" ng-click="searchCreateEndTime=''"><i class="fa-close"></i></span>
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="search-form-btn-wrap">
+					<button
+						class="btn btn-white btn-icon searchBtn"
+						ng-disabled="searchLoading"
+						ng-click="searchList()"
+					>
+						<span class="fa fa-search"></span>
+						<span translate="index.SEARCH"></span>
+					</button>
+				</div>
+				<div class="btn-group">
+					<button class="btn btn-postpone btn-icon">
+						<i class="fa fa-upload"></i>
+						<span translate="index.IMPORT"></span>
+					</button>
+					<button class="btn btn-white btn-icon">
+						<i class="fa fa-exchange"></i>
+						<span translate="compensation.CONVERT_TO_COMPENSATION"></span>
+					</button>
+				</div>
+				<div ui-grid="gridOptions" 
+					ui-grid-pagination 
+					ui-grid-selection 
+					ui-grid-resize-columns 
+					ui-grid-auto-resize
+					hight-auto-fill-bottom
+				>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+
+<style>
+#complaintPage 	.form-group {
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	float: none;
+}
+#complaintPage .labelwidth {
+	width: 30%;
+	text-align: right;
+	padding-right: 5px;
+}
+#complaintPage .inputwidth {
+	width: 60%;
+	margin-left: 3px;
+}
+.search-form-btn-wrap {
+	display: flex;
+	justify-content: flex-end;
+}
+#complaintPage .searchBtn{
+	margin-right: 20px;
+	background-color: #1664F4;
+	color:white;
+	height: 32px;
+}
+.cps-form-wrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+.fob-highlight {
+	background-color: #85acf3 !important;
+	color: fff;
+}
+</style>
