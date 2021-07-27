@@ -94,7 +94,6 @@
           UploadcommonToolsService.save($scope);
         }
         $scope.UploadFile = function (file) {
-					console.log(file)
           if (file) {
             UploadcommonToolsService.UploadFile($scope, file);
           }

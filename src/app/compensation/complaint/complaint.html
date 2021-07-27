@@ -13,7 +13,7 @@
 					</div>
 					<div class="form-group col-md-6 col-md-4">
 						<label translate="compensation.PO_NUMBER" class="labelwidth"></label>
-						<input type="text" ng-model="searchFactory" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+						<input type="text" ng-model="searchPoNumber" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
 					</div>
 					<div class="form-group col-md-6 col-md-4">
 						<label translate="compensation.WORKING_NO" class="labelwidth"></label>
@@ -110,6 +110,12 @@
 					ui-grid-auto-resize
 					hight-auto-fill-bottom
 				>
+					<div class="well grid-loading loading-wrap" ng-show="searchLoading">
+						<div>
+							<i class="fa fa-spin fa-spinner"></i>
+							<strong translate="vendorKpi.LOADING"></strong>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -152,5 +158,13 @@
 .fob-highlight {
 	background-color: #85acf3 !important;
 	color: fff;
+}
+.grid-loading.loading-wrap {
+	margin: 0;
+	bottom: 0;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 </style>

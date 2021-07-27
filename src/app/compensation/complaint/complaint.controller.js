@@ -12,24 +12,33 @@
 				// 获取搜索区域字段
 				// TODO 
 				this.genSearchFormData = function (scope) {
-					var fieldMatcher = {
-						"searchComplaintNo": "",
-						"searchFactory": "",
-						"searchWorkingNo": "",
-						"searchArticle": "",
-						"searchDefectMainID": "",
-						"searchDefectSubID": "",
-						"searchCreatedBy": "",
-						"searchStatus": "",
-						"searchCreateStartTime": "",
-						"searchCreateEndTime": "",
-						"searchDateStartTime": "",
-						"searchDateEndTime": ""
+					// input
+					var inputMatcher = {
+						"searchComplaintNo": "complaintNo",
+						"searchFactory": "factory",
+						"searchPoNumber": "po_no",
+						"searchWorkingNo": "workingNo",
+						"searchArticle": "articleNo",
+						"searchDefectMainID": "defectMainId",
+						"searchDefectSubID": "defectSubId",
+						"searchCreatedBy": "createBy",
+						"searchCreateStartTime": "createStartDate",
+						"searchCreateEndTime": "createEndDate",
+						"searchDateStartTime": "startDate",
+						"searchDateEndTime": "endDate"
 					}
 					var res = {}
-					for (var key in fieldMatcher) {
+					for (var key in inputMatcher) {
 						if (!scope[key]) { continue }
- 						res[fieldMatcher[key]] = scope[key]
+ 						res[inputMatcher[key]] = scope[key]
+					}
+					// select
+					var selectMatcher = {
+						"searchStatus": "status"
+					}
+					for (var key in selectMatcher) {
+						if (!scope[key].value) { continue }
+ 						res[selectMatcher[key]] = scope[key].value
 					}
 					return res
 				}
@@ -63,8 +72,8 @@
 					var param = this.genSearchFormData(scope)
 					param['pageNo'] = scope.page.curPage
 					param['pageSize'] = scope.page.pageSize
-
-					GLOBAL_Http($http, "cpo/api/process/query_process?", 'GET', param, function(data) {
+					scope.searchLoading = true
+					GLOBAL_Http($http, "cpo/api/compensationcomplaint/find?", 'GET', param, function(data) {
 
 						if(data.status == 0) {
 							scope.items = translateData(data.output.processExts);
@@ -73,8 +82,10 @@
 						} else {
 							modalAlert(CommonService, 2, data.message, null);
 						}
+						scope.searchLoading = false
 					}, function(data) {
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+						scope.searchLoading = false
 					});
 				}
 
@@ -84,8 +95,8 @@
 				 */
 				this.init = function(scope) {
 					// 初期化
-					scope.searchCreateEndTime = simpleDateFormat(new Date().getTime());
-          scope.searchCreateStartTime = simpleDateFormat(getDatefromTodayBy(30));
+					scope.searchCreateEndTime = simpleDateFormat(new Date().getTime(), "yyyy-MM-dd");
+          scope.searchCreateStartTime = simpleDateFormat(getDatefromTodayBy(30), "yyyy-MM-dd");
 					scope.searchLoading = false
 					var _this = this;
 					scope.page = {
@@ -97,11 +108,13 @@
 					};
 					// TODO 显示与取值
 					scope.statusList = [
+						{ label: '', value: '' },
 						{ label: 'New', value: 'New' },
 						{ label: 'Processing', value: 'Processing' },
 						{ label: 'Completed', value: 'Completed' },
 						{ label: 'Cancelled', value: 'Cancelled' }
 					]
+					scope.searchStatus = scope.statusList[0]
 
 					scope.gridOptions = {
 						data: 'items',
@@ -311,9 +324,6 @@
 				}
 				$scope.importFile = function () {
 					complaintService.importFile($scope)
-				}
-				$scope.onSearchStatusChange = function () {
-					
 				}
 				complaintService.init($scope);
 			}
