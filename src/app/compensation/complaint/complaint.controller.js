@@ -61,6 +61,8 @@
 				 */
 				this.init = function(scope) {
 					// 初期化
+					scope.searchCreateEndTime = simpleDateFormat(new Date().getTime());
+          scope.searchCreateStartTime = simpleDateFormat(getDatefromTodayBy(30));
 					scope.searchLoading = false
 					var _this = this;
 					scope.page = {
