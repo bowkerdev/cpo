@@ -190,6 +190,13 @@ function getToken() {
 	return token;
 }
 
+// 获取距离timestring/今天的ndays前的日期的字符串
+function getDatefromTodayBy(ndays, timestring) {
+  var temp = timestring? timestring: new Date().getTime();
+  ndays = ndays? ndays: 90;
+  return new Date(temp - 1000 * 60 * 60 * 24 * ndays)
+}
+
 function dateTimeFormat(timestamp) {
 	if(!timestamp) {
 		return "";
