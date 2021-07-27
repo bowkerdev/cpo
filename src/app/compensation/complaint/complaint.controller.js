@@ -28,11 +28,34 @@
 					}
 					var res = {}
 					for (var key in fieldMatcher) {
-						if (scope[key]) { continue }
+						if (!scope[key]) { continue }
  						res[fieldMatcher[key]] = scope[key]
 					}
-					console.log(scope.searchDateStartTime)
 					return res
+				}
+
+				this.importFile = function (scope) {
+					var _this = this;
+					var modalInstance = $uibModal.open({
+						templateUrl: 'commonToolsModal',
+						controller: 'commonToolsController',
+						backdrop: 'static',
+						size: 'md',
+						resolve: {
+							planGroups: function() {
+								return {
+									importConfigKey: '/wms/inventory/inventory/import',
+									param: JSON.stringify()
+								}
+							}
+						}
+					})
+					modalInstance.result.then(function(returnData) {
+						if(returnData) {
+							modalAlert(CommonService, 2, $translate.instant('notifyMsg.UPLOAD_SUCCESS'), null);
+							_this.pullList(scope);
+						}
+					}, function() {})
 				}
 
 				this.pullList = function(scope) {
@@ -286,8 +309,11 @@
 				$scope.searchList = function() {
 					complaintService.pullList($scope);
 				}
+				$scope.importFile = function () {
+					complaintService.importFile($scope)
+				}
 				$scope.onSearchStatusChange = function () {
-					$scope.pullList()
+					
 				}
 				complaintService.init($scope);
 			}
