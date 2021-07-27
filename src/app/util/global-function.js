@@ -197,45 +197,49 @@ function getDatefromTodayBy(ndays, timestring) {
   return new Date(temp - 1000 * 60 * 60 * 24 * ndays)
 }
 
-function dateTimeFormat(timestamp) {
+function dateTimeFormat(timestamp, format) {
 	if(!timestamp) {
 		return "";
 	}
 	var date = new Date();
 	date.setTime(timestamp);
-	return date.Format("yyyy/MM/dd");
+	(!format) && (format = "yyyy/MM/dd");
+	return date.Format(format);
 }
 
-function dateTimeDetailFormat(timestamp) {
+function dateTimeDetailFormat(timestamp, format) {
 	if(!timestamp) {
 		return "";
 	}
 	var date = new Date();
 	date.setTime(timestamp);
-	return date.Format("yyyy/MM/dd HH:mm:ss");
+	(!format) && (format = "yyyy/MM/dd HH:mm:ss");
+	return date.Format(format);
 }
 
-function dateFormat(timestamp) {
+function dateFormat(timestamp, format) {
 	if(!timestamp) {
 		return "";
 	}
 	var date = new Date();
 	date.setTime(timestamp);
-	return date.Format("yyyy/MM/dd");
+	(!format) && (format = "yyyy/MM/dd");
+	return date.Format(format);
 }
 
 function transferDateToTimeStamp(dateTimeString) {
 	return Date.parse(dateTimeString.replace(/-/g, "/"));
 }
 
-function simpleDateFormat(timestamp) {
+function simpleDateFormat(timestamp, format) {
 	if(!timestamp) {
 		return;
 	}
 	var date = new Date();
 	// new Date(timestamp).toLocaleDateString()
 	date.setTime(timestamp);
-	return date.Format("yyyy/MM/dd");
+	(!format) && (format = "yyyy/MM/dd");
+	return date.Format(format);
 
 }
 
