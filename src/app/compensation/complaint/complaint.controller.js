@@ -57,8 +57,6 @@
 						})
  						res[MultiSelectMatcher[key]] = resArr.join(',')
 					}
-					console.log(res)
-					return {}
 					return res
 				}
 
