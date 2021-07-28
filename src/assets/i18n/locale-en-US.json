@@ -881,6 +881,8 @@
   },
   "compensation": {
     "ALERT_SELECTED_NOT_NEW": "only Status is New can be selected",
+    "ALERT_SELECT_DATAS": "Please select data first",
+    "ALERT_CONVERT_TO_COMPENSATION": "Confirm that item(s) convert to Compensation?",
     "CONVERT_TO_COMPENSATION": "Convert to Compensation",
     "COMPLAINT_NO": "Complaint No.",
     "DATE": "Date",

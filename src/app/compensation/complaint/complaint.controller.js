@@ -67,6 +67,19 @@
 					}, function() {})
 				}
 
+				this.convertToCompensation = function (scope) {
+					var selections = scope.gridApi.selection.getSelectedRows()
+					if (!selections.length) {
+						modalAlert(CommonService, 1, $translate.instant('compensation.ALERT_SELECT_DATAS'), null);
+						return 
+					}
+					modalAlert(CommonService, 0, $translate.instant('compensation.ALERT_CONVERT_TO_COMPENSATION'),
+						function () {
+							// TODO
+						}
+					)
+				}
+
 				this.pullList = function(scope) {
 					
 					var param = this.genSearchFormData(scope)
@@ -306,7 +319,7 @@
 									row.entity['status'] !== "New"
 								) { return }
 								gridApi.selection.unSelectRow(row.entity)
-								modalAlert(CommonService, 3, $translate.instant('compensation.ALERT_SELECTED_NOT_NEW'), null);
+								modalAlert(CommonService, 1, $translate.instant('compensation.ALERT_SELECTED_NOT_NEW'), null);
 							});
 						}
 					};
@@ -324,6 +337,9 @@
 				}
 				$scope.importFile = function () {
 					complaintService.importFile($scope)
+				}
+				$scope.convertToCompensation = function () {
+					complaintService.convertToCompensation($scope)
 				}
 				complaintService.init($scope);
 			}
