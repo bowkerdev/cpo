@@ -9,13 +9,26 @@
 				 + "class='ui-grid-cell ' " 
 				 + "ng-class='{ \"ui-grid-row-header-cell\": col.isRowHeader, \"fob-highlight\": (row.entity.fob !== row.entity.tcFob) }' ui-grid-cell></div>"
 
+				// 获取下拉框list
+				this.pullSelectList = function(scope) {
+					var param = {
+						in_code: 'FACTORYLIST'
+					}
+					GLOBAL_Http($http, "cpo/api/sys/admindict/translate_code?", 'GET', param, function(data) {
+						scope.searchFactoryList = data.FACTORYLIST;
+						for(var i = 0; i < scope.searchFactoryList.length; i++) {
+							scope.searchFactoryList[i].id = scope.searchFactoryList[i].value;
+						}
+					}, function(data) {
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+
 				// 获取搜索区域字段
-				// TODO 
 				this.genSearchFormData = function (scope) {
 					// input
 					var inputMatcher = {
 						"searchComplaintNo": "complaintNo",
-						"searchFactory": "factory",
 						"searchPoNumber": "po_no",
 						"searchWorkingNo": "workingNo",
 						"searchArticle": "articleNo",
@@ -32,14 +45,20 @@
 						if (!scope[key]) { continue }
  						res[inputMatcher[key]] = scope[key]
 					}
-					// select
-					var selectMatcher = {
+					// multi-select
+					var MultiSelectMatcher = {
+						"searchFactory": "factory",
 						"searchStatus": "status"
 					}
-					for (var key in selectMatcher) {
-						if (!scope[key].value) { continue }
- 						res[selectMatcher[key]] = scope[key].value
+					for (var key in MultiSelectMatcher) {
+						if (!scope[key].length) { continue }
+						var resArr = scope[key].map(function(el) {
+							return el.id
+						})
+ 						res[MultiSelectMatcher[key]] = resArr.join(',')
 					}
+					console.log(res)
+					return {}
 					return res
 				}
 
@@ -86,7 +105,7 @@
 					param['pageNo'] = scope.page.curPage
 					param['pageSize'] = scope.page.pageSize
 					scope.searchLoading = true
-					GLOBAL_Http($http, "cpo/api/compensationcomplaint/find?", 'GET', param, function(data) {
+					GLOBAL_Http($http, "cpo/api/process/query_process?", 'GET', param, function(data) {
 
 						if(data.status == 0) {
 							scope.items = translateData(data.output.processExts);
@@ -108,6 +127,7 @@
 				 */
 				this.init = function(scope) {
 					// 初期化
+					scope.searchFactory = []
 					scope.searchCreateEndTime = simpleDateFormat(new Date().getTime(), "yyyy-MM-dd");
           scope.searchCreateStartTime = simpleDateFormat(getDatefromTodayBy(30), "yyyy-MM-dd");
 					scope.searchLoading = false
@@ -121,14 +141,14 @@
 					};
 					// TODO 显示与取值
 					scope.statusList = [
-						{ label: '', value: '' },
-						{ label: 'New', value: 'New' },
-						{ label: 'Processing', value: 'Processing' },
-						{ label: 'Completed', value: 'Completed' },
-						{ label: 'Cancelled', value: 'Cancelled' }
+						{ label: 'New', value: 'New', id: 'New' },
+						{ label: 'Processing', value: 'Processing', id: 'Processing' },
+						{ label: 'Completed', value: 'Completed', id: 'Completed' },
+						{ label: 'Cancelled', value: 'Cancelled', id: 'Cancelled' }
 					]
-					scope.searchStatus = scope.statusList[0]
-
+					scope.searchStatus = []
+					// 
+					scope.searchFactoryList = []
 					scope.gridOptions = {
 						data: 'items',
 						paginationPageSizes: [10, 20, 30, 40, 50],
@@ -323,15 +343,13 @@
 							});
 						}
 					};
+					_this.pullSelectList(scope)
 					_this.pullList(scope);
 				};
 			}
 		])
-		.controller('complaintCtrl', ['$scope', 'complaintService',
-			function($scope, complaintService) {
-				$scope.pullList = function() {
-					complaintService.pullList($scope);
-				}
+		.controller('complaintCtrl', ['$scope', 'complaintService', '$translate',
+			function($scope, complaintService, $translate) {
 				$scope.searchList = function() {
 					complaintService.pullList($scope);
 				}
@@ -341,6 +359,22 @@
 				$scope.convertToCompensation = function () {
 					complaintService.convertToCompensation($scope)
 				}
+				// 筛选配置
+				$scope.translationTexts = {
+					checkAll: $translate.instant('index.SELECT_ALL'),
+					uncheckAll: $translate.instant('index.NOT_SELECT_ALL'),
+					buttonDefaultText: $translate.instant('index.SELECT')
+				}
+				$scope.extraSettings = {
+					checkBoxes: true,
+					smartButtonMaxItems: 100,
+					smartButtonTextConverter: function(itemText, originalItem) {
+						return itemText;
+					},
+					scrollableHeight: '200px',
+					scrollable: true
+				};
+
 				complaintService.init($scope);
 			}
 		])

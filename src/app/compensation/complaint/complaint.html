@@ -9,7 +9,12 @@
 					</div>
 					<div class="form-group col-md-6 col-md-4">
 						<label translate="compensation.FACTORY" class="labelwidth"></label>
-						<input type="text" ng-model="searchFactory" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+						<div class="multi-select multi-select ng-scope ng-isolate-scope" 
+							ng-dropdown-multiselect="" options="searchFactoryList" 
+							selected-model="searchFactory" 
+							extra-settings="extraSettings" translation-texts="translationTexts"
+						>
+						</div>
 					</div>
 					<div class="form-group col-md-6 col-md-4">
 						<label translate="compensation.PO_NUMBER" class="labelwidth"></label>
@@ -37,13 +42,12 @@
 					</div>
 					<div class="form-group col-md-6 col-md-4">
 						<label translate="compensation.STATUS" class="labelwidth"></label>
-						<select 
-							ng-model="searchStatus" 
-							ng-change="onSearchStatusChange()" 
-							class="form-control inputwidth" 
-							ng-options="status.label for status in statusList"
+						<div class="multi-select multi-select ng-scope ng-isolate-scope" 
+							ng-dropdown-multiselect="" options="statusList" 
+							selected-model="searchStatus" 
+							extra-settings="extraSettings" translation-texts="translationTexts"
 						>
-						</select>
+						</div>
 					</div>
 					<div class="cps-form-wrap col-xs-12" style="padding: 0;">
 						<div class="form-group col-md-6 col-md-4">
@@ -149,6 +153,9 @@
 	margin-right: 20px;
 	background-color: #1664F4;
 	color:white;
+	height: 32px;
+}
+#complaintPage .multi-select button {
 	height: 32px;
 }
 .cps-form-wrap {
