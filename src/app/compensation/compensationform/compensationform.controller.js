@@ -4,24 +4,100 @@
 		.module('cpo')
 		.service('compensationFormService', ['$http', '$translate', 'CommonService', '$uibModal',
 			function($http, $translate, CommonService, $uibModal) {
-				// 查询接口
-				this.pullList = function(scope) {
+				// 获取下拉框list
+				// TODO ordertype-translate-code
+				this.pullSelectList = function(scope) {
 					var param = {
-						pageNo: scope.page.curPage,
-						pageSize: scope.page.pageSize
+						in_code: 'FACTORYLIST'
 					}
+					GLOBAL_Http($http, "cpo/api/sys/admindict/translate_code?", 'GET', param, function(data) {
+						scope.searchFactoryList = data.FACTORYLIST;
+						for(var i = 0; i < scope.searchFactoryList.length; i++) {
+							scope.searchFactoryList[i].id = scope.searchFactoryList[i].value;
+						}
+					}, function(data) {
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+					});
+				}
+				// 查询条件
+				this.genSearchFormData = function(scope) {
+					var res = {}
+					// TODO
+					var inputMatcher = {
+						"searchCompensationNo": "",
+						"searchCustomer": "",
+						"searchInvoiceNo": "",
+						"searchPoNumber": "",
+						"searchOrderType": "",
+						"searchCreateBy": "",
+						"dateStartTime": "",
+						"dateEndTime": ""
+					}
+					for (var key in inputMatcher) {
+						if (!scope[key]) { continue }
+ 						res[inputMatcher[key]] = scope[key]
+					}
+					// select
+					// multi-select
+					var MultiSelectMatcher = {
+						"searchFactory": "factory",
+						"searchStatus": "status"
+					}
+					for (var key in MultiSelectMatcher) {
+						if (!scope[key].length) { continue }
+						var resArr = scope[key].map(function(el) {
+							return el.id
+						})
+ 						res[MultiSelectMatcher[key]] = resArr.join(',')
+					}
+					return res
+				}
+				// 查询接口
+				// TODO
+				this.pullSummaryList = function(scope) {
+					var param = this.genSearchFormData(scope)
+					param['pageNo'] = scope.page.curPage
+					param['pageSize'] = scope.page.pageSize
+					scope.searchLoading = true;
 					GLOBAL_Http($http, "cpo/api/process/query_process?", 'GET', param, function(data) {
 
 						if(data.status == 0) {
-							scope.items = translateData(data.output.processExts);
-							scope.page.totalNum = data.output.total;
-							scope.gridOptions.totalItems = scope.page.totalNum;
+							scope.summaryItems = translateData(data.output.processExts);
+							scope.summaryPage.totalNum = data.output.total;
+							scope.summaryGridOptions.totalItems = scope.summaryPage.totalNum;
+						} else {
+							modalAlert(CommonService, 2, data.message, null);
+						}
+						scope.searchLoading = false;
+					}, function(data) {
+						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+						scope.searchLoading = false;
+					});
+				}
+				// TODO
+				this.pullDetailList = function(scope) {
+					var param = {
+						pageNo: scope.detailPage.curPage,
+						pageSize: scope.detailPage.pageSize
+					}
+					GLOBAL_Http($http, "cpo/api/process/query_process?", 'GET', param, function(data) {
+				
+						if(data.status == 0) {
+							scope.summaryItems = translateData(data.output.processExts);
+							scope.detailPage.totalNum = data.output.total;
+							scope.summaryGridOptions.totalItems = scope.detailPage.totalNum;
 						} else {
 							modalAlert(CommonService, 2, data.message, null);
 						}
 					}, function(data) {
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
+				}
+
+				// 导出
+				// TODO
+				this.export = function (scope) {
+					
 				}
 
 				// 创建
@@ -41,30 +117,46 @@
 					// modalInstance callback
 					modalInstance.result.then(function(returnData) {
 						if(returnData){
-							_this.getLoading(scope);
+							_this.pullSummaryList(scope);
 						}
 					}, function() {
 						// dismiss(cancel)
 					});
 				}
 
+				// 导出
+				// TODO
+				this.updateInvoiceNo = function (scope) {
+					
+				}
 
 				/**
 				 * init
 				 */
 				this.init = function(scope) {
-					// 初期化
+					// loading
+					scope.searchFactory = []
+					scope.searchLoading = false;
+					scope.searchDetailLoading = false;
 					var _this = this;
-					scope.page = {
+					// status 选项
+					scope.statusList = [
+						{ label: 'Saved', value: 'Saved', id: 'Saved' },
+						{ label: 'Completed', value: 'Completed', id: 'Completed' },
+						{ label: 'Approved', value: 'Approved', id: 'Approved' },
+						{ label: 'Cancelled', value: 'Cancelled', id: 'Cancelled' }
+					]
+					scope.searchStatus = []
+					// summary table
+					scope.summaryPage = {
 						curPage: 1,
 						pageSize: 10,
 						sortColumn: 'id',
 						sortDirection: true,
 						totalNum: 0
 					};
-
-					scope.gridOptions = {
-						data: 'items',
+					scope.summaryGridOptions = {
+						data: 'summaryItems',
 						paginationPageSizes: [10, 20, 30, 40, 50],
 						paginationPageSize: 10,
 						rowEditWaitInterval: -1,
@@ -77,7 +169,7 @@
 						enableHorizontalScrollbar: 1,
             gridMenuCustomItems: CommonService.zsZoomGridMenuCustomItems(),
 						enableVerticalScrollbar: 0,
-						totalItems: scope.page.totalNum,
+						totalItems: scope.summaryPage.totalNum,
 						useExternalPagination: true,
 						columnDefs: [
 							{
@@ -130,9 +222,9 @@
 									"enableCellEdit":false
 							},
 							{
-									"name":"COMPLAINT__AMOUNT",
-									"displayName":$translate.instant('compensation.COMPLAINT__AMOUNT'),
-									"field":"COMPLAINT__AMOUNT",
+									"name":"COMPLAINT_AMOUNT",
+									"displayName":$translate.instant('compensation.COMPLAINT_AMOUNT'),
+									"field":"COMPLAINT_AMOUNT",
 									"width":"200",
 									"enableCellEdit":false
 							},
@@ -226,33 +318,215 @@
 							scope.gridApi.core.on.sortChanged(scope, function(grid, sortColumns) {
 								if(sortColumns.length !== 0) {
 									if(sortColumns[0].sort.direction === 'asc') {
-										scope.page.sortDirection = true;
+										scope.summaryPage.sortDirection = true;
 									}
 									if(sortColumns[0].sort.direction === 'desc') {
-										scope.page.sortDirection = false;
+										scope.summaryPage.sortDirection = false;
 									}
-									scope.page.sortColumn = sortColumns[0].displayName;
+									scope.summaryPage.sortColumn = sortColumns[0].displayName;
 								}
 							});
 							scope.gridApi.pagination.on.paginationChanged(scope, function(newPage, pageSize) {
-								scope.page.curPage = newPage;
-								scope.page.pageSize = pageSize;
-								_this.pullList(scope);
+								scope.summaryPage.curPage = newPage;
+								scope.summaryPage.pageSize = pageSize;
+								_this.pullSummaryList(scope);
 							});
 						}
 					};
-					_this.pullList(scope);
+					// detail table
+					scope.detailPage = {
+						curPage: 1,
+						pageSize: 10,
+						sortColumn: 'id',
+						sortDirection: true,
+						totalNum: 0
+					};
+					scope.detailGridOptions = {
+						data: 'detailItems',
+						paginationPageSizes: [10, 20, 30, 40, 50],
+						paginationPageSize: 10,
+						rowEditWaitInterval: -1,
+						enableRowSelection: true,
+						enableRowHeaderSelection: true,
+						enableColumnMenus: true,
+
+		      	enableGridMenu: true,
+						enableSorting: false,
+						enableHorizontalScrollbar: 1,
+            gridMenuCustomItems: CommonService.zsZoomGridMenuCustomItems(),
+						enableVerticalScrollbar: 0,
+						totalItems: scope.detailPage.totalNum,
+						useExternalPagination: true,
+						columnDefs: [
+							{
+									"name":"COMPENSATION_NO",
+									"displayName":$translate.instant('compensation.COMPENSATION_NO'),
+									"field":"COMPENSATION_NO",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"DATE",
+									"displayName":$translate.instant('compensation.DATE'),
+									"field":"DATE",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"FACTORY",
+									"displayName":$translate.instant('compensation.FACTORY'),
+									"field":"FACTORY",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"ORDER_TYPE",
+									"displayName":$translate.instant('compensation.ORDER_TYPE'),
+									"field":"ORDER_TYPE",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"CUSTOMER",
+									"displayName":$translate.instant('compensation.CUSTOMER'),
+									"field":"CUSTOMER",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"CURR",
+									"displayName":$translate.instant('compensation.CURR'),
+									"field":"CURR",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"COMPLAINT_AMOUNT",
+									"displayName":$translate.instant('compensation.COMPLAINT_AMOUNT'),
+									"field":"COMPLAINT_AMOUNT",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"TOTAL_AMOUNT_CNY",
+									"displayName":$translate.instant('compensation.TOTAL_AMOUNT_CNY'),
+									"field":"TOTAL_AMOUNT_CNY",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"TOTAL_AMOUNT_CNY_VAT",
+									"displayName":$translate.instant('compensation.TOTAL_AMOUNT_CNY_VAT'),
+									"field":"TOTAL_AMOUNT_CNY_VAT",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"INVOICE_NO",
+									"displayName":$translate.instant('compensation.INVOICE_NO'),
+									"field":"INVOICE_NO",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"CLAIM_PO_NUMBER",
+									"displayName":$translate.instant('compensation.CLAIM_PO_NUMBER'),
+									"field":"CLAIM_PO_NUMBER",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"CLAIM_CPO_AMOUNT",
+									"displayName":$translate.instant('compensation.CLAIM_CPO_AMOUNT'),
+									"field":"CLAIM_CPO_AMOUNT",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"CREATED_BY",
+									"displayName":$translate.instant('compensation.CREATED_BY'),
+									"field":"CREATED_BY",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"CREATED_DATE",
+									"displayName":$translate.instant('compensation.CREATED_DATE'),
+									"field":"CREATED_DATE",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"STATUS",
+									"displayName":$translate.instant('compensation.STATUS'),
+									"field":"STATUS",
+									"width":"200",
+									"enableCellEdit":false
+							},
+							{
+									"name":"REMARK",
+									"displayName":$translate.instant('compensation.REMARK'),
+									"field":"REMARK",
+									"width":"200",
+									"enableCellEdit":false
+							}
+						],
+						onRegisterApi: function(gridApi) {
+							scope.gridApi = gridApi;
+							scope.gridApi.core.on.sortChanged(scope, function(grid, sortColumns) {
+								if(sortColumns.length !== 0) {
+									if(sortColumns[0].sort.direction === 'asc') {
+										scope.detailPage.sortDirection = true;
+									}
+									if(sortColumns[0].sort.direction === 'desc') {
+										scope.detailPage.sortDirection = false;
+									}
+									scope.detailPage.sortColumn = sortColumns[0].displayName;
+								}
+							});
+							scope.gridApi.pagination.on.paginationChanged(scope, function(newPage, pageSize) {
+								scope.detailPage.curPage = newPage;
+								scope.detailPage.pageSize = pageSize;
+								_this.pullDetailList(scope);
+							});
+						}
+					};
+					// 获取筛选框数据
+					_this.pullSelectList(scope)
+					// 首次加载数据
+					_this.pullSummaryList(scope);
 				};
 			}
 		])
-		.controller('compensationFormCtrl', ['$scope', 'compensationFormService',
-			function($scope, compensationFormService) {
-				$scope.pullList = function() {
-					compensationFormService.pullList($scope);
+		.controller('compensationFormCtrl', ['$scope', 'compensationFormService', '$translate',
+			function($scope, compensationFormService, $translate) {
+				$scope.search = function() {
+					compensationFormService.pullSummaryList($scope);
+				}
+				$scope.export = function() {
+					compensationFormService.export($scope);
 				}
 				$scope.create = function() {
 					compensationFormService.create($scope);
 				}
+				$scope.updateInvoiceNo = function() {
+					compensationFormService.updateInvoiceNo($scope);
+				}
+				// 筛选配置
+				$scope.translationTexts = {
+					checkAll: $translate.instant('index.SELECT_ALL'),
+					uncheckAll: $translate.instant('index.NOT_SELECT_ALL'),
+					buttonDefaultText: $translate.instant('index.SELECT')
+				}
+				$scope.extraSettings = {
+					checkBoxes: true,
+					smartButtonMaxItems: 100,
+					smartButtonTextConverter: function(itemText, originalItem) {
+						return itemText;
+					},
+					scrollableHeight: '200px',
+					scrollable: true
+				};
 				compensationFormService.init($scope);
 			}
 		])

@@ -3,11 +3,11 @@
 		<div class="col-md-12">
 			<div class="page-title">
 				<div class="cps-form-wrap">
-					<div class="form-group col-md-6 col-md-4">
+					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.COMPLAINT_NO" class="labelwidth"></label>
 						<input type="text" ng-model="searchComplaintNo" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
 					</div>
-					<div class="form-group col-md-6 col-md-4">
+					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.FACTORY" class="labelwidth"></label>
 						<div class="multi-select multi-select ng-scope ng-isolate-scope" 
 							ng-dropdown-multiselect="" options="searchFactoryList" 
@@ -16,31 +16,31 @@
 						>
 						</div>
 					</div>
-					<div class="form-group col-md-6 col-md-4">
+					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.PO_NUMBER" class="labelwidth"></label>
 						<input type="text" ng-model="searchPoNumber" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
 					</div>
-					<div class="form-group col-md-6 col-md-4">
+					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.WORKING_NO" class="labelwidth"></label>
 						<input type="text" ng-model="searchWorkingNo" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
 					</div>
-					<div class="form-group col-md-6 col-md-4">
+					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.ARTICLE" class="labelwidth"></label>
 						<input type="text" ng-model="searchArticle" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
 					</div>
-					<div class="form-group col-md-6 col-md-4">
+					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.DEFECT_MAIN_ID" class="labelwidth"></label>
 						<input type="text" ng-model="searchDefectMainID" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
 					</div>
-					<div class="form-group col-md-6 col-md-4">
+					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.DEFECT_SUB_ID" class="labelwidth"></label>
 						<input type="text" ng-model="searchDefectSubID" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
 					</div>
-					<div class="form-group col-md-6 col-md-4">
+					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.CREATED_BY" class="labelwidth"></label>
 						<input type="text" ng-model="searchCreatedBy" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
 					</div>
-					<div class="form-group col-md-6 col-md-4">
+					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.STATUS" class="labelwidth"></label>
 						<div class="multi-select multi-select ng-scope ng-isolate-scope" 
 							ng-dropdown-multiselect="" options="statusList" 
@@ -50,7 +50,7 @@
 						</div>
 					</div>
 					<div class="cps-form-wrap col-xs-12" style="padding: 0;">
-						<div class="form-group col-md-6 col-md-4">
+						<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 							<label class="control-label labelwidth" translate="compensation.DATE" style="float: left;line-height: 1.3em;"></label>
 							<div ng-model='searchDateStartTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchDateStartTime" style="float: left;margin-left: 4px;">
 								<input ng-model='searchDateStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>
@@ -58,7 +58,7 @@
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
-						<div class="form-group col-md-6 col-md-4">
+						<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 							<label class="control-label labelwidth end-date-label" translate="to"></label>
 							<div ng-model='searchDateEndTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchDateEndTime" style="float: left;margin-left: 4px;">
 								<input ng-model='searchDateEndTime'  ng-change="controlTime('end',1)" class="form-control" size="16" type="text" value="" readonly>
@@ -69,7 +69,7 @@
 					</div>
 					
 					<div class="cps-form-wrap col-xs-12" style="padding: 0;">
-						<div class="form-group col-md-6 col-md-4">
+						<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 							<label class="control-label labelwidth" translate="compensation.CREATED_DATE" style="float: left;line-height: 1.3em;"></label>
 							<div ng-model='searchCreateStartTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchCreateStartTime" style="float: left;margin-left: 4px;">
 								<input ng-model='searchCreateStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>
@@ -77,7 +77,7 @@
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
-						<div class="form-group col-md-6 col-md-4">
+						<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 							<label class="control-label labelwidth end-date-label" translate="to"></label>
 							<div ng-model='searchCreateEndTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchCreateEndTime" style="float: left;margin-left: 4px;">
 								<input ng-model='searchCreateEndTime'  ng-change="controlTime('end',1)" class="form-control" size="16" type="text" value="" readonly>
