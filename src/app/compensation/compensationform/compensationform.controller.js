@@ -3,7 +3,8 @@
 	angular
 		.module('cpo')
 		.service('compensationFormService', ['$http', '$translate', 'CommonService', '$uibModal',
-			function($http, $translate, CommonService, $uibModal) {
+			'compensationConfigService',
+			function($http, $translate, CommonService, $uibModal, compensationConfigService) {
 				// 获取下拉框list
 				// TODO ordertype-translate-code
 				this.pullSelectList = function(scope) {
@@ -28,7 +29,6 @@
 						"searchCustomer": "",
 						"searchInvoiceNo": "",
 						"searchPoNumber": "",
-						"searchOrderType": "",
 						"searchCreateBy": "",
 						"dateStartTime": "",
 						"dateEndTime": ""
@@ -40,6 +40,7 @@
 					// select
 					// multi-select
 					var MultiSelectMatcher = {
+						"searchOrderType": "orderType",
 						"searchFactory": "factory",
 						"searchStatus": "status"
 					}
@@ -140,13 +141,11 @@
 					scope.searchDetailLoading = false;
 					var _this = this;
 					// status 选项
-					scope.statusList = [
-						{ label: 'Saved', value: 'Saved', id: 'Saved' },
-						{ label: 'Completed', value: 'Completed', id: 'Completed' },
-						{ label: 'Approved', value: 'Approved', id: 'Approved' },
-						{ label: 'Cancelled', value: 'Cancelled', id: 'Cancelled' }
-					]
+					scope.statusList = compensationConfigService.getCompensationStatusList()
 					scope.searchStatus = []
+					// Order Type 选项
+					scope.orderTypeList = compensationConfigService.getOrderTypeList()
+					scope.searchOrderType = []
 					// summary table
 					scope.summaryPage = {
 						curPage: 1,
@@ -314,8 +313,8 @@
 							}
 						],
 						onRegisterApi: function(gridApi) {
-							scope.gridApi = gridApi;
-							scope.gridApi.core.on.sortChanged(scope, function(grid, sortColumns) {
+							scope.summaryGridApi = gridApi;
+							scope.summaryGridApi.core.on.sortChanged(scope, function(grid, sortColumns) {
 								if(sortColumns.length !== 0) {
 									if(sortColumns[0].sort.direction === 'asc') {
 										scope.summaryPage.sortDirection = true;
@@ -326,7 +325,7 @@
 									scope.summaryPage.sortColumn = sortColumns[0].displayName;
 								}
 							});
-							scope.gridApi.pagination.on.paginationChanged(scope, function(newPage, pageSize) {
+							scope.summaryGridApi.pagination.on.paginationChanged(scope, function(newPage, pageSize) {
 								scope.summaryPage.curPage = newPage;
 								scope.summaryPage.pageSize = pageSize;
 								_this.pullSummaryList(scope);
@@ -472,8 +471,8 @@
 							}
 						],
 						onRegisterApi: function(gridApi) {
-							scope.gridApi = gridApi;
-							scope.gridApi.core.on.sortChanged(scope, function(grid, sortColumns) {
+							scope.detailGridApi = gridApi;
+							scope.detailGridApi.core.on.sortChanged(scope, function(grid, sortColumns) {
 								if(sortColumns.length !== 0) {
 									if(sortColumns[0].sort.direction === 'asc') {
 										scope.detailPage.sortDirection = true;
@@ -484,7 +483,7 @@
 									scope.detailPage.sortColumn = sortColumns[0].displayName;
 								}
 							});
-							scope.gridApi.pagination.on.paginationChanged(scope, function(newPage, pageSize) {
+							scope.detailGridApi.pagination.on.paginationChanged(scope, function(newPage, pageSize) {
 								scope.detailPage.curPage = newPage;
 								scope.detailPage.pageSize = pageSize;
 								_this.pullDetailList(scope);

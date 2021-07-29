@@ -9,7 +9,7 @@
 					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.FACTORY" class="labelwidth"></label>
-						<div class="multi-select multi-select ng-scope ng-isolate-scope" 
+						<div class="inputwidth multi-select multi-select ng-scope ng-isolate-scope" 
 							ng-dropdown-multiselect="" options="searchFactoryList" 
 							selected-model="searchFactory" 
 							extra-settings="extraSettings" translation-texts="translationTexts"
@@ -42,7 +42,7 @@
 					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.STATUS" class="labelwidth"></label>
-						<div class="multi-select multi-select ng-scope ng-isolate-scope" 
+						<div class="inputwidth multi-select multi-select ng-scope ng-isolate-scope" 
 							ng-dropdown-multiselect="" options="statusList" 
 							selected-model="searchStatus" 
 							extra-settings="extraSettings" translation-texts="translationTexts"
@@ -51,8 +51,8 @@
 					</div>
 					<div class="cps-form-wrap col-xs-12" style="padding: 0;">
 						<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
-							<label class="control-label labelwidth" translate="compensation.DATE" style="float: left;line-height: 1.3em;"></label>
-							<div ng-model='searchDateStartTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchDateStartTime" style="float: left;margin-left: 4px;">
+							<label class="control-label labelwidth" translate="compensation.DATE" style="line-height: 1.3em;"></label>
+							<div ng-model='searchDateStartTime' ng-time class="inputwidth input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchDateStartTime">
 								<input ng-model='searchDateStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>
 								<span class="input-group-addon" ng-click="searchDateStartTime=''"><i class="fa-close"></i></span>
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -60,7 +60,7 @@
 						</div>
 						<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 							<label class="control-label labelwidth end-date-label" translate="to"></label>
-							<div ng-model='searchDateEndTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchDateEndTime" style="float: left;margin-left: 4px;">
+							<div ng-model='searchDateEndTime' ng-time class="inputwidth input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchDateEndTime">
 								<input ng-model='searchDateEndTime'  ng-change="controlTime('end',1)" class="form-control" size="16" type="text" value="" readonly>
 								<span class="input-group-addon" ng-click="searchDateEndTime=''"><i class="fa-close"></i></span>
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -70,8 +70,8 @@
 					
 					<div class="cps-form-wrap col-xs-12" style="padding: 0;">
 						<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
-							<label class="control-label labelwidth" translate="compensation.CREATED_DATE" style="float: left;line-height: 1.3em;"></label>
-							<div ng-model='searchCreateStartTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchCreateStartTime" style="float: left;margin-left: 4px;">
+							<label class="control-label labelwidth" translate="compensation.CREATED_DATE" style="line-height: 1.3em;"></label>
+							<div ng-model='searchCreateStartTime' ng-time class="inputwidth input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchCreateStartTime">
 								<input ng-model='searchCreateStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>
 								<span class="input-group-addon" ng-click="searchCreateStartTime=''"><i class="fa-close"></i></span>
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -79,7 +79,7 @@
 						</div>
 						<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 							<label class="control-label labelwidth end-date-label" translate="to"></label>
-							<div ng-model='searchCreateEndTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchCreateEndTime" style="float: left;margin-left: 4px;">
+							<div ng-model='searchCreateEndTime' ng-time class="inputwidth input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="searchCreateEndTime">
 								<input ng-model='searchCreateEndTime'  ng-change="controlTime('end',1)" class="form-control" size="16" type="text" value="" readonly>
 								<span class="input-group-addon" ng-click="searchCreateEndTime=''"><i class="fa-close"></i></span>
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -89,7 +89,7 @@
 				</div>
 				<div class="search-form-btn-wrap">
 					<button
-						class="btn btn-white btn-icon searchBtn"
+						class="btn btn-blue btn-icon"
 						ng-disabled="searchLoading"
 						ng-click="searchList()"
 					>
@@ -142,18 +142,12 @@
 	padding-right: 5px;
 }
 #complaintPage .inputwidth {
-	width: 60%;
-	margin-left: 3px;
+	width: 68% !important;
+	margin-left: 4px;
 }
 .search-form-btn-wrap {
 	display: flex;
 	justify-content: flex-end;
-}
-#complaintPage .searchBtn{
-	margin-right: 20px;
-	background-color: #1664F4;
-	color:white;
-	height: 32px;
 }
 #complaintPage .multi-select button {
 	height: 32px;

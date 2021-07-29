@@ -1,0 +1,91 @@
+<script type="text/ng-template" id="selectComplaintModal">
+  <div class="modal-header factory-special-process-modal-header">
+    <span class="pull-left">
+      <h4 class="modal-title blue" translate="compensation.ADD_COMPLAINT"></h4>
+    </span>
+    <img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" />
+  </div>
+  <div id="selectComplaintContent" class="bg-operation-monitor modal-body form-border" ng-type-enter>
+    <div class="cps-form-wrap label-orizontal">
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label translate="compensation.CUSTOMER_ID" class="labelwidth"></label>
+        <input type="text" ng-model="searchCustomerID" class="form-control inputwidth">
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label translate="compensation.FACTORY" class="labelwidth"></label>
+        <div class="inputwidth multi-select multi-select ng-scope ng-isolate-scope" 
+          ng-dropdown-multiselect="" options="searchFactoryList" 
+          selected-model="searchFactory" 
+          extra-settings="extraSettings" translation-texts="translationTexts"
+        >
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label translate="compensation.ORDER_TYPE" class="labelwidth"></label>
+        <div class="inputwidth multi-select multi-select ng-scope ng-isolate-scope" 
+          ng-dropdown-multiselect="" options="searchOrderTypeList" 
+          selected-model="searchOrderType" 
+          extra-settings="extraSettings" translation-texts="translationTexts"
+        >
+        </div>
+      </div>
+    </div>
+    <div class="search-form-btn-wrap">
+      <button
+        class="btn btn-blue btn-icon"
+        ng-disabled="searchLoading"
+        ng-click="searchList()"
+      >
+        <span class="fa fa-search"></span>
+        <span translate="index.SEARCH"></span>
+      </button>
+    </div>
+    <div ui-grid="complaintGridOptions"
+      ui-grid-pagination 
+      ui-grid-selection 
+      ui-grid-resize-columns 
+      ui-grid-auto-resize
+      style="margin-top: 0;"
+    >
+      <div class="well grid-loading loading-wrap" ng-show="searchComplaintLoading">
+        <div>
+          <i class="fa fa-spin fa-spinner"></i>
+          <strong translate="vendorKpi.LOADING"></strong>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="modal-footer">
+    <button class="btn btn-white btn-w150" ng-click="cancel()" style="margin:0 auto">
+      <i class="icon-cancel"></i><span translate="index.CANCEL"></span>
+    </button>
+    <button class="btn btn-blue btn-w150" ng-click="save()" style="margin:0 auto">
+      <i class="icon-cancel"></i><span translate="index.CONFIRM"></span>
+    </button>
+  </div>
+</script>
+
+<style type="text/css">
+#selectComplaintContent .multi-select button {
+	height: 32px;
+}
+#selectComplaintContent .form-group {
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	float: none;
+}
+#selectComplaintContent .labelwidth {
+	width: 30%;
+	text-align: right;
+	padding-right: 5px;
+}
+#selectComplaintContent .inputwidth {
+	width: 68% !important;
+  margin-left: 4px;
+}
+</style>
+

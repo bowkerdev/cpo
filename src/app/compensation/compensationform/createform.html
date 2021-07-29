@@ -5,39 +5,179 @@
     </span>
     <img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" />
   </div>
-  <div class="bg-operation-monitor modal-body form-border" ng-type-enter>
-    <form class="form-horizontal form-modal" role="form" name="formCountrySiteEntry" novalidate
-      style="padding-right: 50px">
-      <div class="form-group">
-        <label class="col-sm-6 control-label bold">
-          <div><span translate="worktable.FACTORY_NAME"></span></div>
-        </label>
-        <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryLoadingDetail.factoryName"></div>
+  <div id="compensationCreateFormContent" class="bg-operation-monitor modal-body form-border" ng-type-enter>
+    <div class="cps-form-wrap label-orizontal">
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label translate="compensation.COMPENSTION_ID" class="labelwidth"></label>
+        <input type="text" ng-model="inputForm.compenstionID" ng-disabled="true" class="form-control inputwidth">
       </div>
-      <div class="form-group">
-        <label class="col-sm-6 control-label bold">
-          <div><span translate="worktable.FABRIC_TYPE"></span></div>
-        </label>
-        <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryLoadingDetail.wovenKnit"></div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-6 control-label bold">
-          <div><span translate="worktable.PRODUCT_TYPE"></span></div>
-        </label>
-        <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="factoryLoadingDetail.productType"></div>
-      </div>
-      <div ng-repeat="elem in factoryLoadingDetail.factoryMonthLoadings">
-        <div class="form-group container-flex-align-items-center factory-special-process-detail-input">
-          <label class="col-sm-6 control-label bold">
-            <div><span translate="factoryProcess.CAPACITY"></span>&nbsp;&nbsp;<span ng-bind="elem.month"></span></div>
-          </label>
-          <input type="text" class="col-sm-5" style="padding-top: 5px;padding-bottom: 5px;" ng-model="elem.capacity"
-            name="elem.capacity" ng-if="Mode=='EDIT'" />
-          <div class="col-sm-6 control-content content-margin-top-zero" ng-bind="elem.capacity" ng-if="Mode=='VIEW'">
-          </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label class="control-label labelwidth end-date-label"><span class="red">*</span><span
+            translate="compensation.DATE"></span></label>
+        <div ng-model="inputForm.date" ng-time class="input-group inputwidth date form_date" data-date=""
+          data-date-format="yyyy-mm-dd" data-link-field="inputForm.date">
+          <input ng-model="inputForm.date" ng-change="controlTime('end',1)" class="form-control" size="16" type="text"
+            value="" readonly>
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         </div>
       </div>
-    </form>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label class="labelwidth"><span class="red">*</span><span translate="compensation.CUSTOMER_ID"></span></label>
+        <select ng-model="inputForm.custimerID" class="form-control inputwidth"
+          ng-options="item.label for item in custimerIDList">
+        </select>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label translate="compensation.CUSTOMER_NAME" class="labelwidth"></label>
+        <input type="text" ng-model="inputForm.customerName" ng-disabled="true" class="form-control inputwidth">
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label class="labelwidth"><span class="red">*</span><span translate="compensation.FACTORY"></span></label>
+        <select ng-model="inputForm.factory" class="form-control inputwidth"
+          ng-options="item.label for item in searchFactoryList">
+        </select>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label class="labelwidth"><span class="red">*</span><span translate="compensation.ORDER_TYPE"></span></label>
+        <select ng-model="inputForm.orderType" class="form-control inputwidth"
+          ng-options="item.label for item in orderTypeList">
+        </select>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label translate="compensation.INVOICE_NO" class="labelwidth"></label>
+        <input type="text" ng-model="inputForm.invoiceNo" class="form-control inputwidth">
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label translate="compensation.STATUS" class="labelwidth"></label>
+        <input type="text" ng-disabled="true" ng-model="inputForm.status" class="form-control inputwidth">
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label translate="compensation.REMARK" class="labelwidth"></label>
+        <textarea ng-model="inputForm.remark"  rows="3"
+          class="form-control inputwidth" style="resize: none;"
+        ></textarea>
+      </div>
+    
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <label translate="compensation.CURRENCY" class="labelwidth"></label>
+        <input type="text" ng-model="inputForm.currency" class="form-control inputwidth">
+      </div>
+    </div>
+
+    <div class="table-title" translate="compensation.COMPLAINT"></div>
+    <div ui-grid="complaintGridOptions"
+      ui-grid-selection 
+      ui-grid-resize-columns 
+      ui-grid-auto-resize
+      style="height:260px"
+    >
+      <div class="well grid-loading loading-wrap" ng-show="searchComplaintLoading">
+        <div>
+          <i class="fa fa-spin fa-spinner"></i>
+          <strong translate="vendorKpi.LOADING"></strong>
+        </div>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-add-remove btn-icon" ng-click="addComplaint()">
+        <i class="fa fa-plus"></i>
+        <span translate="compensation.ADD"></span>
+      </button>
+      <button class="btn btn-add-remove btn-icon" ng-click="removeComplaint()">
+        <i class="fa fa-minus"></i>
+        <span translate="compensation.REMOVE"></span>
+      </button>
+    </div>
+
+    <div class="table-title" translate="compensation.CLAIM"></div>
+    <div ui-grid="claimGridOptions"
+      ui-grid-selection 
+      ui-grid-resize-columns 
+      ui-grid-auto-resize
+      style="height:120px"
+    >
+      <div class="well grid-loading loading-wrap" ng-show="searchClaimLoading">
+        <div>
+          <i class="fa fa-spin fa-spinner"></i>
+          <strong translate="vendorKpi.LOADING"></strong>
+        </div>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-add-remove btn-icon" ng-click="addClaim()">
+        <i class="fa fa-plus"></i>
+        <span translate="compensation.ADD"></span>
+      </button>
+      <button class="btn btn-add-remove btn-icon" ng-click="removeClaim()">
+        <i class="fa fa-minus"></i>
+        <span translate="compensation.REMOVE"></span>
+      </button>
+    </div>
+
+    <div class="content-bottom-btns">
+      <div class="content-bottom-btns-left">
+        <button class="btn btn-blue btn-icon">
+          <i class="fa fa-times"></i>
+          <span translate="compensation.CLEAR"></span>
+        </button>
+        <button class="btn btn-blue btn-icon">
+          <i class="fa fa-asterisk"></i>
+          <span translate="compensation.SUGGEST_CLAIM_CPO"></span>
+        </button>
+      </div>
+      <div class="content-bottom-btns-right">
+        <button class="btn btn-orange btn-icon" 
+          ng-show="inputForm.status ==='Completed'"
+          ng-click="reOpenCompensation()"
+        >
+          <i class="fa fa-repeat"></i>
+          <span translate="compensation.RE_OPEN"></span>
+        </button>
+        <button class="btn btn-orange btn-icon"
+          ng-show="(inputForm.status ==='Approved') && thisInvoiceNo"
+          ng-click="completeCompensation()"
+        >
+          <i class="fa fa-list"></i>
+          <span translate="compensation.COMPLETE"></span>
+        </button>
+        <button class="btn btn-blue btn-icon"
+          ng-show="(['Saved', 'New'].indexOf(inputForm.status) > -1)"
+          ng-click="saveCompensation()"
+        >
+          <i class="fa fa-floppy-o"></i>
+          <span translate="compensation.SAVE"></span>
+        </button>
+        <button class="btn btn-blue btn-icon"
+          ng-show="(['Saved', 'New'].indexOf(inputForm.status) > -1)"
+          ng-click="completeCompensation()"
+        >
+          <i class="fa fa-paper-plane-o"></i>
+          <span translate="compensation.SUBMIT"></span>
+        </button>
+        <button class="btn btn-blue btn-icon"
+          ng-show="(['Submitted'].indexOf(inputForm.status) > -1)"
+          ng-click="completeCompensation()"
+        >
+          <i class="fa fa-thumbs-o-up"></i>
+          <span translate="compensation.APPROVE"></span>
+        </button>
+        <button class="btn btn-blue btn-icon"
+          ng-show="inputForm.status === 'Approved'"
+          ng-click="cancelCompensation()"
+        >
+          <i class="fa fa-ban"></i>
+          <span translate="compensation.CANCEL"></span>
+        </button>
+        <button class="btn btn-blue btn-icon"
+          ng-show="inputForm.status !== 'Completed'"
+          ng-click="deleteCompensation()"
+        >
+          <i class="fa fa-trash-o"></i>
+          <span translate="compensation.DELETE"></span>
+        </button>
+      </div>
+    </div>
+
   </div>
   
   <div class="modal-footer">
@@ -46,3 +186,60 @@
     </button>
   </div>
 </script>
+
+<style type="text/css">
+	#compensationCreateFormContent .cps-form-wrap.label-orizontal {
+		align-items: flex-start;
+	}
+	#compensationCreateFormContent .cps-form-wrap.label-orizontal .form-group {
+		display: flex;
+    align-items: center;
+	}
+  #compensationCreateFormContent .cps-form-wrap.label-orizontal .form-group label {
+    width: 26%;
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  #compensationCreateFormContent .cps-form-wrap.label-orizontal .form-group .inputwidth {
+    width: 72% !important;
+  }
+  #compensationCreateFormContent .cps-form-wrap.label-orizontal .form-group {
+    margin-bottom: 6px;
+  }
+  #compensationCreateFormContent .table-title {
+    margin-top: 10px;
+    padding: 8px 10px;
+    background-color: #9ab2df;
+    color: #fff;
+    font-weight: bold;
+  }
+  #compensationCreateFormContent .btn {
+    margin-bottom: 0;
+    border: 1px solid #dddddd;
+  }
+  #compensationCreateFormContent .btn-group {
+    margin: 6px 0;
+  }
+  #compensationCreateFormContent .ui-grid.ng-isolate-scope {
+    margin-top: 0;
+  }
+  #compensationCreateFormContent .btn-add-remove {
+    background-color: #305496;
+    color: #fff;
+  }
+  #compensationCreateFormContent .btn-add-remove:hover {
+    opacity: 0.8;
+  }
+  #compensationCreateFormContent .content-bottom-btns {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+  /* #compensationCreateFormContent .content-bottom-btns {
+    background-color: #ed7d31;
+  } */
+  
+  
+</style>
+

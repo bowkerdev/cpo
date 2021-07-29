@@ -2,8 +2,8 @@
 	'use strict';
 	angular
 		.module('cpo')
-		.service('complaintService', ['$http', '$translate', 'CommonService', '$uibModal',
-			function($http, $translate, CommonService, $uibModal) {
+		.service('complaintService', ['$http', '$translate', 'CommonService', '$uibModal', 'compensationConfigService',
+			function($http, $translate, CommonService, $uibModal, compensationConfigService) {
 				// imported FOB  != CPO FOB
 				var row_template = " <div ng-repeat='(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name'"
 				 + "class='ui-grid-cell ' " 
@@ -138,12 +138,7 @@
 						totalNum: 0
 					};
 					// TODO 显示与取值
-					scope.statusList = [
-						{ label: 'New', value: 'New', id: 'New' },
-						{ label: 'Processing', value: 'Processing', id: 'Processing' },
-						{ label: 'Completed', value: 'Completed', id: 'Completed' },
-						{ label: 'Cancelled', value: 'Cancelled', id: 'Cancelled' }
-					]
+					scope.statusList = compensationConfigService.getComplaintStatusList()
 					scope.searchStatus = []
 					// 
 					scope.searchFactoryList = []

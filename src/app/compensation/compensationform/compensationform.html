@@ -13,7 +13,7 @@
 					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.FACTORY" class="labelwidth"></label>
-						<div class="multi-select multi-select ng-scope ng-isolate-scope" 
+						<div class="inputwidth multi-select multi-select ng-scope ng-isolate-scope" 
 							ng-dropdown-multiselect="" options="searchFactoryList" 
 							selected-model="searchFactory" 
 							extra-settings="extraSettings" translation-texts="translationTexts"
@@ -30,7 +30,12 @@
 					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.ORDER_TYPE" class="labelwidth"></label>
-						<input type="text" ng-model="searchOrderType" class="form-control inputwidth" maxlength="50" ng-maxlength="50">
+						<div class="inputwidth multi-select multi-select ng-scope ng-isolate-scope" 
+							ng-dropdown-multiselect="" options="orderTypeList" 
+							selected-model="searchOrderType" 
+							extra-settings="extraSettings" translation-texts="translationTexts"
+						>
+						</div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.CREATED_BY" class="labelwidth"></label>
@@ -38,7 +43,7 @@
 					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 						<label translate="compensation.STATUS" class="labelwidth"></label>
-						<div class="multi-select multi-select ng-scope ng-isolate-scope" 
+						<div class="inputwidth multi-select multi-select ng-scope ng-isolate-scope" 
 							ng-dropdown-multiselect="" options="statusList" 
 							selected-model="searchStatus" 
 							extra-settings="extraSettings" translation-texts="translationTexts"
@@ -47,8 +52,8 @@
 					</div>
 					<div class="cps-form-wrap col-xs-12" style="padding: 0;">
 						<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
-							<label class="control-label labelwidth" translate="compensation.DATE" style="float: left;line-height: 1.3em;"></label>
-							<div ng-model='dateStartTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dateStartTime" style="float: left;margin-left: 4px;">
+							<label class="control-label labelwidth" translate="compensation.DATE" style="line-height: 1.3em;"></label>
+							<div ng-model='dateStartTime' ng-time class="inputwidth input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dateStartTime">
 								<input ng-model='dateStartTime' ng-change="controlTime('start',1)" class="form-control" size="16" type="text" value="" readonly>
 								<span class="input-group-addon" ng-click="dateStartTime=''"><i class="fa-close"></i></span>
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -56,7 +61,7 @@
 						</div>
 						<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
 							<label class="control-label labelwidth end-date-label" translate="to"></label>
-							<div ng-model='dateEndTime' ng-time class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dateEndTime" style="float: left;margin-left: 4px;">
+							<div ng-model='dateEndTime' ng-time class="inputwidth input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dateEndTime">
 								<input ng-model='dateEndTime'  ng-change="controlTime('end',1)" class="form-control" size="16" type="text" value="" readonly>
 								<span class="input-group-addon" ng-click="dateEndTime=''"><i class="fa-close"></i></span>
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -66,7 +71,7 @@
 				</div>
 				<div class="search-form-btn-wrap">
 					<button
-						class="btn btn-white btn-icon searchBtn"
+						class="btn  btn-blue btn-icon"
 						ng-disabled="searchLoading"
 						ng-click="search()"
 					>
@@ -128,6 +133,8 @@
 
 <ng-include src="'app/common/commonconfirm.html'"></ng-include>
 <ng-include src="'app/compensation/compensationform/createform.html'"></ng-include>
+<ng-include src="'app/compensation/compensationform/selectcomplaint.html'"></ng-include>
+
 <style>
 #compensationFormPage 	.form-group {
 	margin-bottom: 15px;
@@ -141,14 +148,8 @@
 	padding-right: 5px;
 }
 #compensationFormPage .inputwidth {
-	width: 60%;
-	margin-left: 3px;
-}
-#compensationFormPage .searchBtn{
-	margin-right: 20px;
-	background-color: #1664F4;
-	color:white;
-	height: 32px;
+	width: 68% !important;
+	margin-left: 4px;
 }
 #compensationFormPage .ui-grid.ng-isolate-scope {
 	margin-top: 0;
@@ -186,7 +187,10 @@
 	flex-direction: column;
 }
 .full-screen-modal.modal .modal-dialog .modal-content .modal-body {
+	padding-right: 10px;
+	padding-left: 10px;
 	flex-grow: 1;
+	overflow: auto;
 }
 .grid-loading.loading-wrap {
 	margin: 0;
