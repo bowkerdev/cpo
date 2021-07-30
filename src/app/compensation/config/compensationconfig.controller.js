@@ -32,6 +32,20 @@
           ]
         }
 
+        this.getRowNoTemplate = function () {
+          return '<div class="ui-grid-cell-contents text-right" title="TOOLTIP">{{grid.appScope.getRowNo(grid, row)}}</div>'
+        }
+        this.genRowNoFn = function (grid, row) {
+          var rowUid = row.uid
+          for (var i = 0; i < grid.rows.length; i++) {
+            var item = grid.rows[i]
+            if(item.uid === rowUid) {
+              return (i + 1)
+            }
+          }
+          return 'NaN'
+        }
+
       }
     ])
 

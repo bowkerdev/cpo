@@ -183,6 +183,7 @@
 									"displayName":$translate.instant('compensation.DATE'),
 									"field":"DATE",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -225,6 +226,7 @@
 									"displayName":$translate.instant('compensation.COMPLAINT_AMOUNT'),
 									"field":"COMPLAINT_AMOUNT",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -232,6 +234,7 @@
 									"displayName":$translate.instant('compensation.TOTAL_AMOUNT_CNY'),
 									"field":"TOTAL_AMOUNT_CNY",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -239,6 +242,7 @@
 									"displayName":$translate.instant('compensation.TOTAL_AMOUNT_CNY_VAT'),
 									"field":"TOTAL_AMOUNT_CNY_VAT",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -260,6 +264,7 @@
 									"displayName":$translate.instant('compensation.ORDER_QTY'),
 									"field":"ORDER_QTY",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -274,6 +279,7 @@
 									"displayName":$translate.instant('compensation.DELIVERY_DATE'),
 									"field":"DELIVERY_DATE",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -281,6 +287,7 @@
 									"displayName":$translate.instant('compensation.CLAIM_CPO_AMOUNT'),
 									"field":"CLAIM_CPO_AMOUNT",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -295,6 +302,7 @@
 									"displayName":$translate.instant('compensation.CREATED_DATE'),
 									"field":"CREATED_DATE",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -369,6 +377,7 @@
 									"displayName":$translate.instant('compensation.DATE'),
 									"field":"DATE",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -404,6 +413,7 @@
 									"displayName":$translate.instant('compensation.COMPLAINT_AMOUNT'),
 									"field":"COMPLAINT_AMOUNT",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -411,6 +421,7 @@
 									"displayName":$translate.instant('compensation.TOTAL_AMOUNT_CNY'),
 									"field":"TOTAL_AMOUNT_CNY",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -418,6 +429,7 @@
 									"displayName":$translate.instant('compensation.TOTAL_AMOUNT_CNY_VAT'),
 									"field":"TOTAL_AMOUNT_CNY_VAT",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -439,6 +451,7 @@
 									"displayName":$translate.instant('compensation.CLAIM_CPO_AMOUNT'),
 									"field":"CLAIM_CPO_AMOUNT",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{
@@ -453,6 +466,7 @@
 									"displayName":$translate.instant('compensation.CREATED_DATE'),
 									"field":"CREATED_DATE",
 									"width":"200",
+									"cellClass": "text-right",
 									"enableCellEdit":false
 							},
 							{

@@ -6,7 +6,6 @@
     .service('selectComplaintService', ['$http', 'CommonService', '$translate', 
       'uiGridConstants', 'compensationConfigService',
       function ($http, CommonService, $translate, uiGridConstants, compensationConfigService) {
-        var index_cell_template = '<div></div>'
         var gModalInstance;
         var modalScope;
         this.setModalScope = function (inScope, inModalInstance) {
@@ -117,7 +116,8 @@
                 "name": "NO",
                 "displayName": $translate.instant('compensation.NO'),
                 "field": "NO",
-                "width": "200",
+                "width": "80",
+                "cellTemplate": compensationConfigService.getRowNoTemplate(),
                 "enableCellEdit": false
               },
               {
@@ -233,8 +233,8 @@
       }
     ])
     .controller('selectComplaintController', ["$scope", "selectComplaintService", '$uibModalInstance', 
-      'planGroups', '$translate',
-      function ($scope, selectComplaintService, $uibModalInstance, planGroups, $translate) {
+      'planGroups', '$translate', 'compensationConfigService',
+      function ($scope, selectComplaintService, $uibModalInstance, planGroups, $translate,compensationConfigService ) {
         selectComplaintService.setModalScope($scope, $uibModalInstance);
         $scope.cancel = function () {
           selectComplaintService.cancel();
@@ -245,7 +245,10 @@
         $scope.searchList = function () {
           selectComplaintService.pullComplaintList($scope);
         }
-        
+        // 表格获取行号
+        $scope.getRowNo = function (grid, row) {
+          return compensationConfigService.genRowNoFn(grid, row)
+        }
         // 筛选配置
 				$scope.translationTexts = {
 					checkAll: $translate.instant('index.SELECT_ALL'),

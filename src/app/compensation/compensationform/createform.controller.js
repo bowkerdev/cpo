@@ -141,7 +141,8 @@
                 "name": "NO",
                 "displayName": $translate.instant('compensation.NO'),
                 "field": "NO",
-                "width": "200",
+                "width": "80",
+                "cellTemplate": compensationConfigService.getRowNoTemplate(),
                 "enableCellEdit": false
               },
               {
@@ -156,6 +157,7 @@
                 "displayName": $translate.instant('compensation.COMPLAINT_DATE'),
                 "field": "COMPLAINT_DATE",
                 "width": "200",
+                "cellClass": "text-right",
                 "enableCellEdit": false
               },
               {
@@ -184,6 +186,7 @@
                 "displayName": $translate.instant('compensation.QUANTITY'),
                 "field": "QUANTITY",
                 "width": "200",
+                "cellClass": "text-right",
                 "enableCellEdit": false
               },
               {
@@ -191,6 +194,7 @@
                 "displayName": $translate.instant('compensation.FOB'),
                 "field": "FOB",
                 "width": "200",
+                "cellClass": "text-right",
                 "enableCellEdit": false
               },
               {
@@ -198,6 +202,7 @@
                 "displayName": $translate.instant('compensation.HANDLING_COST'),
                 "field": "HANDLING_COST",
                 "width": "200",
+                "cellClass": "text-right",
                 "enableCellEdit": false,
                 "aggregationType": uiGridConstants.aggregationTypes.sum
               },
@@ -206,6 +211,7 @@
                 "displayName": $translate.instant('compensation.TOTAL'),
                 "field": "TOTAL",
                 "width": "200",
+                "cellClass": "text-right",
                 "enableCellEdit": false,
                 "aggregationType": uiGridConstants.aggregationTypes.sum
               },
@@ -214,6 +220,7 @@
                 "displayName": $translate.instant('compensation.TOTAL_INCLUDE_VAT'),
                 "field": "TOTAL_INCLUDE_VAT",
                 "width": "200",
+                "cellClass": "text-right",
                 "enableCellEdit": false,
                 "aggregationType": uiGridConstants.aggregationTypes.sum
               },
@@ -222,6 +229,7 @@
                 "displayName": $translate.instant('compensation.TOTAL_CNY'),
                 "field": "TOTAL_CNY",
                 "width": "200",
+                "cellClass": "text-right",
                 "enableCellEdit": false,
                 "aggregationType": uiGridConstants.aggregationTypes.sum
               },
@@ -231,6 +239,7 @@
                 "field": "TOTAL_INCLUDE_VAT_CNY",
                 "width": "200",
                 "enableCellEdit": false,
+                "cellClass": "text-right",
                 "aggregationType": uiGridConstants.aggregationTypes.sum
               }
             ],
@@ -277,7 +286,8 @@
                 "name": "NO",
                 "displayName": $translate.instant('compensation.NO'),
                 "field": "NO",
-                "width": "200",
+                "width": "80",
+                "cellTemplate": compensationConfigService.getRowNoTemplate(),
                 "enableCellEdit": false
               },
               {
@@ -359,9 +369,15 @@
         };
       }
     ])
-    .controller('compensationCreateFormController', ["$scope", "compensationCreateFormService", '$uibModalInstance', 'planGroups',
-      function ($scope, compensationCreateFormService, $uibModalInstance, planGroups) {
+    .controller('compensationCreateFormController', ["$scope", "compensationCreateFormService", 
+      '$uibModalInstance', 'planGroups', 'compensationConfigService',
+      function ($scope, compensationCreateFormService, $uibModalInstance, planGroups, compensationConfigService) {
         compensationCreateFormService.setModalScope($scope, $uibModalInstance);
+        // 表格获取行号
+        $scope.getRowNo = function (grid, row) {
+          return compensationConfigService.genRowNoFn(grid, row)
+        }
+        // 
         $scope.cancel = function () {
           compensationCreateFormService.cancel();
         }
