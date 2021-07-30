@@ -83,6 +83,27 @@
             scope.searchComplaintLoading = false;
           });
         }
+        
+        this.pullClaimList = function (scope) {
+          var param = {}
+          param['pageNo'] = scope.claimPage.curPage
+          param['pageSize'] = scope.claimPage.pageSize
+          scope.searchClaimLoading = true;
+          GLOBAL_Http($http, "cpo/api/process/query_process?", 'GET', param, function (data) {
+
+            if (data.status == 0) {
+              scope.claimItems = translateData(data.output.processExts);
+              scope.claimPage.totalNum = data.output.total;
+              scope.claimGridOptions.totalItems = scope.claimPage.totalNum;
+            } else {
+              modalAlert(CommonService, 2, data.message, null);
+            }
+            scope.searchClaimLoading = false;
+          }, function (data) {
+            modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+            scope.searchClaimLoading = false;
+          });
+        }
 
         /**
          * init
@@ -261,7 +282,7 @@
           // detail table
           scope.claimPage = {
             curPage: 1,
-            pageSize: 10,
+            pageSize: 1000,
             sortColumn: 'id',
             sortDirection: true,
             totalNum: 0
@@ -366,6 +387,8 @@
           this.pullSelectList(scope)
           // Complaint table data
           this.pullComplaintList(scope)
+          // Claim table data
+          this.pullClaimList(scope)
         };
       }
     ])

@@ -102,7 +102,7 @@
 				}
 
 				// 创建
-				this.create = function (scope) {
+				this.compensationModal = function (scope, mode, row) {
 					var modalInstance = $uibModal.open({
 						templateUrl: 'compensationCreateFormModal',
 						controller: 'compensationCreateFormController',
@@ -111,7 +111,10 @@
 						size: 'lg',
 						resolve: {
 							planGroups: function() {
-								return {}
+								return {
+									mode: mode,
+									record: row
+								}
 							}
 						}
 					});
@@ -119,6 +122,7 @@
 					modalInstance.result.then(function(returnData) {
 						if(returnData){
 							_this.pullSummaryList(scope);
+							_this.pullDetailList(scope)
 						}
 					}, function() {
 						// dismiss(cancel)
@@ -147,6 +151,10 @@
 					scope.orderTypeList = compensationConfigService.getOrderTypeList()
 					scope.searchOrderType = []
 					// summary table
+					var compensationTempalte = ('<div class="op-col"><button class="btn btn-postpone" ng-click="grid.appScope.compensationOp(row.entity)">'
+					+ '<span translate="index.VIEW"></span>'
+					+ '</button></div>')
+				
 					scope.summaryPage = {
 						curPage: 1,
 						pageSize: 10,
@@ -318,6 +326,15 @@
 									"field":"REMARK",
 									"width":"200",
 									"enableCellEdit":false
+							},
+							{
+									"name":"_op",
+									"displayName":$translate.instant('Operation'),
+									"field":"_op",
+									"width":"160",
+									"pinnedRight": true,
+									"cellTemplate": compensationTempalte,
+									"enableCellEdit":false
 							}
 						],
 						onRegisterApi: function(gridApi) {
@@ -340,7 +357,7 @@
 							});
 						}
 					};
-					// detail table
+					// detail table 
 					scope.detailPage = {
 						curPage: 1,
 						pageSize: 10,
@@ -483,6 +500,7 @@
 									"width":"200",
 									"enableCellEdit":false
 							}
+							
 						],
 						onRegisterApi: function(gridApi) {
 							scope.detailGridApi = gridApi;
@@ -520,7 +538,10 @@
 					compensationFormService.export($scope);
 				}
 				$scope.create = function() {
-					compensationFormService.create($scope);
+					compensationFormService.compensationModal($scope, 'new');
+				}
+				$scope.compensationOp = function (row) {
+					compensationFormService.compensationModal($scope, 'op', row);
 				}
 				$scope.updateInvoiceNo = function() {
 					compensationFormService.updateInvoiceNo($scope);
