@@ -1,0 +1,26 @@
+
+<div >
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Is Reserve Material</h3>
+  </div>
+
+
+  <form class="form-horizontal" style="padding:20px">
+
+    <div class="form-group">
+      <label for="input4" class="col-sm-4 control-label">Is Reserve Material</label>
+      <div class="col-sm-8">
+        <select class=" form-control" ng-model="reserve" ng-options="reserve.label for reserve in reserveList">
+              </select>
+      </div>
+    </div>
+
+
+  </form>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
+  </div>
+</div>
+
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>

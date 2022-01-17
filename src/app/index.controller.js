@@ -150,7 +150,7 @@
 				var timeStamp = dateTimeFormat(new Date());
 				//				var userName = "WeCAREC001";
 				var userName = "zhimi";
-				var pwd = "zm@123";
+				var pwd = "zm@2021";
 				var newPassword = SHA256(pwd);
 				var signStr = SHA256(userName + newPassword + timeStamp + userName);
 				var requestData = {

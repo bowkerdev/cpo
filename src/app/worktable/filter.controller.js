@@ -286,6 +286,8 @@
 						type = "POST";
 					} else if(requestUrl == "cpo/api/worktable/get_change_order_filter?") {
 						type = "POST";
+					} else if(requestUrl == "cpo/api/worktable/get_confirm_order_filter?") {
+						type = "POST";
 					}
 
 					var inkey = "in_" + field;

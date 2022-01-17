@@ -127,6 +127,7 @@
 
 					scope['gridOptions' + i] = {
 						data: gridData,
+            searchKeys: [],
 						paginationPageSizes: [20, 50, 100, 200, 500],
 						enableColumnMenus: true,
 						paginationPageSize: 20,
@@ -394,7 +395,7 @@
 				this.getOrderTypeList = function(scope) {
 					var _this = this;
 					var param = {
-						in_code: 'ASSIGNMENTHISTORYORDERTYPE-' + scope.activeTab
+						in_code: 'ASSIGNMENTHISTORYORDERTYPE-' + scope.activeTab+',FACTORYLIST'
 					}
 					GLOBAL_Http($http, "cpo/api/sys/admindict/translate_code?", 'GET', param, function(data) {
 						if(data["ASSIGNMENTHISTORYORDERTYPE-" + scope.activeTab].length > 0) {
@@ -407,6 +408,10 @@
 							scope.orderType = scope.orderTypeList[1];
 							_this.getBatchDate(scope);
 						}
+            scope.factoryList=data['FACTORYLIST'];
+            for (var i = 0; i < scope.factoryList.length; i++) {
+              scope.factoryList[i].id=scope.factoryList[i].label;
+            }
 					}, function(data) {
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
@@ -423,18 +428,11 @@
 						status: "4"
 
 					};
-					var columnDefs = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_new", true, 200);
-					var column = {
-						"field": "manualOrderStatus",
-						"displayName": "Manual Order Status",
-						width: '100',
-						enableCellEdit: false,
-						enableSorting: false,
-						headerCellTemplate: 'app/worktable/filter.html'
-					};
-					columnDefs.unshift(column);
+					var columnDefs = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_his", true, 200);
+
 					scope['gridOptions' + i] = {
 						data: 'bulkOrder',
+						searchKeys: [],
 						paginationPageSizes: [20, 50, 100, 200, 500],
 						enableColumnMenus: true,
 						paginationPageSize: 50,
@@ -777,12 +775,43 @@
 						if(scope.po) {
 							param['like_po'] = scope.po;
 						}
-					}
-
-					if(scope.activeTab != 5 && scope.activeTab != 6) {
 						if(scope.pos) {
-							param['in_po'] = scope.pos.replace(',', '**').replace('\n', '**').replace(' ', '**');
-							debugger;
+							param['in_po'] = scope.pos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+						}
+						if(scope.reserves&&scope.reserves.length>0) {
+              var reser=[];
+              for (var i = 0; i < scope.reserves.length; i++) {
+                reser.push(scope.reserves[i].id);
+              }
+							param['in_is_reserve_material'] = reser.join('**');
+						}
+						if(scope.mos) {
+							param['in_mo_exclu'] = scope.mos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+						}
+						if(scope.factorys&&scope.factorys.length>0) {
+              var fac=[];
+              for (var i = 0; i < scope.factorys.length; i++) {
+                fac.push(scope.factorys[i].id);
+              }
+							param['in_confirm_factory'] = fac.join('**');
+						}
+						if(scope.crdFrom) {
+							param['gte_customer_request_date'] = scope.crdFrom;
+						}
+						if(scope.crdTo) {
+							param['lte_customer_request_date'] = scope.crdTo;
+						}
+						if(scope.orderDateFrom) {
+							param['gte_order_date'] = scope.orderDateFrom;
+						}
+						if(scope.orderDateTo) {
+							param['lte_order_date'] = scope.orderDateTo;
+						}
+						if(scope.tcpsddFrom) {
+							param['gte_psdd'] = scope.tcpsddFrom;
+						}
+						if(scope.tcpsddTo) {
+							param['lte_psdd'] = scope.tcpsddTo;
 						}
 					}
 
@@ -901,23 +930,14 @@
 										scope.bulkOrder = translateData(data.output);
 										scope.gridOptions1.data = scope.bulkOrder;
 										scope.page1.totalNum = data.total;
-										scope.gridOptions1.columnDefs = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_new", true, 200);
+										scope.gridOptions1.columnDefs = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_his", true, 200);
 										workTableCommonService.bulkorderDynamicColumns(data.sizeListCount, scope.gridOptions1);
-										var column = {
-											"field": "manualOrderStatus",
-											"displayName": "Manual Order Status",
-											width: '100',
-											enableCellEdit: false,
-											enableSorting: false,
-											headerCellTemplate: 'app/worktable/filter.html'
-										};
-										scope.gridOptions1.columnDefs.unshift(column);
 										for(var index in scope.bulkOrder) {
 											var item = scope.bulkOrder[index];
 											var manufacturingSize = item.ediOrderSizes;
 											if(manufacturingSize) {
 												for(var index2 = 0; index2 < manufacturingSize.length; index2++) {
-													var xx = manufacturingSize[index];
+													var xx = manufacturingSize[index2];
 
 													if(xx) {
 														item["OQTY_" + (index2 + 1)] = xx.sizeQuantity ? xx.sizeQuantity : "";
@@ -998,8 +1018,25 @@
 					scope.nonTradeCardOrder = [];
 					scope.mkcfcOrder = [];
 					scope.cusOrder = [];
+          scope.factorys=[];
+          scope.reserves=[];
+          scope.reserveList = new Array();
+          var a1 = {
+              id: 'YES',
+              label: 'YES'
+          }
+          var a2 = {
+              id: 'NO',
+              label: 'NO'
+          }
+          scope.reserveList.push(a1);
+          scope.reserveList.push(a2);
 					scope.showLoading = false;
 					scope.exportFileParams = {};
+          var day1 = new Date();
+          day1.setTime(day1.getTime()-365*24*60*60*1000);
+          day1=day1.Format("yyyy-MM-dd");
+          scope.orderDateFrom=day1;
 					_this.initBulkOrderGrid(scope, 1);
 					_this.initSampleOrderGrid(scope, 2, scope.sampleOrder);
 					_this.initSampleOrderGrid(scope, 3, scope.miOrder);
@@ -1142,6 +1179,59 @@
 
 					});
 				}
+
+
+        this.setMaterialReserveTarget = function(scope) {
+        	var _this = this;
+        	var selectedRows = null; //scope.gridApi5.selection.getSelectedRows();
+        	if(scope.activeTab == 1) {
+        		selectedRows = scope.gridApi1.selection.getSelectedRows();
+        	}
+        	if(selectedRows.length < 1) {
+        		modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
+        		return;
+        	}
+        	if(selectedRows.length != 1) {
+        		modalAlert(CommonService, 2, $translate.instant('errorMsg.ONLY_CAN_SELECT_ONE_DATA'), null);
+        		return;
+        	}
+          var modalInstance =
+            $uibModal.open({
+              animation: true,
+              ariaLabelledBy: "modal-header",
+              templateUrl: 'app/assignmenthistory/setReserveMaterial.html',
+              controller: 'setReserveMaterialCtrl',
+              resolve: {}
+            });
+          modalInstance.resolve = function(result) {
+            if(!result){
+              modalAlert(CommonService, 2, $translate.instant('errorMsg.NO_INPUT_WARNING'), null);
+              return;
+            }
+            var param={
+              orderMasterId:selectedRows[0].orderMasterId,
+              fromCPO:selectedRows[0].originalPo,
+              fromMO:selectedRows[0].mo,
+              target:result
+            }
+            GLOBAL_Http($http, "cpo/api/worktable/setReserveMaterialTarget", 'POST', param, function(data) {
+            	if(data.status == 0) {
+            		if(data.tips) {
+            			modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE') + " , " + data.tips, null);
+            		} else {
+            			modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
+            		}
+								_this.searchlist(scope);
+                modalInstance.dismiss();
+            	} else {
+            		modalAlert(CommonService, 2, data.message, null);
+            	}
+            }, function(data) {
+            	modalAlert(CommonService, 3, $translate.instant('index.FAIL_SAVE'), null);
+            });
+          }
+        }
+
 			}
 		])
 		.controller('assignmentHistoryCtrl', ['$scope', 'assignmentHistoryService',
@@ -1171,6 +1261,12 @@
 				}
 				$scope.CloseOrder = function() {
 					assignmentHistoryService.CloseOrder($scope);
+				}
+				$scope.setMaterialReserveTarget = function() {
+					assignmentHistoryService.setMaterialReserveTarget($scope);
+				}
+				$scope.changeFormat = function(v) {
+					$scope[v]=$scope[v].replace(/[ ]/g,',');
 				}
 				assignmentHistoryService.init($scope);
 			}

@@ -436,8 +436,10 @@
 						param['asin_change_status_org'] = '3'
 					}
 					if(i == 10) {
+						param['isOrderFactoryChange'] = 'YES';
 						param['eq_order_approval_status'] = '1';
 					} else if(i == 11) {
+						param['isOrderFactoryChange'] = 'YES';
 						param['eq_order_approval_status'] = '4';
 					}
 					scope['gridOptions' + i] = {
@@ -820,12 +822,16 @@
 				this.getConfimrOrder = function(scope) {
 					var param = {
 						documentType: scope.selectDocumentType.id,
-						pageSize: scope.page7.pageSize,
-						pageNo: scope.page7.curPage
+						pageSize: scope.page7.pageSize.toString(),
+						pageNo: scope.page7.curPage.toString()
 					};
-					if(scope.selectDoc && scope.selectDoc.id) {
-						param.eq_document_id = scope.selectDoc.id;
-					}
+          if(scope.selectPos){
+              param['in_po'] = scope.selectPos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+          }else{
+            if(scope.selectDoc && scope.selectDoc.id) {
+              param.eq_document_id = scope.selectDoc.id;
+            }
+          }
 					for(var attr in searchKey7) {
 						if(searchKey7[attr]) {
 							param[attr] = urlCharTransfer(searchKey7[attr]);
@@ -836,7 +842,7 @@
 
 					scope.gridOptions7.showLoading = true;
 					scope.navList[4].loading = true;
-					GLOBAL_Http($http, "cpo/api/worktable/get_confirm_order?", 'GET', param, function(data) {
+					GLOBAL_Http($http, "cpo/api/worktable/get_confirm_order?", 'POST', param, function(data) {
 						scope.navList[4].loading = false;
 						scope.gridOptions7.showLoading = false;
 						scope.navList[4].count = data.total ? data.total : "0";
@@ -915,9 +921,11 @@
 					if(navIndex === 5) {
 						param['in_change_status'] = 'NEW,UPDATE'
 						param['in_changeStatusOrg'] = '1**2'
+						// param['ne_order_actual_type'] = 'MI Order'
 					} else {
 						param['in_change_status'] = 'CONFIRM'
 						param['in_changeStatusOrg'] = '3'
+						// param['ne_order_actual_type'] = 'MI Order'
 
 					}
 					scope.navList[navIndex].loading = true;
@@ -994,9 +1002,13 @@
 						pageNo: page.curPage
 					};
 
-					if(scope.selectDoc && scope.selectDoc.id) {
-						param.eq_document_id = scope.selectDoc.id;
-					}
+          if(scope.selectPos){
+              param['in_po'] = scope.selectPos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+          }else{
+            if(scope.selectDoc && scope.selectDoc.id) {
+              param.eq_document_id = scope.selectDoc.id;
+            }
+          }
 
 					if(shouldPageNumberReset) {
 						page.curPage = 1;
@@ -1127,16 +1139,16 @@
 						_this.assigningStatus(scope);
 						GLOBAL_Http($http, "cpo/api/worktable/assign_factory?", 'GET', param, function(data) {
 							_this.assignedStatus(scope);
-	
+
 							if(data.status == 0) {
-	
+
 								if(data.tips && data.tips != "0") {
 									modalAlert(CommonService, 2, "Assign Successfully with factory adjustment rules.", null);
 								} else {
 									modalAlert(CommonService, 2, $translate.instant('worktable.SUCCESS_ASSIGN'), null);
-	
+
 								}
-	
+
 								//	modalAlert(CommonService, 2, $translate.instant('worktable.SUCCESS_ASSIGN'), null);
 								_this.refreshAll(scope);
 								_this.getDailyOrder(scope, 3);
@@ -1182,10 +1194,15 @@
 						pageSize: page.pageSize,
 						pageNo: page.curPage
 					};
+
 					if('5' != status) {
-						if(scope.selectDoc && scope.selectDoc.id) {
-							param.eq_document_id = scope.selectDoc.id;
-						}
+            if(scope.selectPos){
+                param['in_po'] = scope.selectPos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+            }else{
+              if(scope.selectDoc && scope.selectDoc.id) {
+                param.eq_document_id = scope.selectDoc.id;
+              }
+            }
 					}
 					if(shouldPageNumberReset) {
 						page.curPage = 1;
@@ -2008,46 +2025,98 @@
 						scope.disableReleaseOrderButton = false;
 						return;
 					}
-					var ediOrderChanges = []
+
+					var ediOrderChanges = [];
+          var changeTypes = [];
 					for(var i = 0; i < selectedRows.length; i++) {
 						ediOrderChanges.push({
 							assignResultId: selectedRows[i].assignResultId,
 							orderChangeId: selectedRows[i].orderChangeId
 						})
+            var changeType=selectedRows[i].changeType;
+            if(changeTypes.indexOf(changeType)<0){
+              changeTypes.push(changeType);
+            }
 					}
+
+          if(changeTypes.length>1){
+            modalAlert(CommonService, 2, $translate.instant('errorMsg.CANNOT_PROCESS_DEFFERENT_CHANGE_TYPE'), null);
+            scope.disableReleaseOrderButton = false;
+            return;
+          }
 
 					var param = {
 						"in_status": "4,5",
 						"isOrderChange": "YES",
 						"assignResultIds": listToString(selectedRows, 'assignResultId'),
+						"orderMasterIds": listToString(selectedRows, 'orderMasterId'),
 						"ediOrderChanges": ediOrderChanges
 					};
 
-					if('D365'===system){
-						param.releaseTo365='1';
-						param.releaseToFr='0';
-					}else if('FR'===system){
-						param.releaseTo365='0';
-						param.releaseToFr='1';
-					}
-					
-					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
-						scope.disableReleaseOrderButton = false;
-						if(data.status == 0) {
-							if(data.tips) {
-								modalAlert(CommonService, 2, $translate.instant('notifyMsg.RELEASE_SUCCESS') + " , " + data.tips, null);
-							} else {
-								modalAlert(CommonService, 2, $translate.instant('notifyMsg.RELEASE_SUCCESS'), null);
-							}
-							_this.refreshAll(scope);
-						} else {
-							modalAlert(CommonService, 2, data.message, null);
-						}
-					}, function(data) {
-						scope.disableReleaseOrderButton = false;
-						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
-					});
+          if(changeTypes[0]=='Order Status Change'){
+              var modalInstance =
+                $uibModal.open({
+                  animation: true,
+                  ariaLabelledBy: "modal-header",
+                  templateUrl: 'app/worktable/confirmReserveMaterial.html',
+                  controller: 'confirmReserveMaterialCtrl',
+                  resolve: {}
+                });
+              modalInstance.resolve = function(result) {
+                if("YES"==result){
+                  modalAlert(CommonService, 0, $translate.instant('notifyMsg.Reserve_Material'), function(){
+                    param.isReserveMaterial='YES';
+                    _this.releaseOrderChange(scope,system,param);
+                  },function(){
+                    scope.disableReleaseOrderButton = false;
+                  });
+                }else if("Cancel"==result){
+                  scope.disableReleaseOrderButton = false;
+                }else{
+                  modalAlert(CommonService, 0, $translate.instant('notifyMsg.Not_Reserve_Material'), function(){
+                    _this.releaseOrderChange(scope,system,param);
+                  },function(){
+                    scope.disableReleaseOrderButton = false;
+                  });
+                }
+              }
+          }else{
+            _this.releaseOrderChange(scope,system,param);
+          }
 				}
+
+
+        this.releaseOrderChange= function(scope, system,param) {
+          if('D365'===system){
+          	param.releaseTo365='1';
+          	param.releaseToFr='0';
+          }else if('FR'===system){
+          	param.releaseTo365='0';
+          	param.releaseToFr='1';
+          }
+
+          GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
+          	scope.disableReleaseOrderButton = false;
+          	if(data.status == 0) {
+          		if(data.tips) {
+          			modalAlert(CommonService, 2, $translate.instant('notifyMsg.RELEASE_SUCCESS') + " , " + data.tips, null);
+          		} else {
+          			modalAlert(CommonService, 2, $translate.instant('notifyMsg.RELEASE_SUCCESS'), null);
+          		}
+          		scope.page8.curPage = 1;
+          		scope.page9.curPage = 1;
+          		_this.getOrderChange(scope, 'PENDING');
+          		_this.getOrderChange(scope, 'CONFIRMED');
+          	} else {
+          		modalAlert(CommonService, 2, data.message, null);
+          	}
+          }, function(data) {
+          	scope.disableReleaseOrderButton = false;
+          	modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+          });
+        }
+
+
 				this.releaseOrder = function(scope,system) {
 
 					var _this = this;
@@ -2072,11 +2141,13 @@
 						return;
 					}
 					var param = {
-						"documentIds": documentid,
+						// "documentIds": documentid,
 						"status": "4",
-						"assignResultIds": listToString(selectedRows, 'assignResultId')
+						"assignResultIds": listToString(selectedRows, 'assignResultId'),
+						"orderMasterIds": listToString(selectedRows, 'orderMasterId'),
+            documentType:scope.selectDocumentType.id
 					};
-					
+
 					if('D365'===system){
 						param.releaseTo365='1';
 						param.releaseToFr='0';
@@ -2084,7 +2155,7 @@
 						param.releaseTo365='0';
 						param.releaseToFr='1';
 					}
-					
+
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
 						scope.disableReleaseOrderButton = false;
 						if(data.status == 0) {
@@ -2129,11 +2200,13 @@
 					}
 
 					var param = {
-						"documentIds": documentid,
+						// "documentIds": documentid,
 						"status": "4",
 						"confirmOrder": "YES",
 						"releaseTo365": "0",
-						"assignResultIds": listToString(selectedRows, 'assignResultId')
+						"assignResultIds": listToString(selectedRows, 'assignResultId'),
+						"orderMasterIds": listToString(selectedRows, 'orderMasterId'),
+            documentType:scope.selectDocumentType.id
 					};
 
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
@@ -2221,12 +2294,14 @@
 						documentId = scope.gridOptions7.data[0].documentId;
 					}
 					var param = {
-						"documentIds": documentId,
+						// "documentIds": documentId,
 						"status": status,
 						"assignResultIds": listToString(selectedRows, 'assignResultId'),
-						releaseTransit: "YES"
+						"orderMasterIds": listToString(selectedRows, 'orderMasterId'),
+						releaseTransit: "YES",
+            documentType:scope.selectDocumentType.id
 					};
-					
+
 					if('D365'===system){
 						param.releaseTo365='1';
 						param.releaseToFr='0';
@@ -2234,7 +2309,7 @@
 						param.releaseTo365='0';
 						param.releaseToFr='1';
 					}
-					
+
 					GLOBAL_Http($http, "cpo/api/document/release_document", 'POST', param, function(data) {
 						scope.disableReleaseOrderButton = false;
 						if(data.status == 0) {
@@ -2258,7 +2333,7 @@
 					if(scope.tabIndex == 1) {
 						selectedRows = scope.gridApi3.selection.getSelectedRows();
 					} else {
-						
+
 						selectedRows = scope.gridApi6.selection.getSelectedRows();
 					}
 
@@ -2302,7 +2377,7 @@
 				this.refreshBno = function(scope, entity) {
 					var _this = this;
 					scope.disableRefreshBNoButton = true;
-					var param = {	
+					var param = {
 						"documentId": '-1'
 					};
 
@@ -2489,6 +2564,7 @@
 								param['documentType'] = "211";
 								param['isOrderChange'] = 'YES';
 								param['in_change_status'] = 'NEW,UPDATE';
+                // param['ne_order_actual_type'] = 'MI Order'
 								param['in_changeStatusOrg'] = '1**2';
 								for(var attr in searchKey8) {
 									if(searchKey8[attr]) {
@@ -2503,6 +2579,7 @@
 								param['documentType'] = "211";
 								param['isOrderChange'] = 'YES';
 								param['in_change_status'] = 'CONFIRM';
+                // param['ne_order_actual_type'] = 'MI Order'
 								param['in_changeStatusOrg'] = '3';
 								for(var attr in searchKey8) {
 									if(searchKey8[attr]) {
@@ -2530,8 +2607,18 @@
 								break;
 							}
 					}
+
+
+
 					if((scope.tabIndex != 6 || scope.tabIndex != 7) && scope.selectDoc && scope.selectDoc.id) {
-						param.eq_document_id = scope.selectDoc.id;
+						// param.eq_document_id = scope.selectDoc.id;
+            if(scope.selectPos){
+                param['in_po'] = scope.selectPos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+            }else{
+              if(scope.selectDoc && scope.selectDoc.id) {
+                param.eq_document_id = scope.selectDoc.id;
+              }
+            }
 					} else {
 						param.eq_document_id = 0;
 					}
@@ -2707,9 +2794,9 @@
 					} else if(scope.tabIndex == 4) {
 						selectedRows = scope.gridApi6.selection.getSelectedRows();
 					};
-					
-					
-					
+
+
+
 					if(selectedRows.length < 1) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
 						return;
@@ -2726,7 +2813,7 @@
 						//   ids.push(row.factAssignId);
 						// }
 					}
-					
+
 					var request = {
 			          	in_code: 'unitTypeList'
 			        }
@@ -2773,12 +2860,12 @@
 
 								var unit = result.unit;
 								var unitChangeRate=result.unitChangeRate;
-								
+
 								if(!unit || !unitChangeRate){
 									modalAlert(CommonService, 3, 'Please Select Unit and Input Unit Rate.', null);
 									return;
 								}
-								
+
 								var param = {
 									orderType: 3,
 									unit: unit,
@@ -3008,7 +3095,21 @@
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
-
+        this.searchlist = function(scope) {
+					var _this = this;
+          if(scope.tabIndex == 0) {
+            this.getAssignFactoryResult(scope, '3', '0,3', scope.page2, true);
+          } else if(scope.tabIndex == 1) {
+            this.getAssignFactoryResult(scope, '3', '2', scope.page3, true);
+          }else if(scope.tabIndex == 3) {
+            this.getTransitOrder(scope, scope.page4, '4', true);
+          } else if(scope.tabIndex == 4) {
+            this.getTransitOrder(scope, scope.page5, '5', true);
+          } else if(scope.tabIndex == 5) {
+            this.getConfimrOrder(scope);
+          };
+          debugger;
+        }
 				this.splitOrder = function(scope) {
 					var _this = this;
 					var selectedRows = null; //scope.gridApi5.selection.getSelectedRows();
@@ -3141,7 +3242,7 @@
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
 				}
-				
+
 				this.checkOrderInfo=function(scope){
 					var gridApi = scope.gridApi3;
 					var _this = this;
@@ -3150,7 +3251,7 @@
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
 						return;
 					}
-					
+
 					var modalInstance =
 						$uibModal.open({
 							animation: true,
@@ -3308,6 +3409,12 @@
 				}
 				$scope.exportMTFContractTotalList = function() {
 					BulkOrderService.exportMTFContractTotalList($scope);
+				}
+				$scope.changeFormat = function(v) {
+					$scope[v]=$scope[v].replace(/[ ]/g,',');
+				}
+				$scope.searchlist = function() {
+					BulkOrderService.searchlist($scope);
 				}
 				$scope.bottomGridHeight = function() {
 

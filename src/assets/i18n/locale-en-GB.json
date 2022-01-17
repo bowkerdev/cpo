@@ -335,7 +335,9 @@
     "ERROR_SELECTED_APP_TYPE": "Selected app filed is not matched with category",
     "CAN_NOT_UPGRADE_UNPUBLISH_APP": "App cannot be upgraded without publishing status",
     "UPLOAD_SUCCESS": "Upload Success",
-    "SELECT_DATE_ERROR": "The effective time is later than the cut-off time"
+    "SELECT_DATE_ERROR": "The effective time is later than the cut-off time",
+    "Reserve_Material": "Confirm Reserve Material?<br>If Yes,Please set [Reserve To PO] in Assignment History Function !",
+    "Not_Reserve_Material": "Confirm Not Reserve Material?<br>If Yes,Allocation will release Material !"
   },
   "errorMsg": {
     "CAN_NOT_RESET_SEASON":"Cannot reset season",
@@ -368,7 +370,9 @@
     "INPUT_TIME_ERROR": "Choose the time earlier than the current time",
     "PLEASE_INPUT_PUSH_TIME": "Please select the push time",
     "NO_ORDER_FILE":"No Order File",
-    "NO_ARTICLE_SEASON_IN_RANGEE_FOUND":"No article season(In Range) found."
+    "NO_ARTICLE_SEASON_IN_RANGEE_FOUND":"No article season(In Range) found.",
+    "CANNOT_PROCESS_DEFFERENT_CHANGE_TYPE":"Cannot process different Change Type!",
+    "CANNOT_SET_NOT_RESERVE_ORDER": "Cannot set not reserve order !"
   },
   "worktabledetail":{
 
@@ -746,6 +750,7 @@
     "CONFIRM_BY_BVG":"Confirm By BVG",
     "CONFIRM_BY_BVN":"Confirm By BVN",
     "CONFIRM_BY_BCA":"Confirm By BCA",
+    "CONFIRM_BY_PGA":"Confirm By PGA",
     "CONFIRM_BY_BYS_SAMPLE_ROOM":"Confirm By BYS Sample Room",
     "CONFIRM_BY_BVG_SAMPLE_ROOM":"Confirm By BVG Sample Room",
     "CONFIRM_BY_BVN_SAMPLE_ROOM":"Confirm By BVN Sample Room"

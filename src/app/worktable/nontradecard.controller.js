@@ -694,7 +694,7 @@
 					var staticColumns = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_new", true, 100);
 
 					scope.gridOptions7.showLoading = true;
-					GLOBAL_Http($http, "cpo/api/worktable/get_confirm_order?", 'GET', param, function(data) {
+					GLOBAL_Http($http, "cpo/api/worktable/get_confirm_order?", 'POST', param, function(data) {
 						scope.gridOptions7.showLoading = false;
 						scope.navList[4].loading = false;
 						scope.navList[4].count = data.total ? data.total : "0";

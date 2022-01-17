@@ -107,39 +107,6 @@
         </div>
       </div>-->
     </div>
-    <div class="panel" ng-if="false">
-      <div class="panel-heading">
-        <form role="form" class="form-inline" name="formPlan" novalidate>
-          <div class="pull-left">
-            <div class="form-group">
-              <div class="work-table-panel-title container-flex-center-center">
-                <span translate="worktable.CAPACITY_FILL_RATE"></span>
-              </div>
-            </div>
-            <!--<div class="form-group">-->
-            <!--<i class="fa fa-exclamation-circle fill-rate-alert"></i>&nbsp;&nbsp;-->
-            <!--<label translate="worktable.OVERLOADING"></label>-->
-            <!--</div>-->
-          </div>
-          <div style="float: right;">
-
-            <div class="form-group">
-              <a data-toggle="collapse" data-parent="#accordionDailyDocument" href="#collapseLC01902">
-                <i class="fa  fa-angle-up pull-right"></i>
-              </a>
-            </div>
-          </div>
-          <div class="empty-view" data-toggle="collapse" data-parent="#accordionDailyDocument" href="#collapseLC01902">
-
-          </div>
-        </form>
-      </div>
-      <div id="collapseLC01902" class="panel-collapse collapse">
-        <div ui-grid="gridOptions1" ui-grid-pinning ui-grid-expandable ui-grid-pagination ui-grid-selection ui-grid-resize-columns
-          ui-grid-auto-resize></div>
-
-      </div>
-    </div>
     <div class="page-title">
 
       <div style="display:inline-flex">
@@ -207,23 +174,27 @@
           </uib-tabset>
         </scrollable-tabset>
         <div class="form-group" style="position: absolute;right: 40px;margin-bottom: 0px !important;">
-          <button style="float: right;margin-top: 10px;" class="btn btn-secondary btn-single" ng-click="exportFile()">
+          <button style="float: right;margin-top: 10px;" class="btn btn-secondary btn-single" ng-click="exportFile()" >
             <i class="fa fa-download"></i>
             <span translate="">Export</span>
           </button>
-          <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="importFile()"
-            ng-if="tabIndex!='5'">
+          <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="importFile(504)"
+            ng-if="tabIndex=='0'||tabIndex=='1'||tabIndex=='2'">
             <i class="fa fa-upload"></i>
             <span translate="">Import</span>
           </button>
-          <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="exportPDF()">
+          <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="exportPDF()" ng-if="tabIndex=='0'||tabIndex=='1'||tabIndex=='2'">
             <i class="fa fa-upload"></i>
             <span translate="">Export PDF</span>
           </button>
-	        <button style="float: right;margin-top: 10px;margin-right: 10px;" class="btn btn-secondary btn-single" ng-click="requestFactoryChange(tabIndex)" ng-if="tabIndex=='1'||tabIndex=='2'">
+          <button style="float: right;margin-top: 10px;margin-right: 5px;" class="btn btn-secondary btn-single" ng-click="importFile(40000)" ng-if="tabIndex=='3'||tabIndex=='4'">
+            <i class="fa fa-upload"></i>
+            <span translate="">Import PO Change</span>
+          </button>
+<!-- 	        <button style="float: right;margin-top: 10px;margin-right: 10px;" class="btn btn-secondary btn-single" ng-click="requestFactoryChange(tabIndex)" ng-if="tabIndex=='0'||tabIndex=='1'||tabIndex=='2'">
 	          <i class="fa fa-share"></i>
 	          <span translate="">Change Application</span>
-	        </button>
+	        </button> -->
           <!--<button style="float: right;margin-top: 10px;margin-right: 20px;" class="btn btn-secondary btn-single" ng-click="toggleFilterRow()" >-->
           <!--<i class="fa fa-search"></i>-->
           <!--<span translate="index.SEARCH"></span>-->
@@ -253,52 +224,23 @@
           </button>
         </div>
         <div ng-if="tabIndex=='0'">
-          <div class="col-md-1">
-            <div>Stripes</div>
-            <div class="input-group" style="width: 100%;">
-              <input type="text" class="form-control" aria-label="" ng-model="updateObj.stripes" style="width: 100%;">
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div>Logo</div>
-            <div class="input-group" style="width: 100%;">
-              <input type="text" class="form-control" aria-label="" ng-model="updateObj.logo" style="width: 100%;">
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div>Sblimiation</div>
-            <div class="input-group" style="width: 100%;">
-              <input type="text" class="form-control" aria-label="" ng-model="updateObj.sblimiation" style="width: 100%;">
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div>N&N</div>
-            <div class="input-group" style="width: 100%;">
-              <input type="text" class="form-control" aria-label="" ng-model="updateObj.nn" style="width: 100%;">
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div>Hem Insert</div>
-            <div class="input-group" style="width: 100%;">
-              <input type="text" class="form-control" aria-label="" ng-model="updateObj.insert" style="width: 100%;">
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div>Add Order Times</div>
-            <div class="input-group" style="width: 100%;">
+          <div class="form-group" style="display: flex;margin-top: 10px;">
+          <div class="col-md-2" style="display: flex;justify-content: flex-start;align-items: center;">
+            <div>Add Order Times:</div>
+            <div class="input-group">
               <input type="text" class="form-control" aria-label="" ng-model="updateObj.addOrderTimes" style="width: 100%;">
             </div>
           </div>
-          <div class="col-md-2">
-
+          <div class="col-md-2" style="padding-left: 0px;">
             <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="update()" ng-disabled="disableReleaseOrderButton||disableUpdateMiAttrButton">
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span>Update</span>
             </button>
           </div>
+          </div>
         </div>
 
-        <div ng-show="tabIndex=='0'"style="margin-top:60px;">
+        <div ng-show="tabIndex=='0'"style="margin-top:10px;">
           <div ng-if="tabIndex=='0'" id="mi_order_grid1" ui-grid="gridOptions2" ui-grid-expandable ui-grid-pagination ui-grid-selection
             ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom>
           <loading show="gridOptions2.showLoading"></loading>
@@ -308,7 +250,7 @@
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span translate="worktable.RELEASE_ALL"></span>
             </button>
-            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrder()" ng-disabled="disableReleaseOrderButton">
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrder('YES','New Order')" ng-disabled="disableReleaseOrderButton">
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span translate="worktable.CONFIRM_TO_AX"></span>
             </button>
@@ -356,7 +298,7 @@
                   <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
                   <span translate="worktable.RELEASE_ALL"></span>
                 </button>
-            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderPending()" ng-disabled="disableReleaseOrderButton">
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrder('YES','Transit Pending')" ng-disabled="disableReleaseOrderButton">
               <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
               <span translate="worktable.CONFIRM_TO_FR"></span>
             </button>
@@ -372,11 +314,52 @@
             ui-grid-resize-columns ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom>
           <loading show="gridOptions3.showLoading"></loading>
           </div>
+          <div class="form-group" style="margin-top: 15px;">
+              <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseAllOrder()" ng-disabled="disableReleaseOrderButton">
+                  <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
+                  <span translate="worktable.RELEASE_ALL"></span>
+                </button>
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrder('YES','Transit Order')" ng-disabled="disableReleaseOrderButton">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;
+              <span translate="worktable.CONFIRM_TO_FR"></span>
+            </button>
+          </div>
+        </div>
+
+        <div ng-show="tabIndex=='3'">
+          <div ng-if="(tabIndex==3  )" id="bulk_order_5"  ui-grid="gridOptions5" ui-grid-expandable ui-grid-pagination ui-grid-selection ui-grid-resize-columns
+               ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom>
+
+            <loading show="gridOptions5.showLoading"></loading>
+          </div>
+          <div class="form-group" style="margin-top: 15px;">
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="confirmChange('PENDING')">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
+              translate="index.CONFIRM"></span>
+            </button>
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder('PENDING')" ng-disabled="disableReleaseOrderButton">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;">	</i>&nbsp;&nbsp;<span>Confirm and Release</span>
+            </button>
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder('PENDING','D365')" ng-disabled="disableReleaseOrderButton">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To D365</span>
+            </button>
+            <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder('PENDING','FR')" ng-disabled="disableReleaseOrderButton">
+              <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To FR</span>
+            </button>
+          </div>
+        </div>
+
+        <div ng-show="tabIndex=='4'">
+          <div ng-if="tabIndex==4" id="bulk_order_6"  ui-grid="gridOptions6" ui-grid-expandable ui-grid-pagination ui-grid-selection ui-grid-resize-columns
+               ui-grid-auto-resize style="height:385px ;" ng-style="bottomGridHeight()" hight-auto-fill-bottom>
+
+            <loading show="gridOptions6.showLoading"></loading>
+          </div>
         </div>
     </div>
 
   </div>
-  
+
 
 <script type="text/ng-template" id="set-season.html">
   <div class="modal-header">

@@ -839,7 +839,7 @@
 					if(scope.userInfo &&scope.userInfo.areaname=='BVN'){
 							param['eq_factory_number']='APU008';
 					}
-					GLOBAL_Http($http, "cpo/api/worktable/get_confirm_order?", 'GET', param, function(data) {
+					GLOBAL_Http($http, "cpo/api/worktable/get_confirm_order?", 'POST', param, function(data) {
 						scope.navList[4].loading = false;
 						scope.gridOptions7.showLoading = false;
 						scope.navList[4].count = data.total ? data.total : "0";

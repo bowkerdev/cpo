@@ -99,11 +99,17 @@
         <!--<span class="input-group-addon">Document:&nbsp</span>-->
         <!--<select ng-model="selectDoc" ng-options="doc.label for doc in docs" style="height: 32px;padding-left: 10px;" ng-change="selectDocument()"></select>-->
       <!--</div>-->
-      <div class="input-group" style="padding-bottom: 5px" ng-show="tabIndex!='6' && tabIndex!='7'&& tabIndex!='8'&& tabIndex!='9'">
-        <span class="input-group-addon">Document Type:&nbsp;</span>
-        <select ng-model="selectDocumentType" ng-options="doc.label for doc in documentTypes" style="height: 32px;padding-left: 10px;" ng-change="selectDocumentTypeChanged()"></select>
-        <span class="input-group-addon">Document:&nbsp;</span>
-        <select ng-model="selectDoc" ng-options="doc.label for doc in documentTypes[selectDocumentType.index].documents" style="height: 32px;padding-left: 10px;min-width: 100px" ng-change="selectDocumentChanged()"></select>
+      <div class="input-group" style="padding-bottom: 5px;display: flex;" ng-show="tabIndex!='6' && tabIndex!='7'&& tabIndex!='8'&& tabIndex!='9'">
+        <span class="input-group-addon searchCondition">Document Type:&nbsp;</span>
+        <select ng-model="selectDocumentType" ng-options="doc.label for doc in documentTypes" style="height: 35px;padding-left: 10px;" ng-change="selectDocumentTypeChanged()"></select>
+        <span class="input-group-addon searchCondition">Document:&nbsp;</span>
+        <select ng-model="selectDoc" ng-options="doc.label for doc in documentTypes[selectDocumentType.index].documents" style="height: 35px;padding-left: 10px;min-width: 100px" ng-change="selectDocumentChanged()"></select>
+        <span class="input-group-addon searchCondition">POs:&nbsp;</span>
+        <input  ng-model="selectPos" style="height: 35px;width: 300px;" type="text" ng-change="changeFormat('selectPos')" />
+        <button class="btn btn-secondary btn-single" ng-click="searchlist()">
+          <i class="fa-search"></i>&nbsp;&nbsp;
+          <span translate="index.SEARCH"></span>
+        </button>
       </div>
 
 
@@ -185,6 +191,11 @@
         <div class="form-group" ng-if="tabIndex=='0'||tabIndex=='1'||tabIndex=='3'">
           <button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2('6','BCA')">
             <span translate="sltforecast.CONFIRM_BY_BCA"></span>
+          </button>
+        </div>
+        <div class="form-group" ng-if="tabIndex=='0'||tabIndex=='1'||tabIndex=='3'">
+          <button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2('6','PGA')">
+            <span translate="sltforecast.CONFIRM_BY_PGA"></span>
           </button>
         </div>
 
@@ -619,7 +630,7 @@
   .dynamic-template-modal-window  .modal {
     margin: auto;
   }
-  
+
    .dynamic-template-modal-window  .modal >div:last-child{
     width: 1500px;
   }
@@ -664,4 +675,10 @@
 .must-input-star {
   color: red;
 }
+
+ div[ng-controller="BulkOrderCtrl"] .searchCondition {
+    flex-basis: fit-content;
+    text-align: center;
+    line-height:1.5
+  }
 </style>
