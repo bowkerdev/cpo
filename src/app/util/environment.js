@@ -3,7 +3,7 @@
  */
 
 //DEV
- var urlDEV = "http://10.0.0.212:8080/";
+ var urlDEV = "http://10.8.238.28:12345/";
 
 //var urlDEV = "http://112.74.191.64:8080/service/";
 //LOCAL
@@ -16,7 +16,7 @@ var urlSIT = "http://52.229.205.22:8080/cpo/";
 var urlUAT = "https://bowkercpodev.azurewebsites.net/cpo/";
 //var urlUAT = "https://bowkercpo-dev.azurewebsites.net/cpo/";
 //PROD
-var urlPROD = "http://bowkercpov2.azurewebsites.net/cpo/";
+var urlPROD = "http://121.37.26.213:8084/cpo/";
 //PUBLIC
 var urlPUBLIC = "http://120.77.214.38:8090/";
 
@@ -27,7 +27,7 @@ var urlDemo="http://zhimi0win.eastasia.cloudapp.azure.com:8087/cpo/";
 
 var urlBasePortalAli="http://47.52.22.37:8080/baseportal/";
 //Base Portal
-var urlBasePortalDEV = "http://112.74.191.64:8080/baseportal/";
+var urlBasePortalDEV = "http://bowkerbaseportalprod.azurewebsites.net/baseportal/";
 //LOCAL
 //var urlBasePortalLOCAL = "http://52.229.205.22:8080/baseportal/";
 //UAT
@@ -38,7 +38,7 @@ var urlBasePortalSIT = "http://52.229.205.22:8080/baseportal/";
 //UAT
 var urlBasePortalUAT = "https://bowkerbaseportalapp.azurewebsites.net/baseportal/";
 //PROD
-var urlBasePortalPROD = "http://bowkerbaseportalprod.azurewebsites.net/baseportal/";
+var urlBasePortalPROD = "http://121.37.26.213:8080/baseportal/";
 //PUBLIC
 var urlBasePortalPUBLIC = "http://120.77.214.38:8090/";
 //PUBLIC
@@ -62,7 +62,7 @@ if(typeof environment == "undefined") {
 	environment.DEMO=8;
 }
 
-var CURRENT_ENVIRONMENT =  environment.DEMO;
+var CURRENT_ENVIRONMENT =  environment.PROD;
 
 function getBaseURL() {
 	switch(CURRENT_ENVIRONMENT) {
