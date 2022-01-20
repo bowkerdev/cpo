@@ -333,8 +333,8 @@
 
 			$scope.init = function() {
 
-				angular.element("#envirommentA").text(getEnvironment());
-				angular.element("#envirommentB").text(getEnvironment());
+				angular.element("#envirommentA").text('DEMO');
+				angular.element("#envirommentB").text('DEMO');
 				var token = window.localStorage ? localStorage.getItem("token") : Cookie.read("token");
 				$http({
 						method: "get",
