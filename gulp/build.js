@@ -91,7 +91,7 @@ gulp.task('ga', function () {
 gulp.task('util', function () {
 	gulp.src('bower_components/angular-ui-grid/*.{eot,svg,ttf,woff,woff2}')
     .pipe($.flatten())
-    .pipe(gulp.dest(path.join(conf.paths.dist, '/styles/')));
+    .pipe(gulp.dest(path.join(conf.paths.dist, '/styles/fonts/')));
     
   return gulp.src(conf.paths.src + '/app/util/*.js')
     .pipe(gulp.dest(path.join(conf.paths.dist, '/app/util/')));
