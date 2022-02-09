@@ -191,6 +191,10 @@
             <i class="fa fa-upload"></i>
             <span translate="">Import PO Change</span>
           </button>
+          <button style="float: right;margin-top: 10px;margin-right: 10px;" class="btn btn-secondary btn-single" ng-click="multiUploadFile()">
+            <i class="fa fa-upload"></i>
+            <span translate="index.UPLOAD_FILE"></span>
+          </button>
 <!-- 	        <button style="float: right;margin-top: 10px;margin-right: 10px;" class="btn btn-secondary btn-single" ng-click="requestFactoryChange(tabIndex)" ng-if="tabIndex=='0'||tabIndex=='1'||tabIndex=='2'">
 	          <i class="fa fa-share"></i>
 	          <span translate="">Change Application</span>
@@ -472,3 +476,4 @@
 <ng-include src="'app/worktable/factorycapacity.html'"></ng-include>
 <ng-include src="'app/worktable/uploadfile.html'"></ng-include>
 <ng-include src="'app/file/uploadfile.html'"></ng-include>
+<ng-include src="'app/worktable/multiUploadFile.html'"></ng-include>
