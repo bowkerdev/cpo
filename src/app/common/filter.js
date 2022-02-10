@@ -20,4 +20,11 @@
         return date;
       }
     })
+    .filter('dateFilter', ['$translate', '$filter',
+      function ($translate, $filter) {
+        return function (dateValue) {
+          return new Date(dateValue).Format('yyyy/MM/dd HH:mm:ss');
+        };
+      }
+    ])
 })();

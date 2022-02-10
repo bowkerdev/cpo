@@ -745,6 +745,27 @@
           });
 
         }
+
+        this.multiUploadFile = function(scope) {
+        	var _this = this;
+        	var modalInstance = $uibModal.open({
+        		templateUrl: 'multiUploadFileModal',
+        		controller: 'MultiUploadFileController',
+        		backdrop: 'static',
+        		size: 'lg',
+        		resolve: {
+        			planGroups: {
+
+              }
+        		}
+        	});
+        	modalInstance.result.then(function(returnData) {
+        		if(returnData) {
+
+        		}
+        	}, function() {});
+        }
+
         this.toUpload = function(scope, entity) {
           var _this = this;
           var modalInstance = $uibModal.open({
@@ -2022,6 +2043,9 @@
         }
         $scope.adjustFactoryAssignment2 = function(mode, confirmFactory) {
           MIOrderService.adjustFactoryAssignment2($scope, mode, confirmFactory);
+        };
+        $scope.multiUploadFile = function() {
+        	MIOrderService.multiUploadFile($scope);
         };
         $scope.toUpload = function(entity) {
           MIOrderService.toUpload($scope, entity);
