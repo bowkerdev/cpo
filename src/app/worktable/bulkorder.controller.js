@@ -2087,6 +2087,7 @@
 
 
         this.releaseOrderChange= function(scope, system,param) {
+          var _this = this;
           if('D365'===system){
           	param.releaseTo365='1';
           	param.releaseToFr='0';

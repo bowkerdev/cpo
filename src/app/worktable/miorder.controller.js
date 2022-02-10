@@ -1281,8 +1281,17 @@
           var param = {
             "documentIds": documentid,
             "assignResultIds": listToString(selectOrders, 'assignResultId'),
-            "status": "4"
+            "status": "4",
+            documentType:scope.selectDocumentType.id
           };
+
+          if ("Transit Pending" == type) {
+            param.releaseTransit="YES";
+          } else if ("Transit Order" == type) {
+            param.releaseTransit="YES";
+          }
+
+
           if (flag) {
             param['checkMi'] = 'YES';
           }
@@ -1325,7 +1334,8 @@
           }
           var param = {
             "documentIds": documentid,
-            "status": "4"
+            "status": "4",
+            documentType:scope.selectDocumentType.id
           };
           if (flag) {
             param['checkMi'] = 'YES';
@@ -1449,7 +1459,7 @@
               resolve: {
                 parameter: function() {
                   return {
-                    documentType: entity.documentType, 
+                    documentType: entity.documentType,
                     orderType: 5
                   };
                 }
