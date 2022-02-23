@@ -324,6 +324,32 @@
 					}];
 					scope.round = scope.roundList[0];
 				}
+				
+				this.importFile = function(scope,documentType) {
+					var _this = this;
+					var modalInstance = $uibModal.open({
+						templateUrl: 'FileModal',
+						controller: 'FileController',
+						backdrop: 'static',
+						size: 'md',
+						resolve: {
+							planGroups: function() {
+								return {
+									fileType: documentType
+
+								};
+							}
+						}
+					});
+					modalInstance.result.then(function(returnData) {
+
+						if(returnData) {
+							modalAlert(CommonService, 2, $translate.instant('notifyMsg.UPLOAD_SUCCESS'), null);
+							_this.searchlist(scope);
+						}
+					}, function() {});
+
+				}
 
 				this.exportFile = function(scope) {
 					var tabValue = "";
@@ -1246,6 +1272,9 @@
 				}
 				$scope.changeOrderActualType = function() {
 
+				}
+				$scope.importFile = function(documentType) {
+					assignmentHistoryService.importFile($scope,documentType);
 				}
 				$scope.exportFile = function(scope) {
 					assignmentHistoryService.exportFile($scope);
