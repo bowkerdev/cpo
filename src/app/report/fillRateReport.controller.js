@@ -599,6 +599,32 @@
             this.getPro(scope , type)
           }
         }
+				
+				this.importFile = function(scope,documentType) {
+					var _this = this;
+					var modalInstance = $uibModal.open({
+						templateUrl: 'FileModal',
+						controller: 'FileController',
+						backdrop: 'static',
+						size: 'md',
+						resolve: {
+							planGroups: function() {
+								return {
+									fileType: documentType
+
+								};
+							}
+						}
+					});
+					modalInstance.result.then(function(returnData) {
+
+						if(returnData) {
+							modalAlert(CommonService, 2, $translate.instant('notifyMsg.UPLOAD_SUCCESS'), null);
+							_this.refresh(scope);
+						}
+					}, function() {});
+
+				}
 
         this.getPT = function ( scope , type ) {
           scope.type = type;
@@ -1080,6 +1106,9 @@
           fillRateReportService.refresh($scope);
 
         }
+				$scope.importFile = function(documentType) {
+					fillRateReportService.importFile($scope,documentType);
+				}
         $scope.upload = function ( type ) {
           fillRateReportService.upload($scope);
 
