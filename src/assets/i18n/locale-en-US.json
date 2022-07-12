@@ -40,6 +40,7 @@
     "FAIL_GET_DATA":"Failed to get data",
     "GO_TO_TOP": "Top",
     "UPLOAD_FILE":"Upload File",
+    "UPLOAD_TD_PRINT":"Upload TD Print",
     "SELECT_ALL": "Select All",
     "NOT_SELECT_ALL": "Clean",
     "SELECT": "Select",

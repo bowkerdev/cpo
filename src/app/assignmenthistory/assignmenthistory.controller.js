@@ -324,7 +324,7 @@
 					}];
 					scope.round = scope.roundList[0];
 				}
-				
+
 				this.importFile = function(scope,documentType) {
 					var _this = this;
 					var modalInstance = $uibModal.open({
@@ -402,15 +402,23 @@
 						}
 					}
 					CommonService.showLoadingView("Exporting...");
-					GLOBAL_Http($http, "cpo/portal/document/check_record_count?", 'GET', param, function(data) {
-						CommonService.hideLoadingView();
+					GLOBAL_Http($http, "cpo/portal/document/check_record_count_post?documentType="+param['documentType'], 'POST', param, function(data) {
 						if(data.status == 0) {
 							if(parseInt(data.message) > 0) {
-								exportExcel(param, "cpo/portal/document/export_file?", "_blank");
+								// exportExcel(param, "cpo/portal/document/export_file?", "_blank");
+                GLOBAL_Http($http, "cpo/portal/document/export_file_post?documentType="+param['documentType'], 'POST', param, function(data) {
+                  console.log(data);
+                  CommonService.hideLoadingView();
+                  window.open(data.output,'_blank');
+                }, function(data) {
+                  modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+                });
 							} else {
 								modalAlert(CommonService, 2, $translate.instant('notifyMsg.NO_DATA_EXPORT'), null);
 							}
-						}
+						}else{
+              	CommonService.hideLoadingView();
+            }
 					}, function(data) {
 						CommonService.hideLoadingView();
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
@@ -418,6 +426,8 @@
 
 					//  exportExcel(param, "cpo/portal/document/export_file?", "_blank");
 				}
+
+
 				this.getOrderTypeList = function(scope) {
 					var _this = this;
 					var param = {

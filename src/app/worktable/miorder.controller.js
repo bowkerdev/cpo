@@ -1404,6 +1404,36 @@
               param['status'] = '5';
               break
             }
+						case 3:
+							{
+								param['orderType'] = '5';
+								param['documentType'] = "211";
+								param['isOrderChange'] = 'YES';
+								param['in_change_status'] = 'NEW,UPDATE';
+                // param['ne_order_actual_type'] = 'MI Order'
+								param['in_changeStatusOrg'] = '1**2';
+								for(var attr in searchKey6) {
+									if(searchKey6[attr]) {
+										param[attr] = urlCharTransfer(searchKey6[attr]);
+									}
+								}
+								break;
+							}
+						case 4:
+							{
+								param['orderType'] = '5';
+								param['documentType'] = "211";
+								param['isOrderChange'] = 'YES';
+								param['in_change_status'] = 'CONFIRM';
+                // param['ne_order_actual_type'] = 'MI Order'
+								param['in_changeStatusOrg'] = '3';
+								for(var attr in searchKey7) {
+									if(searchKey7[attr]) {
+										param[attr] = urlCharTransfer(searchKey7[attr]);
+									}
+								}
+								break;
+							}
           }
           param.eq_document_id = (scope.selectDoc.id == null || scope.selectDoc.id == "") ? 0 : scope.selectDoc
             .id;
@@ -1446,6 +1476,27 @@
               break
             }
           }
+          var missingBNoPOs=[];
+          var missingBatchNoPOs=[];
+          for(var index in selectRows){
+            var obj=selectRows[index];
+            if(obj.bNo.indexOf('Some Size')!=-1){
+                missingBNoPOs.push(obj.po);
+            }
+            if(!obj.batchNo){
+                missingBNoPOs.push(obj.po);
+            }
+          }
+          if(missingBNoPOs.length>0){
+            modalAlert(CommonService, 2, 'Orders ['+missingBNoPOs.toString()+'] missing BNumber information,Please Check First .' , null);
+            return;
+          } 
+          
+          if(missingBatchNoPOs.length>0){
+            modalAlert(CommonService, 2, 'Orders ['+missingBatchNoPOs.toString()+'] missing Batch No information,Please Check First .' , null);
+            return;
+          }
+
           if (selectRows && selectRows.length > 0) {
             param.in_order_master_id = listToString(selectRows, 'orderMasterId');
           }

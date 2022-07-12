@@ -7,23 +7,23 @@
 
 //var urlDEV = "http://112.74.191.64:8080/service/";
 //LOCAL
+// var urlLOCAL = "http://121.37.2.207:8080/cpo/";
 var urlLOCAL = "http://localhost:12345/";
-//var urlLOCAL = "https://bowkercpodev.azurewebsites.net/cpo1/";
+// var urlLOCAL = "https://mes-uat.bowkerasia.com/cpo/";
+// var urlLOCAL = "http://localhost:8080/";
 //var urlLOCAL = "http://bowkerwecareapp.azurewebsites.net/service/";
 //SIT
 var urlSIT = "http://52.229.205.22:8080/cpo/";
 //UAT
-var urlUAT = "https://bowkercpodev.azurewebsites.net/cpo/";
+var urlUAT = "https://mes-uat.bowkerasia.com/cpo/";
 //var urlUAT = "https://bowkercpo-dev.azurewebsites.net/cpo/";
 //PROD
-var urlPROD = "http://bowkercpov2.azurewebsites.net/cpo/";
+var urlPROD = "https://mes.bowkerasia.com/cpo/";
 //PUBLIC
 var urlPUBLIC = "http://120.77.214.38:8090/";
 
 var urlALi="http://47.52.22.37:8080/service/";
 var urlDemo="http://zhimi0win.eastasia.cloudapp.azure.com:8087/cpo/";
-
-
 
 var urlBasePortalAli="http://47.52.22.37:8080/baseportal/";
 //Base Portal
@@ -31,14 +31,15 @@ var urlBasePortalDEV = "http://112.74.191.64:8080/baseportal/";
 //LOCAL
 //var urlBasePortalLOCAL = "http://52.229.205.22:8080/baseportal/";
 //UAT
-//var urlBasePortalLOCAL = "http://bowkerbaseportalprod.azurewebsites.net/baseportal/";
-var urlBasePortalLOCAL = "https://bowkerbaseportalapp.azurewebsites.net/baseportal/";
+var urlBasePortalLOCAL = "https://baseportal.bowkerasia.com/baseportal/";
+// var urlBasePortalLOCAL = "https://mes-uat.bowkerasia.com/baseportal/";
 //SIT
 var urlBasePortalSIT = "http://52.229.205.22:8080/baseportal/";
 //UAT
-var urlBasePortalUAT = "https://bowkerbaseportalapp.azurewebsites.net/baseportal/";
+var urlBasePortalUAT = "https://baseportal.bowkerasia.com/baseportal/";
+// var urlBasePortalUAT = "https://baseportal.bowkerasia.com/baseportal/";
 //PROD
-var urlBasePortalPROD = "http://bowkerbaseportalprod.azurewebsites.net/baseportal/";
+var urlBasePortalPROD = "https://baseportal.bowkerasia.com/baseportal/";
 //PUBLIC
 var urlBasePortalPUBLIC = "http://120.77.214.38:8090/";
 //PUBLIC
@@ -62,7 +63,7 @@ if(typeof environment == "undefined") {
 	environment.DEMO=8;
 }
 
-var CURRENT_ENVIRONMENT =  environment.DEMO;
+var CURRENT_ENVIRONMENT =  environment.LOCAL;
 
 function getBaseURL() {
 	switch(CURRENT_ENVIRONMENT) {
