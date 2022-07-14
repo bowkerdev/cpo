@@ -822,7 +822,7 @@
 							param['in_po'] = scope.pos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
 						}
             if(scope.originPO) {
-            	param['in_origin_po'] = scope.originPO.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+            	param['in_original_po'] = scope.originPO.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
             }
 						if(scope.reserves&&scope.reserves.length>0) {
               var reser=[];
