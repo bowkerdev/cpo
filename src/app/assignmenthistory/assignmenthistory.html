@@ -46,15 +46,19 @@
           <div class="search-form-his pull-left">
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
               <div>Working No:</div>
-              <input ng-model="workingNo" style="height: 30px;" type="text" />
+              <input ng-model="workingNo" style="height: 30px;" type="text" ng-paste="formatPaste($event,'workingNo')" />
             </div>
              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-show="activeTab!=5&&activeTab!=6">
               <div >MOs:</div>
               <input  ng-model="mos" style="height: 30px;" type="text" ng-change="changeFormat('mos')" />
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-show="activeTab!=5&&activeTab!=6">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-show="activeTab!=5&&activeTab!=6&&activeTab!=1">
               <div >PO:</div>
               <input  ng-model="po" style="height: 30px;" type="text" />
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-show="activeTab==1">
+              <div >Origin POs:</div>
+              <input ng-model="originPO" style="height: 30px;" type="text" ng-paste="changeFormat('originPO')" />
             </div>
              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-show="activeTab!=5&&activeTab!=6">
               <div >POs:</div>
@@ -119,7 +123,7 @@
                 <input ng-model="orderDateTo" class="form-control" size="16" type="text" value="" readonly>
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
               </div>
-             </div>     
+             </div>
              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-show="activeTab!=5&&activeTab!=6">
               <div class="batch-date-item">Is Reserve Material:</div>
               <div ng-dropdown-multiselect="" options="reserveList" selected-model="reserves"
