@@ -898,7 +898,7 @@
 							}
 						}
 
-    
+
 						if(gridOptions.data && gridOptions.data.length > 0) {
 							for(var index in gridOptions.data) {
 								var item = gridOptions.data[index];
@@ -1017,7 +1017,7 @@
 				this.assignFactory = function(scope) {
 
 					var _this = this;
-					
+
 					var _this = this;
 					var modalInstance =
 						$uibModal.open({
@@ -1036,14 +1036,14 @@
 						GLOBAL_Http($http, "cpo/api/worktable/assign_factory?", 'GET', param, function(data) {
 							_this.assignedStatus(scope);
 							if(data.status == 0) {
-	
+
 								if(data.tips && data.tips != "0") {
 									modalAlert(CommonService, 2, "Assign Successfully with factory adjustment rules.", null);
 								} else {
 									modalAlert(CommonService, 2, $translate.instant('worktable.SUCCESS_ASSIGN'), null);
-	
+
 								}
-	
+
 								_this.refreshAll(scope);
 								_this.getDailyOrder(scope, 2);
 							} else if(data.status == 9) {
@@ -1216,7 +1216,7 @@
 							}
 						}
 					}
-					
+
 					var param = {
 						"ids": listToString(selectedRows, 'assignResultId'),
 						"workingNos": workingNos,
@@ -2172,11 +2172,11 @@
 						}
 					}, function(data) {
 
-						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+						modalAlert(CommonService, 3, data.message, null);
 					});
 				}
-				
-				
+
+
 
 				this.releaseToBUERP = function(scope) {
 					var param={
@@ -2189,11 +2189,11 @@
 						modalAlert(CommonService, 2, $translate.instant('notifyMsg.RELEASE_SUCCESS'), null);
 					}, function(data) {
 						scope.disableReleaseERPButton=false;
-						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+						modalAlert(CommonService, 3, data.message, null);
 					});
 				}
-				
-				
+
+
 				this.refreshBno = function(scope, entity) {
 
 					if(scope.gridOptions7.data.length == 0) {
@@ -2249,7 +2249,7 @@
 						}
 					}, function(data) {
 						scope.disableRefreshCountryCodeButton = false;
-						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+						modalAlert(CommonService, 3, data.message, null);
 					});
 
 				}
@@ -2283,7 +2283,7 @@
 						_this.refreshAll(scope)
 					})
 				}
-				
+
 				this.checkOrderInfo=function(scope){
 					var _this = this;
 					if(!scope.selectDoc){

@@ -1901,10 +1901,12 @@
 						selectedRows = scope.gridApi2.selection.getSelectedRows();
 					} else if(scope.tabIndex == 1) {
 						selectedRows = scope.gridApi3.selection.getSelectedRows();
-					} else if(scope.tabIndex == 2) {
-						selectedRows = scope.gridApi5.selection.getSelectedRows();
 					} else if(scope.tabIndex == 3) {
+						selectedRows = scope.gridApi5.selection.getSelectedRows();
+					} else if(scope.tabIndex == 4) {
 						selectedRows = scope.gridApi6.selection.getSelectedRows();
+					} else if(scope.tabIndex == 5) {
+						selectedRows = scope.gridApi7.selection.getSelectedRows();
 					}
 					if(selectedRows.length <= 0) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
@@ -2685,12 +2687,14 @@
 						selectedRows = scope.gridApi2.selection.getSelectedRows();
 					} else if(scope.tabIndex == 1) {
 						selectedRows = scope.gridApi3.selection.getSelectedRows();
-					}else if(scope.tabIndex == 2) {
+					} else if(scope.tabIndex == 2) {
 						selectedRows = scope.gridApi4.selection.getSelectedRows();
 					} else if(scope.tabIndex == 3) {
 						selectedRows = scope.gridApi5.selection.getSelectedRows();
 					} else if(scope.tabIndex == 4) {
 						selectedRows = scope.gridApi6.selection.getSelectedRows();
+					} else if(scope.tabIndex == 5) {
+						selectedRows = scope.gridApi7.selection.getSelectedRows();
 					};
 					if(selectedRows.length < 1) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
