@@ -2174,12 +2174,20 @@
       "field": "dnNo"
     },
     {
-      "displayName": "Cancelation Qty",
+      "displayName": "Cancellation Qty",
       "field": "cancelationQty"
     },
     {
-      "displayName": "Cancelation Cost",
+      "displayName": "Add Qty",
+      "field": "addQty"
+    },
+    {
+      "displayName": "Cancellation Cost",
       "field": "cancelationCost"
+    },
+    {
+      "displayName": "Payment Complete Or Not",
+      "field": "paymentCompleteOrNot"
     },
     {
       "displayName": "TC PO",
