@@ -476,8 +476,12 @@
             label : "Half Month"
           } ];
 
+          var day1 = new Date();
+          day1.setTime(day1.getTime()-1*24*60*60*1000);
+          day1=day1.Format("yyyy-MM");
+          
           scope.searchRequest = {
-            fromMonth:null,
+            fromMonth:day1,
             toMonth:null,
             mkfc : null ,
             cus : null ,

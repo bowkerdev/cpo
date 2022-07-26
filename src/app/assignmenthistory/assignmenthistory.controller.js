@@ -471,6 +471,7 @@
 						searchKeys: [],
 						paginationPageSizes: [20, 50, 100, 200, 500],
 						enableColumnMenus: true,
+						enableGridMenu: true,
 						paginationPageSize: 50,
 						rowEditWaitInterval: -1,
 						enableRowSelection: false,

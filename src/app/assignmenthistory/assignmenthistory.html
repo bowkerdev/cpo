@@ -119,7 +119,7 @@
                 <input ng-model="orderDateTo" class="form-control" size="16" type="text" value="" readonly>
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
               </div>
-             </div>     
+             </div>
              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-show="activeTab!=5&&activeTab!=6">
               <div class="batch-date-item">Is Reserve Material:</div>
               <div ng-dropdown-multiselect="" options="reserveList" selected-model="reserves"
@@ -157,11 +157,11 @@
               </button>
 							<button style="float: right" class="btn btn-secondary btn-single" ng-click="importFile(60003)" ng-if="activeTab=='1'">
 								<i class="fa fa-upload"></i>
-								<span translate="">Import</span>
+								<span translate="">Import Split Order</span>
 							</button>
               <button style="float: right;" class="btn btn-secondary btn-single" ng-click="exportFile()">
                 <i class="fa fa-download"></i>
-                <span translate="">Export</span>
+                <span translate="">Export Orders</span>
               </button>
               <button ng-show="activeTab!=5&&activeTab!=4" style="float: right;" class="btn btn-secondary btn-single"
                 ng-click="transferDocumnet()">
@@ -171,7 +171,7 @@
               <button ng-show="activeTab==1" style="float: right;" class="btn btn-secondary btn-single"
                 ng-click="changeManualOrderStatus()">
                 <i class="fa fa-exchange"></i>
-                <span translate="">Change Manual Order Status</span>
+                <span translate="">Change Order Status</span>
               </button>
               <button ng-show="activeTab==1" style="float: right;" class="btn btn-secondary btn-single"
                 ng-click="CloseOrder()">
@@ -182,6 +182,11 @@
                 ng-click="setMaterialReserveTarget()">
                 <i class="fa fa-exchange"></i>
                 <span translate="">Set Material Reserve Target</span>
+              </button>
+              <button ng-show="activeTab==1" style="float: right;background-color: coral !important;" class="btn btn-secondary btn-single"
+                ng-click="importFile(3000)">
+                <i class="fa fa-exchange"></i>
+                <span translate="">Import Order Payment</span>
               </button>
             </div>
 

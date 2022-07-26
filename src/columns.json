@@ -1709,6 +1709,10 @@
       "field": "batchNo"
     },
     {
+      "displayName": "Sales Document Type",
+      "field": "salesDocumentType"
+    },
+    {
       "displayName": "Athlete",
       "field": "athlete"
     },
@@ -2164,6 +2168,18 @@
     {
       "displayName": "Reserve Material To",
       "field": "reserveMaterialTo"
+    },
+    {
+      "displayName": "Payment DN No",
+      "field": "dnNo"
+    },
+    {
+      "displayName": "Cancelation Qty",
+      "field": "cancelationQty"
+    },
+    {
+      "displayName": "Cancelation Cost",
+      "field": "cancelationCost"
     },
     {
       "displayName": "TC PO",
@@ -3902,10 +3918,6 @@
     {
       "field": "planDate",
       "displayName": "PLNDAT"
-    },
-    {
-      "displayName": "PSDD(Factory)",
-      "field": "psddFactory"
     },
     {
       "field": "podd",

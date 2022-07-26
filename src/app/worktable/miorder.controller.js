@@ -1502,8 +1502,9 @@
           }
           param.document_id = (scope.selectDoc.id == null || scope.selectDoc.id == "") ? 0 : scope.selectDoc.id;
           //					exportExcel(param, "cpo/portal/document/export_file?", "_blank");
+          param.MI_ORDER='YES';
           CommonService.showLoadingView("Exporting...");
-          GLOBAL_Http($http, "cpo/api/worktable/miPdf?", 'POST', param, function(data) {
+          GLOBAL_Http($http, "cpo/api/worktable/moPdf?", 'POST', param, function(data) {
             CommonService.hideLoadingView();
             if (data.status != 0) {
               modalAlert(CommonService, 2, data.message, null);

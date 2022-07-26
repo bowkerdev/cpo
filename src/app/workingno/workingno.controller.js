@@ -94,7 +94,7 @@
 
 						var headers = [];
 						var redHeaderTexts = ['Silicon Print', 'HD Print', 'Puff Print'];
-						var greenHeaders = ['Flock Print', 'Digital Print', 'Embroidery Stitch', 'Snap Button'];
+						var greenHeaders = ['Flock Print', 'Digital Print', 'Embroidery Stitch', 'Snap Button','Bonding SMV','Laser Cut SMV','Padding SMV'];
 						var orangeHeaders = ['Bonding Qty', 'Laser Cut Qty'];
 						for (var key in data.output.header) {
 							var content = data.output.header[key];

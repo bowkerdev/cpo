@@ -215,10 +215,33 @@
 						modalAlert(CommonService, 3, "No document", null);
 						return;
 					}
+					var selectedRows;
+					if(scope.tabIndex == 0) {
+						selectedRows = scope.gridApi2.selection.getSelectedRows();
+					} else if(scope.tabIndex == 1) {
+						selectedRows = scope.gridApi3.selection.getSelectedRows();
+					} else if(scope.tabIndex == 3) {
+						selectedRows = scope.gridApi5.selection.getSelectedRows();
+					} else if(scope.tabIndex == 4) {
+						selectedRows = scope.gridApi6.selection.getSelectedRows();
+					} else if(scope.tabIndex == 5) {
+						selectedRows = scope.gridApi7.selection.getSelectedRows();
+					}
+
+          if(!selectedRows || selectedRows.length==0){
+            modalAlert(CommonService, 3, "Please Select At Least Record .", null);
+            return;
+          }
+
+
+          var param={
+            document_id: documentId,
+            "assignResultIds": listToString(selectedRows, 'assignResultId')
+          }
+
+
 					scope.generateBatchNoButtonDisabled = true;
-					GLOBAL_Http($http, "cpo/api/worktable/generate_batch_no?", 'GET', {
-						document_id: documentId
-					}, function(data) {
+					GLOBAL_Http($http, "cpo/api/worktable/generate_batch_no?", 'POST', param, function(data) {
 						scope.generateBatchNoButtonDisabled = false;
 						if(data.status == 0) {
 							modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
@@ -3276,6 +3299,65 @@
 							}
 						});
 				}
+
+        this.exportPDF = function(scope) {
+          var param = {
+            documentType: 70010,
+            pageSize: 1000000,
+            pageNo: 1
+          };
+
+          var selectRows = [];
+          switch (scope.tabIndex) {
+            case 5: {
+              selectRows = scope.gridApi7.selection.getSelectedRows();
+              break
+            }
+          }
+          var missingBNoPOs=[];
+          var missingBatchNoPOs=[];
+          for(var index in selectRows){
+            var obj=selectRows[index];
+            if(obj.bNo.indexOf('Some Size')!=-1){
+                missingBNoPOs.push(obj.po);
+            }
+            if(!obj.batchNo){
+                missingBNoPOs.push(obj.po);
+            }
+          }
+          if(missingBNoPOs.length>0){
+            modalAlert(CommonService, 2, 'Orders ['+missingBNoPOs.toString()+'] missing BNumber information,Please Check First .' , null);
+            return;
+          }
+
+          if(missingBatchNoPOs.length>0){
+            modalAlert(CommonService, 2, 'Orders ['+missingBatchNoPOs.toString()+'] missing Batch No information,Please Check First .' , null);
+            return;
+          }
+
+          if (selectRows && selectRows.length > 0) {
+            param.in_order_master_id = listToString(selectRows, 'orderMasterId');
+          }
+          param.document_id = (scope.selectDoc.id == null || scope.selectDoc.id == "") ? 0 : scope.selectDoc.id;
+          //					exportExcel(param, "cpo/portal/document/export_file?", "_blank");
+          CommonService.showLoadingView("Exporting...");
+          GLOBAL_Http($http, "cpo/api/worktable/moPdf?", 'POST', param, function(data) {
+            CommonService.hideLoadingView();
+            if (data.status != 0) {
+              modalAlert(CommonService, 2, data.message, null);
+            } else {
+              window.open(data.output, "");
+            }
+          }, function(data) {
+            CommonService.hideLoadingView();
+            modalAlert(CommonService, 3, data.message, null);
+          });
+
+
+
+        }
+
+
 			}
 		])
 		.controller('BulkOrderCtrl', ['$scope', 'BulkOrderService',
@@ -3330,6 +3412,9 @@
 				$scope.exportFile = function() {
 					BulkOrderService.exportFile($scope);
 				}
+        $scope.exportPDF = function() {
+          BulkOrderService.exportPDF($scope);
+        }
 				$scope.exportCSV = function(type) {
 					BulkOrderService.exportCSV($scope, type);
 				}
