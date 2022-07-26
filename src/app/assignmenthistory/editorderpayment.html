@@ -1,0 +1,78 @@
+<!-- Modal -->
+<script type="text/ng-template" id="editOrderPaymentModal">
+<div id="editOrderPayment">
+  <div class="modal-header">
+    <span class="pull-left">
+      <h4 class="modal-title blue" translate="Edit Order Payment"></h4>
+    </span>
+    <img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" ng-disabled="Uploading" />
+  </div>
+  <div class="bg-operation-monitor modal-body" ng-type-enter style="margin-top: 20px;">
+    <form class="form-horizontal form-modal" role="form" name="formCountrySiteEntry" novalidate>
+      <div class="form-group">
+        <label class="col-sm-5 control-label bold">
+          <div><span translate="Payment DN No:"></span></div>
+        </label>
+        <input class="input-wrap col-sm-6" ng-model="form.dnNo"  type="text"
+          placeholder="Required"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-5 control-label bold">
+          <div><span translate="Cancelation Qty:"></span></div>
+        </label>
+        <input class="input-wrap col-sm-6" ng-model="form.cancelationQty"  type="number"
+          placeholder="Required"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-5 control-label bold">
+          <div><span translate="Add Qty:"></span></div>
+        </label>
+        <input class="input-wrap col-sm-6" ng-model="form.addQty"  type="number" />
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-5 control-label bold">
+          <div><span translate="Cancelation Cost:"></span></div>
+        </label>
+        <input class="input-wrap col-sm-6" ng-model="form.cancelationCost"  type="number"
+          placeholder="Required"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-5 control-label bold">
+          <div><span translate="Is Payment Complete Or Not:"></span></div>
+        </label>
+        <select ng-model="form.completeOrNot"
+          class="input-wrap col-sm-6" ng-options="item.label for item in completeOrNotList">
+        </select>
+      </div>
+      
+      <div class="modal-footer" style="margin-top: 40px;margin-bottom: 20px;">
+        <button class="btn white" ng-click="cancel()">
+          <i class="icon-cancel"></i><span translate="index.CANCEL"></span>
+        </button>
+        <button class="btn btn-blue" ng-click="save()">
+          <i class="icon-save"></i><span translate="index.SAVE"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  #editOrderPayment .form-group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  #editOrderPayment .form-group .input-wrap {
+    padding: 8px 10px;
+    border: #C6C6C6 1px solid !important
+  }
+</style>
+</script>

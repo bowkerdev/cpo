@@ -152,9 +152,9 @@
 
           </div>
 
-          <div class="pull-left">
+          <div class="">
 
-            <div class="form-group container-flex-start">
+            <div class="form-group container-flex-start" style="flex-wrap: wrap;">
               <button class="btn btn-secondary btn-single" ng-click="searchlist()">
                 <i class="fa-search"></i>&nbsp;&nbsp;
                 <span translate="index.SEARCH"></span>
@@ -189,8 +189,13 @@
               </button>
               <button ng-show="activeTab==1" style="float: right;background-color: coral !important;" class="btn btn-secondary btn-single"
                 ng-click="importFile(3000)">
-                <i class="fa fa-exchange"></i>
+                <i class="fa fa-upload"></i>
                 <span translate="">Import Order Payment</span>
+              </button>
+              <button ng-show="activeTab==1" style="background-color: coral !important;" class="btn btn-secondary btn-single"
+                ng-click="editOrderPayment()">
+                <i class="fa fa-pencil-square-o"></i>
+                <span translate="">Edit Order Payment</span>
               </button>
             </div>
 
@@ -256,6 +261,7 @@
   </div>
 </div>
 <ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<ng-include src="'app/assignmenthistory/editorderpayment.html'"></ng-include>
 
 <script id="assignmentHistoryHoverTemplate" type="text/template">
   <div class="ui-grid-cell-contents" title="TOOLTIP">
@@ -385,5 +391,10 @@
 
   div[ng-controller="assignmentHistoryCtrl"] .col-md-12.container-flex-start+.col-md-12.container-flex-start {
     margin: 15px 0px;
+  }
+  
+  div[ng-controller="assignmentHistoryCtrl"] .page-title .btn {
+    margin-left: 5px;
+    margin-bottom: 5px !important;
   }
 </style>

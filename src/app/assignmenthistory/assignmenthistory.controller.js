@@ -354,6 +354,48 @@
 
 				}
 
+				this.editOrderPayment = function(scope) {
+					var selectedRows = scope.gridApi1.selection.getSelectedRows()
+					if (selectedRows.length !== 1) {
+						modalAlert(CommonService, 1, $translate.instant('history.MSG_SELECT_ONE_ROW'), null);
+						return
+					}
+					var row = selectedRows[0]
+					var editData = {
+						po: row['po'] || '',
+						dnNo: row['dnNo'] || '',
+						cancelationQty: row['cancelationQty'] || '',
+						addQty: row['addQty'] || '',
+						cancelationCost: row['cancelationCost'] || '',
+						completeOrNot: row['paymentCompleteOrNot'] || ''
+					}
+					if (!editData['po']) {
+						modalAlert(CommonService, 1, 'PO is undefined', null);
+						return
+					}
+					var _this = this;
+					var modalInstance = $uibModal.open({
+						templateUrl: 'editOrderPaymentModal',
+						controller: 'EditOrderPaymentController',
+						backdrop: 'static',
+						size: 'md',
+						resolve: {
+							planGroups: function() {
+								return {
+									editData: editData
+								}
+							}
+						}
+					});
+					modalInstance.result.then(function(returnData) {
+						if(returnData) {
+							modalAlert(CommonService, 2, $translate.instant('Edit Successfully!'), null);
+							_this.searchlist(scope);
+						}
+					}, function() {});
+
+				}
+
 				this.exportFile = function(scope) {
 					var tabValue = "";
 					var documentType = '';
@@ -1319,6 +1361,9 @@
 				}
 				$scope.changeFormat = function(v) {
 					$scope[v]=$scope[v].replace(/[ ]/g,',');
+				}
+				$scope.editOrderPayment = function () {
+					assignmentHistoryService.editOrderPayment($scope)
 				}
         $scope.formatPaste = function(e,field) {
           var clipboardData = e.originalEvent.clipboardData.getData('text/plain').replace(/\n/g,',')

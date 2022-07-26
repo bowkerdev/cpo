@@ -525,7 +525,9 @@
     "EMBOSSING":"Embossing Qty"
   },
   "history":{
-    "ORDER_TIME":"Order Time"
+    "ORDER_TIME":"Order Time",
+    "MSG_SELECT_ONE_ROW":"Please select one row to edit Order Payment!",
+    "MSG_REQUIRED_NO_FILLED":"There are required fields not filled"
   },
   "factory": {
     "FACTORY_DETAIL": "Factory Detail",
