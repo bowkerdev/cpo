@@ -8,7 +8,9 @@
 					var _this = this;
 					scope.activeTab = Tab;
 					scope.orderType = '';
-					if(Tab != '5' && Tab != '6') {
+					if(Tab == 1) {
+						_this.getOrderTypeList(scope,true);
+					}else if(Tab != '5' && Tab != '6') {
 						_this.getOrderTypeList(scope);
 					} else {
 						_this.getBatchDate(scope);
@@ -42,7 +44,7 @@
 					}
 					return page;
 				}
-				this.getBatchDate = function(scope) {
+				this.getBatchDate = function(scope, noNeedSearch) {
 					var _this = this;
 					var orderType = null;
 					switch(scope.activeTab) {
@@ -89,13 +91,14 @@
 								documentId: null,
 								label: "All"
 							}].concat(result);
-							if(scope.batchDates.length > 1) {
+							if(scope.batchDates.length > 1 && scope.activeTab!="1") {
 								scope.batchDate = scope.batchDates[1];
 							} else {
 								scope.batchDate = scope.batchDates[0];
 							}
-							_this.searchlist(scope);
-
+              if(!noNeedSearch){
+                _this.searchlist(scope);
+              }
 						} else {
 							scope.batchDates = [{
 								documentId: null,
@@ -428,7 +431,7 @@
 				}
 
 
-				this.getOrderTypeList = function(scope) {
+				this.getOrderTypeList = function(scope, noNeedSearch) {
 					var _this = this;
 					var param = {
 						in_code: 'ASSIGNMENTHISTORYORDERTYPE-' + scope.activeTab+',FACTORYLIST'
@@ -441,8 +444,12 @@
 							};
 							data["ASSIGNMENTHISTORYORDERTYPE-" + scope.activeTab].unshift(orderType);
 							scope.orderTypeList = data["ASSIGNMENTHISTORYORDERTYPE-" + scope.activeTab];
-							scope.orderType = scope.orderTypeList[1];
-							_this.getBatchDate(scope);
+              if (scope.activeTab=="1") {
+                scope.orderType = orderType;
+              } else{
+                scope.orderType = scope.orderTypeList[1];
+              }
+							_this.getBatchDate(scope,noNeedSearch);
 						}
             scope.factoryList=data['FACTORYLIST'];
             for (var i = 0; i < scope.factoryList.length; i++) {
@@ -617,7 +624,7 @@
 						selectedRows = scope.gridApi3.selection.getSelectedRows();
 					} else if(scope.activeTab == 4) {
 						selectedRows = scope.gridApi4.selection.getSelectedRows();
-					};
+					}
 					if(selectedRows.length < 1) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
 						return;
@@ -815,6 +822,9 @@
 						if(scope.pos) {
 							param['in_po'] = scope.pos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
 						}
+            if(scope.originPO) {
+            	param['in_original_po'] = scope.originPO.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+            }
 						if(scope.reserves&&scope.reserves.length>0) {
               var reser=[];
               for (var i = 0; i < scope.reserves.length; i++) {
@@ -1086,7 +1096,7 @@
 					scope.activeTab = 5;
 
 					scope.$watch('orderType', function() {
-						if(scope.orderType == "") {
+						if(scope.orderType == "" || (scope.activeTab == 1 && scope.orderType.value == "")) {
 							return;
 						}
 						_this.getBatchDate(scope);
@@ -1100,6 +1110,7 @@
 					var selectedRows = null; //scope.gridApi5.selection.getSelectedRows();
 					var ids = new Array();
 					var assignResultIds = new Array();
+					var idFactoryList = new Array();
 					if(scope.activeTab == 1) {
 						selectedRows = scope.gridApi1.selection.getSelectedRows();
 					}
@@ -1107,11 +1118,11 @@
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
 						return;
 					}
-
 					for(var index in selectedRows) {
 						var row = selectedRows[index];
 						ids.push(row.orderMasterId);
 						assignResultIds.push(row.assignResultId);
+						idFactoryList.push({"id":row.orderMasterId,"confirmFactory":row.confirmFactory});
 					}
 
 					var _this = this;
@@ -1152,7 +1163,8 @@
 							var param = {
 								ids: ids.join(","),
 								assignResultIds: assignResultIds.join(","),
-								orderStatus: manualOrderStatus
+								orderStatus: manualOrderStatus,
+								idFactoryList: JSON.stringify(idFactoryList)
 							}
 							GLOBAL_Http($http, "cpo/api/worktable/change_manual_order_status", 'POST', param, function(data) {
 								if(data.status == 0) {
@@ -1271,8 +1283,8 @@
 
 			}
 		])
-		.controller('assignmentHistoryCtrl', ['$scope', 'assignmentHistoryService',
-			function($scope, assignmentHistoryService) {
+		.controller('assignmentHistoryCtrl', ['$scope', 'assignmentHistoryService','$timeout',
+			function($scope, assignmentHistoryService, $timeout) {
 				$scope.selectTab = function(Tab) {
 					if(Tab == 5 || Tab == 4) {
 						$("#orderTypeSelect").hide();
@@ -1308,6 +1320,12 @@
 				$scope.changeFormat = function(v) {
 					$scope[v]=$scope[v].replace(/[ ]/g,',');
 				}
+        $scope.formatPaste = function(e,field) {
+          var clipboardData = e.originalEvent.clipboardData.getData('text/plain').replace(/\n/g,',')
+          $timeout(function() {
+            $scope[field] = clipboardData;
+          }, 200);
+        }
 				assignmentHistoryService.init($scope);
 			}
 		])
