@@ -1,0 +1,148 @@
+<!-- Modal -->
+<script type="text/ng-template" id="editABGradeInfoModal">
+<div id="editABGradeInfo">
+  <div class="modal-header">
+    <span class="pull-left">
+      <h4 class="modal-title blue" translate="Edit A/B Grade Info"></h4>
+    </span>
+    <img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" ng-disabled="Uploading" />
+  </div>
+  <div class="bg-operation-monitor modal-body" ng-type-enter>
+    <div style="margin-bottom: 10px;">
+      <button type="button" class="btn btn-secondary btn-single" 
+        ng-click="addInfo()"
+      > 
+        <i class="fa fa-plus"></i>
+        <span translate="index.ADD"></span>
+      </button>
+
+      <div class="tip-msg">
+        <i class="fa fa-check" aria-hidden="true"></i> means that it can be submitted,
+        <i class="fa fa-close" aria-hidden="true"></i> means not.
+      </div>
+    </div>
+    <form class="form-horizontal form-modal" role="form" name="formCountrySiteEntry" novalidate>
+      <table class="edit-ab-grade-info-table">
+        <thead id="editABGradeInfoTableHead"
+          ng-init="calcTableHeadWidth()"
+        >
+          <tr>
+            <th class="index-col">Index</th>
+            <th>PO</th>
+            <th>Manufactoring Size</th>
+            <th>Qty</th>
+            <th class="operation-col">Operation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in infoList">
+            <td class="index-col">
+              {{ $index + 1 }}
+              <i class="fa" 
+                ng-class="{'fa-check': genTrStatus($index), 'fa-close': !genTrStatus($index)}"
+                aria-hidden="true"
+              ></i>
+            </td>
+            <td>
+              <input class="input-wrap col-sm-6" ng-model="row['referencePo']"  type="text"
+                placeholder="Required"
+              />
+            </td>
+            <td>
+              <input class="input-wrap col-sm-6" ng-model="row['referenceSize']"  type="text"
+                placeholder="Required"
+              />
+            </td>
+            <td>
+              <input class="input-wrap col-sm-6" ng-model="row['referenceQty']"  type="number"
+                placeholder="Required"
+              />
+            </td>
+            <td class="operation-col">
+              <button type="button" class="btn btn-xs"
+                style="margin-bottom: 0;background-color: #f3562c;color: #fff;"
+                ng-click="removeInfo($index)"
+              >
+                <span translate="index.DELETE"></span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="modal-footer" style="margin-top: 40px;margin-bottom: 20px;">
+        <button class="btn white" ng-click="cancel()">
+          <i class="icon-cancel"></i><span translate="index.CANCEL"></span>
+        </button>
+        <button class="btn btn-blue" ng-click="save()">
+          <i class="icon-save"></i><span translate="index.SAVE"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  #editABGradeInfo .tip-msg {
+    display: inline-block;
+  }
+  .edit-ab-grade-info-table {
+    width: 100%;
+  }
+  .edit-ab-grade-info-table tbody{
+    display: block;
+    height: 40vh;
+    overflow-y: scroll;
+  }
+  .edit-ab-grade-info-table .index-col {
+    width: 80px;
+    position: relative;
+  }
+  .edit-ab-grade-info-table .index-col .fa {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  #editABGradeInfo .tip-msg .fa.fa-check,
+  .edit-ab-grade-info-table .index-col .fa.fa-check {
+    color: green;
+  }
+  #editABGradeInfo .tip-msg .fa.fa-close, 
+  .edit-ab-grade-info-table .index-col .fa.fa-close {
+    color: red;
+  }
+  .edit-ab-grade-info-table .operation-col {
+    width: 120px;
+  }
+  .edit-ab-grade-info-table thead {
+    width: calc(100% - 17px);
+  }
+  .edit-ab-grade-info-table tbody tr {
+    width: 100%;
+  }
+  .edit-ab-grade-info-table thead,
+  .edit-ab-grade-info-table tbody tr {
+    display: table;
+    table-layout: fixed;
+  }
+
+  .edit-ab-grade-info-table th,
+  .edit-ab-grade-info-table td {
+    border: 1px solid #eee;
+  }
+  .edit-ab-grade-info-table th {
+    padding: 8px 6px;
+    background-color: #5b9bd5;
+    color: #fff;
+  }
+  .edit-ab-grade-info-table td {
+    padding: 4px 6px;
+  }
+  .edit-ab-grade-info-table input.input-wrap {
+    width: 100%;
+    padding: 4px 4px;
+    border: #C6C6C6 1px solid !important;
+    box-sizing: border-box;
+  }
+</style>
+</script>

@@ -793,3 +793,31 @@ function isIE10_11() {
 	}
 	return false;
 }
+
+var scroll_bar_width;
+
+function calcScrollBarWidth () {
+  if (scroll_bar_width !== undefined) return scroll_bar_width;
+
+  var outer = document.createElement('div');
+  outer.style.height = '100%';
+  outer.style.overflow = 'auto';
+  outer.style.visibility = 'hidden';
+  outer.style.width = '100px';
+  outer.style.position = 'absolute';
+  outer.style.top = '-9999px';
+  document.body.appendChild(outer);
+
+  var widthNoScroll = outer.offsetWidth;
+  outer.style.overflow = 'scroll';
+
+  var inner = document.createElement('div');
+  inner.style.width = '100%';
+  outer.appendChild(inner);
+
+  var widthWithScroll = inner.offsetWidth;
+  outer.parentNode.removeChild(outer);
+  scroll_bar_width =  widthNoScroll - widthWithScroll;
+
+  return scroll_bar_width;
+}

@@ -396,6 +396,39 @@
 
 				}
 
+				this.editABGradeInfo = function(scope) {
+					var selectedRows = scope.gridApi1.selection.getSelectedRows()
+					if (selectedRows.length !== 1) {
+						modalAlert(CommonService, 1, $translate.instant('history.MSG_SELECT_ONE_ROW'), null);
+						return
+					}
+					var po = selectedRows[0]['po']
+					var originalPo = selectedRows[0]['originalPo']
+					if (!originalPo) {
+						modalAlert(CommonService, 1, 'Original Po is undefined', null);
+						return
+					}
+					var _this = this;
+					var modalInstance = $uibModal.open({
+						templateUrl: 'editABGradeInfoModal',
+						controller: 'EditABGradeInfoController',
+						backdrop: 'static',
+						size: 'lg',
+						resolve: {
+							planGroups: function() {
+								return { po: po, originalPo:originalPo }
+							}
+						}
+					});
+					modalInstance.result.then(function(returnData) {
+						if(returnData) {
+							modalAlert(CommonService, 2, $translate.instant('Edit Successfully!'), null);
+							_this.searchlist(scope);
+						}
+					}, function() {});
+
+				}
+
 				this.exportFile = function(scope) {
 					var tabValue = "";
 					var documentType = '';
@@ -1364,6 +1397,9 @@
 				}
 				$scope.editOrderPayment = function () {
 					assignmentHistoryService.editOrderPayment($scope)
+				}
+				$scope.editABGradeInfo = function () {
+					assignmentHistoryService.editABGradeInfo($scope)
 				}
         $scope.formatPaste = function(e,field) {
           var clipboardData = e.originalEvent.clipboardData.getData('text/plain').replace(/\n/g,',')
