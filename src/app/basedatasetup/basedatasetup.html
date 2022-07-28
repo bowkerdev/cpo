@@ -36,9 +36,10 @@
           <loading show="gridOptions1.showLoading"></loading>
         </div>
 
-        <ng-include src="'app/seasondaterangesetting/seasondaterangesetting.html'" ng-if="tabIndex==2"></ng-include>
-        <ng-include src="'app/basedatasetup/planGroup.html'" ng-if="tabIndex==3"></ng-include>
-        <ng-include src="'app/basedatasetup/ediColumnSetting.html'" ng-if="tabIndex==4"></ng-include>
+        <ng-include src="'app/basedatasetup/bNumBatchMaster.html'" ng-if="tabIndex==2"></ng-include>
+        <ng-include src="'app/seasondaterangesetting/seasondaterangesetting.html'" ng-if="tabIndex==3"></ng-include>
+        <ng-include src="'app/basedatasetup/planGroup.html'" ng-if="tabIndex==4"></ng-include>
+        <ng-include src="'app/basedatasetup/ediColumnSetting.html'" ng-if="tabIndex==5"></ng-include>
         <ul class="list-group" ng-style="getLeftSpaceHeight()" hight-auto-fill-bottom ng-show="tabIndex==0">
         	
           <li class="list-group-item" ng-click="changeLC0190Date()">LC0190 New Order Date Setting :&nbsp;<label style="color: red;">{{LC0190Date}}</label>  </li>

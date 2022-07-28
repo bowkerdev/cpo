@@ -1,0 +1,46 @@
+<div id="bNumBatchMasterPane" ng-controller="bNumBatchMasterCtrl">
+  <div class="search-form">
+    <div class="search-item col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <label>B No.:</label>
+      <input ng-model="bNo" type="text" ng-paste="formatPaste($event,'bNo')" />
+    </div>
+    <button class="btn btn-secondary btn-single" ng-click="fetchInfo(page, true)">
+      <i class="fa-search"></i>
+      <span translate="index.SEARCH"></span>
+    </button>
+    <button class="btn btn-secondary btn-single" ng-click="exportFile()">
+      <i class="fa fa-download"></i>
+      <span translate="index.EXPORT"></span>
+    </button>
+  </div>
+  <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize
+    hight-auto-fill-bottom>
+    <div class="well grid-loading" style="margin-top: 30px" ng-show="gridOptions.showLoading">
+      <i class="fa fa-spin fa-spinner"></i>
+      <strong translate="vendorKpi.LOADING"></strong>
+    </div>
+  </div>
+
+  <style>
+    #bNumBatchMasterPane .search-form {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    #bNumBatchMasterPane .search-item {
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
+      float: none !important;
+    }
+    #bNumBatchMasterPane .search-item label {
+      margin-right: 10px;
+    }
+    #bNumBatchMasterPane .search-item input {
+      height: 30px;
+      width: 50%;
+      flex: auto;
+    }
+  </style>
+
+</div>

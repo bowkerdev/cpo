@@ -5224,6 +5224,16 @@
       "field": "planGroup"
     }
   ],
+  "bNumBatchMaster": [
+    {
+      "displayName": "B No.",
+      "field": "bNo"
+    },
+    {
+      "displayName": "Batch",
+      "field": "batch"
+    }
+  ],
   "productUpdate": [
     {
       "displayName": "Product Name",
