@@ -505,6 +505,53 @@
 					//  exportExcel(param, "cpo/portal/document/export_file?", "_blank");
 				}
 
+        this.exportPDF = function (scope) {
+          var param = {
+            documentType: 70010,
+            pageSize: 1000000,
+            pageNo: 1
+          }
+
+          var selectRows = scope.gridApi1.selection.getSelectedRows()
+          var missingBNoPOs = []
+          var missingBatchNoPOs = []
+          selectRows.forEach(function(obj){
+            if (obj['bNo'].indexOf('Some Size') != -1) {
+              missingBNoPOs.push(obj.po);
+            }
+            if (!obj['batchNo']) {
+              missingBNoPOs.push(obj.po);
+            }
+          })
+
+          if (missingBNoPOs.length > 0) {
+            modalAlert(CommonService, 2, 'Orders [' + missingBNoPOs.toString() + '] missing BNumber information,Please Check First .', null);
+            return;
+          }
+
+          if (missingBatchNoPOs.length > 0) {
+            modalAlert(CommonService, 2, 'Orders [' + missingBatchNoPOs.toString() + '] missing Batch No information,Please Check First .', null);
+            return;
+          }
+
+          if (selectRows && selectRows.length > 0) {
+            param['in_order_master_id'] = listToString(selectRows, 'orderMasterId');
+          }
+          CommonService.showLoadingView("Exporting...");
+          GLOBAL_Http($http, "cpo/api/worktable/moPdf?", 'POST', param, function (data) {
+            CommonService.hideLoadingView();
+            if (data.status != 0) {
+              modalAlert(CommonService, 2, data.message || 'Exception!', null);
+            } else {
+              window.open(data.output, "");
+            }
+          }, function (data) {
+            CommonService.hideLoadingView();
+            modalAlert(CommonService, 3, data.message, null);
+          });
+
+        }
+
 
 				this.getOrderTypeList = function(scope, noNeedSearch) {
 					var _this = this;
@@ -1401,6 +1448,10 @@
 				$scope.editABGradeInfo = function () {
 					assignmentHistoryService.editABGradeInfo($scope)
 				}
+        $scope.exportPDF = function () {
+          assignmentHistoryService.exportPDF($scope)
+        }
+        
         $scope.formatPaste = function(e,field) {
           var clipboardData = e.originalEvent.clipboardData.getData('text/plain').replace(/\n/g,',')
           $timeout(function() {
