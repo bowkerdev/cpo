@@ -162,7 +162,7 @@
 					}
 
 					if(scope.selectDoc && scope.selectDoc.id) {
-						this.refreshAll(scope);
+						this.refreshAll(scope,'YES');
 					} else {
 						this.clearAll(scope);
 					}
@@ -245,14 +245,14 @@
 						scope.generateBatchNoButtonDisabled = false;
 						if(data.status == 0) {
 							modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
-							__this.refreshAll(scope);
+							__this.refreshAll(scope,'YES');
 						} else {
 							modalAlert(CommonService, 2, data.message, null);
 						}
 					}, function(data) {
 						scope.generateBatchNoButtonDisabled = false;
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
-					});
+					});ss
 
 				}
 				this.getSelectedData = function(scope) {
@@ -809,7 +809,7 @@
 				this.deleteDom = function(scope, entity) {
 					if(!entity.documentId) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.NO_ORDER_FILE'), null);
-						_this.refreshAll(scope);
+						_this.refreshAll(scope,'YES');
 						return;
 					}
 					var _this = this;
@@ -832,7 +832,7 @@
 							if(data.status == 0) {
 								modalAlert(CommonService, 2, $translate.instant('notifyMsg.DELETE_SUCCESS'), null);
 								_this.getDailyOrder(scope, 3);
-								_this.refreshAll(scope);
+								_this.refreshAll(scope,'YES');
 							} else {
 								modalAlert(CommonService, 2, data.message, null);
 							}
@@ -1173,7 +1173,7 @@
 								}
 
 								//	modalAlert(CommonService, 2, $translate.instant('worktable.SUCCESS_ASSIGN'), null);
-								_this.refreshAll(scope);
+								_this.refreshAll(scope,'YES');
 								_this.getDailyOrder(scope, 3);
 							} else {
 								modalAlert(CommonService, 3, data.message, null);
@@ -1595,7 +1595,7 @@
 					GLOBAL_Http($http, "cpo/api/worktable/adjust_assign", 'POST', param, function(data) {
 						if(data.status == 0) {
 							modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
-							_this.refreshAll(scope);
+							_this.refreshAll(scope,'YES');
 						} else {
 							modalAlert(CommonService, 2, data.message, null);
 						}
@@ -1947,7 +1947,7 @@
 						GLOBAL_Http($http, "cpo/api/worktable/adjust_assign", 'POST', param, function(data) {
 							if(data.status == 0) {
 								modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
-								_this.refreshAll(scope);
+								_this.refreshAll(scope,'YES');
 							} else {
 								modalAlert(CommonService, 2, data.message, null);
 							}
@@ -2438,7 +2438,7 @@
 					_this.assigningStatus(scope);
 					workTableCommonService.reAssignAll(scope, param, function(scope) {
 						_this.assignedStatus(scope);
-						_this.refreshAll(scope)
+						_this.refreshAll(scope,'YES')
 					})
 				}
 				this.refreshCountryCode = function(scope, entity) {
@@ -2786,7 +2786,7 @@
 								GLOBAL_Http($http, "cpo/api/worktable/set_season", 'POST', param, function(data) {
 									if(data.status == 0) {
 										modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
-										_this.refreshAll(scope);
+										_this.refreshAll(scope,'YES');
 									} else {
 										modalAlert(CommonService, 2, data.message, null);
 									}
@@ -2903,7 +2903,7 @@
 								GLOBAL_Http($http, "cpo/api/worktable/set_unit", 'POST', param, function(data) {
 									if(data.status == 0) {
 										modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
-										_this.refreshAll(scope);
+										_this.refreshAll(scope,'YES');
 									} else {
 										modalAlert(CommonService, 2, data.message, null);
 									}
@@ -3114,7 +3114,7 @@
 							} else {
 								modalAlert(CommonService, 2, $translate.instant('notifyMsg.REFRESH_DATA_SUCCESS'), null);
 							}
-							_this.refreshAll(scope);
+							_this.refreshAll(scope,'YES');
 						} else {
 							modalAlert(CommonService, 2, data.message, null);
 						}
