@@ -511,7 +511,7 @@
 
 								} else if(i == 3) {
 									searchKey3 = newsearchKey;
-									_this.getAssignFactoryResult(scope, '3', '2', scope.page2, true);
+									_this.getAssignFactoryResult(scope, '3', '2', scope.page3, true);
 								} else if(i == 5) {
 									searchKey5 = newsearchKey;
 									_this.getTransitOrder(scope, scope.page4, '4', true);
@@ -555,7 +555,6 @@
 							gridApi.pagination.on.paginationChanged(scope, function(newPage, pageSize) {
 								scope['page' + i].curPage = newPage;
 								scope['page' + i].pageSize = pageSize;
-								console.log(i)
 								//  gggg
 								switch(i) {
 									case 2:
