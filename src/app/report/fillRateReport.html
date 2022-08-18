@@ -96,6 +96,10 @@
             <span class="input-group-addon">By:&nbsp</span>
             <select  ng-model="searchRequest.queryType"  ng-options="queryType.label for queryType in queryTypes" style="height: 32px;min-width: 100px;padding-left: 10px"  ></select>
           </div>
+          <div class="input-group" style=""  >
+            <span class="input-group-addon">Capacity Type:&nbsp</span>
+            <select  ng-model="searchRequest.capt" ng-options="capt.label for capt in capts" style="height: 32px;min-width: 100px;padding-left: 10px"  ></select>
+          </div>
           <div class="input-group" style=""  ng-if=" searchRequest.queryType.id=='CUS_LC0190'||searchRequest.queryType.id=='CUS'||searchRequest.queryType.id=='MKT_CUS_LC0190'">
             <span class="input-group-addon">Customer Forecast:&nbsp</span>
             <select  ng-model="searchRequest.cus" ng-options="doc.label for doc in cuss" style="height: 32px;min-width: 100px;padding-left: 10px"  ></select>
