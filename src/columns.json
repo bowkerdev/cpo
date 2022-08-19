@@ -2190,6 +2190,14 @@
       "field": "paymentCompleteOrNot"
     },
     {
+      "displayName": "Confirm Shortage",
+      "field": "shortageQty"
+    },
+    {
+      "displayName": "Shortage Reason",
+      "field": "shortageReason"
+    },
+    {
       "displayName": "TC PO",
       "field": "po"
     },
