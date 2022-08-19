@@ -1309,7 +1309,7 @@
           if ("Transit Pending" == type) {
             param.releaseTransit="YES";
           } else if ("Transit Order" == type) {
-            param.releaseTransit="YES";
+            param.transitOrderRelease="YES";
           }
 
 
@@ -1490,8 +1490,8 @@
           if(missingBNoPOs.length>0){
             modalAlert(CommonService, 2, 'Orders ['+missingBNoPOs.toString()+'] missing BNumber information,Please Check First .' , null);
             return;
-          } 
-          
+          }
+
           if(missingBatchNoPOs.length>0){
             modalAlert(CommonService, 2, 'Orders ['+missingBatchNoPOs.toString()+'] missing Batch No information,Please Check First .' , null);
             return;
@@ -1788,7 +1788,11 @@
         }
         this.generateBatchNo = function(scope) {
           var _this = this;
-
+          var selectedRows = scope.gridApi2.selection.getSelectedRows();
+          if (selectedRows.length <= 0) {
+            modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
+            return;
+          }
           var documentId = "";
 
           if (scope.newOrderData.length > 0) {
@@ -1800,10 +1804,14 @@
             modalAlert(CommonService, 3, "No document", null);
             return;
           }
+
+          var param={
+            document_id: documentId,
+            "assignResultIds": listToString(selectedRows, 'assignResultId')
+          }
+
           scope.generateBatchNoButtonDisabled = true;
-          GLOBAL_Http($http, "cpo/api/worktable/generate_batch_no?", 'GET', {
-            document_id: documentId
-          }, function(data) {
+          GLOBAL_Http($http, "cpo/api/worktable/generate_batch_no?", 'POST', param, function(data) {
             scope.generateBatchNoButtonDisabled = false;
             if (data.status == 0) {
               modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);

@@ -197,6 +197,11 @@
                 <i class="fa fa-pencil-square-o"></i>
                 <span translate="">Edit Order Payment</span>
               </button>
+              <button ng-show="activeTab==1" style="float: right;background-color: coral !important;" class="btn btn-secondary btn-single"
+                ng-click="importFile(3001)">
+                <i class="fa fa-upload"></i>
+                <span translate="">Import Shipment Shortage</span>
+              </button>
               <button ng-show="activeTab==1" style="background-color: coral !important;" class="btn btn-secondary btn-single"
                 ng-click="editABGradeInfo()">
                 <i class="fa fa-pencil-square-o"></i>
@@ -402,7 +407,7 @@
   div[ng-controller="assignmentHistoryCtrl"] .col-md-12.container-flex-start+.col-md-12.container-flex-start {
     margin: 15px 0px;
   }
-  
+
   div[ng-controller="assignmentHistoryCtrl"] .page-title .btn {
     margin-left: 5px;
     margin-bottom: 5px !important;

@@ -162,7 +162,7 @@
 					}
 
 					if(scope.selectDoc && scope.selectDoc.id) {
-						this.refreshAll(scope,'YES');
+						this.refreshAll(scope);
 					} else {
 						this.clearAll(scope);
 					}
