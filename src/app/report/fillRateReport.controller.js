@@ -108,6 +108,7 @@
           if(in_month){
             param.in_month = in_month;
           }
+          param.capt = scope.searchRequest.capt.id;
           CommonService.showLoadingView("Exporting...");
           GLOBAL_Http($http , "cpo/portal/document/check_record_count?" , 'GET' , param , function ( data ) {
             CommonService.hideLoadingView();
@@ -475,7 +476,6 @@
             id : "YES" ,
             label : "Half Month"
           } ];
-
           var day1 = new Date();
           day1.setTime(day1.getTime()-1*24*60*60*1000);
           day1=day1.Format("yyyy-MM");
@@ -486,13 +486,13 @@
             mkfc : null ,
             cus : null ,
             lco190 : null ,
-
+            capt: null,
             deduction : true ,
             monthType : scope.monthTypes[ 0 ] ,
             queryType : scope.queryTypes[ 0 ]
           };
           var param = {
-            in_code : "CAPACITYMKTFC,CAPACITYCUSTOMERPO,CAPACITYCUSTOMERFORECAST"
+            in_code : "CAPACITYMKTFC,CAPACITYCUSTOMERPO,CAPACITYCUSTOMERFORECAST,CAPACITY_TYPE"
           }
           GLOBAL_Http($http , "cpo/api/sys/admindict/translate_code?" , 'GET' , param , function ( data ) {
             if ( data.CAPACITYMKTFC ) {
@@ -532,6 +532,17 @@
 
             } else {
               scope.cuss = [];
+            }
+
+            if ( data.CAPACITY_TYPE ) {
+              scope.capts = data.CAPACITY_TYPE;
+              for ( var i = 0 ; i < scope.capts.length ; i++ ) {
+                scope.capts[ i ].id = scope.capts[ i ].value;
+                scope.capts[ i ].label = scope.capts[ i ].label;
+              }
+              scope.searchRequest.capt = scope.capts[ 0 ] ? scope.capts[ 0 ] : null;
+            } else {
+              scope.capts = [];
             }
             _this.getLoading(scope , scope.type , scope.fillType);
           });
@@ -690,7 +701,7 @@
           param.isHalfMonth = scope.searchRequest.monthType.id;
           scope.gridOptions1.showLoading = true;
           param.queryType = scope.searchRequest.queryType.id;
-
+          param.capt = scope.searchRequest.capt.id;
           var in_month  = getMonths(scope.searchRequest.fromMonth,scope.searchRequest.toMonth);
           if(in_month){
             param.in_month = in_month;
@@ -757,6 +768,7 @@
             param.cusfcDocId = scope.searchRequest.cus.id;
             param.cuspoDocId = scope.searchRequest.lco190.id;
             param.mktfcDocId = scope.searchRequest.mkfc.id;
+            
           }
          else if ( scope.searchRequest.queryType.id == "CUS_LC0190" ) {
             if ( !scope.searchRequest.cus || !scope.searchRequest.cus.id ) {
@@ -788,6 +800,7 @@
           param.isHalfMonth = scope.searchRequest.monthType.id;
           scope.gridOptions1.showLoading = true;
           param.queryType = scope.searchRequest.queryType.id;
+          param.capt = scope.searchRequest.capt.id;
           var in_month  = getMonths(scope.searchRequest.fromMonth,scope.searchRequest.toMonth);
           if(in_month){
             param.in_month = in_month;
