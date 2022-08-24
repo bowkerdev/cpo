@@ -1313,6 +1313,7 @@
 					var ids = new Array();
 					var assignResultIds = new Array();
 					var POs = new Array();
+					var idFactoryList = new Array();
 					if(scope.activeTab == 1) {
 						selectedRows = scope.gridApi1.selection.getSelectedRows();
 					}
@@ -1325,6 +1326,7 @@
 						var row = selectedRows[index];
 						ids.push(row.orderMasterId);
 						assignResultIds.push(row.assignResultId);
+						idFactoryList.push({"id":row.orderMasterId,"confirmFactory":row.confirmFactory});
 						POs.push("<br/>"+row.po);
 					}
 					var _this = this;
@@ -1332,7 +1334,8 @@
 						var param = {
 							ids: ids.join(","),
 							assignResultIds: assignResultIds.join(","),
-							orderStatus: 'CLOSE'
+							orderStatus: 'CLOSE',
+							idFactoryList:  JSON.stringify(idFactoryList)
 						}
 						GLOBAL_Http($http, "cpo/api/worktable/change_manual_order_status", 'POST', param, function(data) {
 							if(data.status == 0) {
