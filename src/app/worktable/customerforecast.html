@@ -150,6 +150,11 @@
             <span translate="sltforecast.CONFIRM_BY_BCA"></span>
           </button>
 				</div>
+				<div class="form-group" ng-if="tabIndex=='0'||tabIndex=='1' || tabIndex=='2'|| tabIndex=='4' || tabIndex=='5' || tabIndex=='6'">
+					<button class="btn-bowker-theme-o" ng-click="adjustFactoryAssignment2('6','PGA')">
+            <span translate="sltforecast.CONFIRM_BY_PGA"></span>
+          </button>
+				</div>
 				<button ng-if="tabIndex!='4'" style="" class="btn btn-secondary btn-single" ng-click="exportFile()">
           <i class="fa fa-download"></i>
           <span translate="">Export</span>
