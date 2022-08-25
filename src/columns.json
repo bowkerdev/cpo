@@ -2198,6 +2198,10 @@
       "field": "shortageReason"
     },
     {
+      "displayName": "Reference Info",
+      "field": "reference_info"
+    },
+    {
       "displayName": "TC PO",
       "field": "po"
     },

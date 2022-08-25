@@ -1310,6 +1310,7 @@
             param.releaseTransit="YES";
           } else if ("Transit Order" == type) {
             param.transitOrderRelease="YES";
+            param.status='5';
           }
 
 
