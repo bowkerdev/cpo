@@ -1444,7 +1444,7 @@
 					assignmentHistoryService.setMaterialReserveTarget($scope);
 				}
 				$scope.changeFormat = function(v) {
-					$scope[v]=$scope[v].replace(/[ ]/g,',');
+					$scope[v]=$scope[v].replace(/[ ]/g,',').replace(/,+/g,',').replace(/\s+/g,'').replace(/(^,*)|(,*$)/g, "");
 				}
 				$scope.editOrderPayment = function () {
 					assignmentHistoryService.editOrderPayment($scope)
