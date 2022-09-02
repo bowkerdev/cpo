@@ -1111,6 +1111,7 @@
 													if(xx) {
 														item["OQTY_" + (index2 + 1)] = xx.sizeQuantity ? xx.sizeQuantity : "";
 														item["TS_" + (index2 + 1)] = xx.manufacturingSize ? xx.manufacturingSize : "";
+														item["ORGQTY_" + (index2 + 1)] = xx.orgSizeQuantity ? xx.orgSizeQuantity : "";
 													}
 												}
 											}

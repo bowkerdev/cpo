@@ -2198,8 +2198,12 @@
       "field": "shortageReason"
     },
     {
-      "displayName": "Reference Info",
-      "field": "reference_info"
+      "displayName": "Shortage Remark",
+      "field": "shortageRemark"
+    },
+    {
+      "displayName": "Reference Order(PO-Size-Qty)",
+      "field": "referenceInfo"
     },
     {
       "displayName": "TC PO",

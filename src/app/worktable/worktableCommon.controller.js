@@ -86,7 +86,7 @@
 					}
 
 				}
-				this.bulkorderDynamicColumns = function(number, gridOption) {
+				this.bulkorderDynamicColumns = function(number, gridOption,showOrgQty) {
 					var hoverTemplate = document.getElementById("hoverTemplate").innerText;
 					var hoverBigNumberTemplate = document.getElementById("hoverBigNumberTemplate").innerText;
 					for(var i = 1; i <= number; i++) {
@@ -118,7 +118,7 @@
 						}
 						gridOption.columnDefs.push(tsItem);
 
-						var qutyItem = {
+						var qtyItem = {
 							name: "OQTY_" + i,
 							displayName: "Size" + i + " Qty",
 							field: "OQTY_" + i,
@@ -131,7 +131,24 @@
 							}]
 						}
 
-						gridOption.columnDefs.push(qutyItem);
+						gridOption.columnDefs.push(qtyItem);
+
+
+            if(showOrgQty){
+              var orgQtyItem = {
+              	name: "ORGQTY_" + i,
+              	displayName: "Org Size" + i + " Qty",
+              	field: "ORGQTY_" + i,
+              	width: '100',
+              	enableCellEdit: false,
+              	cellTemplate: hoverBigNumberTemplate,
+              	filters: [{
+              		condition: uiGridConstants.filter.CONTAINS,
+              		placeholder: ''
+              	}]
+              }
+              gridOption.columnDefs.push(orgQtyItem);
+            }
 
 						gridOption.columnDefs.push({
 							name: "unitPrice" + i,
@@ -214,7 +231,7 @@
 
 				this.reAssignAll = function(scope, param, func) {
 					var _this = this;
-					
+
 					var modalInstance =
 						$uibModal.open({
 							animation: true,
@@ -261,7 +278,7 @@
 						scope.showLoading = false;
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 					});
-						
+
 					}
 				}
 			}
