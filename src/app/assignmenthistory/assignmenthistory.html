@@ -202,10 +202,15 @@
                 <i class="fa fa-upload"></i>
                 <span translate="">Import Shipment Shortage</span>
               </button>
+              <button ng-show="activeTab==1" style="background-color: coral !important;" class="btn btn-secondary btn-single"
+                ng-click="editShipmentShortage()">
+                <i class="fa fa-pencil-square-o"></i>
+                <span translate="">Edit Shipment Shortage</span>
+              </button>
               <button ng-show="activeTab==1" style="float: right;background-color: coral !important;" class="btn btn-secondary btn-single"
                 ng-click="importFile(3002)">
                 <i class="fa fa-upload"></i>
-                <span translate="">Import A/B Grade Info/span>
+                <span translate="">Import A/B Grade Info</span>
               </button>
               <button ng-show="activeTab==1" style="background-color: coral !important;" class="btn btn-secondary btn-single"
                 ng-click="editABGradeInfo()">
@@ -282,6 +287,7 @@
 <ng-include src="'app/common/commonconfirm.html'"></ng-include>
 <ng-include src="'app/assignmenthistory/editorderpayment.html'"></ng-include>
 <ng-include src="'app/assignmenthistory/editabgradeinfo.html'"></ng-include>
+<ng-include src="'app/assignmenthistory/editshipmentshortage.html'"></ng-include>
 
 <script id="assignmentHistoryHoverTemplate" type="text/template">
   <div class="ui-grid-cell-contents" title="TOOLTIP">

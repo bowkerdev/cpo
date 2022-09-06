@@ -428,6 +428,54 @@
 					}, function() {});
 
 				}
+				// Edit Shipment Shortage
+				this.editShipmentShortage = function (scope) {
+					var selectedRows = scope.gridApi1.selection.getSelectedRows()
+					if (selectedRows.length !== 1) {
+						modalAlert(CommonService, 1, $translate.instant('history.MSG_SELECT_ONE_ROW'), null);
+						return
+					}
+					var orderMasterId = selectedRows[0]['orderMasterId']
+					var _this = this;
+					var cpo = selectedRows[0]['po']
+					CommonService.showLoadingView("Loading...")
+					GLOBAL_Http($http, "cpo/api/worktable/ediorderbatch/find?", 'GET',
+						{ orderMasterId: orderMasterId },
+						function (data) {
+							CommonService.hideLoadingView()
+							var list = data && data.rows && data.rows.length ? data.rows : []
+							if (list.length) {
+								_this.openShipmentShortage(scope, { cpo: cpo, list: list })
+							} else {
+								modalAlert(CommonService, 2, $translate.instant('No relatived data fetched'), null);
+							}
+						}, function (data) {
+							CommonService.hideLoadingView();
+							modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+						})
+				}
+
+				this.openShipmentShortage = function (scope, data) {
+					var modalInstance = $uibModal.open({
+						templateUrl: 'editShipmentShortageModal',
+						controller: 'editShipmentShortageController',
+						backdrop: 'static',
+						size: 'lg',
+						resolve: {
+							planGroups: function () {
+								return {
+									data: data
+								}
+							}
+						}
+					});
+					modalInstance.result.then(function (returnData) {
+						if (returnData) {
+							modalAlert(CommonService, 2, $translate.instant('Edit Successfully!'), null);
+							_this.searchlist(scope);
+						}
+					}, function () { });
+				}
 
 				this.exportFile = function(scope) {
 					var tabValue = "";
@@ -1452,6 +1500,9 @@
 				$scope.editABGradeInfo = function () {
 					assignmentHistoryService.editABGradeInfo($scope)
 				}
+        $scope.editShipmentShortage = function () {
+          assignmentHistoryService.editShipmentShortage($scope)
+        }
         $scope.exportPDF = function () {
           assignmentHistoryService.exportPDF($scope)
         }

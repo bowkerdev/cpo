@@ -1,0 +1,135 @@
+<!-- Modal -->
+<script type="text/ng-template" id="editShipmentShortageModal">
+<div id="editShipmentShortage">
+  <div class="modal-header">
+    <span class="pull-left">
+      <h4 class="modal-title blue" translate="Edit Shipment Shortage"></h4>
+    </span>
+    <img src="assets/images/alert_delete.png" ng-click="cancel()" alt="" class="pull-right" ng-disabled="Uploading" />
+  </div>
+  <div class="bg-operation-monitor modal-body" ng-type-enter>
+    <div style="margin-bottom: 10px;">
+      <div class="tip-msg">
+        <i class="fa fa-check" aria-hidden="true"></i> means that it can be submitted,
+        <i class="fa fa-close" aria-hidden="true"></i> means not.
+      </div>
+    </div>
+    <form class="form-horizontal form-modal" role="form" name="formCountrySiteEntry" novalidate>
+      <table class="shipment-shortage-info-table">
+        <thead id="editShipmentShortageTableHead" ng-init="calcTableHeadWidth()">
+          <tr>
+            <th class="index-col">Index</th>
+            <th>Shortage Qty</th>
+            <th>Shortage Reason</th>
+            <th>Shortage Remark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in infoList">
+            <td class="index-col">
+              {{ $index + 1 }}
+              <i class="fa" ng-class="{'fa-check': genTrStatus($index), 'fa-close': !genTrStatus($index)}"
+                aria-hidden="true"></i>
+            </td>
+            <td>
+              <input class="input-wrap col-sm-6" ng-model="row['shortageQty']" type="number" placeholder="Required" />
+            </td>
+            <td>
+              <input class="input-wrap col-sm-6" ng-model="row['shortageReason']" type="text" placeholder="Required" />
+            </td>
+            <td>
+              <input class="input-wrap col-sm-6" ng-model="row['shortageRemark']" type="text" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="modal-footer" style="margin-top: 40px;margin-bottom: 20px;">
+        <button class="btn white" ng-click="cancel()">
+          <i class="icon-cancel"></i><span translate="index.CANCEL"></span>
+        </button>
+        <button class="btn btn-blue" ng-click="save()">
+          <i class="icon-save"></i><span translate="index.SAVE"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  #editShipmentShortage .tip-msg {
+    display: inline-block;
+  }
+
+  .shipment-shortage-info-table {
+    width: 100%;
+  }
+
+  .shipment-shortage-info-table tbody {
+    display: block;
+    height: 40vh;
+    overflow-y: scroll;
+  }
+
+  .shipment-shortage-info-table .index-col {
+    width: 80px;
+    position: relative;
+  }
+
+  .shipment-shortage-info-table .index-col .fa {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  #editShipmentShortage .tip-msg .fa.fa-check,
+  .shipment-shortage-info-table .index-col .fa.fa-check {
+    color: green;
+  }
+
+  #editShipmentShortage .tip-msg .fa.fa-close,
+  .shipment-shortage-info-table .index-col .fa.fa-close {
+    color: red;
+  }
+
+  .shipment-shortage-info-table .operation-col {
+    width: 120px;
+  }
+
+  .shipment-shortage-info-table thead {
+    width: calc(100% - 17px);
+  }
+
+  .shipment-shortage-info-table tbody tr {
+    width: 100%;
+  }
+
+  .shipment-shortage-info-table thead,
+  .shipment-shortage-info-table tbody tr {
+    display: table;
+    table-layout: fixed;
+  }
+
+  .shipment-shortage-info-table th,
+  .shipment-shortage-info-table td {
+    border: 1px solid #eee;
+  }
+
+  .shipment-shortage-info-table th {
+    padding: 8px 6px;
+    background-color: #5b9bd5;
+    color: #fff;
+  }
+
+  .shipment-shortage-info-table td {
+    padding: 4px 6px;
+  }
+
+  .shipment-shortage-info-table input.input-wrap {
+    width: 100%;
+    padding: 4px 4px;
+    border: #C6C6C6 1px solid !important;
+    box-sizing: border-box;
+  }
+</style>
+</script>
