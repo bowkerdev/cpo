@@ -367,7 +367,8 @@
 						cancelationQty: row['cancelationQty'] || '',
 						addQty: row['addQty'] || '',
 						cancelationCost: row['cancelationCost'] || '',
-						completeOrNot: row['paymentCompleteOrNot'] || ''
+						completeOrNot: row['paymentCompleteOrNot'] || '',
+						paymentRemark: row['paymentRemark'] || ''
 					}
 					if (!editData['po']) {
 						modalAlert(CommonService, 1, 'PO is undefined', null);
@@ -445,7 +446,7 @@
 							CommonService.hideLoadingView()
 							var list = data && data.rows && data.rows.length ? data.rows : []
 							if (list.length) {
-								_this.openShipmentShortage(scope, { cpo: cpo, list: list })
+								_this.openShipmentShortage(scope, { cpo: cpo, list: list }, _this)
 							} else {
 								modalAlert(CommonService, 2, $translate.instant('No relatived data fetched'), null);
 							}
@@ -453,9 +454,10 @@
 							CommonService.hideLoadingView();
 							modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 						})
+
 				}
 
-				this.openShipmentShortage = function (scope, data) {
+				this.openShipmentShortage = function (scope, data, _this) {
 					var modalInstance = $uibModal.open({
 						templateUrl: 'editShipmentShortageModal',
 						controller: 'editShipmentShortageController',
@@ -527,6 +529,7 @@
 							delete param[key]
 						}
 					}
+					debugger
 					CommonService.showLoadingView("Exporting...");
 					GLOBAL_Http($http, "cpo/portal/document/check_record_count_post?documentType="+param['documentType'], 'POST', param, function(data) {
 						if(data.status == 0) {

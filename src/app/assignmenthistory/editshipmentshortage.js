@@ -42,6 +42,7 @@
               'Shortage Qty': item['shortageQty'],
               'Shortage Reason': item['shortageReason'],
               'Shortage Remark': item['shortageRemark'] || '',
+              'Shortage Status': item['shortageStatus']['value'],
             }
           })
           var param = {
@@ -66,6 +67,20 @@
           var data = angular.copy(planGroups['data'])
           scope.infoList = data['list']
           scope.cpo = data['cpo']
+          // 存在值显示现在值,没有值默认选中Confirmed by adidas
+          for(var i = 0; i < scope.infoList.length; i++){
+            for (var j = 0; j < scope.shortageStatusList.length; j++) {
+              var item = scope.shortageStatusList[j]
+              if (item['value'] === scope.infoList[i].shortageStatus) {
+                scope.infoList[i].shortageStatus = item
+                break
+              }
+            }
+            if (typeof data.shortageStatus == 'string') {
+              scope.infoList[i].shortageStatus = scope.shortageStatusList[1]
+            }
+          }
+          
         }
 
       }
@@ -73,7 +88,10 @@
     .controller('editShipmentShortageController', ["$scope", "EditShipmentShortageService", '$uibModalInstance', 'planGroups',
       function ($scope, EditShipmentShortageService, $uibModalInstance, planGroups) {
         EditShipmentShortageService.setModalScope($scope, $uibModalInstance)
-
+        $scope.shortageStatusList = [
+          { label: 'Submitted to adidas', value: 'Submitted to adidas' },
+          { label: 'Confirmed by adidas', value: 'Confirmed by adidas' }
+        ]
         $scope.cancel = function () {
           EditShipmentShortageService.cancel()
         }

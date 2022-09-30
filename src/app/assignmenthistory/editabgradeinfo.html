@@ -31,6 +31,7 @@
             <th>PO</th>
             <th>Manufactoring Size</th>
             <th>Qty</th>
+            <th>Reference PO Production Status</th>
             <th class="operation-col">Operation</th>
           </tr>
         </thead>
@@ -55,6 +56,11 @@
             </td>
             <td>
               <input class="input-wrap col-sm-6" ng-model="row['referenceQty']"  type="number"
+                placeholder="Required"
+              />
+            </td>
+            <td>
+              <input class="input-wrap col-sm-6" ng-model="row['referencePoProductionStatus']"  type="text"
                 placeholder="Required"
               />
             </td>

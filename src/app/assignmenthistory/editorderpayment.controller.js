@@ -36,7 +36,8 @@
             cancelationQty: 'Cancellation Qty',
             addQty: 'Add Qty',
             cancelationCost: 'Cancellation Cost',
-            completeOrNot: 'Payment Complete Or Not'
+            completeOrNot: 'Payment Complete Or Not',
+            paymentRemark: 'Payment Remark' || ''
           }
           var param = {}
           Object.keys(saveMatch).forEach(function (key) {
