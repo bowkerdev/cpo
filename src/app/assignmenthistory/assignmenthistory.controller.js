@@ -587,6 +587,9 @@
 
           if (selectRows && selectRows.length > 0) {
             param['in_order_master_id'] = listToString(selectRows, 'orderMasterId');
+          }else{
+            modalAlert(CommonService, 2, 'Please Select At Least Record .', null);
+            return;
           }
           CommonService.showLoadingView("Exporting...");
           GLOBAL_Http($http, "cpo/api/worktable/moPdf?", 'POST', param, function (data) {
