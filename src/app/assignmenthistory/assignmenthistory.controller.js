@@ -711,11 +711,14 @@
 
 				this.searchlist = function(scope) {
 					var _this = this;
-					var page = {
-						pageSize: "20",
-						curPage: "1"
-					};
+					var page = scope['page'+scope.activeTab];
 					var tabValue = "";
+          _this.initBulkOrderGrid(scope, 1);
+          _this.initSampleOrderGrid(scope, 2, scope.sampleOrder);
+          _this.initSampleOrderGrid(scope, 3, scope.miOrder);
+          _this.initSampleOrderGrid(scope, 4, scope.nonTradeCardOrder);
+          _this.initMarketingforecastGrid(scope, 5, scope.mkcfcOrder);
+          _this.initCustomerforecastGrid(scope, 6, scope.cusOrder);
 					switch(scope.activeTab) {
 						case 5:
 							tabValue = "1";
@@ -946,10 +949,9 @@
 							});
 							gridApi.pagination.on.paginationChanged(scope, function(newPage, pageSize) {
 								var page = _this.getPageFromOrderType(scope, i);
-
-								page.curPage = newPage;
-								page.pageSize = pageSize;
-								_this.getAssignFactoryResult(scope, i, '4', page);
+                scope['page' + i].curPage = newPage;
+                scope['page' + i].pageSize = pageSize;
+								_this.getAssignFactoryResult(scope, i, '4', scope['page' + i]);
 							});
 							gridApi.core.on.filterChanged(scope, function(col) {
 								var __this = this;
@@ -1230,7 +1232,7 @@
 					for(var i = 1; i < 7; i++) {
 						scope['page' + i] = {
 							curPage: 1,
-							pageSize: 20,
+							pageSize: i==5||i==6?20:50,
 							sortColumn: 'id',
 							sortDirection: true,
 							totalNum: 0
@@ -1512,7 +1514,7 @@
         $scope.exportPDF = function () {
           assignmentHistoryService.exportPDF($scope)
         }
-        
+
         $scope.formatPaste = function(e,field) {
           var clipboardData = e.originalEvent.clipboardData.getData('text/plain').replace(/\n/g,',')
           $timeout(function() {
