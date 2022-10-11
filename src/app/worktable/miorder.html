@@ -124,6 +124,8 @@
           <span class="input-group-addon">Document:&nbsp;</span>
           <select ng-model="selectDoc" ng-options="doc.label for doc in documentTypes[selectDocumentType.index].documents" style="height: 32px;padding-left: 10px;min-width: 100px"
             ng-change="selectDocumentChanged()"></select>
+          <span class="input-group-addon searchCondition">POs:&nbsp;</span>
+          <input  ng-model="selectPos" style="height: 35px;width: 300px;" type="text" ng-change="changeFormat('selectPos')" />
         </div>
 
 

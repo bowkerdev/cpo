@@ -22,8 +22,12 @@
             pageNo: page.curPage
           };
 
-          if (scope.selectDoc && scope.selectDoc.id) {
-            param.eq_document_id = scope.selectDoc.id;
+          if(scope.selectPos){
+              param['in_po'] = scope.selectPos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+          }else{
+            if(scope.selectDoc && scope.selectDoc.id) {
+              param.eq_document_id = scope.selectDoc.id;
+            }
           }
 
           if (filterTab) {
@@ -973,8 +977,12 @@
             pageNo: page.curPage
           };
 
-          if (scope.selectDoc && scope.selectDoc.id) {
-            param.eq_document_id = scope.selectDoc.id;
+          if(scope.selectPos){
+              param['in_po'] = scope.selectPos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+          }else{
+            if(scope.selectDoc && scope.selectDoc.id) {
+              param.eq_document_id = scope.selectDoc.id;
+            }
           }
 
           if (filterTab) {
@@ -1436,8 +1444,13 @@
 								break;
 							}
           }
-          param.eq_document_id = (scope.selectDoc.id == null || scope.selectDoc.id == "") ? 0 : scope.selectDoc
-            .id;
+
+          if(scope.selectPos){
+              param['in_po'] = scope.selectPos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+          }else{
+            param.eq_document_id = (scope.selectDoc.id == null || scope.selectDoc.id == "") ? 0 : scope.selectDoc.id;
+          }
+
           CommonService.showLoadingView("Exporting...");
           GLOBAL_Http($http, "cpo/portal/document/check_record_count?", 'GET', param, function(data) {
             CommonService.hideLoadingView();
@@ -1501,7 +1514,12 @@
           if (selectRows && selectRows.length > 0) {
             param.in_order_master_id = listToString(selectRows, 'orderMasterId');
           }
-          param.document_id = (scope.selectDoc.id == null || scope.selectDoc.id == "") ? 0 : scope.selectDoc.id;
+          
+          if(scope.selectPos){
+              param['in_po'] = scope.selectPos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
+          }else{
+            param.document_id = (scope.selectDoc.id == null || scope.selectDoc.id == "") ? 0 : scope.selectDoc.id;
+          }
           //					exportExcel(param, "cpo/portal/document/export_file?", "_blank");
           param.MI_ORDER='YES';
           CommonService.showLoadingView("Exporting...");
@@ -2239,6 +2257,10 @@
         }
         $scope.releaseOrderChangeOrder = function(type, system) {
           MIOrderService.releaseOrderChangeOrder($scope, type, system);
+        }
+
+        $scope.changeFormat = function(v) {
+        	$scope[v]=$scope[v].replace(/[ ]/g,',');
         }
         MIOrderService.init($scope);
       }
