@@ -1148,7 +1148,7 @@
 										scope.gridOptions1.data = scope.bulkOrder;
 										scope.page1.totalNum = data.total;
 										scope.gridOptions1.columnDefs = workTableCommonService.constructeAssignmentStaticColumns(scope, "bulkorder_his", true, 200);
-										workTableCommonService.bulkorderDynamicColumns(data.sizeListCount, scope.gridOptions1);
+										workTableCommonService.bulkorderDynamicColumns(data.sizeListCount, scope.gridOptions1,true);
 										for(var index in scope.bulkOrder) {
 											var item = scope.bulkOrder[index];
 											var manufacturingSize = item.ediOrderSizes;

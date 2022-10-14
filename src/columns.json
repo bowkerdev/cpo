@@ -1525,7 +1525,7 @@
     },
     {
       "displayName": "Order Status",
-      "field": "cpoOrderStatus"
+      "field": "orderStatus"
     },
     {
       "field": "aSource",

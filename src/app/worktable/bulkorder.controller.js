@@ -2532,6 +2532,15 @@
 					};
 					exportExcel(param, "cpo/portal/document/export_file?", "_blank");
 				}
+        
+        
+				this.exportOrderByMO = function(scope) {
+          var param = {};
+          param.document_id = scope.selectDoc.id;
+					param.documentType = "9998";
+          exportExcel(param, "cpo/portal/document/export_file?", "_blank");
+        }
+        
 				this.exportFile = function(scope, isCSV) {
 
 					var param = {
@@ -3410,6 +3419,9 @@
 				};
 				$scope.exportFile = function() {
 					BulkOrderService.exportFile($scope);
+				}
+				$scope.exportOrderByMO = function() {
+					BulkOrderService.exportOrderByMO($scope);
 				}
         $scope.exportPDF = function() {
           BulkOrderService.exportPDF($scope);
