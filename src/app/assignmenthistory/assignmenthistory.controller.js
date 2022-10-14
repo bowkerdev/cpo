@@ -367,7 +367,8 @@
 						cancelationQty: row['cancelationQty'] || '',
 						addQty: row['addQty'] || '',
 						cancelationCost: row['cancelationCost'] || '',
-						completeOrNot: row['paymentCompleteOrNot'] || ''
+						completeOrNot: row['paymentCompleteOrNot'] || '',
+						paymentRemark: row['paymentRemark'] || ''
 					}
 					if (!editData['po']) {
 						modalAlert(CommonService, 1, 'PO is undefined', null);
@@ -445,7 +446,7 @@
 							CommonService.hideLoadingView()
 							var list = data && data.rows && data.rows.length ? data.rows : []
 							if (list.length) {
-								_this.openShipmentShortage(scope, { cpo: cpo, list: list })
+								_this.openShipmentShortage(scope, { cpo: cpo, list: list }, _this)
 							} else {
 								modalAlert(CommonService, 2, $translate.instant('No relatived data fetched'), null);
 							}
@@ -453,9 +454,10 @@
 							CommonService.hideLoadingView();
 							modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
 						})
+
 				}
 
-				this.openShipmentShortage = function (scope, data) {
+				this.openShipmentShortage = function (scope, data, _this) {
 					var modalInstance = $uibModal.open({
 						templateUrl: 'editShipmentShortageModal',
 						controller: 'editShipmentShortageController',
@@ -527,6 +529,7 @@
 							delete param[key]
 						}
 					}
+					debugger
 					CommonService.showLoadingView("Exporting...");
 					GLOBAL_Http($http, "cpo/portal/document/check_record_count_post?documentType="+param['documentType'], 'POST', param, function(data) {
 						if(data.status == 0) {
@@ -584,6 +587,9 @@
 
           if (selectRows && selectRows.length > 0) {
             param['in_order_master_id'] = listToString(selectRows, 'orderMasterId');
+          }else{
+            modalAlert(CommonService, 2, 'Please Select At Least Record .', null);
+            return;
           }
           CommonService.showLoadingView("Exporting...");
           GLOBAL_Http($http, "cpo/api/worktable/moPdf?", 'POST', param, function (data) {
@@ -705,11 +711,14 @@
 
 				this.searchlist = function(scope) {
 					var _this = this;
-					var page = {
-						pageSize: "20",
-						curPage: "1"
-					};
+					var page = scope['page'+scope.activeTab];
 					var tabValue = "";
+          _this.initBulkOrderGrid(scope, 1);
+          _this.initSampleOrderGrid(scope, 2, scope.sampleOrder);
+          _this.initSampleOrderGrid(scope, 3, scope.miOrder);
+          _this.initSampleOrderGrid(scope, 4, scope.nonTradeCardOrder);
+          _this.initMarketingforecastGrid(scope, 5, scope.mkcfcOrder);
+          _this.initCustomerforecastGrid(scope, 6, scope.cusOrder);
 					switch(scope.activeTab) {
 						case 5:
 							tabValue = "1";
@@ -940,10 +949,9 @@
 							});
 							gridApi.pagination.on.paginationChanged(scope, function(newPage, pageSize) {
 								var page = _this.getPageFromOrderType(scope, i);
-
-								page.curPage = newPage;
-								page.pageSize = pageSize;
-								_this.getAssignFactoryResult(scope, i, '4', page);
+                scope['page' + i].curPage = newPage;
+                scope['page' + i].pageSize = pageSize;
+								_this.getAssignFactoryResult(scope, i, '4', scope['page' + i]);
 							});
 							gridApi.core.on.filterChanged(scope, function(col) {
 								var __this = this;
@@ -1224,7 +1232,7 @@
 					for(var i = 1; i < 7; i++) {
 						scope['page' + i] = {
 							curPage: 1,
-							pageSize: 20,
+							pageSize: i==5||i==6?20:50,
 							sortColumn: 'id',
 							sortDirection: true,
 							totalNum: 0
@@ -1506,7 +1514,7 @@
         $scope.exportPDF = function () {
           assignmentHistoryService.exportPDF($scope)
         }
-        
+
         $scope.formatPaste = function(e,field) {
           var clipboardData = e.originalEvent.clipboardData.getData('text/plain').replace(/\n/g,',')
           $timeout(function() {

@@ -2190,6 +2190,10 @@
       "field": "paymentCompleteOrNot"
     },
     {
+      "displayName": "Payment Remark",
+      "field": "paymentRemark"
+    },
+    {
       "displayName": "Confirm Shortage",
       "field": "shortageQty"
     },
@@ -2202,8 +2206,24 @@
       "field": "shortageRemark"
     },
     {
+      "displayName": "Shortage Status",
+      "field": "shortageStatus"
+    },   
+    {
+      "displayName": "Shortage Import Date",
+      "field": "shortageImportDate"
+    },    
+    {
+      "displayName": "Balance Qty Need Or Not",
+      "field": "balanceQtyNeedOrNot"
+    },
+    {
       "displayName": "Reference Order(PO-Size-Qty)",
       "field": "referenceInfo"
+    },    
+    {
+      "displayName": "Reference PO Production Status",
+      "field": "referencePoProductionStatus"
     },
     {
       "displayName": "TC PO",

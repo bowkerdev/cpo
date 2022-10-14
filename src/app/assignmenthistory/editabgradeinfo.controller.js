@@ -40,7 +40,8 @@
               'Reference PO': item['referencePo'],
               'Reference Size': item['referenceSize'],
               'Reference Qty': item['referenceQty'],
-              'CPO': scope.po
+              'CPO': scope.po,
+              'Reference PO Production Status': item['referencePoProductionStatus'] || '',
             }
           })
           var param = {

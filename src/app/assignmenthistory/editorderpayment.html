@@ -51,6 +51,14 @@
           class="input-wrap col-sm-6" ng-options="item.label for item in completeOrNotList">
         </select>
       </div>
+
+      <div class="form-group">
+        <label class="col-sm-5 control-label bold">
+          <div><span translate="Payment Remark:"></span></div>
+        </label>
+        <textarea class="input-wrap col-sm-6" ng-model="form.paymentRemark"  type="text">
+        </textarea>
+      </div>
       
       <div class="modal-footer" style="margin-top: 40px;margin-bottom: 20px;">
         <button class="btn white" ng-click="cancel()">

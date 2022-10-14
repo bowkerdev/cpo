@@ -22,6 +22,7 @@
             <th>Shortage Qty</th>
             <th>Shortage Reason</th>
             <th>Shortage Remark</th>
+            <th>Shortage Status</th>
           </tr>
         </thead>
         <tbody>
@@ -40,6 +41,12 @@
             <td>
               <input class="input-wrap col-sm-6" ng-model="row['shortageRemark']" type="text" />
             </td>
+            <td>
+              <select ng-model="row['shortageStatus']"
+              class="input-wrap col-sm-6" ng-options="item.label for item in shortageStatusList">
+              </select>
+            </td>
+
           </tr>
         </tbody>
       </table>
@@ -125,7 +132,7 @@
     padding: 4px 6px;
   }
 
-  .shipment-shortage-info-table input.input-wrap {
+  .shipment-shortage-info-table input.input-wrap, .shipment-shortage-info-table select.input-wrap{
     width: 100%;
     padding: 4px 4px;
     border: #C6C6C6 1px solid !important;
