@@ -23,6 +23,8 @@
             <th>Shortage Reason</th>
             <th>Shortage Remark</th>
             <th>Shortage Status</th>
+            <th>Shortage Import Date</th>
+            <th>Balance Qty Need Or Not</th>
           </tr>
         </thead>
         <tbody>
@@ -44,6 +46,18 @@
             <td>
               <select ng-model="row['shortageStatus']"
               class="input-wrap col-sm-6" ng-options="item.label for item in shortageStatusList">
+              </select>
+            </td>
+            <td>
+              <div ng-time style="display: flex;align-items: center;width: 100% !important;" class="table_time input-wrap col-sm-6 input-group date form_date" data-date-format="yyyy-mm-dd"
+                ng-model="row['shortageImportDate']" >
+                <input style="background-color: white;width:80%" ng-model="row['shortageImportDate']" class="table_time_input input-wrap col-sm-6" type="text" value="" readonly>
+                <span style="width:20%" class="table_time_tab input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+            </td>
+            <td>
+              <select ng-model="row['balanceQtyNeedOrNot']"
+              class="input-wrap col-sm-6" ng-options="item.label for item in balanceQtyNeedOrNotList">
               </select>
             </td>
 

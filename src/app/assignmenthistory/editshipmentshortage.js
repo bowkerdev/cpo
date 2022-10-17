@@ -43,6 +43,8 @@
               'Shortage Reason': item['shortageReason'],
               'Shortage Remark': item['shortageRemark'] || '',
               'Shortage Status': item['shortageStatus']['value'],
+              'Shortage Import Date': item['shortageImportDate'],
+              'Balance Qty Need Or Not': item['balanceQtyNeedOrNot'].value
             }
           })
           var param = {
@@ -79,6 +81,17 @@
             if (typeof data.shortageStatus == 'string') {
               scope.infoList[i].shortageStatus = scope.shortageStatusList[1]
             }
+            var day1 = new Date();
+            day1.setTime(scope.infoList[i].shortageImportDate);
+            day1=day1.Format("yyyy-MM-dd");
+            scope.infoList[i].shortageImportDate = day1;
+            for (var j = 0; j < scope.balanceQtyNeedOrNotList.length; j++) {
+              var item = scope.balanceQtyNeedOrNotList[j]
+              if (item['value'] === scope.infoList[i].balanceQtyNeedOrNot) {
+                scope.infoList[i].balanceQtyNeedOrNot = item
+                break
+              }
+            }
           }
           
         }
@@ -91,6 +104,11 @@
         $scope.shortageStatusList = [
           { label: 'Submitted to adidas', value: 'Submitted to adidas' },
           { label: 'Confirmed by adidas', value: 'Confirmed by adidas' }
+        ]
+        $scope.balanceQtyNeedOrNotList = [
+          { label: 'Yes', value: 'Yes' },
+          { label: 'No', value: 'No' },
+          { label: '', value: '' }
         ]
         $scope.cancel = function () {
           EditShipmentShortageService.cancel()

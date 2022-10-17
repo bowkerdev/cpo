@@ -462,7 +462,7 @@
 						templateUrl: 'editShipmentShortageModal',
 						controller: 'editShipmentShortageController',
 						backdrop: 'static',
-						size: 'lg',
+						size: 'full-width',
 						resolve: {
 							planGroups: function () {
 								return {

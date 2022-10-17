@@ -3,7 +3,11 @@
  * Apply your custom CSS here
  *
 */
-
+.modal-dialog.modal-full-width {
+ width: 90% !important;
+ /* height: 100% !important; */
+ /* overflow-y: hidden; */
+}
 div[ng-controller="filterCtrl"] .ui-grid-column-menu-button {
 	top: auto;
 	right: 0;
