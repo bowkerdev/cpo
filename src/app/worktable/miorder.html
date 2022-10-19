@@ -126,6 +126,10 @@
             ng-change="selectDocumentChanged()"></select>
           <span class="input-group-addon searchCondition">POs:&nbsp;</span>
           <input  ng-model="selectPos" style="height: 35px;width: 300px;" type="text" ng-change="changeFormat('selectPos')" />
+          <button class="btn btn-secondary btn-single" ng-click="searchlist()">
+            <i class="fa-search"></i>&nbsp;&nbsp;
+            <span translate="index.SEARCH"></span>
+          </button>
         </div>
 
 

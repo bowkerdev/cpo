@@ -1992,6 +1992,63 @@
 						});
 					}
 				}
+        this.checkIfNeedToAddSample = function(scope,isAll) {
+        	var _this = this;
+          var documentid = null;
+          if(scope.selectDoc && scope.selectDoc.id) {
+          	documentid = scope.selectDoc.id;
+          } else {
+          	documentid = scope.documentIds;
+          }
+          if(!documentid) {
+          	modalAlert(CommonService, 2, $translate.instant('worktable.NO_DOCUMENT_NEED_TO_RELEASE'), null);
+          	return;
+          }
+          var param = {
+          	"documentId": documentid
+          };
+          scope.disableReleaseOrderButton = true;
+        	GLOBAL_Http($http, "cpo/api/worktable/checkIfNeedToAddSample", 'POST', param, function(data) {
+        		scope.disableReleaseOrderButton = false;
+        		if(data.status == 0) {
+              if (data.output && data.output.length) {
+                _this.openAddSample(scope,data.output);
+              } else{
+                if (isAll) {
+                  _this.releaseAllOrder(scope);
+                } else{
+                  _this.releaseOrder(scope);
+                }
+              }
+            } else {
+        			modalAlert(CommonService, 2, data.message, null);
+        		}
+        	}, function(data) {
+        		scope.disableReleaseOrderButton = false;
+        		modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+        	});
+        }
+        this.openAddSample = function(scope, rows) {
+        	var _this = this;
+        	var modalInstance =
+        		$uibModal.open({
+        			animation: true,
+        			ariaLabelledBy: "modal-header",
+        			templateUrl: 'app/worktable/addSample.html',
+        			controller: 'addSampleCtrl',
+              size: 'lg',
+        			resolve: {
+        				parameter: function() {
+        					return {
+        						rows: rows
+        					};
+        				}
+        			}
+        		});
+        	modalInstance.resolve = function(result) {
+
+        	}
+        }
 				this.releaseAllOrder = function(scope) {
 
 					if(scope.NewPending.length > 0) {
@@ -2532,15 +2589,15 @@
 					};
 					exportExcel(param, "cpo/portal/document/export_file?", "_blank");
 				}
-        
-        
+
+
 				this.exportOrderByMO = function(scope) {
           var param = {};
           param.document_id = scope.selectDoc.id;
 					param.documentType = "9998";
           exportExcel(param, "cpo/portal/document/export_file?", "_blank");
         }
-        
+
 				this.exportFile = function(scope, isCSV) {
 
 					var param = {
@@ -2726,7 +2783,7 @@
 						selectedRows = scope.gridApi6.selection.getSelectedRows();
 					} else if(scope.tabIndex == 5) {
 						selectedRows = scope.gridApi7.selection.getSelectedRows();
-					};
+					}
 					if(selectedRows.length < 1) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
 						return;
@@ -2829,7 +2886,7 @@
 						selectedRows = scope.gridApi5.selection.getSelectedRows();
 					} else if(scope.tabIndex == 4) {
 						selectedRows = scope.gridApi6.selection.getSelectedRows();
-					};
+					}
 
 
 
@@ -3143,7 +3200,7 @@
             this.getTransitOrder(scope, scope.page5, '5', true);
           } else if(scope.tabIndex == 5) {
             this.getConfimrOrder(scope);
-          };
+          }
           debugger;
         }
 				this.splitOrder = function(scope) {
@@ -3156,7 +3213,7 @@
 						selectedRows = scope.gridApi3.selection.getSelectedRows();
 					} else if(scope.tabIndex == 3) {
 						selectedRows = scope.gridApi5.selection.getSelectedRows();
-					};
+					}
 					if(selectedRows.length < 1) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
 						return;
@@ -3258,7 +3315,7 @@
 											_this.getAssignFactoryResult(scope, '3', '2', scope.page3, true);
 										} else if(scope.tabIndex == 3) {
 											_this.getTransitOrder(scope, scope.page4, '4', true);
-										};
+										}
 									} else {
 										modalAlert(CommonService, 2, data.message, null);
 									}
@@ -3411,6 +3468,10 @@
 				$scope.releaseAllOrder = function(type) {
 					BulkOrderService.releaseAllOrder($scope, type);
 				}
+
+        $scope.checkIfNeedToAddSample = function(isAll) {
+        	BulkOrderService.checkIfNeedToAddSample($scope,isAll);
+        }
 				$scope.holdPendingOrder = function(type) {
 					BulkOrderService.holdPendingOrder($scope, type);
 				}

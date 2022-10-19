@@ -672,6 +672,20 @@
           };
 
         };
+        this.searchList = function(scope) {
+          var _this = this;
+          if (scope.tabIndex == 0) {
+            _this.getAssignFactoryResult(scope, '5', 2, scope.page2, 2);
+          } else if (scope.tabIndex == 2) {
+            _this.getTransitOrder(scope, scope.page3, 5, 5);
+          } else if (scope.tabIndex == 1) {
+            _this.getTransitOrder(scope, scope.page4, 4, 4);
+          } else if (scope.tabIndex == 3) {
+            _this.getOrderChange(scope, 'PENDING');
+          } else if (scope.tabIndex == 4) {
+            _this.getOrderChange(scope, 'CONFIRMED');
+          }
+        }
         this.refreshAll = function(scope) {
           var _this = this;
           scope.page2.curPage = 1;
@@ -1514,7 +1528,7 @@
           if (selectRows && selectRows.length > 0) {
             param.in_order_master_id = listToString(selectRows, 'orderMasterId');
           }
-          
+
           if(scope.selectPos){
               param['in_po'] = scope.selectPos.replace(/,/g,'**').replace(/\n/g, '**').replace(/' '/g, '**');
           }else{
@@ -2258,7 +2272,9 @@
         $scope.releaseOrderChangeOrder = function(type, system) {
           MIOrderService.releaseOrderChangeOrder($scope, type, system);
         }
-
+        $scope.searchlist = function() {
+          MIOrderService.searchList($scope);
+        }
         $scope.changeFormat = function(v) {
         	$scope[v]=$scope[v].replace(/[ ]/g,',');
         }

@@ -255,11 +255,11 @@
 
       </div>
       <div class="form-group" style="margin-top: 15px;">
-        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseAllOrder()" ng-disabled="disableReleaseOrderButton">
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="checkIfNeedToAddSample(true)" ng-disabled="disableReleaseOrderButton">
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="worktable.RELEASE_ALL"></span>
         </button>
-        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrder()" ng-disabled="disableReleaseOrderButton">
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="checkIfNeedToAddSample(false)" ng-disabled="disableReleaseOrderButton">
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="worktable.RELEASE"></span>
         </button>
@@ -514,7 +514,9 @@
     <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()">Submit</button>
   </div>
 </script>
-
+<script id="addSamplePOTemplate" type="text/template">
+  <input type="text" class="form-control" ng-model="row.entity.po" />
+</script>
 <script type="text/ng-template" id="set-split-order.html">
   <div class="modal-header">
     <h3 class="modal-title" >Split order</h3>
