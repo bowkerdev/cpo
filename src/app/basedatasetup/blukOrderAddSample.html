@@ -1,0 +1,55 @@
+<div  ng-controller="blukOrderAddSampleCtrl">
+  <div  style="margin-top: -10px;width:1500px">
+    <div class="input-group">
+      <span class="input-group-addon">Factory:</span>
+      <div ng-dropdown-multiselect="" options="factoryList" selected-model="searchParam.factory" extra-settings="idPropertySettings" class="form-control" id="sample-tpye-list"></div>
+      <span class="input-group-addon">Season:</span>
+      <input type="text" class="form-control" aria-label=""  ng-model="searchParam.season" id="searchSeason">
+      <span class="input-group-addon">Article:</span>
+      <input type="text" class="form-control" aria-label=""  ng-model="searchParam.articleNo" id="searchArticle">
+      <span class="input-group-addon">Working No:</span>
+      <input type="text" class="form-control" aria-label=""  ng-model="searchParam.workingNo" id="searchWorkingNo">
+      <span class="input-group-addon">Sample Type:</span>
+      <div ng-dropdown-multiselect="" options="sampleTypeList" selected-model="searchParam.sampleType"
+              extra-settings="idPropertySettings" class="form-control" id="sample-tpye-list"></div>
+      <span class="input-group-addon" style="background-color: #1664F4;color:white" ng-click="search()">Search</span>
+      <span class="input-group-addon" style="background-color: #1664F4;color:white;padding-left: 10px;" ng-click="importFile('1009')">Import QATM Sample</span>
+      <span class="input-group-addon" style="background-color: #1664F4;color:white;padding-left: 10px;" ng-click="importFile('1010')">Import Bulk Sample</span>
+    </div>
+  </div>
+  <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom >
+    <div class="well grid-loading" style="margin-top: 30px" ng-show="gridOptions.showLoading">
+      <i class="fa fa-spin fa-spinner"></i>
+      <strong translate="vendorKpi.LOADING"></strong>
+    </div>
+  </div>
+
+</div>
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<script id="blukOrderAddSampleOperationTemplate" type="text/template">
+  <div class="operation">
+    <button ng-if="row.entity.po == null" type="button" class="btn btn-xs op-btn" ng-click="grid.appScope.deleteRow(row)">
+      <span translate="index.DELETE"></span>
+    </button>
+  </div>
+</script>
+<style>
+  div[ng-controller="blukOrderAddSampleCtrl"] .op-btn{
+    background-color: #f3562c;color: white;margin-bottom: 0;
+  }
+  div[ng-controller="blukOrderAddSampleCtrl"] .operation{
+    height: 100%;display: flex;align-items: center;padding: 5px
+  }
+  div[ng-controller="blukOrderAddSampleCtrl"] #sample-tpye-list,
+  div[ng-controller="blukOrderAddSampleCtrl"] #factory-list{
+    width:100%;
+    padding: 0px;
+    display: table-cell;
+  }
+  div[ng-controller="blukOrderAddSampleCtrl"] #sample-tpye-list button,
+  div[ng-controller="blukOrderAddSampleCtrl"] #factory-list button{
+    width:calc(100% + 3px);
+    height: 32px;
+    margin: -1px;
+  }
+</style>

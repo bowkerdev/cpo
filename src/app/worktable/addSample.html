@@ -1,0 +1,44 @@
+
+<div>
+  <div class="modal-header" id="addSampleDialog">
+    <h3 class="modal-title" id="modal-title">Add Sample</h3>
+  </div>
+  <form class="form-horizontal" style="padding:20px">
+    <div class="header-scetion container-flex-start">
+      <div ng-bind="'PO:'"></div>
+    </div>
+  	<div id="addSampleGrid" ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom>
+  		<div class="well grid-loading" ng-show="gridOptions.showLoading">
+						<i class="fa fa-spin fa-spinner"></i>
+						<strong>Loading...</strong>
+					</div>
+  	</div>
+  </form>
+  <div class="modal-footer">
+    <button class="btn " type="button" ng-click="dismiss()" style="background-color: gray;color: white" ng-disabled="submiting">Cancel</button>
+    <button type="submit" class="btn btn-secondary btn-single" ng-click="submit()" ng-disabled="submiting">Submit</button>
+  </div>
+</div>
+
+<ng-include src="'app/common/commonconfirm.html'"></ng-include>
+<style>
+  #addSampleGrid .op-btn{
+    background-color: #f3562c;color: white;margin-bottom: 0;
+  }
+  #addSampleGrid .operation{
+    height: 100%;display: flex;align-items: center;padding: 5px
+  }
+  #addSampleGrid .templatestyle{
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #addSampleDialog+form .header-scetion{
+    font-size: 24px;
+    font-weight: bold;
+  }
+  #addSampleDialog+form .header-scetion>div{
+    margin-right: 20px;
+  }
+</style>
