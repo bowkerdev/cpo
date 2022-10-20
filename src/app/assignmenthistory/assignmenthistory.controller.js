@@ -1364,52 +1364,6 @@
 
 				}
 
-				this.CloseOrder = function(scope) {
-					var _this = this;
-					var selectedRows = null; //scope.gridApi5.selection.getSelectedRows();
-					var ids = new Array();
-					var assignResultIds = new Array();
-					var POs = new Array();
-					var idFactoryList = new Array();
-					if(scope.activeTab == 1) {
-						selectedRows = scope.gridApi1.selection.getSelectedRows();
-					}
-					if(selectedRows.length < 1) {
-						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
-						return;
-					}
-
-					for(var index in selectedRows) {
-						var row = selectedRows[index];
-						ids.push(row.orderMasterId);
-						assignResultIds.push(row.assignResultId);
-						idFactoryList.push({"id":row.orderMasterId,"confirmFactory":row.confirmFactory});
-						POs.push("<br/>"+row.po);
-					}
-					var _this = this;
-					modalAlert(CommonService, 0, $translate.instant('Comfirm Close Order?\n') + POs, function() {
-						var param = {
-							ids: ids.join(","),
-							assignResultIds: assignResultIds.join(","),
-							orderStatus: 'CLOSE',
-							idFactoryList:  JSON.stringify(idFactoryList)
-						}
-						GLOBAL_Http($http, "cpo/api/worktable/change_manual_order_status", 'POST', param, function(data) {
-							if(data.status == 0) {
-								modalAlert(CommonService, 2, $translate.instant('notifyMsg.SUCCESS_SAVE'), null);
-								_this.searchlist(scope);
-							} else {
-								modalAlert(CommonService, 2, data.message, null);
-							}
-						}, function(data) {
-
-							modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
-						});
-
-					}, function() {
-
-					});
-				}
 
 
         this.setMaterialReserveTarget = function(scope) {
@@ -1492,9 +1446,6 @@
 				}
 				$scope.changeManualOrderStatus = function() {
 					assignmentHistoryService.changeManualOrderStatus($scope);
-				}
-				$scope.CloseOrder = function() {
-					assignmentHistoryService.CloseOrder($scope);
 				}
 				$scope.setMaterialReserveTarget = function() {
 					assignmentHistoryService.setMaterialReserveTarget($scope);
