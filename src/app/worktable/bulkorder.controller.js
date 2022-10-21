@@ -418,18 +418,26 @@
 						url = "cpo/api/worktable/get_confirm_order_filter?";
 					}
 					var status = "";
+          var pageSizeA = [10, 20, 50, 100, 200, 500, 1000, 2000, 4000];
 					switch(i) {
 						case 2:
 							status = "0,3";
+              pageSizeA = [100000];
 							break;
 						case 3:
 							status = "2";
+              pageSizeA = [100000];
 							break;
 						case 5:
 							status = "4";
+              pageSizeA = [100000];
 							break;
 						case 6:
 							status = "5";
+              pageSizeA = [100000];
+							break;
+						case 7:
+              pageSizeA = [100000];
 							break;
 						case 10:
 							{
@@ -467,12 +475,12 @@
 					}
 					scope['gridOptions' + i] = {
 						data: dataName,
-						paginationPageSizes: [10, 20, 50, 100, 200, 500, 1000, 2000, 4000],
+						paginationPageSizes: pageSizeA,
 						enableColumnMenus: true,
 						enableGridMenu: true,
 						flatEntityAccess: true,
 						fastWatch: true,
-						paginationPageSize: 100,
+						paginationPageSize: pageSizeA[0]==100000?100000:100,
 						rowEditWaitInterval: -1,
 						showLoading: false,
 						enableRowSelection: false,
@@ -1682,7 +1690,7 @@
 					for(var i = 2; i <= 11; i++) {
 						scope['page' + i] = {
 							curPage: 1,
-							pageSize: 100,
+							pageSize: [2,3,5,6,7].indexOf(i)?100000:100,
 							sortColumn: 'id',
 							sortDirection: true,
 							totalNum: 0
