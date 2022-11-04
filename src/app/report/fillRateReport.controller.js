@@ -106,7 +106,7 @@
           param.isHalfMonth = scope.searchRequest.monthType.id;
           var in_month  = getMonths(scope.searchRequest.fromMonth,scope.searchRequest.toMonth);
           if(in_month){
-            param.in_month = in_month;
+            param.inMonth = in_month;
           }
           param.capt = scope.searchRequest.capt.id;
           CommonService.showLoadingView("Exporting...");
