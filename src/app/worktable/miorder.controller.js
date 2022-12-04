@@ -1322,8 +1322,9 @@
             documentid = scope.documentIds;
           }
           var param = {
-            "documentIds": documentid,
+            // "documentIds": documentid,
             "assignResultIds": listToString(selectOrders, 'assignResultId'),
+						"orderMasterIds": listToString(selectOrders, 'orderMasterId'),
             "status": "4",
             documentType:scope.selectDocumentType.id
           };

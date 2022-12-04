@@ -12,7 +12,10 @@
         }
 				scope.fetchInfo = function(scope) {
 					scope.gridOptions.showLoading = true;
-          var param = {};
+          var param = {
+            pageSize:scope.page.pageSize+"",
+            pageNo: scope.page.curPage+""
+          };
           if (scope.searchParam.season) {
             param.season = scope.searchParam.season;
           }
@@ -39,6 +42,10 @@
 					GLOBAL_Http($http, "/portal/ediorderaddsample/queryEdiOrderAddSample", 'post', param, function(data) {
 						scope.gridOptions.showLoading = false;
 						scope.dataList = data.output&&data.output.rows&&data.output.rows.length?translateData(data.output.rows):[];
+
+            scope.page.totalNum = data.output.total;
+            scope.gridOptions.totalItems = scope.page.totalNum;
+
 					}, function(data) {
 						scope.gridOptions.showLoading = false;
 						modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
@@ -49,18 +56,18 @@
 					var _this = this;
 					scope.gridOptions = {
 						data: 'dataList',
-						paginationPageSizes: [10, 20, 50, 100, 200, 500],
-						enablePagination: false,
-						enablePaginationControls: false,
-						paginationPageSize: 100,
-						rowEditWaitInterval: -1,
-						enableRowSelection: false,
-						enableRowHeaderSelection: false,
-						enableColumnMenus: true,
-						enableGridMenu: true,
-						enableSorting: false,
-						enableHorizontalScrollbar: 1,
-						enableVerticalScrollbar: 0,
+          paginationPageSizes:  [100, 200, 500],
+          paginationPageSize: 100,
+          rowEditWaitInterval: -1,
+          enableRowSelection: true,
+          enableRowHeaderSelection: true,
+          enableColumnMenus: false,
+          enableGridMenu: false,
+          enableSorting: false,
+          enableHorizontalScrollbar: 1,
+          enableVerticalScrollbar: 0,
+          totalItems: scope.page.totalNum,
+          useExternalPagination: true,
 						// zsColumnFilterRequestUrl: "/cpo/api/worktable/query_slt_result_filter?",
 						// zsColumnFilterRequestParam: {},
             columnDefs:[
@@ -86,6 +93,12 @@
               	name: 'baseSize',
               	displayName: 'Base Size',
               	field: 'baseSize',
+              	minWidth: '100'
+              },
+              {
+              	name: 'gender',
+              	displayName: 'Gender',
+              	field: 'gender',
               	minWidth: '100'
               },
               {
@@ -198,6 +211,7 @@
 							gridApi.pagination.on.paginationChanged(scope, function(newPage, pageSize) {
 								scope.page.curPage = newPage;
 								scope.page.pageSize = pageSize;
+                scope.fetchInfo( scope);
 							});
 
 						}
@@ -210,6 +224,13 @@
             factory:[],
             sampleType:[]
           };
+
+          scope.page = {
+            curPage: "1",
+            pageSize: "100",
+            totalNum: 0
+          };
+
           scope.factoryList=[]
           var param = {
           	in_code: 'FACTORYLIST,BULK_ORDER_SAMPLE_TYPE'

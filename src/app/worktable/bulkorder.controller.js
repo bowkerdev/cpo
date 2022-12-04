@@ -1690,7 +1690,7 @@
 					for(var i = 2; i <= 11; i++) {
 						scope['page' + i] = {
 							curPage: 1,
-							pageSize: [2,3,5,6,7].indexOf(i)?100000:100,
+							pageSize: [2,3,4,5,7].indexOf(i)>=0?100000:100,
 							sortColumn: 'id',
 							sortDirection: true,
 							totalNum: 0
@@ -2054,7 +2054,7 @@
         			}
         		});
         	modalInstance.resolve = function(result) {
-
+							_this.refreshAll(scope,'YES');
         	}
         }
 				this.releaseAllOrder = function(scope) {
