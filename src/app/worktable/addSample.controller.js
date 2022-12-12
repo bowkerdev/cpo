@@ -7,6 +7,19 @@
     .service('addSampleService', ['$http', '$translate', 'CommonService', '$location',
       function($http, $translate, CommonService, $location) {
 
+        this.export = function(scope){
+          var param={
+            documentType:9999,
+            data:scope.items
+          }
+          GLOBAL_Http($http, "cpo/portal/document/export_file_post?documentType="+param['documentType'], 'POST', param, function(data) {
+              console.log(data);
+              window.open(data.output,'_blank');
+            }, function(data) {
+              modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+            });
+        }
+
         this.submit = function(scope,finishBlock) {
           if (scope.items && scope.items.length) {
             for (var i = 0; i < scope.items.length; i++) {
@@ -197,6 +210,9 @@
           $uibModalInstance.resolve({});
           $uibModalInstance.dismiss();
         });
+      }
+      $scope.export = function() {
+        addSampleService.export($scope);
       }
       addSampleService.init($scope, parameter);
 

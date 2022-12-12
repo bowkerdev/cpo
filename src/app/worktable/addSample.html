@@ -7,6 +7,10 @@
     <div class="header-scetion container-flex-start">
       <div ng-bind="'PO:'"></div>
     </div>
+    <button style="float: right;margin-top: 10px;margin-right: 10px;" class="btn btn-secondary btn-single" ng-click="export()">
+      <i class="fa fa-share"></i>
+      <span translate="">Export</span>
+    </button>
   	<div id="addSampleGrid" ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize hight-auto-fill-bottom>
   		<div class="well grid-loading" ng-show="gridOptions.showLoading">
 						<i class="fa fa-spin fa-spinner"></i>
