@@ -30,8 +30,8 @@
 				};
 			}
 		])
-		.controller('MultiUploadFileController', ["$scope", '$translate', "MultiUploadFileService", '$uibModalInstance', "fileReader", 'planGroups',
-			function($scope, $translate, MultiUploadFileService, $uibModalInstance, fileReader, planGroups) {
+		.controller('MultiUploadFileController', ["$scope", '$translate', "MultiUploadFileService", '$uibModalInstance', "fileReader", 'planGroups','$http',
+			function($scope, $translate, MultiUploadFileService, $uibModalInstance, fileReader, planGroups,$http) {
 
 				MultiUploadFileService.setModalScope($scope, $uibModalInstance);
 
