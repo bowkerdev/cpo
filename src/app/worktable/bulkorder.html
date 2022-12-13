@@ -143,7 +143,7 @@
           <i class="fa fa-download"></i>
           <span translate="">Export Order</span>
         </button>
-        <button style="float: right;margin-top: 10px;margin-right: 10px;" class="btn btn-secondary btn-single" ng-click="requestFactoryChange(tabIndex)" ng-if="tabIndex=='4'||tabIndex=='5'">
+        <button style="float: right;margin-top: 10px;margin-right: 10px;" class="btn btn-secondary btn-single" ng-click="checkIfNeedToAddSample('changeOrderChangeApplication')" ng-if="tabIndex=='4'||tabIndex=='5'">
           <i class="fa fa-share"></i>
           <span translate="">Change Application</span>
         </button>
@@ -255,11 +255,11 @@
 
       </div>
       <div class="form-group" style="margin-top: 15px;">
-        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="checkIfNeedToAddSample(true)" ng-disabled="disableReleaseOrderButton">
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="checkIfNeedToAddSample('newOrderReleaseAll')" ng-disabled="disableReleaseOrderButton">
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="worktable.RELEASE_ALL"></span>
         </button>
-        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="checkIfNeedToAddSample(false)" ng-disabled="disableReleaseOrderButton">
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="checkIfNeedToAddSample('newOrderRelease')" ng-disabled="disableReleaseOrderButton">
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="worktable.RELEASE"></span>
         </button>
@@ -440,13 +440,13 @@
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span
           translate="index.CONFIRM"></span>
         </button>
-        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder('PENDING')" ng-disabled="disableReleaseOrderButton">
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="checkIfNeedToAddSample('changePendingConfirmAndRelease')" ng-disabled="disableReleaseOrderButton">
           <i class="fa fa-check-circle-o" style="font-size: 20px;">	</i>&nbsp;&nbsp;<span>Confirm and Release</span>
         </button>
-        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder('PENDING','D365')" ng-disabled="disableReleaseOrderButton">
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="checkIfNeedToAddSample('changePendingReleaseToD365')" ng-disabled="disableReleaseOrderButton">
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To D365</span>
         </button>
-        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="releaseOrderChangeOrder('PENDING','FR')" ng-disabled="disableReleaseOrderButton">
+        <button class="btn btn-secondary btn-single" style="background-color: #33b17a !important;" ng-click="checkIfNeedToAddSample('changePendingReleaseToFR')" ng-disabled="disableReleaseOrderButton">
           <i class="fa fa-check-circle-o" style="font-size: 20px;"></i>&nbsp;&nbsp;<span>Release To FR</span>
         </button>
       </div>
