@@ -2000,7 +2000,7 @@
 						});
 					}
 				}
-        this.checkIfNeedToAddSample = function(scope,isAll) {
+        this.checkIfNeedToAddSample = function(scope, type) {
         	var _this = this;
           var documentid = null;
           if(scope.selectDoc && scope.selectDoc.id) {
@@ -2022,10 +2022,18 @@
               if (data.output && data.output.length) {
                 _this.openAddSample(scope,data.output);
               } else{
-                if (isAll) {
+                if (type == 'newOrderReleaseAll') {
                   _this.releaseAllOrder(scope);
-                } else{
+                } else if (type == 'newOrderRelease'){
                   _this.releaseOrder(scope);
+                } else if(type == 'changePendingConfirmAndRelease'){
+                  _this.releaseOrderChangeOrder('PENDING')
+                } else if(type == 'changePendingReleaseToD365'){
+                  _this.releaseOrderChangeOrder('PENDING','D365')
+                } else if(type == 'changePendingReleaseToFR'){
+                  _this.releaseOrderChangeOrder('PENDING','FR')
+                } else if(type == 'changeOrderChangeApplication'){
+                  _this.requestFactoryChange(_this.tabIndex)
                 }
               }
             } else {
@@ -3477,8 +3485,8 @@
 					BulkOrderService.releaseAllOrder($scope, type);
 				}
 
-        $scope.checkIfNeedToAddSample = function(isAll) {
-        	BulkOrderService.checkIfNeedToAddSample($scope,isAll);
+        $scope.checkIfNeedToAddSample = function(type) {
+        	BulkOrderService.checkIfNeedToAddSample($scope,type);
         }
 				$scope.holdPendingOrder = function(type) {
 					BulkOrderService.holdPendingOrder($scope, type);

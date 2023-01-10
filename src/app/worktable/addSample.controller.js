@@ -68,6 +68,12 @@
             useExternalPagination: false,
             columnDefs: [
               {
+              	name: 'action',
+              	displayName: 'Action',
+              	field: 'action',
+              	minWidth: '120'
+              },
+              {
               	name: 'workingNo',
               	displayName: 'Working No',
               	field: 'workingNo',
