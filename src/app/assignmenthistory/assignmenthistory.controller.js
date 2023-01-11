@@ -1419,8 +1419,8 @@
 
 			}
 		])
-		.controller('assignmentHistoryCtrl', ['$scope', 'assignmentHistoryService','$timeout',
-			function($scope, assignmentHistoryService, $timeout) {
+		.controller('assignmentHistoryCtrl', ['$scope', 'assignmentHistoryService','$timeout', 'CommonService',
+			function($scope, assignmentHistoryService, $timeout, CommonService) {
 				$scope.selectTab = function(Tab) {
 					if(Tab == 5 || Tab == 4) {
 						$("#orderTypeSelect").hide();
@@ -1471,6 +1471,9 @@
           $timeout(function() {
             $scope[field] = clipboardData;
           }, 200);
+        }
+        $scope.hasPermission = function(permission){
+          return CommonService.hasPermission('app/assignmenthistory/assignmenthistory.html',permission);
         }
 				assignmentHistoryService.init($scope);
 			}

@@ -2052,7 +2052,8 @@
         			ariaLabelledBy: "modal-header",
         			templateUrl: 'app/worktable/addSample.html',
         			controller: 'addSampleCtrl',
-              size: 'lg',
+              openedClass:'dynamic-template-modal-window',
+              size:"lg",
         			resolve: {
         				parameter: function() {
         					return {

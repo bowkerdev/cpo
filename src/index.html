@@ -71,13 +71,13 @@
 						</div>
 					</header>
 					<ul id="main-menu" class="main-menu">
-						<li ng-repeat="section in navList" ng-init="setupMenu(navList.length,$index)">
+						<li ng-if="section.type!='3'" ng-repeat="section in navList" ng-init="setupMenu(navList.length,$index)">
 							<a href="#" ng-click="openTab('{{section.url == homeUrl?homeId:section.menuid}}','{{section.url}}','{{section.name}}');focusPage('{{section.url == homeUrl?homeId:section.menuid}}');">
 								<i  class="{{section.icon}}"></i>
 								<span class="title" ng-bind="section.name" ></span>
 							</a>
 							<ul>
-								<li ng-repeat="menu in section.subMenus" ng-class="{'active':activePage==='{{menu.menuid}}'}">
+								<li ng-if="menu.type!='3'" ng-repeat="menu in section.subMenus" ng-class="{'active':activePage==='{{menu.menuid}}'}">
 									<a href="" ng-click="openTab('{{menu.menuid}}','{{menu.url}}' , '{{menu.name}}');focusPage('{{menu.menuid}}');">
 										<span class="title" ng-bind="menu.name"></span>
 									</a>

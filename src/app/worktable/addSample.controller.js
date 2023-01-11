@@ -66,6 +66,7 @@
             enableHorizontalScrollbar: 1,
             enableVerticalScrollbar: 0,
             useExternalPagination: false,
+            height: 600,
             columnDefs: [
               {
               	name: 'action',
