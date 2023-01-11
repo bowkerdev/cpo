@@ -125,9 +125,9 @@
           });
 
         }
-        
+
         this.exportOrderList=function(scope){
-        	
+
 					var modalInstance =
 						$uibModal.open({
 							animation: true,
@@ -163,8 +163,8 @@
 	        	exportExcel(param , "cpo/portal/document/export_file?" , "_blank");
 					}
         }
-        
-        
+
+
         this.search = function ( scope ) {
 
           scope.fillRateReportData = [];
@@ -477,12 +477,18 @@
             label : "Half Month"
           } ];
           var day1 = new Date();
-          day1.setTime(day1.getTime()-1*24*60*60*1000);
+          day1.setTime(day1.getTime());
           day1=day1.Format("yyyy-MM");
-          
+
+
+          var day2 = new Date();
+          day2.setTime(day2.getTime()+150*24*60*60*1000);
+          day2=day2.Format("yyyy-MM");
+
+
           scope.searchRequest = {
             fromMonth:day1,
-            toMonth:null,
+            toMonth:day2,
             mkfc : null ,
             cus : null ,
             lco190 : null ,
@@ -614,7 +620,7 @@
             this.getPro(scope , type)
           }
         }
-				
+
 				this.importFile = function(scope,documentType) {
 					var _this = this;
 					var modalInstance = $uibModal.open({
@@ -768,7 +774,7 @@
             param.cusfcDocId = scope.searchRequest.cus.id;
             param.cuspoDocId = scope.searchRequest.lco190.id;
             param.mktfcDocId = scope.searchRequest.mkfc.id;
-            
+
           }
          else if ( scope.searchRequest.queryType.id == "CUS_LC0190" ) {
             if ( !scope.searchRequest.cus || !scope.searchRequest.cus.id ) {
