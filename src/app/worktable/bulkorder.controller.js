@@ -2018,7 +2018,7 @@
           scope.disableReleaseOrderButton = true;
         	GLOBAL_Http($http, "cpo/api/worktable/checkIfNeedToAddSample", 'POST', param, function(data) {
         		scope.disableReleaseOrderButton = false;
-        		if(data.status == 0) {
+        		if(data.status == 0 || data.status == '0') {
               if (data.output && data.output.length) {
                 _this.openAddSample(scope,data.output);
               } else{
