@@ -2033,7 +2033,7 @@
                 } else if(type == 'changePendingReleaseToFR'){
                   _this.releaseOrderChangeOrder('PENDING','FR')
                 } else if(type == 'changeOrderChangeApplication'){
-                  _this.requestFactoryChange(_this.tabIndex)
+                  _this.requestFactoryChange(scope, scope.tabIndex)
                 }
               }
             } else {
