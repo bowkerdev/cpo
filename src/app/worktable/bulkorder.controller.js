@@ -2018,7 +2018,7 @@
           scope.disableReleaseOrderButton = true;
         	GLOBAL_Http($http, "cpo/api/worktable/checkIfNeedToAddSample", 'POST', param, function(data) {
         		scope.disableReleaseOrderButton = false;
-        		if(data.status == 0) {
+        		if(data.status == 0 || data.status == '0') {
               if (data.output && data.output.length) {
                 _this.openAddSample(scope,data.output);
               } else{
@@ -2027,13 +2027,13 @@
                 } else if (type == 'newOrderRelease'){
                   _this.releaseOrder(scope);
                 } else if(type == 'changePendingConfirmAndRelease'){
-                  _this.releaseOrderChangeOrder('PENDING')
+                  _this.releaseOrderChangeOrder(scope,'PENDING')
                 } else if(type == 'changePendingReleaseToD365'){
-                  _this.releaseOrderChangeOrder('PENDING','D365')
+                  _this.releaseOrderChangeOrder(scope,'PENDING','D365')
                 } else if(type == 'changePendingReleaseToFR'){
-                  _this.releaseOrderChangeOrder('PENDING','FR')
+                  _this.releaseOrderChangeOrder(scope,'PENDING','FR')
                 } else if(type == 'changeOrderChangeApplication'){
-                  _this.requestFactoryChange(_this.tabIndex)
+                  _this.requestFactoryChange(scope, scope.tabIndex)
                 }
               }
             } else {
@@ -2052,7 +2052,8 @@
         			ariaLabelledBy: "modal-header",
         			templateUrl: 'app/worktable/addSample.html',
         			controller: 'addSampleCtrl',
-              size: 'lg',
+              openedClass:'dynamic-template-modal-window',
+              size:"lg",
         			resolve: {
         				parameter: function() {
         					return {

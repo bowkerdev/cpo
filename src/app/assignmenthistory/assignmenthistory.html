@@ -159,60 +159,60 @@
                 <i class="fa-search"></i>&nbsp;&nbsp;
                 <span translate="index.SEARCH"></span>
               </button>
-							<button style="float: right" class="btn btn-secondary btn-single" ng-click="importFile(60003)" ng-if="activeTab=='1'">
+							<button style="float: right" class="btn btn-secondary btn-single" ng-click="importFile(60003)" ng-if="activeTab=='1'&&hasPermission('bulkOrder::ImportSplitOrder')">
 								<i class="fa fa-upload"></i>
 								<span translate="">Import Split Order</span>
 							</button>
-              <button style="float: right;" class="btn btn-secondary btn-single" ng-click="exportFile()">
+              <button style="float: right;" class="btn btn-secondary btn-single" ng-if="hasPermission('bulkOrder::ExportOrders')" ng-click="exportFile()">
                 <i class="fa fa-download"></i>
                 <span translate="">Export Orders</span>
               </button>
-              <button ng-show="activeTab!=5&&activeTab!=4" style="float: right;" class="btn btn-secondary btn-single"
+              <button ng-if="hasPermission('bulkOrder::TransferDocument')" ng-show="activeTab!=5&&activeTab!=4" style="float: right;" class="btn btn-secondary btn-single"
                 ng-click="transferDocumnet()">
                 <i class="fa fa-exchange"></i>
                 <span translate="">Transfer Document</span>
               </button>
-              <button ng-show="activeTab==1" style="float: right;" class="btn btn-secondary btn-single"
+              <button ng-if="hasPermission('bulkOrder::ChangeOrderStatus')" ng-show="activeTab==1||activeTab==3" style="float: right;" class="btn btn-secondary btn-single"
                 ng-click="changeManualOrderStatus()">
                 <i class="fa fa-exchange"></i>
                 <span translate="">Change Order Status</span>
               </button>
-              <button ng-show="activeTab==1" style="float: right;" class="btn btn-secondary btn-single"
+              <button ng-if="hasPermission('bulkOrder::SetMaterialReserveTarget')" ng-show="activeTab==1" style="float: right;" class="btn btn-secondary btn-single"
                 ng-click="setMaterialReserveTarget()">
                 <i class="fa fa-exchange"></i>
                 <span translate="">Set Material Reserve Target</span>
               </button>
-              <button ng-show="activeTab==1" style="float: right;background-color: coral !important;" class="btn btn-secondary btn-single"
+              <button ng-if="hasPermission('bulkOrder::OrderPayment')" ng-show="activeTab==1" style="float: right;background-color: coral !important;" class="btn btn-secondary btn-single"
                 ng-click="importFile(3000)">
                 <i class="fa fa-upload"></i>
                 <span translate="">Import Order Payment</span>
               </button>
-              <button ng-show="activeTab==1" style="background-color: coral !important;" class="btn btn-secondary btn-single"
+              <button ng-if="hasPermission('bulkOrder::OrderPayment')" ng-show="activeTab==1" style="background-color: coral !important;" class="btn btn-secondary btn-single"
                 ng-click="editOrderPayment()">
                 <i class="fa fa-pencil-square-o"></i>
                 <span translate="">Edit Order Payment</span>
               </button>
-              <button ng-show="activeTab==1" style="float: right;background-color: coral !important;" class="btn btn-secondary btn-single"
+              <button ng-if="hasPermission('bulkOrder::ImportShipmentShortage')" ng-show="activeTab==1" style="float: right;background-color: coral !important;" class="btn btn-secondary btn-single"
                 ng-click="importFile(3001)">
                 <i class="fa fa-upload"></i>
                 <span translate="">Import Shipment Shortage</span>
               </button>
-              <button ng-show="activeTab==1" style="background-color: coral !important;" class="btn btn-secondary btn-single"
+              <button ng-if="hasPermission('bulkOrder::EditShipmentShortage')" ng-show="activeTab==1" style="background-color: coral !important;" class="btn btn-secondary btn-single"
                 ng-click="editShipmentShortage()">
                 <i class="fa fa-pencil-square-o"></i>
                 <span translate="">Edit Shipment Shortage</span>
               </button>
-              <button ng-show="activeTab==1" style="float: right;background-color: coral !important;" class="btn btn-secondary btn-single"
+              <button ng-if="hasPermission('bulkOrder::ImportA/BGradeInfo')" ng-show="activeTab==1" style="float: right;background-color: coral !important;" class="btn btn-secondary btn-single"
                 ng-click="importFile(3002)">
                 <i class="fa fa-upload"></i>
                 <span translate="">Import A/B Grade Info</span>
               </button>
-              <button ng-show="activeTab==1" style="background-color: coral !important;" class="btn btn-secondary btn-single"
+              <button ng-if="hasPermission('bulkOrder::EditA/BGradeInfo')" ng-show="activeTab==1" style="background-color: coral !important;" class="btn btn-secondary btn-single"
                 ng-click="editABGradeInfo()">
                 <i class="fa fa-pencil-square-o"></i>
                 <span translate="">Edit A/B Grade Info</span>
               </button>
-              <button ng-show="activeTab==1" class="btn btn-secondary btn-single" ng-click="exportPDF()">
+              <button ng-if="hasPermission('bulkOrder::ExportPDF')" ng-show="activeTab==1" class="btn btn-secondary btn-single" ng-click="exportPDF()">
                 <i class="fa fa-share"></i>
                 <span translate="">Export PDF</span>
               </button>
@@ -414,7 +414,7 @@
     margin: 15px 0px;
   }
 
-  div[ng-controller="assignmentHistoryCtrl"] .page-title .btn {
+  div[ng-controller="assignmentHistoryCtrl"] .page-title .form-group .btn {
     margin-left: 5px;
     margin-bottom: 5px !important;
   }

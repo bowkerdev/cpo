@@ -1292,6 +1292,8 @@
 					var idFactoryList = new Array();
 					if(scope.activeTab == 1) {
 						selectedRows = scope.gridApi1.selection.getSelectedRows();
+					}else if(scope.activeTab == 3) {
+						selectedRows = scope.gridApi3.selection.getSelectedRows();
 					}
 					if(selectedRows.length < 1) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
@@ -1419,8 +1421,8 @@
 
 			}
 		])
-		.controller('assignmentHistoryCtrl', ['$scope', 'assignmentHistoryService','$timeout',
-			function($scope, assignmentHistoryService, $timeout) {
+		.controller('assignmentHistoryCtrl', ['$scope', 'assignmentHistoryService','$timeout', 'CommonService',
+			function($scope, assignmentHistoryService, $timeout, CommonService) {
 				$scope.selectTab = function(Tab) {
 					if(Tab == 5 || Tab == 4) {
 						$("#orderTypeSelect").hide();
@@ -1471,6 +1473,9 @@
           $timeout(function() {
             $scope[field] = clipboardData;
           }, 200);
+        }
+        $scope.hasPermission = function(permission){
+          return CommonService.hasPermission('app/assignmenthistory/assignmenthistory.html',permission);
         }
 				assignmentHistoryService.init($scope);
 			}

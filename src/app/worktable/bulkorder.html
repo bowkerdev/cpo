@@ -515,7 +515,7 @@
   </div>
 </script>
 <script id="addSamplePOTemplate" type="text/template">
-  <input type="text" class="form-control" ng-model="row.entity.po" />
+  <input type="text" style="height:100%;" class="form-control" ng-model="row.entity.po" />
 </script>
 <script type="text/ng-template" id="set-split-order.html">
   <div class="modal-header">
@@ -690,5 +690,13 @@
     flex-basis: fit-content;
     text-align: center;
     line-height:1.5
+  }
+
+  div[ng-controller="BulkOrderCtrl"] .dynamic-template-modal-window  .modal {
+    margin: auto;
+  }
+
+  div[ng-controller="BulkOrderCtrl"] .dynamic-template-modal-window  .modal >div:last-child{
+    width: 1500px;
   }
 </style>

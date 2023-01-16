@@ -349,6 +349,7 @@
 						initUserInfo(token,function(){
 							if(data.rows && data.rows.length > 0) {
 								$scope.navList = data.rows;
+                CommonService.menu = JSON.parse(JSON.stringify(data.rows));
 							} else {
 								if(CURRENT_ENVIRONMENT == environment.SIT || CURRENT_ENVIRONMENT == environment.LOCAL) {
 									initMenu();

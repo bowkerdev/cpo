@@ -24,6 +24,7 @@
           if (scope.items && scope.items.length) {
             for (var i = 0; i < scope.items.length; i++) {
               var po = scope.items[i].po;
+              scope.items[i].addSampleTime=undefined;
               if (po.length==10) {
                 scope.items[i].originalPo = po.substring(1,10);
               }else{
@@ -65,6 +66,7 @@
             enableHorizontalScrollbar: 1,
             enableVerticalScrollbar: 0,
             useExternalPagination: false,
+            height: 600,
             columnDefs: [
               {
               	name: 'action',
@@ -81,7 +83,7 @@
               {
               	name: 'bno',
               	displayName: 'B No',
-              	field: 'bno',
+              	field: 'bNo',
               	minWidth: '100'
               },
               {

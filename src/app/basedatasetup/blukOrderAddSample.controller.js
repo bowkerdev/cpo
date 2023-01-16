@@ -80,7 +80,7 @@
               {
               	name: 'bno',
               	displayName: 'B No',
-              	field: 'bno',
+              	field: 'bNo',
               	minWidth: '100'
               },
               {

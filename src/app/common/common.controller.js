@@ -59,6 +59,8 @@
       function ($uibModal, $translate, COMMON_CONFIG,uiGridConstants) {
 
 			this.userInfo;
+      this.menu = null;
+      this.permissionCache = {};
 
       this.setFlg = function(checkParam1, checkParam2){
         var checkResult = null;
@@ -257,7 +259,7 @@
       }
 
       this.columnHasHide = function(girdName,field){
-;
+
         if ( girdName ) {
           var array = localStorage.getItem(girdName) ?
             localStorage.getItem(girdName).split("________"):null;
@@ -333,25 +335,55 @@
           $('#httploading').css('display','none')
 
         }
-      this.constructeColumnItem = function (displayname,name,field,hasFilter,cellTemplate,minwidth) {
-          var  column =   {
-          name: displayname,
-          displayName: displayname,
-          field: field,
-            minwidth: width ? width : '100',
-          enableCellEdit: false,
+        this.constructeColumnItem = function (displayname,name,field,hasFilter,cellTemplate,minwidth) {
+            var  column =   {
+            name: displayname,
+            displayName: displayname,
+            field: field,
+              minwidth: width ? width : '100',
+            enableCellEdit: false,
+          }
+          if (cellTemplate) {
+            column.cellTemplate = cellTemplate;
+          }
+          if(hasFilter){
+            column.filters = [{
+              condition: uiGridConstants.filter.CONTAINS,
+              placeholder: ''
+            }];
+          }
+          return column;
         }
-        if (cellTemplate) {
-          column.cellTemplate = cellTemplate;
+        this.hasPermission = function (pageID, permissionName){
+          if (this.permissionCache[pageID] && this.permissionCache[pageID][permissionName] != undefined) {
+            return this.permissionCache[pageID][permissionName];
+          } else{
+            try {
+              if (this.menu && this.menu.length) {
+                for (var i = 0; i < this.menu.length; i++) {
+                  if (this.menu[i].url == pageID && this.menu[i].subMenus && this.menu[i].subMenus.length) {
+                    for (var index = 0; index < this.menu[i].subMenus.length; index++) {
+                      if (this.menu[i].subMenus[index].permission.indexOf(permissionName) > -1) {
+                        if (!this.permissionCache[pageID]) {
+                          this.permissionCache[pageID] = {};
+                        }
+                        this.permissionCache[pageID][permissionName] = true;
+                        return true;
+                      }
+                    }
+                  }
+                }
+              }
+              if (!this.permissionCache[pageID]) {
+                this.permissionCache[pageID] = {};
+              }
+              this.permissionCache[pageID][permissionName] = false;
+              return false;
+            } catch(e) {
+              return false;
+            }
+          }
         }
-        if(hasFilter){
-          column.filters = [{
-            condition: uiGridConstants.filter.CONTAINS,
-            placeholder: ''
-          }];
-        }
-        return column;
-      }
 
     }]);
 
