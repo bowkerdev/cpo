@@ -1292,6 +1292,8 @@
 					var idFactoryList = new Array();
 					if(scope.activeTab == 1) {
 						selectedRows = scope.gridApi1.selection.getSelectedRows();
+					}else if(scope.activeTab == 3) {
+						selectedRows = scope.gridApi3.selection.getSelectedRows();
 					}
 					if(selectedRows.length < 1) {
 						modalAlert(CommonService, 2, $translate.instant('errorMsg.ONE_RECORD_SELECT_WARNING'), null);
