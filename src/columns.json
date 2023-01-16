@@ -5232,6 +5232,10 @@
     {
       "displayName": "Size",
       "field": "size"
+    },
+    {
+      "displayName": "Base Size",
+      "field": "baseSize"
     }
   ],
   "planGroup": [
