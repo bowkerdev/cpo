@@ -7,7 +7,7 @@
 		.module('cpo')
 		.controller('baseDataSetupCtrl', ['$scope', '$uibModal', 'CommonService', '$http', '$translate',
 			function($scope, $uibModal, CommonService, $http, $translate) {
-				$scope.navList = ['Base Setup', 'B Num', 'B Num Batch Master',"Season Date Range", "Plan Group", "Edi Column Change Setting", "Bluk Order Add Sample"];
+				$scope.navList = ['Base Setup', 'B Num', 'B Num Batch Master',"Season Date Range", "Plan Group", "Edi Column Change Setting", "Bluk Order Add Sample", "ILA Master By Adidas", "ILA Master By Reebok"];
 				$scope.tabIndex = 0;
 				$scope.importLineSheetData = function() {
 					var modalInstance = $uibModal.open({

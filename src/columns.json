@@ -1781,6 +1781,30 @@
       "field": "ftyName"
     },
     {
+      "displayName": "Customer No. And Service Identify",
+      "field": "customerNoAndServiceIdentify"
+    },
+    {
+      "displayName": "Material Bom",
+      "field": "materialBom"
+    },
+    {
+      "displayName": "Paster",
+      "field": "paster"
+    },  
+    {
+      "displayName": "ILA",
+      "field": "ila"
+    },    
+    {
+      "displayName": "Customer Material",
+      "field": "customerMaterial"
+    },    
+    {
+      "displayName": "ILA Master Remark",
+      "field": "remark"
+    },
+    {
       "displayName": "Remark",
       "field": "assignmentRemark"
     },
@@ -5386,6 +5410,54 @@
     {
       "displayName": "Approved Time",
       "field": "orderApprovalUpdateTime"
+    }
+  ],
+  "ilaMasterByAdidas": [
+    {
+      "displayName": "Customer No. And Service Identify",
+      "field": "customerNoAndServiceIdentify"
+    },
+    {
+      "displayName": "Material Bom",
+      "field": "materialBom"
+    },
+    {
+      "displayName": "Paster",
+      "field": "paster"
+    },  
+    {
+      "displayName": "ILA",
+      "field": "ila"
+    },       
+    {
+      "displayName": "Customer Material",
+      "field": "customerMaterial"
+    }
+  ],
+  "ilaMasterByReebok": [
+    {
+      "displayName": "Customer No. And Service Identify",
+      "field": "customerNoAndServiceIdentify"
+    },
+    {
+      "displayName": "Material Bom",
+      "field": "materialBom"
+    },
+    {
+      "displayName": "Paster",
+      "field": "paster"
+    },  
+    {
+      "displayName": "ILA",
+      "field": "ila"
+    },    
+    {
+      "displayName": "Customer Material",
+      "field": "customerMaterial"
+    },    
+    {
+      "displayName": "Remark",
+      "field": "remark"
     }
   ]
 }

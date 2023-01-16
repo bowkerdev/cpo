@@ -2027,11 +2027,11 @@
                 } else if (type == 'newOrderRelease'){
                   _this.releaseOrder(scope);
                 } else if(type == 'changePendingConfirmAndRelease'){
-                  _this.releaseOrderChangeOrder('PENDING')
+                  _this.releaseOrderChangeOrder(scope,'PENDING')
                 } else if(type == 'changePendingReleaseToD365'){
-                  _this.releaseOrderChangeOrder('PENDING','D365')
+                  _this.releaseOrderChangeOrder(scope,'PENDING','D365')
                 } else if(type == 'changePendingReleaseToFR'){
-                  _this.releaseOrderChangeOrder('PENDING','FR')
+                  _this.releaseOrderChangeOrder(scope,'PENDING','FR')
                 } else if(type == 'changeOrderChangeApplication'){
                   _this.requestFactoryChange(scope, scope.tabIndex)
                 }
