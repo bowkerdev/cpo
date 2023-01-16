@@ -2022,6 +2022,85 @@
           }
         }
 
+        this.downloadNewOrderInTradeCard = function(scope, entity) {
+
+        	var param = {
+        		pageSize: 100000,
+        		pageNo: 1
+        	};
+        	switch(entity.documentType) {
+        		case '6':
+        			param['documentType'] = 603;
+        			break;
+        		case '7':
+        			param['documentType'] = 604;
+        			break;
+        		case '8':
+        			param['documentType'] = 605;
+        			break;
+        		case '9':
+        			param['documentType'] = 606;
+        			break;
+        		case '10':
+        			param['documentType'] = 609;
+        			break;
+        	}
+        	CommonService.showLoadingView("Exporting...");
+        	GLOBAL_Http($http, "cpo/portal/document/check_record_count?", 'GET', param, function(data) {
+        		CommonService.hideLoadingView();
+        		if(data.status == 0) {
+        			if(parseInt(data.message) > 0) {
+        				exportExcel(param, "cpo/portal/document/export_file?", "_blank");
+        			} else {
+        				modalAlert(CommonService, 2, $translate.instant('notifyMsg.NO_DATA_EXPORT'), null);
+        			}
+        		} else {
+        			modalAlert(CommonService, 2, $translate.instant('notifyMsg.NO_DATA_EXPORT'), null);
+        		}
+        	}, function(data) {
+        		CommonService.hideLoadingView();
+        		modalAlert(CommonService, 3, $translate.instant('index.FAIL_GET_DATA'), null);
+        	});
+        }
+
+        this.downloadEmailChecking = function(scope, entity) {
+        	if(entity.orderQuantity == 0) {
+        		modalAlert(CommonService, 2, $translate.instant('notifyMsg.NO_DATA_EXPORT'), null);
+        	} else {
+        		var param = {
+        			documentType: 10000
+        		};
+        		switch(entity.documentType) {
+        			case '6':
+        				{
+        					param['in_order_actual_type'] = 'LC0190,MTF Order,PPC Order';
+        					break;
+        				}
+        			case '7':
+        				{
+        					param['in_order_actual_type'] = 'MTF Contract';
+        					break;
+        				}
+        			case '8':
+        				{
+        					param['in_order_actual_type'] = 'PPC Contract';
+        					break;
+        				}
+        			case '9':
+        				{
+        					param['in_order_actual_type'] = 'SLT Order';
+        					break;
+        				}
+              case '10':
+                {
+                  param['in_order_actual_type'] = 'MI Order';
+                  break;
+                }
+        		}
+        		exportExcel(param, "cpo/portal/document/export_file?", "_blank");
+        	}
+        }
+
         this.confirmChange = function(scope, type) {
           var gridApi = {}
           if (type === 'PENDING') {
@@ -2281,6 +2360,12 @@
         $scope.changeFormat = function(v) {
         	$scope[v]=$scope[v].replace(/[ ]/g,',');
         }
+				$scope.downloadNewOrderInTradeCard = function(entity) {
+					MIOrderService.downloadNewOrderInTradeCard($scope, entity);
+				}
+				$scope.downloadEmailChecking = function(entity) {
+					MIOrderService.downloadEmailChecking($scope, entity);
+				}
         MIOrderService.init($scope);
       }
     ])
