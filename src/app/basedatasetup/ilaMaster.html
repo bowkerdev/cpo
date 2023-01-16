@@ -1,0 +1,54 @@
+<div id="ilaMasterPane" ng-controller="ilaMasterCtrl">
+  <div class="search-form">
+    <div class="search-item col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <label>Customer No. And Service Identify:</label>
+      <input ng-model="customerNoAndServiceIdentify" type="text" ng-paste="formatPaste($event,'customerNoAndServiceIdentify')" />
+    </div>
+    <button class="btn btn-secondary btn-single" ng-click="fetchInfo(page, true)">
+      <i class="fa-search"></i>
+      <span translate="index.SEARCH"></span>
+    </button>
+    <button class="btn btn-secondary btn-single" ng-click="importFile()">
+      <i class="fa fa-upload"></i>
+      <span translate="index.IMPORT"></span>
+    </button>
+    <button class="btn btn-secondary btn-single" ng-click="exportFile()">
+      <i class="fa fa-download"></i>
+      <span translate="index.EXPORT"></span>
+    </button>    
+    <button class="btn btn-secondary btn-single" ng-click="save()">
+      <i class="fa fa-save"></i>
+      <span translate="index.SAVE"></span>
+    </button>
+  </div>
+  <div ui-grid="gridOptions" ui-grid-edit ui-grid-pagination ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize
+    hight-auto-fill-bottom>
+    <div class="well grid-loading" style="margin-top: 30px" ng-show="gridOptions.showLoading">
+      <i class="fa fa-spin fa-spinner"></i>
+      <strong translate="vendorKpi.LOADING"></strong>
+    </div>
+  </div>
+
+  <style>
+    #ilaMasterPane .search-form {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    #ilaMasterPane .search-item {
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
+      float: none !important;
+    }
+    #ilaMasterPane .search-item label {
+      margin-right: 10px;
+    }
+    #ilaMasterPane .search-item input {
+      height: 30px;
+      width: 50%;
+      flex: auto;
+    }
+  </style>
+
+</div>
