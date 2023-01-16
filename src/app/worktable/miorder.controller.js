@@ -359,6 +359,7 @@
           var isNewTemplate = document.getElementById("isNewTemplate").innerText;
           var linkLabelTemplate = document.getElementById("linkLabelTemplate").innerText;
           var functionButtonTemplate = document.getElementById("functionButtonTemplate").innerText;
+          var exportButtonTemplate = document.getElementById("exportButtonTemplate").innerText;
           scope.gridOptions = {
             data: 'dailyDocumentData',
             enableColumnMenus: false,
@@ -438,8 +439,9 @@
                 name: 'orderQuantity',
                 displayName: $translate.instant('worktable.NEW_ORDER_IN_TRADE_CARD'),
                 field: 'orderQuantity',
-                minWidth: '120',
-                enableCellEdit: false
+                minWidth: '350',
+                enableCellEdit: false,
+                cellTemplate: exportButtonTemplate
               }
             ],
             onRegisterApi: function(gridApi) {
