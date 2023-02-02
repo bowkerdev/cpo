@@ -58,7 +58,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-show="activeTab==1">
               <div >Origin POs:</div>
-              <input ng-model="originPO" style="height: 30px;" type="text" ng-paste="changeFormat('originPO')" />
+              <input ng-model="originPO" style="height: 30px;" type="text" ng-change="changeFormat('originPO')" />
             </div>
              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-show="activeTab!=5&&activeTab!=6">
               <div >POs:</div>

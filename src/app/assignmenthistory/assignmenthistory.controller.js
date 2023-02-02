@@ -1165,6 +1165,7 @@
 													var xx = manufacturingSize[index2];
 
 													if(xx) {
+														item['SIZENAME_' + (index2 + 1)] = xx.sizeName ? xx.sizeName : "";
 														item["OQTY_" + (index2 + 1)] = xx.sizeQuantity ? xx.sizeQuantity : "";
 														item["TS_" + (index2 + 1)] = xx.manufacturingSize ? xx.manufacturingSize : "";
 														item["ORGQTY_" + (index2 + 1)] = xx.orgSizeQuantity ? xx.orgSizeQuantity : "";
@@ -1260,8 +1261,8 @@
 					scope.showLoading = false;
 					scope.exportFileParams = {};
           var day1 = new Date();
-          day1.setTime(day1.getTime()-365*24*60*60*1000);
-          day1=day1.Format("yyyy-MM-dd");
+          day1.setTime(day1.getTime()-60*24*60*60*1000);
+          day1=day1.Format("yyyy-MM")+"-01";
           scope.orderDateFrom=day1;
 					_this.initBulkOrderGrid(scope, 1);
 					_this.initSampleOrderGrid(scope, 2, scope.sampleOrder);

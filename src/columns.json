@@ -1791,15 +1791,15 @@
     {
       "displayName": "Paster",
       "field": "paster"
-    },  
+    },
     {
       "displayName": "ILA",
       "field": "ila"
-    },    
+    },
     {
       "displayName": "Customer Material",
       "field": "customerMaterial"
-    },    
+    },
     {
       "displayName": "ILA Master Remark",
       "field": "remark"
@@ -2080,6 +2080,10 @@
       "field": "unitPrice"
     },
     {
+      "displayName": "Surcharge",
+      "field": "surcharge"
+    },
+    {
       "displayName": "Client",
       "field": "client"
     },
@@ -2218,6 +2222,10 @@
       "field": "paymentCompleteOrNot"
     },
     {
+      "displayName": "Payment Remark",
+      "field": "paymentRemark"
+    },
+    {
       "displayName": "Confirm Shortage",
       "field": "shortageQty"
     },
@@ -2230,7 +2238,7 @@
       "field": "shortageRemark"
     },
     {
-      "displayName": "Reference Order(PO-Size-Qty)",
+      "displayName": "Reference Order(PO-Size-Qty-Status)",
       "field": "referenceInfo"
     },
     {
@@ -2591,6 +2599,10 @@
     {
       "displayName": "Unit Price",
       "field": "unitPrice"
+    },
+    {
+      "displayName": "Surcharge",
+      "field": "surcharge"
     },
     {
       "displayName": "Client",
@@ -5424,11 +5436,11 @@
     {
       "displayName": "Paster",
       "field": "paster"
-    },  
+    },
     {
       "displayName": "ILA",
       "field": "ila"
-    },       
+    },
     {
       "displayName": "Customer Material",
       "field": "customerMaterial"
@@ -5446,15 +5458,15 @@
     {
       "displayName": "Paster",
       "field": "paster"
-    },  
+    },
     {
       "displayName": "ILA",
       "field": "ila"
-    },    
+    },
     {
       "displayName": "Customer Material",
       "field": "customerMaterial"
-    },    
+    },
     {
       "displayName": "Remark",
       "field": "remark"
